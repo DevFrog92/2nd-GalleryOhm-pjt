@@ -102,8 +102,11 @@ ex) s12345 /Add Login -> 이슈번호 없으면 None
 - **완성해서 merge한 브랜치는 삭제**
 
 ```
-git branch -d [merge시킨브랜치 이름]
+1) git checkout develop
+  : develop 브랜치로 옮겨가서 삭제
+2) git branch -d [merge시킨브랜치 이름] 
 ex) git branch -d feature/login
+ : 완성해서 merge한 브랜치 삭제
 ```
 
 - **commit**
