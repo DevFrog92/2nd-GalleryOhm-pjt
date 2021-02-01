@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.gallery.dao.userDao">
+
+	<select id="login" parameterType="user" resultType="user">
+		select *
+		from user
+		where user_id = #{user_id} and user_password = #{user_password}
+	</select>
+	
+	<insert id="joinUser" parameterType="user">
+		insert into user(user_id,
+		user_name, user_email, user_password, user_nickName, user_tel,
+		user_birth, user_type, user_createDate)
+		values (
+			#{user_id},
+			#{user_name},
+			#{user_email},
+			#{user_password},
+			(select concat(
+				(select nickname_pre from nickname order by rand() limit 1),
+				" ",
+				(select nickname_post from nickname order by rand() limit 1)
+				)
+			),
+			#{user_tel},
+			#{user_birth},
+			1,
+			now()
+		)
+	</insert>
+
+	<update id="modifyUser" parameterType="user">
+		update user
+		set
+			user_email = #{user_email},
+			user_name = #{user_name},
+			user_password = #{user_password},
+			user_tel = #{user_tel},
+			user_nickName = #{user_nickName},
+			user_birth = #{user_birth},
+			user_profile = #{user_profile}
+		where user_id = #{user_id}
+	</update>
+	
+	<delete id="leaveUser" parameterType="string">
+		delete from user
+		where
+		user_id = #{user_id}
+	</delete>
+
+	<select id="checkPassword" parameterType="user" resultType="int">
+		select IF(
+		    (select user_password
+			from user
+			where user_id = #{user_id}) = #{user_password}, 1, 0)
+	</select>
+
+	<select id="getUserInfo" parameterType="String" resultType="user">
+		select
+			user_id, user_name, user_nickName,
+		    user_email, user_tel, user_birth,
+		    user_type, user_createDate, user_profile, user_about
+		from user
+		where user_id = #{user_id}
+	</select>
+
+	<select id="getUserProfile" parameterType="String" resultType="_byte[]">
+		select user_profile
+		from user
+		where user_id = #{user_id}
+	</select>
+
+	<update id="modifyUserNickName" parameterType="user">
+		update user
+		set
+		user_nickName = #{user_nickName}
+		where user_id = #{user_id}
+	</update>
+
+	<select id="makeUserNickName" resultType="string">
+		select concat(
+		    (select nickname_pre from nickname order by rand() limit 1),
+			" ",
+			(select nickname_post from nickname order by rand() limit 1)
+		)
+	</select>
+	
+	<select id="getUserNickName" parameterType="user" resultType="string">
+		select user_nickName
+		from user
+		where user_id = #{user_id}
+	</select>
+
+	<update id="modifyUserAbout" parameterType="user">
+		update user
+		set
+			user_about = #{user_about}
+		where user_id = #{user_id}
+	</update>
+
+	<select id="checkId" parameterType="string" resultType="int">
+		select count(user_id) from user
+		where user_id = #{user_id}
+	</select>
+</mapper>

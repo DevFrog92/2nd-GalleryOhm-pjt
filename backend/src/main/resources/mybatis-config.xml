@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.web.gallery.dto.ArtistDto" alias="artist" />
+		<typeAlias type="com.web.gallery.dto.CostDto" alias="cost" />
+		<typeAlias type="com.web.gallery.dto.FollowDto" alias="follow" />
+		<typeAlias type="com.web.gallery.dto.FootPrintDto" alias="footPrint" />
+		<typeAlias type="com.web.gallery.dto.GalleryDetailDto" alias="galleryDetail" />
+		<typeAlias type="com.web.gallery.dto.GalleryDto" alias="gallery" />
+		<typeAlias type="com.web.gallery.dto.HashTagDto" alias="hashTag" />
+		<typeAlias type="com.web.gallery.dto.KeywordDto" alias="keyword" />
+		<typeAlias type="com.web.gallery.dto.MainGalleryDto" alias="mainGallery" />
+		<typeAlias type="com.web.gallery.dto.MessageDto" alias="message" />
+		<typeAlias type="com.web.gallery.dto.NickNameDto" alias="nickName" />
+		<typeAlias type="com.web.gallery.dto.ScrapDto" alias="scrap" />
+		<typeAlias type="com.web.gallery.dto.SubGalleryDto" alias="subGallery" />
+		<typeAlias type="com.web.gallery.dto.UserDto" alias="user" />
+		<typeAlias type="com.web.gallery.dto.WorkDto" alias="work" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mapper/user.xml" />
+		<mapper resource="mapper/login.xml" />
+		<mapper resource="mapper/artist.xml" />
+		<mapper resource="mapper/work.xml" />
+		<mapper resource="mapper/gallery.xml" />
+		<mapper resource="mapper/message.xml" />
+		<mapper resource="mapper/admin.xml" />
+		<mapper resource="mapper/follow.xml" />
+	</mappers>
+</configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.gallery.dao.followDao">
+
+	<insert id="follow" parameterType="follow">
+		insert into follow(follow_artistId, follow_userId)
+		values (#{follow_artistId}, #{follow_userId})
+	</insert>
+
+	<delete id="cancelFollow" parameterType="follow">
+		delete from follow
+		where
+			follow_artistId = #{follow_artistId}
+			and
+			follow_userId = #{follow_userId}
+	</delete>
+
+	<select id="getAllMyFollowing" resultType="string">
+		select follow_artistId from follow where follow_userId = #{follow_userId}
+	</select>
+
+	<select id="getAllMyFollower" resultType="string">
+		select follow_userId from follow where follow_artistId = #{follow_artistId}
+	</select>
+
+</mapper>

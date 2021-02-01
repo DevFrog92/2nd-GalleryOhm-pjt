@@ -1,0 +1,501 @@
+/* reset css*/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*reset css*/
+
+
+
+#left-side ul,#left-side li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.modicon {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: block;
+    fill: rgba(51, 51, 51, 0.5);
+    margin-right: 15px;
+    transition: all .2s ease-out;
+}
+
+.modicon.active {
+    fill: #E74C3C;
+}
+
+.modicon.big {
+    width: 64px;
+    height: 64px;
+    fill: rgba(51, 51, 51, 0.5);
+}
+
+#modwrapper {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    overflow: hidden;
+}
+
+#left-side {
+    height: 70%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#left-side ul li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    line-height: 34px;
+    color: rgba(51, 51, 51, 0.5);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s ease-out;
+}
+
+#left-side ul li:hover {
+    color: #333333;
+    transition: all .2s ease-out;
+}
+
+#left-side ul li:hover > .icon {
+    fill: #333;
+}
+
+#left-side ul li.active {
+    color: #333333;
+}
+
+#left-side ul li.active:hover > .icon {
+    fill: #E74C3C;
+}
+
+#modborder {
+    height: 33%;
+    width: 1px;
+    background-color: rgba(51, 51, 51, 0.2);
+}
+
+#modborder #line.one {
+    width: 5px;
+    height: 54px;
+    background-color: #E74C3C;
+    margin-left: -2px;
+    margin-top: 35px;
+    transition: all .4s ease-in-out;
+}
+
+#modborder #line.two {
+    width: 5px;
+    height: 54px;
+    background-color: #E74C3C;
+    margin-left: -2px;
+    margin-top: 89px;
+    transition: all .4s ease-in-out;
+}
+
+#modborder #line.three {
+    width: 5px;
+    height: 54px;
+    background-color: #E74C3C;
+    margin-left: -2px;
+    margin-top: 143px;
+    transition: all .4s ease-in-out;
+}
+
+#modborder #line.four {
+    width: 5px;
+    height: 54px;
+    background-color: #E74C3C;
+    margin-left: -2px;
+    margin-top: 197px;
+    transition: all .4s ease-in-out;
+}
+
+#right-side {
+    height: 75%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#right-side #first, #right-side #second, #right-side #third, #right-side #fourth {
+    position: absolute;
+    height: 75%;
+    width: 75%;
+    transition: all .6s ease-in-out;
+    margin-top: -800px;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+#right-side #first.active, #right-side #second.active, #right-side #third.active, #right-side #fourth.active {
+    margin-top: 0px;
+    opacity: 1;
+    transition: all .6s ease-in-out;
+}
+#first, #second, #third, #fourth{
+  width: 100%;
+/*  background-color: aqua;*/
+  height: 100%;
+}
+/*--------------Modify User Info 페이지 ---------------*/
+.modUserContainer2{
+  width: 37%;
+	position:absolute;
+	left:72%;
+	top:46%;
+	transform: translate(-50%,-50%);
+    background-color: transparent;
+	border-radius:3px;
+    padding: 2%;
+}
+
+.UserContainer2{
+	position:relative;
+	margin-bottom:6.5%;
+  width: 96%;
+}
+.register_artist{
+  position: relative;
+  margin-bottom: 8%;
+  width: 400px;
+}
+
+.bankname {
+  margin-bottom: 16px;
+  width: 100px
+}
+
+.register_artist_container {
+  width: 80%;
+  margin-left: 50%;
+  transform: translateX(-10%)
+
+}
+
+.registerinfo {
+  font-size: 13px;
+  margin-top: 7px;
+}
+
+.third_title {
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+.UserContainer2 label, .register_artist label{
+	position:absolute;
+	top:0px;
+	left:0px;
+	font-size:15px;
+	color:black;
+/*  font-weight: 600;*/
+/*  pointer-event:none;*/
+	transition: all 0.5s ease-in-out;
+}
+.UserContainer2 input, .register_artist input{ 
+  border:0;
+  border-bottom:1px solid #555;  
+  background:transparent;
+  width:100%;
+  padding:1.5%;
+  font-size:15px;
+  color:black;
+}
+.UserContainer2 input:focus, .register_artist input:focus { 
+  border:none;	
+  outline:none;
+  border-bottom:2px solid #6A16CD;	
+  border-image: linear-gradient(to right,#6A16CD, #5411A4, #be29ec,	#c616cd);
+  border-image-slice: 1;
+  
+}
+
+
+.UserContainer2 input:focus ~ label,
+.UserContainer2 input:valid ~ label,
+.register_artist input:focus ~ label,
+.register_artist input:valid ~ label{
+	top:-12px;
+	font-size:12px;
+  color: #6A16CD;
+  font-weight: bold;
+	
+}
+
+.modUserContainer1{
+  width: 30%;
+	position:absolute;
+	left:31%;
+	top:43%;
+	transform: translate(-50%,-50%);
+/*    background-color: blue;*/
+	border-radius:3px;
+    padding: 2%;
+  text-align: center;
+}
+
+.modUserContainer1 img {
+  width: 70%;
+  height: auto;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  text-align: center; 
+}
+
+/*
+.modUserTitle{
+  position: absolute;
+  font-size:40px;
+  font-weight: bold;
+  top:-7%;
+}
+*/
+.mod_nickname input{
+  width: 88%
+}
+
+#mod_explain {
+  font-size: 8px;
+  color: red;
+  margin-top: 3px;
+  
+}
+
+
+.modUserBtn {
+  position: absolute;
+  top: 94%;
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #FF4B2B;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+
+.modUserBtn:hover {
+  color: red;
+  background-color: white;
+}
+
+
+#first h2, #fourth h2 {
+  font-size: 40px;
+}
+
+#first h1 {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.selfintro {
+  border: 2px solid red;
+  resize: none;
+  
+ background-color: transparent;
+}
+#third textarea:focus {
+   border:7px solid #6A16CD;	
+  border-image: linear-gradient(to right,#6A16CD, #5411A4, #be29ec,	#c616cd);
+  border-image-slice: 1;
+ background-color: transparent;
+}
+  
+.file_input label {
+    position: relative;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  width: 150px;
+  height: 30px;
+  background: #777;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  }
+
+.file_input label input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.file_input input[type=text] {
+  vertical-align: middle;
+  display: inline-block;
+  width: 300px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 11px;
+  padding: 0;
+  border: 0;
+  text-align: center;
+}
+
+
+/*----------------------fourth-------------------------*/
+#fourth h2 {
+  font-size: 30px;
+  
+}
+

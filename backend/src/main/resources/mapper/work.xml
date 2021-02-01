@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.gallery.dao.workDao">
+
+    <insert id="addWork" parameterType="work">
+        insert into work(work_artistId, work_title, work_desc, work_piece, work_rating)
+        values (#{work_artistId}, #{work_title}, #{work_desc}, #{work_piece}, #{work_rating})
+    </insert>
+
+    <select id="getWork" parameterType="int" resultType="work">
+        select *
+        from work
+        where work_id = #{work_id}
+    </select>
+
+    <update id="modifyWork" parameterType="work">
+        update work
+        set work_title  = #{work_title},
+            work_desc   = #{work_desc},
+            work_piece  = #{work_piece},
+            work_rating = #{work_rating}
+        where work_id = #{work_id};
+    </update>
+
+    <delete id="deleteWork" parameterType="int">
+        delete
+        from work
+        where work_id = #{work_id}
+    </delete>
+
+    <select id="getAllWork" parameterType="int" resultType="work">
+        select *
+        from work
+        order by case
+                     when #{sort} = 1 then work_uploadDate
+                     end desc,
+                 case
+                     when #{sort} = 2 then work_uploadDate
+                     end asc,
+                 case
+                     when #{sort} = 3 then work_artistId
+                     end asc,
+                 case
+                     when #{sort} = 4 then work_artistId
+                     end desc,
+                 case
+                     when #{sort} = 5 then work_title
+                     end asc,
+                 case
+                     when #{sort} = 6 then work_title
+                     end desc
+    </select>
+
+    <select id="getMyWorks" parameterType="String" resultType="work">
+        select *
+        from work
+        where work_artistId = #{work_artistId}
+    </select>
+
+    <select id="getMyWorksCount" parameterType="String" resultType="int">
+        select count(*)
+        from work
+        where work_artistId = #{work_artistId}
+    </select>
+
+    <select id="getFollowingWork" parameterType="String" resultType="work">
+        select *
+        from work
+        where work_artistId in (select follow_artistId
+                                from follow
+                                where follow_userId = #{follow_userId})
+    </select>
+
+    <insert id="giveCostToWork" parameterType="cost">
+        insert into cost
+        values (#{cost_workId}, #{cost_userId})
+    </insert>
+
+    <update id="updateWorkCost" parameterType="cost">
+        update work
+        set work_cost = (select count(*)
+                         from cost
+                         where cost_workId = #{cost_workId})
+        where work_id = #{cost_workId};
+    </update>
+
+    <select id="isCheckCost" parameterType="cost" resultType="int">
+        select IF(
+                    (select count(*)
+                        from cost
+                        where cost_userId = #{cost_userId}
+                              and cost_workId = #{cost_workId}) > 0, 0, 1)
+    </select>
+
+    <delete id="clearToWorkCost" parameterType="cost">
+        delete
+        from cost
+        where cost_userId = #{cost_userId}
+          and cost_workId = #{cost_workId}
+    </delete>
+
+    <insert id="scrapWork" parameterType="scrap">
+        insert into scrap(scrap_workId, scrap_userId)
+        values (#{scrap_workId}, #{scrap_userId})
+    </insert>
+
+    <select id="isCheckScrap" parameterType="scrap" resultType="int">
+        select IF(
+                           (select count(*)
+                            from scrap
+                            where scrap_userId = #{scrap_userId}
+                              and scrap_workId = #{scrap_workId}) > 0, 0, 1)
+    </select>
+
+    <delete id="clearToWorkScrap" parameterType="scrap">
+        delete
+        from scrap
+        where scrap_userId = #{scrap_userId}
+          and scrap_workId = #{scrap_workId}
+    </delete>
+
+    <select id="getAllScrapWork" parameterType="String" resultType="work">
+        select *
+        from work
+        where work_id in (select scrap_workId
+                          from scrap
+                          where scrap_userId = #{scrap_userId})
+    </select>
+
+    <select id="isCheckHashTag" parameterType="hashTag" resultType="int">
+        select IF(
+                           (select count(*)
+                            from hashtag
+                            where hashtag_name = #{hashtag_name}
+                              and hashtag_workId = #{hashtag_workId}) > 0, 1, 0)
+    </select>
+
+    <insert id="addHashTag" parameterType="hashTag">
+        insert into hashtag (hashtag_workId, hashtag_name)
+        values (#{hashtag_workId}, #{hashtag_name})
+    </insert>
+
+    <select id="countWorkHashTag" parameterType="int" resultType="int">
+        select count(*)
+        from hashtag
+        where hashtag_workId = #{hashtag_workId}
+    </select>
+
+    <select id="getWorkHashTag" parameterType="int" resultType="String">
+        select hashtag_name
+        from hashtag
+        where hashtag_workId = #{hashtag_workId}
+    </select>
+
+    <select id="searchByHashTag" parameterType="list" resultType="work">
+        select *
+        from work
+        where work_id in (select hashtag_workId
+        from hashtag
+        group by hashtag_workId
+        having
+        <foreach collection="list" index="index" item="hashtag_name" separator="and">
+            group_concat(hashtag_name) like CONCAT('%', #{hashtag_name}, '%')
+        </foreach>
+        )
+    </select>
+</mapper>

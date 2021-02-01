@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="Upload_picture_page.css">
+</head>
+
+<body class="upload_picture_page">
+  <!-- TOP -->
+  <div class="top">
+    <span>TOP (1000 x 80) <br /> #FF5E00;</span>
+  </div>
+
+  <!-- MIDDLE -->
+
+
+  <div class="upload_picture_page_middle">
+    <div class="wrapPicture">
+
+
+      <div class="previewPicture">
+
+      </div>
+      <div class="pictureInfo">
+
+        <div class="picture_Title info_input">
+          <label for="pictureTitle">작품명</label><br>
+          <input type="text" id="pictureTitle" placeholder="작품의 제목을 입력해주세요.">
+        </div>
+
+
+        <div class="picture_Age ">
+          <p>작품 연령 선택</p>
+          <label><input type="radio" name="age" value="전체관람">전체관람</label>
+          <label class="gallery19"><input type="radio" name="age" value="19금">19금</label>
+        </div>
+
+
+        <div class="picture_About info_input">
+          <label for="pictureAbout">작품소개</label><br>
+          <textarea name="pictureAbout" id="pictureAbout" placeholder="작품에 대한 설명을 적어주세요."></textarea>
+        </div>
+
+        <div class="picture_Tool info_input">
+          <label for="pictureTool">작품그린툴</label><br>
+          <textarea name="pictureTool" id="pictureTool" placeholder="작품그린툴(비공개시 빈칸으로 남겨주세요)"></textarea>
+        </div>
+
+        <div class="picture_Tag info_input">
+          <label for="pictureTag">해쉬태그</label>
+          <div class="hashtag">
+            <p>* Separate your tags with a comma</p>
+            <div class="tags-input"></div>
+          </div>
+        </div>
+
+        <div class="picture_Upload info_input">
+          <label for="pictureUpload">그림업로드</label><br>
+          <input type="file">
+
+
+
+        </div>
+        <div class="uploadBtn">
+          <button>UPLOAD</button>
+          <button>뒤로가기</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="Upload_picture_page.js"></script>
+</body></html>

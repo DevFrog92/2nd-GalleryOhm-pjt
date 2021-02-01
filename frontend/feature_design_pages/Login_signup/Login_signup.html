@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="Login_signup.css">
+  <!--  폰트어썸-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head>
+
+<body class="login_signup_form">
+  <div class="login_signup_container" id="container">
+    <!-- 회원가입-->
+    <div class="form-container sign-up-container">
+      <form>
+        <h1 class="signup_title">Create Account</h1>
+        <br>
+        <!--         소셜로그 인 기능-->
+        <div class="social-container">
+          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your email for registration</span>
+
+        <input type="text" placeholder="ID" required="required" />
+        <div class="nickname">
+          <input class="nickname_input" type="text" placeholder="닉네임" required="required" />
+          <button class="random_btn"><i class="fas fa-redo"></i></button>
+          <p>* 닉네임은 마이페이지에서 변경 가능합니다.</p>
+        </div>
+        <input type="password" placeholder="Password" required="required" />
+        <input type="password_confirm" placeholder="Password_confirm" required="required" />
+        <input type="text" placeholder="이름" required="required" />
+        <input type="email" placeholder="Email" required="required" />
+        <input type="tel" placeholder="Telephone ( 010 - xxxx - xxxx )" required="required" />
+        <button class="signup_btn loginFormBtn">Sign Up</button>
+      </form>
+    </div>
+
+    <!--로그인-->
+    <div class="form-container sign-in-container">
+      <form>
+        <h1 class="signin_title">SIGN IN</h1><br><br>
+        <input class="login_id" type="text" placeholder="ID" />
+        <input class="login_password" type="password" placeholder="Password" />
+
+        <button class="trigger">Forgot your ID?</button>
+        <!--         아이디찾기 모달창-->
+        <div class="find_modal">
+          <div class="modal_content">
+            <div class="close_button"><i class="fas fa-times"></i></div>
+            <h2 class="modaltitle">Find ID</h2>
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <button class="findid_btn">Find ID</button>
+            <button class="find_cancel">Cancel</button>
+
+          </div>
+        </div>
+
+
+
+        <button class="trigger_pw">Forgot your Password?</button>
+        <!--       비번찾기 모달창-->
+        <div class="find_modal_pw">
+          <div class="modal_content_pw">
+            <div class="close_button_pw"><i class="fas fa-times"></i></div>
+            <h2 class="modaltitle">Find PW</h2>
+            <input type="text" placeholder="ID">
+            <input type="email" placeholder="Email">
+            <input type="tel" placeholder="Telephone ( 010 - xxxx - xxxx )">
+            <button class="findpw_btn">Find PW</button>
+            <button class="cancel_pw">Cancel</button>
+
+          </div>
+        </div>
+
+
+        <button class="signin_btn loginFormBtn">Sign In</button>
+        <span>or use your SNS account</span>
+        <div class="social-container">
+
+          <a href="#" class="social1"><img src="google.png" alt=""></a>
+          <a href="#" class="social2"><img src="naver.png" alt=""></a>
+          <a href="#" class="social3"><img src="kakao5.png" alt=""></a>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost loginFormBtn" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button class="ghost loginFormBtn" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="Login_signup.js"></script>
+</body></html>

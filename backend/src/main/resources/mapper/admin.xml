@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.gallery.dao.adminDao">
+
+	<select id="getAllUser" resultType="user">
+		select * from user where user_type in (1, 2)
+	</select>
+
+	<select id="getAllHashTag" resultType="string">
+		select hashtag_name from hashtag group by hashtag_name
+	</select>
+
+	<update id="giveRating" parameterType="int">
+		UPDATE work SET work_rating = 19 where work_id = #{work_id};
+	</update>
+
+	<update id="clearRating" parameterType="int">
+		UPDATE work SET work_rating = 0 where work_id = #{work_id};
+	</update>
+
+	<insert id="addMainGalleryHashTag" parameterType="string">
+		insert into keyword(keyword_name)
+		values (#{keyword_name})
+	</insert>
+
+	<delete id="deleteMainGalleryHashTag" parameterType="string">
+		delete from keyword
+		where
+			keyword_name = #{keyword_name}
+	</delete>
+
+	<select id="getMainGalleryHashTag" resultType="string">
+		select keyword_name from keyword group by keyword_name
+	</select>
+
+	<delete id="deleteHashTagFromWork" parameterType="hashTag">
+		delete from hashtag
+		where
+			hashtag_name = #{hashtag_name} and hashtag_workId = #{hashtag_workId}
+	</delete>
+
+	<delete id="deleteHashTagFromTotal" parameterType="hashTag">
+		delete from hashtag
+		where
+			hashtag_name = #{hashtag_name}
+	</delete>
+
+	<select id="renewMainGallery" resultType="mainGallery">
+		select mainGallery_galleryId from maingallery
+	</select>
+
+	<select id="renewSubGallery" resultType="subGallery">
+		select subGallery_workId from subgallery
+	</select>
+
+	<update id="renewMainGallery_algorithm">
+		UPDATE maingallery
+		SET maingallery_galleryId = (
+		    select galleryId
+		    from gallery
+		    where galleryId in (
+				select galleryDetail_galleryId
+		        from galleryDetail
+		        where galleryDetail_workId = (
+					select hashtag_workId
+					from hashtag
+		            where hashtag_name in (
+		                select keyword_name
+		                from keyword
+						)
+					)
+				)
+			order by gallery_footPrint desc
+			LIMIT 10
+		)
+	</update>
+
+	<insert id="renewSubGallery_algorithm">
+		insert into subgallery(subGallery_workId)
+		value(
+			select ork_id
+			from work
+			where work_artistId = (
+			    select artist_id
+			    from artist
+			    where artist_exp = 1
+				)
+			order by work_cost desc
+		)
+	</insert>
+
+	<delete id="renewSubGallery_delete">
+		truncate subgallery
+	</delete>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.gallery.dao.artistDao">
+	<select id="getArtistInfo" parameterType="String" resultType="artist">
+		SELECT * FROM artist WHERE artist_id = #{artist_id}
+	</select>
+
+	<insert id="changeArtist" parameterType="artist">
+		INSERT INTO
+		artist(artist_id, artist_bank, artist_account, artist_nickName)
+		VALUES(#{artist_id}, #{artist_bank}, #{artist_account}, #{artist_nickName})
+	</insert>
+
+	<update id="updateUserType" parameterType="String">
+		UPDATE user
+		SET user_type =
+				CASE
+					WHEN user_type=1 THEN 2
+					WHEN user_type=2 THEN 1
+					END
+		WHERE user_id = #{artist_id}
+	</update>
+
+	<delete id="leaveArtist" parameterType="String">
+		DELETE
+		FROM artist
+		WHERE artist_id = #{artist_id}
+	</delete>
+</mapper>
