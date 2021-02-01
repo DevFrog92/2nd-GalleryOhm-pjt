@@ -1,5 +1,7 @@
 ## SSAFY 2학기 공통프로젝트
 
+
+
 ### #목차
 
 1. 팀소개
@@ -69,28 +71,39 @@
 
 #### (1) Git
 
+[2021/02/01 수정]
+
 - **branch**
 
 ```
-master -> develop -> [자신의 브랜치 ex-kmj, kys 등] 
+master -> develop -> feature/내가만들것(완성해서 merge 후 삭제)
 
 1) clone
 2) git checkout -b develop origin/develop
    : 중앙 저장소와 연결된 개발 브랜치를 만들기
-3) git checkout -b [자신의 브랜치] develop 
-   : 나의 격리된 branch 생성
+3) git checkout -b [feature/내가만들것] develop
+  ex)  git checkout -b feature/login develop
+   : 기능개발을 위헤 격리된 branch 생성
 ```
 
 - **merge request**
 
 ```
-1) git push origin [자신의 브랜치]
+1) git push origin [feature/내가만들것]
+ ex) git push origin feature/login
 2) GUI에서 create new merge request
-3) kmj -> develop으로 요청 설정
+3) feature/내가만들것 -> develop으로 요청 설정
 
 RM컨벤션은
 "이슈번호 / (Add/Update/Delete) 작업내용"
 ex) s12345 /Add Login -> 이슈번호 없으면 None
+```
+
+- **완성해서 merge한 브랜치는 삭제**
+
+```
+git branch -d [merge시킨브랜치 이름]
+ex) git branch -d feature/login
 ```
 
 - **commit**
@@ -99,14 +112,14 @@ ex) s12345 /Add Login -> 이슈번호 없으면 None
 항상 코딩하기전에 develop 가져오기
 1) git checkout develop
 2) git pull origin develop
-3) git checkout [자신의 브랜치]
-4) git pull origin [자신의 브랜치]
 ```
 
 - **push**
 
 ```
 push는 하루에 한 번 ! 자기 직전에 하기!
+
+반드시 자신이 현재 개발을 진행하고 있는 브랜치에서 push하기!
 ```
 
 
@@ -133,13 +146,9 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 ### 4. 프로젝트 소개
 
-
-
 #### 	[ Ssaatchi Gallery ]	
 
 > 이유 : SSAFY + Saatchi Galley / 싸피의 갤러리
-
-
 
 #### (1) 주제
 
@@ -166,9 +175,7 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 #### (4) 진행 일정
 
-![image-20210128224441934](README.assets/image-20210128224441934.png)
-
-
+![image-20210128224502705](README.assets/image-20210128224502705.png)
 
 #### (5) 기술 스택
 
@@ -179,7 +186,7 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 **[System Architecture]**
 
-<img src="README.assets/시스템아키텍쳐.png" alt="시스템아키텍쳐" style="zoom:50%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/시스템아키텍쳐.png" alt="시스템아키텍쳐" style="zoom:50%;" />
 
 
 
@@ -187,31 +194,31 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 - Main Gallery page
 
-<img src="README.assets/01_main.png" alt="01_main" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/01_main.png" alt="01_main" style="zoom:25%;" />
 
 - Pinterest
 
-<img src="README.assets/03_search.png" alt="03_search" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/03_search.png" alt="03_search" style="zoom:25%;" />
 
 - Sub Gallery page
 
-<img src="README.assets/05_subpage.png" alt="05_subpage" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/05_subpage.png" alt="05_subpage" style="zoom:25%;" />
 
 - My page
 
-<img src="README.assets/04_mypage.png" alt="04_mypage" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/04_mypage.png" alt="04_mypage" style="zoom:25%;" />
 
 - Modify user data and my page
 
-<img src="README.assets/07_setting1.png" alt="07_setting1" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/07_setting1.png" alt="07_setting1" style="zoom:25%;" />
 
 - About
 
-<img src="README.assets/02_about.png" alt="02_about" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/02_about.png" alt="02_about" style="zoom:25%;" />
 
 - Detail
 
-<img src="README.assets/06_detail.png" alt="06_detail" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/06_detail.png" alt="06_detail" style="zoom:25%;" />
 
 #### (7) Rest API
 
@@ -502,27 +509,25 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 #### (9) ERD
 
-<img src="README.assets/ERD.png" alt="ERD" style="zoom: 33%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/ERD.png" alt="ERD" style="zoom: 33%;" />
 
 #### (10) Sequence Diagram
 
-<img src="README.assets/회원탈퇴시퀀ㅅ-1611839806143.png" alt="회원탈퇴시퀀ㅅ" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원탈퇴시퀀ㅅ-1611839806143.png" alt="회원탈퇴시퀀ㅅ" style="zoom:25%;" />
 
-<img src="README.assets/회원정보수정시퀀스-1611839778495.png" alt="회원정보수정시퀀스" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원정보수정시퀀스-1611839778495.png" alt="회원정보수정시퀀스" style="zoom:25%;" />
 
-<img src="README.assets/회원정보받아오기시퀀스.png" alt="회원정보받아오기시퀀스" style="zoom:25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원정보받아오기시퀀스.png" alt="회원정보받아오기시퀀스" style="zoom:25%;" />
 
-<img src="README.assets/로그인시퀀스.png" alt="로그인시퀀스" style="zoom: 50%;" />
-
-
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/로그인시퀀스.png" alt="로그인시퀀스" style="zoom: 50%;" />
 
 
 
-<img src="README.assets/전체작품받아오기시퀀스.png" alt="전체작품받아오기시퀀스" style="zoom: 50%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/전체작품받아오기시퀀스.png" alt="전체작품받아오기시퀀스" style="zoom: 50%;" />
 
-<img src="README.assets/회원가입시퀀스.png" alt="회원가입시퀀스" style="zoom: 25%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원가입시퀀스.png" alt="회원가입시퀀스" style="zoom: 25%;" />
 
-<img src="README.assets/작품저장시퀀스.png" alt="작품저장시퀀스" style="zoom: 50%;" />
+<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/작품저장시퀀스.png" alt="작품저장시퀀스" style="zoom: 50%;" />
 
 
 
@@ -535,13 +540,16 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 - [ ] 캡쳐방지 기능
 - [ ] 다크 모드
+- [ ] 이미지 크롭 기능 : 사진의 원하는 부분만 잘라서 프로필 사진으로 등록 ( 카카오톡 처럼 이미지 잘라서 프로필 등록) 자동으로 자르면 해상도를 많이 해친다.
 - [ ] 반응형 웹 : 테블릿과 웹이 메인인 반응형 웹
 
 [2021/01/19 기준]
 
 - [ ] 큐레이트
+- [ ] 배경음악 추가
 - [ ] [보류] DM 기능
-- [ ] 소셜로그인
+- [ ] [보류] 이미지 드래그 앤 드롭
+- [ ] [보류] 소셜로그인
 
 
 
@@ -598,6 +606,7 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
                1. 태마별로 분류해 주어야 한다,
             2. 즐겨찾기한 그림을 보여주는 페이지로 이동하기 위한 버튼
             3. about : 작가의 정보를 보여주는 페이지로 이동하기 위한 버
+         8. 배지 : pro, ama 등의 배지를 달 것인지
    2. 마이페이지 작성 및 수정 폼 페이지
       1. 프로필 사진 등록
       2. 자기소개
@@ -637,6 +646,7 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
   - 기술 추가를 위한 추가 기능 아이디어
 
     - 큐레이팅 서비스
+    - 경매 시스템
     - 메인 작품 선정 -> 알고리즘
       - ex) 4월/봄/꽃 -> 좋아요수 - 회원가입 날짜 - 즐겨찾기 
 
@@ -674,7 +684,8 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 - 협업툴 규칙 설정 및 Zira 이슈 등록
 - RestApi, DB전면 수정
 - 와이어프레임 전면 수정
--  소셜로그인 기능
+- [보류] 소셜로그인 기능
+- 전시회 그림 드래그앤 드로그로 설정 [도전]
 - DM 알림 표시 [도전] 
 
 [2021/01/20] - 컨설턴트님 팀회의
@@ -693,11 +704,32 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 [2021/01/26]
 
 - sub2 발표 대비 Minimun V Page 결정하기
+
   - 로그인, 회원가입, 작품올리기, 올라간 그림 보여주기 까지가 목표!
+
 - 와이어프레임 다시 만들기 -> 컨설턴트님 팀회의
+
 - 디테일 페이지 상세 내용 변경 
+
   - 부제 빼기, 그림 tool 따로 받기 
 
+  
 
+[2021/02/01]
 
+```
+[타이트하게 잡아놓은 현재 계획!]
+
+- 2월 3일까지 -> 각자 맡은 페이지 디자인 및 기능 구현, vue연결
+- 2월 4일 -> 자신이 만들어온 페이지 디자인 다같이 평가 및 수정
+- 2월 5일 -> 평가 바탕으로 수정완료
+- 2월 6일 ~ 2월 7일 -> 추가 기능 구현 및 전부 하나로 연결
+- 2월 8일 ~ 2월 10일 -> 추가 작업 및 오류 수정 및 DB 제작 
+- 2월 11일 ~ 2월 17일 -> 프론트: 권용수, 백앤드 : 오현정 , 영상제작: 강민지, 정수빈, 봉유정
+- 2월 18일 -> 완료예정!
+```
+
+- 카카오로그인 => 문제 발생 ==> 7일 이후에 하기 
+- **GIT 이름이 아닌 feature 단위로 만들기**
+- post 글 textarea -> 에디터로 변경
 
