@@ -58,9 +58,9 @@
 	<update id="renewMainGallery_algorithm">
 		UPDATE maingallery
 		SET maingallery_galleryId = (
-		    select galleryId
+		    select gallery_id
 		    from gallery
-		    where galleryId in (
+		    where gallery_id in (
 				select galleryDetail_galleryId
 		        from galleryDetail
 		        where galleryDetail_workId = (
@@ -80,7 +80,7 @@
 	<insert id="renewSubGallery_algorithm">
 		insert into subgallery(subGallery_workId)
 		value(
-			select ork_id
+			select work_id
 			from work
 			where work_artistId = (
 			    select artist_id
