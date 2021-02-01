@@ -89,7 +89,7 @@ master -> develop -> feature/내가만들것(완성해서 merge 후 삭제)
 - **merge request**
 
 ```
-1) git push origin [feature/내가만들것]
+1) git push origin [feature/내가만들것]  ====> 반드시 내가 개발완성한 브랜치에서!
  ex) git push origin feature/login
 2) GUI에서 create new merge request
 3) feature/내가만들것 -> develop으로 요청 설정
