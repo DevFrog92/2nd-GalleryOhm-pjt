@@ -184,4 +184,14 @@ public class GalleryController {
     }
 
 
+    /*** 성인 갤러리 목록 반환 ***/
+    @ApiOperation(value = "성인 갤러리 작품 목록 반환.", response = List.class, notes = "getAdultGallery \n return List<WorkDto>")
+    @RequestMapping(value = "/getAdultGallery", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAdultGallery() throws Exception {
+        List<WorkDto> adultGallery = galleryService.getAdultGallery();
+        if(adultGallery.isEmpty()){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(adultGallery,HttpStatus.OK);
+    }
 }

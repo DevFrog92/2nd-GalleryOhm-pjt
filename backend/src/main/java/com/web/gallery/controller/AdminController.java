@@ -174,7 +174,8 @@ public class AdminController {
         NumberResult ns = new NumberResult();
         List<MainGalleryDto> mainGalleryList = null;
         try {
-            adminService.renewMainGallery_algorithm();
+            adminService.renewMainGallery_delete();
+            adminService.renewMainGallery_algorithm(); // insert
             mainGalleryList = adminService.renewMainGallery();
             ns.setValue("renewMainGallery", mainGalleryList.size(), "succ");
         } catch (Exception e) {
