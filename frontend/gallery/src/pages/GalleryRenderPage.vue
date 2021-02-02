@@ -1,8 +1,8 @@
 <template>
  <div class="gallery__render">
    <div id="lamp">
-    <input type="radio" name="switch" value="on" />
-    <input type="radio" name="switch" value="off" checked="checked" />
+    <input type="radio" name="switch" value="on" checked="checked" />
+    <input type="radio" name="switch" value="off"  />
     <div class="lamp">
       <div class="gonna-give-light"></div>
     </div>
@@ -10,7 +10,7 @@
   <div class="close__btn">
     <i class="icon-back"></i>
   </div>
-    <div class="qurating">
+  <div class="qurating">
     <i class="icon-mic-1"></i>
   </div>
   <div class="main__carousel">

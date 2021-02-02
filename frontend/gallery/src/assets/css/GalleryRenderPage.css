@@ -5,6 +5,14 @@
   position:relative;
   width:100vw;
   z-index: 100;
+  opacity: 0;
+  animation: lampAni 2s forwards;
+}
+
+@keyframes lampAni {
+  0% {opacity: 0;z-index:100;}
+  50% {opacity: 0;z-index:100;}
+  100% {opacity: 1;z-index:70;}
 }
 
 #lamp input[name="switch"] {
@@ -121,13 +129,15 @@ input[value="on"]:checked ~ .lamp:before {
   content:"";
   width:100%;
   height: 100%;
-  background: rgba(0,0,0,0.95);
-  animation: start__side 5s infinite;
+  background: rgba(0,0,0,1);
+  animation: startside 5s forwards;
+
 }
 
-@keyframes start__side {
-  0% {opacity: 1; z-index: 60;}
-  100% {opacity: 0;z-index: -99999;}
+@keyframes startside {
+  0% {  background: rgba(0,0,0,1);z-index:60;}
+  50% {  background: rgba(0,0,0,0.99);z-index:60;}
+  100% {  background: rgba(0,0,0,0.01);z-index:-20;}
 }
 
 .main__carousel {
@@ -301,6 +311,7 @@ input[value="on"]:checked ~ .lamp:before {
 
 .qurating {
   position: absolute;
+  z-index: 70;
 /*
   bottom:2%;
   right:2%;
@@ -311,6 +322,8 @@ input[value="on"]:checked ~ .lamp:before {
 }
 
 .close__btn{
+  z-index: 70;
+
   position: absolute;
   top:2%;
   right:2%;
@@ -321,7 +334,8 @@ input[value="on"]:checked ~ .lamp:before {
   font-size: 1.7rem;
   cursor: pointer;
 }
-.icon-mic-1{
-   font-size: 1.7rem;
+
+.qurating{
+  font-size: 1.7rem;
   cursor: pointer;
 }

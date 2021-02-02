@@ -73,8 +73,8 @@ export default {
       this.work_piece = this.$refs.work_piece.files[0];
       // 업로드한 파일로 부터 url 을 생성할 수 있다.
       this.$store.dispatch("addWork",{
-        // work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
-        work_artistId: "ohj",
+        work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
+        // work_artistId: "ohj",
         work_title: this.work_title,
         work_desc:this.work_desc,
         work_piece:this.work_piece,

@@ -1,7 +1,6 @@
 const init = () => {
 
 "use strict";
-
 // const carousel = document.querySelector('main__carousel');
 const slider = document.querySelector('.carousel__slider');
 const  items = document.querySelectorAll('.carousel__slider__item');
