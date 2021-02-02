@@ -99,7 +99,10 @@ public class GalleryServiceImpl implements GalleryService{
         galleryDao.giveFootPrintToGallery(map);
     }
 
-
+    @Override
+    public List<WorkDto> getAdultGallery() {
+        return galleryDao.getAdultGallery();
+    }
 
 
 }

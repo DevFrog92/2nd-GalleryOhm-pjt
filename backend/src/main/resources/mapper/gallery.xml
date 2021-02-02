@@ -45,7 +45,8 @@
 	<select id="getAllMainGallery" resultType="gallery">
 		SELECT * FROM gallery
 		WHERE gallery_id
-			IN (SELECT mainGallery_galleryId FROM maingallery)
+				  IN (SELECT mainGallery_galleryId FROM maingallery)
+		ORDER BY gallery_footPrint DESC
 	</select>
 
 	<delete id="deleteGalleryToMainGallery" parameterType="int">
@@ -81,5 +82,11 @@
 		INSERT INTO footprint
 		VALUES(#{footPrint_galleryId},#{footPrint_userId})
 	</insert>
+
+	<select id="getAdultGallery" resultType="work">
+		select work_id
+		from work
+		where work_rating >= 19
+	</select>
 
 </mapper>
