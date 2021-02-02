@@ -1,6 +1,5 @@
 package com.web.gallery.controller;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,16 +21,13 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RestController
 @RequestMapping("/api/kakao")
 @Api(value = "artGallery", description = "Art Gallery KaKao Login")
-public class KaKaoLoginController {
+public class KakaoLoginController {
 
     @Autowired
     private JwtService jwtService;
@@ -48,7 +44,7 @@ public class KaKaoLoginController {
     @Autowired
     private LoginService loginService;
 
-    public static final Logger logger = LoggerFactory.getLogger(KaKaoLoginController.class);
+    public static final Logger logger = LoggerFactory.getLogger(KakaoLoginController.class);
 
 
     @ApiOperation(value = "카카오 로그인", response = String.class)

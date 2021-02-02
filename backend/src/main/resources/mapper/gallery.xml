@@ -82,4 +82,10 @@
 		VALUES(#{footPrint_galleryId},#{footPrint_userId})
 	</insert>
 
+	<select id="getAdultGallery" resultType="work">
+		select work_id
+		from work
+		where work_rating >= 19
+	</select>
+
 </mapper>

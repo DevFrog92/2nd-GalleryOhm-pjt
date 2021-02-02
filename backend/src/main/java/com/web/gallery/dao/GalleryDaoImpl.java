@@ -81,5 +81,7 @@ public class GalleryDaoImpl {
     }
 
 
-
+    public List<WorkDto> getAdultGallery() {
+        return sqlSession.selectList(ns+"getAdultGallery");
+    }
 }
