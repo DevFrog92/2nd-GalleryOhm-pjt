@@ -68,7 +68,7 @@ public class GalleryDaoImpl {
         return sqlSession.delete(ns+"deleteWorkToSubGallery",subGallery_workId);
     }
 
-    public List<WorkDto> getArtistGallery(String galleryDetail_galleryId) {
+    public List<WorkDto> getArtistGallery(int galleryDetail_galleryId) {
         return sqlSession.selectList(ns+"getArtistGallery", galleryDetail_galleryId);
     }
 
