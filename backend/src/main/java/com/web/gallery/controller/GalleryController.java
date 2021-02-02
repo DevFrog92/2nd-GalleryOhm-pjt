@@ -154,7 +154,7 @@ public class GalleryController {
     /**** 전시관 관련 기타 기능 ****/
     @ApiOperation(value = "전시관 속 작품들 목록을 받아온다.", response = List.class, notes = "getArtistGallery(galleryDetail_galleryId) \n return List<WorkDto>")
     @RequestMapping(value = "/getArtistGallery/{galleryDetail_galleryId}", method = RequestMethod.GET)
-    public ResponseEntity<List<WorkDto>> getArtistGallery(@PathVariable String galleryDetail_galleryId) throws Exception{
+    public ResponseEntity<List<WorkDto>> getArtistGallery(@PathVariable int galleryDetail_galleryId) throws Exception{
         List<WorkDto> worksInGallery = galleryService.getArtistGallery(galleryDetail_galleryId);
         if(worksInGallery.isEmpty()){
             return new ResponseEntity(HttpStatus.NO_CONTENT);
