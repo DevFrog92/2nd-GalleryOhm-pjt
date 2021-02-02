@@ -40,7 +40,7 @@ public interface GalleryService {
     int deleteWorkToSubGallery(int subGallery_workId);
 
     /**** 전시관 속 작품들 목록 리스트를 반환한다. ****/
-    List<WorkDto> getArtistGallery(String galleryDetail_galleryId);
+    List<WorkDto> getArtistGallery(int galleryDetail_galleryId);
 
     /**** 작가의 아이디로 작가의 전시관 리스트를 반환한다. ****/
     List<GalleryDto> getMyGallery(String gallery_artistId);
