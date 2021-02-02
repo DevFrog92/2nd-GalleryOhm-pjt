@@ -1,9 +1,6 @@
 package com.web.gallery.dao;
 
-import com.web.gallery.dto.HashTagDto;
-import com.web.gallery.dto.MainGalleryDto;
-import com.web.gallery.dto.SubGalleryDto;
-import com.web.gallery.dto.UserDto;
+import com.web.gallery.dto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -68,7 +65,9 @@ public class AdminDaoImpl {
     }
 
     public void renewSubGallery_algorithm() {
-        sqlSession.update(ns + "renewMainGallery_algorithm");
+        List<WorkDto> subGallery = sqlSession.selectList(ns + "renewSubGallery_algorithm");
+
+        sqlSession.insert(ns + "renewSubGallery_insert", subGallery);
     }
 
     public void renewSubGallery_delete() {
