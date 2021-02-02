@@ -61,7 +61,11 @@ public class AdminDaoImpl {
     }
 
     public void renewMainGallery_algorithm() {
-        sqlSession.update(ns + "renewMainGallery_algorithm");
+        sqlSession.insert(ns + "renewMainGallery_algorithm");
+    }
+
+    public void renewMainGallery_delete() {
+        sqlSession.delete(ns+"renewMainGallery_delete");
     }
 
     public void renewSubGallery_algorithm() {

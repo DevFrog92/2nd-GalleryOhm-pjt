@@ -55,27 +55,32 @@
 		select subGallery_workId from subgallery
 	</select>
 
-	<update id="renewMainGallery_algorithm">
-		UPDATE maingallery
-		SET maingallery_galleryId = (
-			select galleryId
-			from gallery
-			where galleryId in (
-				select galleryDetail_galleryId
-				from galleryDetail
-				where galleryDetail_workId = (
-					select hashtag_workId
-					from hashtag
-					where hashtag_name in (
-						select keyword_name
-						from keyword
-					)
-				)
+	<insert id="renewMainGallery_algorithm">
+		INSERT INTO maingallery(mainGallery_galleryId)
+			(SELECT gallery_id
+			 FROM gallery
+			 WHERE gallery_id
+					   IN
+				   (SELECT galleryDetail_galleryId
+					FROM gallerydetail
+					WHERE galleryDetail_workId
+							  IN
+						  (SELECT hashtag_workId
+						   FROM hashtag
+						   WHERE hashtag_name
+									 IN
+								 (SELECT keyword_name
+								  FROM keyword)
+						  )
+				   )
 			)
-			order by gallery_footPrint desc
+				ORDER BY gallery_footPrint DESC
 			LIMIT 10
-			)
-	</update>
+	</insert>
+
+	<delete id="renewMainGallery_delete">
+		truncate maingallery;
+	</delete>
 
 	<insert id="renewSubGallery_insert" parameterType="list">
 		insert into subgallery(subGallery_artistId, subGallery_workId)
