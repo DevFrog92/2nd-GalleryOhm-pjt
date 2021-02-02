@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.gallery.dao.adminDao">
 
@@ -58,38 +58,43 @@
 	<update id="renewMainGallery_algorithm">
 		UPDATE maingallery
 		SET maingallery_galleryId = (
-		    select gallery_id
-		    from gallery
-		    where gallery_id in (
+			select galleryId
+			from gallery
+			where galleryId in (
 				select galleryDetail_galleryId
-		        from galleryDetail
-		        where galleryDetail_workId = (
+				from galleryDetail
+				where galleryDetail_workId = (
 					select hashtag_workId
 					from hashtag
-		            where hashtag_name in (
-		                select keyword_name
-		                from keyword
-						)
+					where hashtag_name in (
+						select keyword_name
+						from keyword
 					)
 				)
+			)
 			order by gallery_footPrint desc
 			LIMIT 10
-		)
+			)
 	</update>
 
-	<insert id="renewSubGallery_algorithm">
-		insert into subgallery(subGallery_workId)
-		value(
-			select work_id
-			from work
-			where work_artistId = (
-			    select artist_id
-			    from artist
-			    where artist_exp = 1
-				)
-			order by work_cost desc
-		)
+	<insert id="renewSubGallery_insert" parameterType="list">
+		insert into subgallery(subGallery_artistId, subGallery_workId)
+		values
+		<foreach collection="list" index="index" item="work" separator=",">
+			(#{work.work_artistId}, #{work.work_id})
+		</foreach>
 	</insert>
+
+	<select id="renewSubGallery_algorithm" resultType="work">
+		select work_artistId, work_id
+		from work
+		where work_artistId in (
+			select artist_id
+			from artist
+			where artist_exp = 1
+		)
+		order by work_cost desc
+	</select>
 
 	<delete id="renewSubGallery_delete">
 		truncate subgallery

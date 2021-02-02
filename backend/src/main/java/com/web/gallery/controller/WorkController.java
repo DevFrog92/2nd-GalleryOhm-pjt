@@ -28,7 +28,7 @@ public class WorkController {
     @Autowired
     private WorkService workService;
 
-    public static final Logger logger = LoggerFactory.getLogger(MessageController.class);
+    public static final Logger logger = LoggerFactory.getLogger(WorkController.class);
 
     @ApiOperation(value = "작가가 작품을 등록한다.", response = NumberResult.class,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,

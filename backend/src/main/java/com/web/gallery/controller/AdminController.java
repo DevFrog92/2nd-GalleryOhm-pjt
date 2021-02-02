@@ -28,7 +28,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    public static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @ApiOperation(value = "사용자 목록을 반환한다.", response = List.class)
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
