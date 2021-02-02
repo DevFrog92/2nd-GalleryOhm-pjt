@@ -10,9 +10,9 @@
       <div class="nav">
       <router-link class="nav-item" to="/">Main</router-link>
       <router-link class="nav-item" to="/listitem">List</router-link>
-      <!-- <router-link class="nav-item" to="/detail">Detail</router-link> -->
-      <!-- <router-link class="nav-item" to="/mypage">Mypage</router-link> -->
-      <!-- <router-link class="nav-item" to="/galleryrender">GalleryRender</router-link> -->
+      <router-link class="nav-item" to="/detail">Detail</router-link>
+      <router-link class="nav-item" to="/mypage">Mypage</router-link>
+      <router-link class="nav-item" to="/galleryrender">GalleryRender</router-link>
       <div v-if="loginState">
       <router-link class="nav-item" to="/workupload">WorkUpLoad</router-link>
       <router-link class="nav-item" to="/settings">Settings</router-link>
