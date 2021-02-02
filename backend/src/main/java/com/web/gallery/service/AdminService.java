@@ -42,11 +42,15 @@ public interface AdminService {
     // 서브관 작품 선정 (작품) 목록
     List<SubGalleryDto> renewSubGallery() throws Exception;
 
-    // 메인관 작품 선정 (전시관)
+    /**** 메인관 작품 선정 (전시관) ****/
+    // 메인 갤러리 DB에 insert
     void renewMainGallery_algorithm() throws Exception;
+    // 메인 갤러리 DB 데이터들 삭제
+    void renewMainGallery_delete() throws Exception;
 
-    // 서브관 작품 선정 (작품)
+    /**** 서브관 작품 선정 (작품) ****/
     void renewSubGallery_algorithm() throws Exception;
 
     void renewSubGallery_delete() throws Exception;
+
 }
