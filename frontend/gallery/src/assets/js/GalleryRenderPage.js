@@ -6,7 +6,7 @@ const slider = document.querySelector('.carousel__slider');
 const  items = document.querySelectorAll('.carousel__slider__item');
 const  prevBtn = document.querySelector('.carousel__prev');
 const  nextBtn = document.querySelector('.carousel__next');
-
+console.log(items);
 var width, height, totalWidth, margin = 20,
   currIndex = 0;
 
