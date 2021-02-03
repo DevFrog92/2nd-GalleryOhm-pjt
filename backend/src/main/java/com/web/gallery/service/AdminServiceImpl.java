@@ -37,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteMainGalleryHashTag(String keyword_name) throws Exception {
-         adminDao.deleteMainGalleryHashTag(keyword_name);
+        adminDao.deleteMainGalleryHashTag(keyword_name);
     }
 
     @Override
@@ -73,6 +73,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void renewMainGallery_algorithm() throws Exception {
         adminDao.renewMainGallery_algorithm();
+    }
+
+    @Override
+    public void renewMainGallery_delete() throws Exception {
+        adminDao.renewMainGallery_delete();
     }
 
     @Override

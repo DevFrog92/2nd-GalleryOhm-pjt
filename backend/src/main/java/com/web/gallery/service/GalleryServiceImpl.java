@@ -79,7 +79,7 @@ public class GalleryServiceImpl implements GalleryService{
 
     /**** 전시관 속 작품들 목록 리스트를 반환한다. ****/
     @Override
-    public List<WorkDto> getArtistGallery(String galleryDetail_galleryId) {
+    public List<WorkDto> getArtistGallery(int galleryDetail_galleryId) {
         return galleryDao.getArtistGallery(galleryDetail_galleryId);
     }
 
@@ -99,7 +99,10 @@ public class GalleryServiceImpl implements GalleryService{
         galleryDao.giveFootPrintToGallery(map);
     }
 
-
+    @Override
+    public List<WorkDto> getAdultGallery() {
+        return galleryDao.getAdultGallery();
+    }
 
 
 }

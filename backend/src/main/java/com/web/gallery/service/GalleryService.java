@@ -40,7 +40,7 @@ public interface GalleryService {
     int deleteWorkToSubGallery(int subGallery_workId);
 
     /**** 전시관 속 작품들 목록 리스트를 반환한다. ****/
-    List<WorkDto> getArtistGallery(String galleryDetail_galleryId);
+    List<WorkDto> getArtistGallery(int galleryDetail_galleryId);
 
     /**** 작가의 아이디로 작가의 전시관 리스트를 반환한다. ****/
     List<GalleryDto> getMyGallery(String gallery_artistId);
@@ -48,5 +48,6 @@ public interface GalleryService {
     /**** 전시관을 발자국(좋아요) 누른 사용자를 footprint DB에 저장한다. (한 사용자가 좋아요 두번이상 누르지 못하도록) ****/
     void giveFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
 
-
+    // 성인 갤러리 작품 목록 반환
+    List<WorkDto> getAdultGallery();
 }
