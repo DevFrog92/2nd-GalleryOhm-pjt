@@ -60,9 +60,9 @@ const addWork = (context, info) => {
   formData.append("work_piece", info.work_piece);
   formData.append("work_rating", info.work_rating);
 
-  // for(let key of formData.entries()){
-  //   console.log(`${key}`);
-  // }
+  for(let key of formData.entries()){
+    console.log(`${key}`);
+  }
   // response 다시 확인 할 것
   return http.post(`/work/addWork`, formData,{ headers :
                       {'Content-Type' : 'multipart/form-data'}

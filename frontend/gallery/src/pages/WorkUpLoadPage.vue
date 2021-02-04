@@ -4,9 +4,7 @@
     <div class="upload_picture_page_middle">
       <div class="wrapPicture">
         <div class="previewPicture">
-          <div>
           <img v-if="img_url" :src="img_url" alt="">
-          </div>
           <div class="picture_Upload info_input">
           <!-- <label for="pictureUpload">그림업로드</label><br> -->
           <input type="file" ref="work_piece" hidden @change="onChangeImage" /><br />
@@ -71,7 +69,8 @@
     methods: {
       addWork: function () {
         // console.log(this.$refs.work_piece.files);
-        this.work_piece = this.$refs.work_piece.files[0];
+        // this.work_piece = this.$refs.work_piece.files[0];
+        console.log(this.work_piece)
         // 업로드한 파일로 부터 url 을 생성할 수 있다.
         this.$store.dispatch("addWork", {
             work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
@@ -87,6 +86,7 @@
       },
       onChangeImage(event) {
         const imgFile = event.target.files[0];
+        this.work_piece = imgFile;
         this.img_url = URL.createObjectURL(imgFile);
       },
       onClickUploadImage() {
