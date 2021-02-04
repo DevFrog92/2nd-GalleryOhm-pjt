@@ -32,13 +32,14 @@ public class WorkController {
 
     @ApiOperation(value = "작가가 작품을 등록한다.", response = NumberResult.class,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            notes = "addWork(String work_artistId, String work_title, String work_desc, MultipartFile work_piece, int work_rating[0 or 1])")
+            notes = "addWork(String work_artistId, String work_title, String work_desc, MultipartFile work_piece, int work_rating[0 or 1], String work_tool)")
     @RequestMapping(value = "/addWork", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> addWork(@RequestParam(value = "work_artistId") String work_artistId,
                                                 @RequestParam(value = "work_title") String work_title,
                                                 @RequestParam(value = "work_desc") String work_desc,
                                                 @RequestParam(value = "work_piece") MultipartFile work_piece,
-                                                @RequestParam(value = "work_rating") int work_rating) {
+                                                @RequestParam(value = "work_rating") int work_rating,
+                                                @RequestParam(value = "work_tool") String work_tool) {
         HttpStatus status = null;
         NumberResult ns = new NumberResult();
         WorkDto work = new WorkDto();
@@ -48,6 +49,7 @@ public class WorkController {
             work.setWork_title(work_title);
             work.setWork_desc(work_desc);
             work.setWork_piece(work_piece.getBytes());
+            work.setWork_tool(work_tool);
 
             if (work_rating != 0) {
                 work.setWork_rating(work_rating);
