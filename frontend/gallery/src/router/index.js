@@ -13,6 +13,10 @@ import GalleryRenderPage from '../pages/GalleryRenderPage'
 import LoginSignup from '../pages/User/LoginSignup'
 import Settings from '../pages/Settings'
 import WorkUpLoad from '../pages/WorkUpLoadPage'
+
+import Adult from '../pages/Adult/AdultPage'
+import DragAndDrop from '../pages/DragAndDrop'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -55,6 +59,16 @@ const routes = [
     path:'/workupload',
     name:'WorkUpLoad',
     component:WorkUpLoad,
+  },
+  {
+    path:'/adult',
+    name:'Adult',
+    component:Adult
+  },
+  {
+    path:'/creategallery',
+    name:"DragAndDrop",
+    component:DragAndDrop
   }
 ]
 
