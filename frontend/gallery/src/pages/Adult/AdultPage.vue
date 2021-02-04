@@ -103,7 +103,7 @@ import 'swiper/swiper-bundle.css'
     height: 400px;
     padding-top: 50px;
     padding-bottom: 50px;
-    // background-color: rgb(158, 22, 22);
+    background-color: rgb(158, 22, 22);
   }
 
   .swiper {
