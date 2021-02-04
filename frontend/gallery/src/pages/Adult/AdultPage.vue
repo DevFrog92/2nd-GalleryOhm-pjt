@@ -1,4 +1,5 @@
 <template >
+<div id="adult">
     <div>
         <div class="welcome">
             <div class="dark">
@@ -30,6 +31,7 @@
   </div>
 </div>
         <!-- </div> -->
+    </div>
     </div>
 </template>
 
@@ -120,7 +122,7 @@ import 'swiper/swiper-bundle.css'
       font-weight: bold;
     //   font-size: $font-size-huge * 2;
     font-size: 20px;
-      background-color: #2C8DFB;
+      // background-color: #2C8DFB;
       background-position: center;
       background-size: cover;
       color: white;
@@ -144,7 +146,10 @@ import 'swiper/swiper-bundle.css'
 .swiper-container img {
     width:100%;
     height:auto;
+    mix-blend-mode: normal;
+    filter: blur(15px);
 }
+
 </style>
 
 <style lang="sass" scoped>
@@ -249,6 +254,9 @@ $fadeout-time: 2s
 
 
 <style lang="scss" scoped>
+#adult img{
+  object-fit: contain;
+}
 .carousel-nav-icon {
    height: 48px;
    width: 48px;

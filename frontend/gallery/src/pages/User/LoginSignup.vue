@@ -74,7 +74,7 @@
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input class="login_password" type="password" placeholder="Password" v-model="userInfo.user_password" />
+            <input class="login_password" type="password" placeholder="Password" @keypress.enter="login" v-model="userInfo.user_password" />
             <span class="focus-border"></span>
           </div>
           <button class="trigger" @click.prevent="toggleModalId">Forgot your ID?</button>

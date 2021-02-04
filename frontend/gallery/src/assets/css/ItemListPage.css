@@ -6,7 +6,7 @@
 
 .item-lists {
 	display: grid;
-	grid-template-columns:repeat(auto-fit,minmax(10%, auto));
+	grid-template-columns:repeat(auto-fit,minmax(13%, auto));
 	grid-gap: 1rem;
 	/* grid-auto-rows: 15%; */
 	grid-auto-flow: dense;

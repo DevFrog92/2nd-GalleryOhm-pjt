@@ -34,7 +34,7 @@
 
           <div class="picture_Tool info_input">
             <label for="pictureTool">작품그린툴</label><br>
-            <textarea name="pictureTool" id="pictureTool" placeholder="작품그린툴(비공개시 빈칸으로 남겨주세요)"></textarea>
+            <textarea name="pictureTool" id="pictureTool" placeholder="작품그린툴(비공개시 빈칸으로 남겨주세요)" v-model="work_tool"></textarea>
           </div>
 
           <div class="picture_Tag info_input">
@@ -78,7 +78,8 @@
             work_title: this.work_title,
             work_desc: this.work_desc,
             work_piece: this.work_piece,
-            work_rating: this.work_rating
+            work_rating: this.work_rating,
+            work_tool: this.work_tool
           })
           .then(() => {
             // console.log(data);
@@ -102,6 +103,7 @@
         work_title: "",
         work_desc: "",
         work_piece: "",
+        work_tool:"",
         img_url: '',
       };
     },
