@@ -54,3 +54,25 @@ function windowOnClickPw(event) {
     toggleModalPw();
   }
 }
+
+//terms모달 js------------------------------------------------
+
+var termsModal = document.querySelector(".terms_modal");
+var triggerTerms = document.querySelector(".triggerTerms");
+var closeButtonTerms = document.querySelector(".close_button_terms");
+
+
+triggerTerms.addEventListener("click", toggleModalTerms);
+closeButtonTerms.addEventListener("click", toggleModalTerms);
+window.addEventListener("click", windowOnClickTerms);
+
+function toggleModalTerms(event) {
+  event.preventDefault();
+  termsModal.classList.toggle("show_modal_terms");
+}
+
+function windowOnClickTerms(event) {
+  if (event.target === termsModal) {
+    toggleModalTerms();
+  }
+}
