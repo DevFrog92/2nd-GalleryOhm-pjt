@@ -21,7 +21,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img class="gallery__image" data-index="1" src="../assets/images/1.png" alt="">
+              <img class="gallery__image" data-index="1" src="../assets/images/보노.png" alt="">
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
@@ -33,7 +33,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img class="gallery__image" data-index="2" src="../assets/images/1.png" alt="">
+              <img class="gallery__image" data-index="2" src="../assets/images/너구리.png" alt="">
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
@@ -45,7 +45,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img class="gallery__image" data-index="3" src="../assets/images/2.png" alt="">
+              <img class="gallery__image" data-index="3" src="../assets/images/포로리.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
@@ -58,7 +58,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img src="../assets/images/3.png" alt="">
+              <img src="../assets/images/보노.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
@@ -71,7 +71,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img src="../assets/images/4.png" alt="">
+              <img src="../assets/images/너구리.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
@@ -84,7 +84,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img src="../assets/images/1.png" alt="">
+              <img src="../assets/images/포로리.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
@@ -97,7 +97,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img src="../assets/images/1.png" alt="">
+              <img src="../assets/images/보노.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
@@ -110,7 +110,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img src="../assets/images/1.png" alt="">
+              <img src="../assets/images/너구리.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
@@ -123,7 +123,7 @@
         <div class="carousel__slider__item">
           <div class="item__3d-frame">
             <div class="item__3d-frame__box item__3d-frame__box--front">
-              <img src="../assets/images/1.png" alt="">
+              <img src="../assets/images/포로리.png" alt="">
 
             </div>
             <div class="item__3d-frame__box item__3d-frame__box--left"></div>
