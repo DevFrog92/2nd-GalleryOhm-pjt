@@ -178,7 +178,7 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 #### (4) 진행 일정
 
-![image-20210128224502705](README.assets/image-20210128224502705.png)
+![image-20210128224502705-1612189516493](README.assets/image-20210128224502705-1612189516493.png)
 
 #### (5) 기술 스택
 
@@ -189,7 +189,7 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 **[System Architecture]**
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/시스템아키텍쳐.png" alt="시스템아키텍쳐" style="zoom:50%;" />
+<img src="README.assets/시스템아키텍쳐.png" alt="시스템아키텍쳐" style="zoom:50%;" />
 
 
 
@@ -197,31 +197,31 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 - Main Gallery page
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/01_main.png" alt="01_main" style="zoom:25%;" />
+<img src="README.assets/01_main.png" alt="01_main" style="zoom:25%;" />
 
 - Pinterest
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/03_search.png" alt="03_search" style="zoom:25%;" />
+<img src="README.assets/03_search.png" alt="03_search" style="zoom:25%;" />
 
 - Sub Gallery page
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/05_subpage.png" alt="05_subpage" style="zoom:25%;" />
+<img src="README.assets/05_subpage.png" alt="05_subpage" style="zoom:25%;" />
 
 - My page
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/04_mypage.png" alt="04_mypage" style="zoom:25%;" />
+<img src="README.assets/04_mypage.png" alt="04_mypage" style="zoom:25%;" />
 
 - Modify user data and my page
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/07_setting1.png" alt="07_setting1" style="zoom:25%;" />
+<img src="README.assets/07_setting1-1612460863421.png" alt="07_setting1" style="zoom:25%;" />
 
 - About
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/02_about.png" alt="02_about" style="zoom:25%;" />
+<img src="README.assets/02_about.png" alt="02_about" style="zoom:25%;" />
 
 - Detail
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/06_detail.png" alt="06_detail" style="zoom:25%;" />
+<img src="README.assets/06_detail.png" alt="06_detail" style="zoom:25%;" />
 
 #### (7) Rest API
 
@@ -512,27 +512,25 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
 
 #### (9) ERD
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/ERD.png" alt="ERD" style="zoom: 33%;" />
+<img src="README.assets/ERD-1612460957636.png" alt="ERD" style="zoom: 33%;" />
 
 #### (10) Sequence Diagram
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원탈퇴시퀀ㅅ-1611839806143.png" alt="회원탈퇴시퀀ㅅ" style="zoom:25%;" />
+<img src="README.assets/작품저장시퀀스.png" alt="작품저장시퀀스" style="zoom: 50%;" />
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원정보수정시퀀스-1611839778495.png" alt="회원정보수정시퀀스" style="zoom:25%;" />
+<img src="README.assets/전체작품받아오기시퀀스.png" alt="전체작품받아오기시퀀스" style="zoom: 67%;" />
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원정보받아오기시퀀스.png" alt="회원정보받아오기시퀀스" style="zoom:25%;" />
+<img src="README.assets/회원가입시퀀스.png" alt="회원가입시퀀스" style="zoom: 33%;" />
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/로그인시퀀스.png" alt="로그인시퀀스" style="zoom: 50%;" />
+<img src="README.assets/회원정보받아오기시퀀스.png" alt="회원정보받아오기시퀀스" style="zoom: 33%;" />
 
+<img src="README.assets/회원정보수정시퀀스.png" alt="회원정보수정시퀀스" style="zoom:33%;" />
 
+<img src="README.assets/회원정보수정시퀀스-1611839778495.png" alt="회원정보수정시퀀스-1611839778495" style="zoom:33%;" />
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/전체작품받아오기시퀀스.png" alt="전체작품받아오기시퀀스" style="zoom: 50%;" />
+<img src="README.assets/회원탈퇴시퀀ㅅ.png" alt="회원탈퇴시퀀ㅅ" style="zoom:33%;" />
 
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/회원가입시퀀스.png" alt="회원가입시퀀스" style="zoom: 25%;" />
-
-<img src="../GITHUB/Common_PJT/공통pjt개인README.assets/작품저장시퀀스.png" alt="작품저장시퀀스" style="zoom: 50%;" />
-
-
+<img src="README.assets/회원탈퇴시퀀ㅅ-1611839806143.png" alt="회원탈퇴시퀀ㅅ-1611839806143" style="zoom:33%;" />
 
 #### (10) 기능
 
@@ -757,3 +755,26 @@ EPIC의 세부내용 작성 후 담당자설정 및 매주 Sprint에 올리기
   - 오현정 : 서버연결!! 메인갤러리 레이아웃 디자인 & 함수연결
   - 강민지 : navbar만들기, 디테일페이지 카피라이터 추가, 작품개개인에는 즐겨찾기 필요 없음, 회원정보 수정 페이지, 어바웃페이지
 
+
+
+### 6. 페이지 상황(server 기준)
+
+#### (1) 2021/02/05
+
+
+
+<img src="README.assets/image-20210205025410422.png" alt="image-20210205025410422" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025418435.png" alt="image-20210205025418435" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025424782.png" alt="image-20210205025424782" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025429556.png" alt="image-20210205025429556" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025434944.png" alt="image-20210205025434944" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025442497.png" alt="image-20210205025442497" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025448135.png" alt="image-20210205025448135" style="zoom:33%;" />
+
+<img src="README.assets/image-20210205025452497.png" alt="image-20210205025452497" style="zoom:33%;" />
