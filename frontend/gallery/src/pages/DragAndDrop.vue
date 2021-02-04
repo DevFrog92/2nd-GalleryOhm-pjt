@@ -46,7 +46,7 @@
     <a href="#" @click="plusDivs(-1)">prev</a>
     <a href="#" @click="plusDivs(1)">next</a>
 
-    <button class="gallery_list_btn" @click="clickEventHandler">작품 등록</button>
+    <button class="gallery_list_btn" @click="clickEventHandler">전시관 등록</button>
 
     <Modal v-if="showModal" @close="showModal = false">
       <!--
