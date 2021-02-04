@@ -7,12 +7,12 @@
       <div class="gonna-give-light"></div>
     </div>
   </div>
-  <div class="close__btn">
+  <div class="close__btn" @click="goBack">
     <i class="icon-back"></i>
   </div>
-  <div class="qurating">
+  <!-- <div class="qurating">
     <i class="icon-mic-1"></i>
-  </div>
+  </div> -->
   <div class="main__carousel">
     <div class="carousel__body">
       <div class="carousel__prev"><i class="icon-left-open"></i></div>
@@ -27,7 +27,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
           <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -39,7 +39,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
           <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -52,7 +52,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -65,7 +65,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -78,7 +78,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -91,7 +91,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -104,7 +104,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -117,7 +117,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
         <div class="carousel__slider__item">
@@ -130,7 +130,7 @@
             <div class="item__3d-frame__box item__3d-frame__box--right"> </div>
           </div>
                 <div class="item__title">
-          <h1>아인슈타인</h1>            
+          <h1>도라에몽</h1>            
           </div>
         </div>
       </div>
@@ -151,6 +151,11 @@ export default {
   },
   mounted(){
     init.init();
+  },
+  methods:{
+    goBack(){
+      this.$router.go(-1);
+    }
   }
 }
 </script>

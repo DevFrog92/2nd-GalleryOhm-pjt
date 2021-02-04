@@ -18,23 +18,9 @@
                   <div class="sub_item__3d-frame__box sub_item__3d-frame__box--right"> </div>
                 </div>
                 <div class="sub_item__title">
-                  <h1>아인슈타인</h1>
+                  <h1></h1>
                 </div>
               </div>
-              <div class="sub_carousel__slider__item">
-                <div class="sub_item__3d-frame">
-                  <div class="sub_item__3d-frame__box sub_item__3d-frame__box--front">
-                    <div class="empty">
-                    </div>
-                  </div>
-                  <div class="sub_item__3d-frame__box sub_item__3d-frame__box--left"></div>
-                  <div class="sub_item__3d-frame__box sub_item__3d-frame__box--right"> </div>
-                </div>
-                <div class="sub_item__title">
-                  <h1>아인슈타인</h1>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>

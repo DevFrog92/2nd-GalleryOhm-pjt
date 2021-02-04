@@ -15,11 +15,11 @@ const init = () => {
     
   
   function createBlock () {
-    const maxNumGallery = 15;
+    const maxNumGallery = 14;
     for(let i=0;i <maxNumGallery;i++){
       const subItem = document.createElement('div');
       subItem.classList.add('sub_carousel__slider__item');
-      subItem.innerHTML='<div class="sub_item__3d-frame"><div class="sub_item__3d-frame__box sub_item__3d-frame__box--front"><div class="empty"></div></div><div class="sub_item__3d-frame__box sub_item__3d-frame__box--left"></div><div class="sub_item__3d-frame__box sub_item__3d-frame__box--right"> </div></div><div class="sub_item__title"><h1>아인슈타인</h1></div>'
+      subItem.innerHTML='<div class="sub_item__3d-frame"><div class="sub_item__3d-frame__box sub_item__3d-frame__box--front"><div class="empty"></div></div><div class="sub_item__3d-frame__box sub_item__3d-frame__box--left"></div><div class="sub_item__3d-frame__box sub_item__3d-frame__box--right"> </div></div><div class="sub_item__title"><h1></h1></div>'
       slider.appendChild(subItem);
     }
     resize();
@@ -61,15 +61,15 @@ const init = () => {
             box = item.getElementsByClassName('sub_item__3d-frame')[0];
         if(i == (index - 1)) {
             item.classList.add('sub_carousel__slider__item--active');
-            box.style.transform = "perspective(1200px)";
+            box.style.transform = "perspective(2000px)";
         } else {
           item.classList.remove('sub_carousel__slider__item--active');
-            box.style.transform = "perspective(1200px) rotateY(" + (i < (index - 1) ? 40 : -40) + "deg)";
+            box.style.transform = "perspective(2000px) rotateY(" + (i < (index - 1) ? 40 : -40) + "deg)";
             
         }
     }
   
-    slider.style.transform = "translate3d(" + ((index * -width) + (width / 2) + window.innerWidth / 2) + "px, 0, 0)";
+    slider.style.transform = "translate3d(" + ((index *-width)*1.08 + (width / 2) + window.innerWidth / 2) + "px, 0, 0)";
   }
   
   
