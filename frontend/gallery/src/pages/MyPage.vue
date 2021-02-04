@@ -60,9 +60,9 @@ export default {
       // console.log('scroll');
     },
     checkScroll(){
-    var lastScrollTop = 0;
-    var delta = 5;
-    var fixBox = document.querySelector('.btns');
+    // var lastScrollTop = 0;
+    // var delta = 5;
+    // var fixBox = document.querySelector('.btns');
     var fixBoxTop = document.querySelector('.goToTop');
     // var fixBoxHeight = fixBox.offsetHeight;
     var didScroll = true;
@@ -90,25 +90,25 @@ export default {
 
       // console.log(document.querySelector('#headerpage-header').offsetHeight);
     
-    var nowScrollTop = window.scrollY;
-      if (Math.abs(lastScrollTop - nowScrollTop) <= delta) {
-        return;
-      }
-      if (nowScrollTop >= document.querySelector('#mypage-header').offsetHeight+document.querySelector('#headerpage-header').offsetHeight-2) {
-        // console.log('돌파');
-        fixBox.classList.add('show');
-        fixBoxTop.classList.add('show');
+    // var nowScrollTop = window.scrollY;
+    //   if (Math.abs(lastScrollTop - nowScrollTop) <= delta) {
+    //     return;
+    //   }
+    //   if (nowScrollTop >= document.querySelector('#mypage-header').offsetHeight+document.querySelector('#headerpage-header').offsetHeight-2) {
+    //     // console.log('돌파');
+    //     fixBox.classList.add('show');
+    //     fixBoxTop.classList.add('show');
 
-      } else {
-        fixBox.classList.remove('show');
-        fixBoxTop.classList.remove('show');
-      }
-      lastScrollTop = nowScrollTop;
+    //   } else {
+    //     fixBox.classList.remove('show');
+    //     fixBoxTop.classList.remove('show');
+    //   }
+    //   lastScrollTop = nowScrollTop;
     }
     }
   },
   created(){
-    window.addEventListener('scroll',this.checkScroll);
+    // window.addEventListener('scroll',this.checkScroll);
   },
   destroyed(){
     window.addEventListener('scroll',this.checkScroll);

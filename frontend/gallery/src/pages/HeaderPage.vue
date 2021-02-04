@@ -8,15 +8,17 @@
         <!-- <h3>{{nickName}}</h3> -->
       </div>
       <div class="nav">
-      <router-link class="nav-item" to="/">Main</router-link>
-      <router-link class="nav-item" to="/listitem">List</router-link>
-      <!-- <router-link class="nav-item" to="/detail">Detail</router-link> -->
-      <!-- <router-link class="nav-item" to="/mypage">Mypage</router-link> -->
-      <!-- <router-link class="nav-item" to="/galleryrender">GalleryRender</router-link> -->
+      <router-link class="nav-item" to="/">|  메인  |</router-link>
       <div v-if="loginState">
-      <router-link class="nav-item" to="/workupload">WorkUpLoad</router-link>
-      <router-link class="nav-item" to="/settings">Settings</router-link>
-      <a href="#" @click.prevent="logout">Logout</a>
+      <router-link class="nav-item" to="/listitem">작품 갤러리  |</router-link>
+      <!-- <router-link class="nav-item" to="/detail">Detail</router-link> -->
+      <router-link class="nav-item" to="/galleryrender">작가 갤러리  |</router-link>
+      <router-link class="nav-item" to="/adult">레드 갤러리관  |</router-link>
+      <router-link class="nav-item" to="/workupload">작품 등록  |</router-link>
+      <router-link class="nav-item" to="/creategallery">전시관 등록  |</router-link>
+      <router-link class="nav-item" to="/mypage">마이페이지 |</router-link>
+      <router-link class="nav-item" to="/settings">설정  |</router-link>
+      <a href="#" @click.prevent="logout">로그아웃  |</a>
       </div>
       <div v-else>
       <router-link class="nav-item" to="/loginsignup">Login & Signup</router-link>
