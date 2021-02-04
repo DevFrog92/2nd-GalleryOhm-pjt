@@ -116,7 +116,7 @@
     mounted() {
       setTimeout(() => {
         init.init();
-      }, 100)
+      }, 1000)
     },
     created() {
       const user_id = localStorage.getItem('user_id')
