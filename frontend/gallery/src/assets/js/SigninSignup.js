@@ -31,7 +31,7 @@ const login = (userInfo) => {
 }
 
 const activeBtn = () => {
-  const container = document.querySelector("#container");
+  const container = document.querySelector("#singup_container");
   container.classList.toggle("right-panel-active");        
 }
 const toggleModalId = () => {
@@ -73,4 +73,29 @@ const checkId = (user_id) => {
   })
 }
 
-export default {join,login,activeBtn,toggleModalId,toggleModalPw,findPassword,findId,checkId};
+
+const toggleModalInit = ()=>{
+
+
+const termsModal = document.querySelector(".terms_modal");
+const triggerTerms = document.querySelector(".triggerTerms");
+const closeButtonTerms = document.querySelector(".close_button_terms");
+
+triggerTerms.addEventListener("click", toggleModalTerms);
+closeButtonTerms.addEventListener("click", toggleModalTerms);
+window.addEventListener("click", windowOnClickTerms);
+function toggleModalTerms(event){
+  event.preventDefault();
+  termsModal.classList.toggle("show_modal_terms");
+}
+function windowOnClickTerms(event){
+  if (event.target === termsModal) {
+    toggleModalTerms();
+}
+}
+
+
+
+}
+
+export default {join,login,activeBtn,toggleModalId,toggleModalPw,findPassword,findId,checkId,toggleModalInit};

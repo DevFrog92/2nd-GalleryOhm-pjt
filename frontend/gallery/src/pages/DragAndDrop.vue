@@ -81,7 +81,7 @@
         <button class="closeRegisterGalleryBtn" @click="showModal=false">나가기</button>
       </div>
       <div slot="footer" v-else>
-        <button class="registerGallery">전시관으로 이동</button>
+        <button class="registerGallery" @click="galleryrender">전시관으로 이동</button>
         <button class="closeRegisterGalleryBtn" @click="goToMypage">마이페이지로 이동</button>
       </div>
     </Modal>
@@ -123,7 +123,7 @@
       return http.get(`/work/getMyWorks/${user_id}`)
         .then(response => {
           const workList = response.data;
-
+          console.log('worklist',workList);
           for (let i = 0; i < workList.length; i++) {
             workList[i].work_piece = "data:image/jpeg;base64," + workList[i].work_piece;
           }
@@ -154,6 +154,7 @@
         formdata.append('gallery_mainWorkId', this.galleryIdArray[0]);
         formdata.append('gallery_name', this.gallery_name);
         formdata.append('gallery_workIdList', this.galleryIdArray);
+        console.log(this.galleryIdArray,'array');
         http.post('/gallery/addArtistGallery', formdata)
           .then(response => {
             console.log(response.data);
@@ -180,6 +181,12 @@
           // if(index > items.length) index = 1;
           // this.currIndex = index;
           // slider.style.transform = "translate3d(" + ((index * -width) + (width / 2) + window.innerWidth / 2) + "px, 0, 0)";
+      },
+      goToMypage(){
+        this.$router.push('/mypage');
+      },
+      galleryrender(){
+        this.$router.push('/galleryrender');
       }
     }
   }

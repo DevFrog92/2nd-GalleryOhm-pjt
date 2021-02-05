@@ -109,7 +109,6 @@ input[value="on"]:checked ~ .lamp:before {
 
 
 .gallery__render {
-  font-size: 1rem;
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -318,8 +317,10 @@ input[value="on"]:checked ~ .lamp:before {
   right:2%;
 */
   left:2%;
-  top:2%;
+  top:4%;
   color:white;
+  font-size: 1.7rem;
+  cursor: pointer;
 }
 
 .close__btn{
@@ -335,8 +336,17 @@ input[value="on"]:checked ~ .lamp:before {
   font-size: 1.7rem;
   cursor: pointer;
 }
-
-.qurating{
-  font-size: 1.7rem;
-  cursor: pointer;
+.qurating i {
+  position: absolute;
+  top:0.3rem;
 }
+
+
+.qurating audio{
+  position: absolute;
+  margin:0;
+  padding: 0;
+  transform: scale3d(.7,.7,.7);
+}
+
+
