@@ -41,6 +41,7 @@ public class GalleryController {
                                                          @RequestParam(value = "gallery_mainWorkId") int gallery_mainWorkId,
                                                          @RequestParam(value = "gallery_workIdList") List<Integer> gallery_workIdList) throws Exception{
         NumberResult nr = new NumberResult();
+        System.out.println(gallery_workIdList.toString());
         if(galleryService.addArtistGallery(gallery_name, gallery_desc, gallery_artistId, gallery_mainWorkId)==1) {
             if(galleryService.addArtistGalleryDetail(gallery_workIdList)>=1) {    // 작품에 추가.
                 nr.setValue("addArtistGallery", 1, "succ");
