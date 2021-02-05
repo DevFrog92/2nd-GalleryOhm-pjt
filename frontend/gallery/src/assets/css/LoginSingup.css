@@ -3,15 +3,16 @@
   box-sizing: border-box;
 }
 
-#container {
+#singup_container {
   height: 70vh;
 }
 .focus_container {
   margin:0.2rem 0;
-  width: 100%;
+  width: 80%;
   position: relative;
+  
 }
-#container input {
+#singup_container input {
   outline-style: none;
   border: 0;
   padding: 7px;
@@ -49,7 +50,7 @@ input:focus ~ .focus-border
 .signin_title {
   font-weight: bold;
   margin: 0 0 1.2em ;
-  font-size: 2rem;
+  font-size: 2.3rem;
 }
 
 
@@ -79,7 +80,7 @@ input:focus ~ .focus-border
 
 .nickname {
   display:flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0px;
   width: 100%;
   margin-bottom: 3px;
@@ -151,7 +152,7 @@ input:focus ~ .focus-border
 }
 
 .signin_btn {
-  margin-top: 9px;
+  margin-top: 22px;
 }
 
 .loginFormBtn:active {
@@ -332,12 +333,14 @@ form {
 
 
 .find_modal,
-.find_modal_pw {
+.find_modal_pw,
+.terms_modal{
   position: fixed;
-  left: 10;
-  top: 50;
-  width: 100px;
-  height: auto;
+  z-index: 999;
+  /* left: 20; */
+  /* top: 50; */
+  width: 100%;
+  /* height: auto; */
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
@@ -345,37 +348,60 @@ form {
   transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
 
-.modal_content,
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.6rem;
+  width: 400px;
+  height:300px;
+  border-radius: 0.5rem;
+  border: 2px solid red;
+}
+
+
 .modal_content_pw {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: lightgray;
+  background-color: white;
   padding: 1rem 1.6rem;
-  width: 300px;
-  height: auto;
+  width: 400px;
+  height:350px;;
   border-radius: 0.5rem;
+  border: 2px solid red;
+}
+
+.modal_focus_container {
+  margin:0.2rem 0 0.2rem 0.9rem;
+  width: 90%;
+  position: relative;
+  
 }
 
 .close_button,
-.close_button_pw {
+.close_button_pw,
+.close_button_terms {
   float: right;
   width: 1rem;
   font-size: 18px;
   text-align: center;
   cursor: pointer;
   border-radius: 0.25rem;
-  background-color: lightgray;
 }
 
 .close_button:hover,
-.close_button_pw:hover {
-  background-color: darkgray;
+.close_button_pw:hover,
+.close_button_terms:hover {
+  color: red;
 }
 
 .show-modal,
-.show_modal_pw {
+.show_modal_pw,
+.show_modal_terms{
   position: absolute;
   z-index: 100;
   opacity: 1;
@@ -393,6 +419,7 @@ form {
   cursor: pointer;
   border: 0px;
   background-color: transparent;
+  font-size: 15px;
 }
 
 .findid_btn:hover,
@@ -411,6 +438,7 @@ form {
   cursor: pointer;
   border: 0px;
   background-color: transparent;
+  font-size: 15px;
 }
 
 .find_cancel:hover,
@@ -422,31 +450,106 @@ form {
 
 .modaltitle {
   text-align: center;
-  font-size: 15px;
+  font-size: 32px;
   margin-bottom: 15px;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+  margin-top: 29px;
 
 }
 
-.trigger,
-.trigger_pw {
+
+.trigger_pw,
+.triggerTerms{
   padding: 4px;
   border: 0;
+  outline: 0;
   background-color: transparent;
   color: black;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0px;
   cursor: pointer;
+  margin-top: 5px;
+ 
+}
+
+.trigger{
+    padding: 4px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: black;
+  font-size: 13px;
+  letter-spacing: 0px;
+  cursor: pointer;
+  margin-top: 13px;
 }
 
 .trigger:hover,
-.trigger_pw:hover {
+.trigger_pw:hover,
+.triggerTerms:hover {
   color: red;
+  
+}
+.termstitle {
+  pointer-events: none;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+.terms_content p{
+  pointer-events: none;
+
+  margin: 3px;
+  text-align: left;
+}
+.terms_content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: white;
+  padding: 1rem 1.6rem;
+  width: 32rem;
+  z-index: 999;
+  border-radius: 0.5rem;
+  border: 2px solid red;
+}
+#info_terms{
+  font-weight: bold;
+}
+
+#more_info {
+  color: red;
+}
+#terms_checkbox_id {
+  display: flex;
+  justify-content: center;
 }
 
 
+#terms_checkbox_id input[type="checkbox"] {
+  width:20px; 
+/*  height: auto;*/
+  margin:0 1em;
+  margin-top:0.4em;
+}
+.triggerTerms{
+  font-size: 15px;
+    font-weight:bold;
+}
 
+.overlay-right h1, .overlay-left h1{
+  font-size:1.4rem;
+  font-weight: bold;
+  
+}
+.overlay-right p, .overlay-left p{
+  font-size:1.2rem;
+  
+}
+/*
 .social-container {
   margin: 20px 0;
   width: 100%;
@@ -455,6 +558,8 @@ form {
   align-items: center;
 
 }
+*/
+/*
 
 .social-span {
   margin-top: 1rem;
@@ -474,7 +579,7 @@ form {
   width: 100%;
   height: 100%;
   object-fit: content;
-/*  margin-top: 6.1px;*/
+  margin-top: 6.1px;
 }
 .social2 img{
   width: 100%;
@@ -489,3 +594,4 @@ object-fit: cover;
   object-fit: cover;
 }
 
+*/
