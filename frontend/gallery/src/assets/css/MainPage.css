@@ -4,7 +4,7 @@ h3 {
 
 @keyframes rotate-carousel{
   to {
-    transform:rotateY(360deg);
+    transform:rotateY(-360deg);
   }
 
 }

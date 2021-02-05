@@ -5,8 +5,8 @@
 <mapper namespace="com.web.gallery.dao.workDao">
 
     <insert id="addWork" parameterType="work">
-        insert into work(work_artistId, work_title, work_desc, work_piece, work_rating)
-        values (#{work_artistId}, #{work_title}, #{work_desc}, #{work_piece}, #{work_rating})
+        insert into work(work_artistId, work_title, work_desc, work_piece, work_rating, work_tool)
+        values (#{work_artistId}, #{work_title}, #{work_desc}, #{work_piece}, #{work_rating}, #{work_tool})
     </insert>
 
     <select id="getWork" parameterType="int" resultType="work">

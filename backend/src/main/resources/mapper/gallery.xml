@@ -11,10 +11,10 @@
 
 	<insert id="addArtistGalleryDetail" parameterType="list">
 			INSERT INTO
-			gallerydetail(galleryDetail_galleryId, galleryDetail_workId)
+			gallerydetail(galleryDetail_galleryId, galleryDetail_workId, galleryDetail_order)
 			VALUES
-			<foreach collection="list" index="index" item="gallery_workId" separator=",">
-			       ((SELECT gallery_id FROM gallery WHERE gallery_mainWorkId = #{list[0]}), #{gallery_workId})
+			<foreach collection="list" index="i" item="gallery_workId" separator=",">
+			       ((SELECT gallery_id FROM gallery WHERE gallery_mainWorkId = #{list[0]}), #{gallery_workId}, ${i}+1)
 			</foreach>
 
 	</insert>
@@ -66,11 +66,14 @@
 	</delete>
 
 	<select id="getArtistGallery" parameterType="int" resultType="work">
-		SELECT * FROM work
-		WHERE work_id
-		IN (SELECT galleryDetail_workId
-			FROM gallerydetail
-		    WHERE galleryDetail_galleryId = #{galleryDetail_galleryId})
+		select work.*
+		FROM work
+			 RIGHT JOIN
+			 (SELECT galleryDetail_workId, galleryDetail_order
+			  FROM gallerydetail
+			  WHERE galleryDetail_galleryId = 52) AS detail
+			 ON work.work_id = detail.galleryDetail_workId
+		ORDER BY galleryDetail_order;
 	</select>
 
 	<select id="getMyGallery" parameterType="String" resultType="gallery">

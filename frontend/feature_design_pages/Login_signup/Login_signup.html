@@ -11,7 +11,7 @@
 </head>
 
 <body class="login_signup_form">
-  <div class="login_signup_container" id="container">
+  <div class="login_signup_container" id="singup_container">
     <!-- 회원가입-->
     <div class="form-container sign-up-container">
       <form>
@@ -28,7 +28,6 @@
         </div>
         <div class="nickname">
           <div class="focus_container">
-
             <input class="nickname_input" type="text" placeholder="재밌는 랜덤 닉네임이 주어집니다" readonly required="required" v-model="nickName" />
             <span class="focus-border"></span>
           </div>
@@ -116,11 +115,11 @@
           <div class="modal_content">
             <div class="close_button" @click="toggleModalId"><i class="fas fa-times"></i></div>
             <h2 class="modaltitle">FIND ID</h2>
-            <div class="focus_container">
+            <div class="modal_focus_container">
               <input type="text" placeholder="Name" v-model="userInfo.user_name">
               <span class="focus-border"></span>
             </div>
-            <div class="focus_container">
+            <div class="modal_focus_container">
               <input type="email" placeholder="Email" v-model="userInfo.user_email">
               <span class="focus-border"></span>
             </div>
@@ -138,15 +137,15 @@
           <div class="modal_content_pw">
             <div class="close_button_pw" @click='toggleModalPw'><i class="fas fa-times"></i></div>
             <h2 class="modaltitle">FIND PW</h2>
-            <div class="focus_container">
+            <div class="modal_focus_container">
               <input type="text" placeholder="ID" v-model="userInfo.user_id">
               <span class="focus-border"></span>
             </div>
-            <div class="focus_container">
+            <div class="modal_focus_container">
               <input type="email" placeholder="Email" v-model="userInfo.user_email">
               <span class="focus-border"></span>
             </div>
-            <div class="focus_container">
+            <div class="modal_focus_container">
               <input type="tel" placeholder="Phone" v-model="userInfo.user_tel">
               <span class="focus-border"></span>
             </div>

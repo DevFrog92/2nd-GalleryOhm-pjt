@@ -3,16 +3,16 @@
   box-sizing: border-box;
 }
 
-#container {
+#singup_container {
   height: 70vh;
 }
 .focus_container {
   margin:0.2rem 0;
-  width: 100%;
+  width: 80%;
   position: relative;
   
 }
-#container input {
+#singup_container input {
   outline-style: none;
   border: 0;
   padding: 7px;
@@ -50,7 +50,7 @@ input:focus ~ .focus-border
 .signin_title {
   font-weight: bold;
   margin: 0 0 1.2em ;
-  font-size: 2rem;
+  font-size: 2.3rem;
 }
 
 
@@ -80,7 +80,7 @@ input:focus ~ .focus-border
 
 .nickname {
   display:flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0px;
   width: 100%;
   margin-bottom: 3px;
@@ -355,7 +355,7 @@ form {
   background-color: white;
   padding: 1rem 1.6rem;
   width: 400px;
-  height:300px;;
+  height:300px;
   border-radius: 0.5rem;
   border: 2px solid red;
 }
@@ -372,6 +372,13 @@ form {
   height:350px;;
   border-radius: 0.5rem;
   border: 2px solid red;
+}
+
+.modal_focus_container {
+  margin:0.2rem 0 0.2rem 0.9rem;
+  width: 90%;
+  position: relative;
+  
 }
 
 .close_button,
@@ -442,15 +449,15 @@ form {
 
 .modaltitle {
   text-align: center;
-  font-size: 30px;
+  font-size: 32px;
   margin-bottom: 15px;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  margin-top: 25px;
+  margin-top: 29px;
 
 }
 
-.trigger,
+
 .trigger_pw,
 .triggerTerms{
   padding: 4px;
@@ -463,6 +470,18 @@ form {
   cursor: pointer;
   margin-top: 5px;
  
+}
+
+.trigger{
+    padding: 4px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: black;
+  font-size: 13px;
+  letter-spacing: 0px;
+  cursor: pointer;
+  margin-top: 13px;
 }
 
 .trigger:hover,
