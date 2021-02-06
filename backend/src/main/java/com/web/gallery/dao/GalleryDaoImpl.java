@@ -91,4 +91,12 @@ public class GalleryDaoImpl {
     public List<WorkDto> getAdultGallery_even() {
         return sqlSession.selectList(ns+"getAdultGallery_even");
     }
+
+    public List<WorkDto> getAllSubGallery_odd() {
+        return sqlSession.selectList(ns+"getAllSubGallery_odd");
+    }
+
+    public List<WorkDto> getAllSubGallery_even(){
+        return sqlSession.selectList(ns+"getAllSubGallery_even");
+    }
 }

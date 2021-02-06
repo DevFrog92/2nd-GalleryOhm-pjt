@@ -60,6 +60,18 @@
 				  IN (SELECT subGallery_workId FROM subgallery)
 	</select>
 
+	<select id="getAllSubGallery_odd" resultType="work">
+		SELECT * FROM work
+		WHERE MOD(work_id, 2) = 1 and work_id
+				  IN (SELECT subGallery_workId FROM subgallery)
+	</select>
+
+	<select id="getAllSubGallery_even" resultType="work">
+		SELECT * FROM work
+		WHERE MOD(work_id, 2) = 0 and work_id
+			IN (SELECT subGallery_workId FROM subgallery)
+	</select>
+
 	<delete id="deleteWorkToSubGallery" parameterType="int">
 		DELETE FROM subgallery
 		WHERE subGallery_workId = #{subGallery_workId}

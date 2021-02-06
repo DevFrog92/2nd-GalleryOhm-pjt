@@ -140,6 +140,28 @@ public class GalleryController {
         return new ResponseEntity<List<WorkDto>>(works,HttpStatus.OK);
     }
 
+    /**** 서브 갤러리 홀수 번호 작품 반환****/
+    @ApiOperation(value = "서브 갤러리의 홀수 작품 목록들을 조회한다.", response = List.class, notes = "getAllSubGallery()")
+    @RequestMapping(value = "/getAllSubGallery_odd", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAllSubGallery_odd() throws Exception{
+        List<WorkDto> works = galleryService.getAllSubGallery_odd();
+        if(works.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(works,HttpStatus.OK);
+    }
+
+    /**** 서브 갤러리 짝수 번호 작품 반환****/
+    @ApiOperation(value = "서브 갤러리의 홀수 작품 목록들을 조회한다.", response = List.class, notes = "getAllSubGallery()")
+    @RequestMapping(value = "/getAllSubGallery_even", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAllSubGallery_even() throws Exception{
+        List<WorkDto> works = galleryService.getAllSubGallery_even();
+        if(works.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(works,HttpStatus.OK);
+    }
+
     @ApiOperation(value = "서브 갤러리의 작품을 작품 아이디로 삭제한다.", response = NumberResult.class, notes = "deleteWorkToSubGallery(subGallery_workId)")
     @RequestMapping(value = "/deleteWorkToSubGallery/{subGallery_workId}", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> deleteWorkToSubGallery(@PathVariable int subGallery_workId) throws Exception{
