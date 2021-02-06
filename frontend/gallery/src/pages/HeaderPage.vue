@@ -13,7 +13,8 @@
       <router-link class="nav-item" to="/listitem">작품 갤러리  |</router-link>
       <!-- <router-link class="nav-item" to="/detail">Detail</router-link> -->
       <router-link class="nav-item" to="/galleryrender">작가 갤러리  |</router-link>
-      <router-link class="nav-item" to="/adult">레드 갤러리관  |</router-link>
+      <router-link class="nav-item" to="/SubGallery">서브 갤러리  |</router-link>
+      <router-link class="nav-item" to="/RedGallery">레드 갤러리관  |</router-link>
       <router-link class="nav-item" to="/workupload">작품 등록  |</router-link>
       <router-link class="nav-item" to="/creategallery">전시관 등록  |</router-link>
       <router-link class="nav-item" to="/mypage">마이페이지 |</router-link>
