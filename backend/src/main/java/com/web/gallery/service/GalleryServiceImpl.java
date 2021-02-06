@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class GalleryServiceImpl implements GalleryService{
+public class GalleryServiceImpl implements GalleryService {
 
     @Autowired
     private GalleryDaoImpl galleryDao;
@@ -71,6 +71,7 @@ public class GalleryServiceImpl implements GalleryService{
     public List<WorkDto> getAllSubGallery() {
         return galleryDao.getAllSubGallery();
     }
+
     /**** 서브 갤러리의 작품을 작품 아이디로 삭제한다. ****/
     @Override
     public int deleteWorkToSubGallery(int subGallery_workId) {
@@ -114,5 +115,13 @@ public class GalleryServiceImpl implements GalleryService{
         return galleryDao.getAdultGallery_even();
     }
 
+    @Override
+    public List<WorkDto> getAllSubGallery_odd() {
+        return galleryDao.getAllSubGallery_odd();
+    }
 
+    @Override
+    public List<WorkDto> getAllSubGallery_even() {
+        return galleryDao.getAllSubGallery_even();
+    }
 }
