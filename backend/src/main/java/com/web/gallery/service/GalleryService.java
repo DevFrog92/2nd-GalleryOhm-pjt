@@ -50,4 +50,10 @@ public interface GalleryService {
 
     // 성인 갤러리 작품 목록 반환
     List<WorkDto> getAdultGallery();
+
+    // 성인 갤러리 홀수 작품 목록 반환
+    List<WorkDto> getAdultGallery_odd();
+
+    // 성인 갤러리 짝수 작품 목록 반환
+    List<WorkDto> getAdultGallery_even();
 }

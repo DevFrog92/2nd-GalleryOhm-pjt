@@ -104,5 +104,15 @@ public class GalleryServiceImpl implements GalleryService{
         return galleryDao.getAdultGallery();
     }
 
+    @Override
+    public List<WorkDto> getAdultGallery_odd() {
+        return galleryDao.getAdultGallery_odd();
+    }
+
+    @Override
+    public List<WorkDto> getAdultGallery_even() {
+        return galleryDao.getAdultGallery_even();
+    }
+
 
 }
