@@ -14,8 +14,9 @@ import LoginSignup from '../pages/User/LoginSignup'
 import Settings from '../pages/Settings'
 import WorkUpLoad from '../pages/WorkUpLoadPage'
 
-import Adult from '../pages/Adult/AdultPage'
 import DragAndDrop from '../pages/DragAndDrop'
+import RedGallery from '../pages/Adult/RedGallery'
+import AdultPage from '../pages/Adult/AdultPage'
 
 Vue.use(VueRouter)
 
@@ -61,14 +62,19 @@ const routes = [
     component:WorkUpLoad,
   },
   {
-    path:'/adult',
-    name:'Adult',
-    component:Adult
-  },
-  {
     path:'/creategallery',
     name:"DragAndDrop",
     component:DragAndDrop
+  },
+  {
+    path: '/RedGallery',
+    name: RedGallery, 
+    component: RedGallery
+  },
+  {
+    path: '/RedGallery/AdultPage',
+    name: AdultPage, 
+    component: AdultPage
   }
 ]
 
