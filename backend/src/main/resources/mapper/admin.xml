@@ -83,21 +83,21 @@
 	</delete>
 
 	<insert id="renewSubGallery_insert" parameterType="list">
-		insert into subgallery(subGallery_artistId, subGallery_workId)
+		insert into subgallery(subGallery_workId)
 		values
 		<foreach collection="list" index="index" item="work" separator=",">
-			(#{work.work_artistId}, #{work.work_id})
+			(#{work.work_id})
 		</foreach>
 	</insert>
 
 	<select id="renewSubGallery_algorithm" resultType="work">
-		select work_artistId, work_id
+		select work_id
 		from work
 		where work_artistId in (
 			select artist_id
 			from artist
 			where artist_exp = 1
-		)
+		) and work_rating = 0
 		order by work_cost desc
 	</select>
 

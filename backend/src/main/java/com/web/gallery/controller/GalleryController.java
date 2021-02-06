@@ -41,6 +41,7 @@ public class GalleryController {
                                                          @RequestParam(value = "gallery_mainWorkId") int gallery_mainWorkId,
                                                          @RequestParam(value = "gallery_workIdList") List<Integer> gallery_workIdList) throws Exception{
         NumberResult nr = new NumberResult();
+        System.out.println(gallery_workIdList.toString());
         if(galleryService.addArtistGallery(gallery_name, gallery_desc, gallery_artistId, gallery_mainWorkId)==1) {
             if(galleryService.addArtistGalleryDetail(gallery_workIdList)>=1) {    // 작품에 추가.
                 nr.setValue("addArtistGallery", 1, "succ");
@@ -139,6 +140,28 @@ public class GalleryController {
         return new ResponseEntity<List<WorkDto>>(works,HttpStatus.OK);
     }
 
+    /**** 서브 갤러리 홀수 번호 작품 반환****/
+    @ApiOperation(value = "서브 갤러리의 홀수 작품 목록들을 조회한다.", response = List.class, notes = "getAllSubGallery()")
+    @RequestMapping(value = "/getAllSubGallery_odd", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAllSubGallery_odd() throws Exception{
+        List<WorkDto> works = galleryService.getAllSubGallery_odd();
+        if(works.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(works,HttpStatus.OK);
+    }
+
+    /**** 서브 갤러리 짝수 번호 작품 반환****/
+    @ApiOperation(value = "서브 갤러리의 홀수 작품 목록들을 조회한다.", response = List.class, notes = "getAllSubGallery()")
+    @RequestMapping(value = "/getAllSubGallery_even", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAllSubGallery_even() throws Exception{
+        List<WorkDto> works = galleryService.getAllSubGallery_even();
+        if(works.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(works,HttpStatus.OK);
+    }
+
     @ApiOperation(value = "서브 갤러리의 작품을 작품 아이디로 삭제한다.", response = NumberResult.class, notes = "deleteWorkToSubGallery(subGallery_workId)")
     @RequestMapping(value = "/deleteWorkToSubGallery/{subGallery_workId}", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> deleteWorkToSubGallery(@PathVariable int subGallery_workId) throws Exception{
@@ -193,5 +216,27 @@ public class GalleryController {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<WorkDto>>(adultGallery,HttpStatus.OK);
+    }
+
+    /*** 성인 갤러리 홀수 목록 반환 ***/
+    @ApiOperation(value = "성인 갤러리 작품 목록 반환.", response = List.class, notes = "getAdultGallery \n return List<WorkDto>")
+    @RequestMapping(value = "/getAdultGallery_odd", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAdultGallery_odd() throws Exception {
+        List<WorkDto> adultGallery_odd = galleryService.getAdultGallery_odd();
+        if(adultGallery_odd.isEmpty()){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(adultGallery_odd,HttpStatus.OK);
+    }
+
+    /*** 성인 갤러리 짝수 목록 반환 ***/
+    @ApiOperation(value = "성인 갤러리 작품 목록 반환.", response = List.class, notes = "getAdultGallery \n return List<WorkDto>")
+    @RequestMapping(value = "/getAdultGallery_even", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAdultGallery_even() throws Exception {
+        List<WorkDto> adultGallery_even = galleryService.getAdultGallery_even();
+        if(adultGallery_even.isEmpty()){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(adultGallery_even,HttpStatus.OK);
     }
 }

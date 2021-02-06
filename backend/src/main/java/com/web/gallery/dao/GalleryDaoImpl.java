@@ -80,8 +80,23 @@ public class GalleryDaoImpl {
         sqlSession.insert(ns+"giveFootPrintToGallery",map);
     }
 
-
     public List<WorkDto> getAdultGallery() {
         return sqlSession.selectList(ns+"getAdultGallery");
+    }
+
+    public List<WorkDto> getAdultGallery_odd() {
+        return sqlSession.selectList(ns+"getAdultGallery_odd");
+    }
+
+    public List<WorkDto> getAdultGallery_even() {
+        return sqlSession.selectList(ns+"getAdultGallery_even");
+    }
+
+    public List<WorkDto> getAllSubGallery_odd() {
+        return sqlSession.selectList(ns+"getAllSubGallery_odd");
+    }
+
+    public List<WorkDto> getAllSubGallery_even(){
+        return sqlSession.selectList(ns+"getAllSubGallery_even");
     }
 }

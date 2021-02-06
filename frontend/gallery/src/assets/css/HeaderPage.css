@@ -1,3 +1,4 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @media (max-width:768) {
   .nav {
     width: 30%;
@@ -33,6 +34,7 @@
   float: right;
   font-size: 0.9rem;
   line-height: 2rem;
+  font-family: 'Jeju Gothic', sans-serif;
 }
 
 .nav-item {

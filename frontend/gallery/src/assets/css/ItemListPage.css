@@ -6,9 +6,9 @@
 
 .item-lists {
 	display: grid;
-	grid-template-columns:repeat(auto-fit,minmax(18%, auto));
+	grid-template-columns:repeat(auto-fit,minmax(13%, auto));
 	grid-gap: 1rem;
-	grid-auto-rows: 15%;
+	/* grid-auto-rows: 15%; */
 	grid-auto-flow: dense;
   padding: 1rem;
 }
@@ -19,7 +19,7 @@
 	}
 	.item-lists {
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-auto-rows: 7%;
+		/* grid-auto-rows: 7%; */
 
 	}
 }
@@ -33,7 +33,7 @@
 	 
 	.item-lists {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-auto-rows: 15%;
+		/* grid-auto-rows: 15%; */
 
 	}
 }
@@ -44,7 +44,7 @@
 	 
 	 .item-lists {
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-auto-rows: 10%;
+		/* grid-auto-rows: 10%; */
 
 
 	}
@@ -55,7 +55,7 @@
 	}
 	 
 	 .item-lists {
-		grid-auto-rows: 5%;
+		/* grid-auto-rows: 5%; */
 		grid-template-columns: 1fr;
 		 
 	}
@@ -63,6 +63,7 @@
 
 
  .item-lists .grid {
+	 /* min-height: 350px; */
 	 display: inline-block;
 	 /* margin: 0.2rem 0; */
    position: relative;

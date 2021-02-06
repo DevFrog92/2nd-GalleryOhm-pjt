@@ -9,7 +9,7 @@
           </div>
           test GALLERY
         </li>
-        <!-- <div v-show="checkPassword_state"> -->
+        <div v-show="checkPassword_state">
         <li class="moduser">
           <div class="modicon">
 
@@ -29,7 +29,7 @@
           </div>
           Unsubscribe
         </li>
-        <!-- </div> -->
+        </div>
       </ul>
     </div>
     <div id="modborder">
@@ -43,13 +43,13 @@
         <h2>Thank you for subscirbe</h2><br>
         <h1>test website</h1>
         <h2>You can modify infomation in this page</h2>
-        <!-- <div v-if="!checkPassword_state">
+        <div v-if="!checkPassword_state">
           <label for="id_for_mod">아이디</label>
           <input type="text" class="id_for_mod" v-model="userInfo.user_id">
           <label for="password_for_mod">비빌번호</label>
           <input type="password" class="password_for_mod" v-model="password_for_mod">
           <button @click="checkPassword">check pw</button>
-        </div> -->
+        </div>
       </div>
 
 

@@ -9,11 +9,12 @@ public class WorkDto {
 	private int work_cost;				// 작품 가치(좋아요 수)
 	private int work_rating;			// 작품 연령
 	private String work_uploadDate;		// 작품 업로드 시간
+	private String work_tool;			// 작품 툴 설명
 	
 	public WorkDto() {}
 
 	public WorkDto(int work_id, String work_artistId, String work_title, String work_desc, byte[] work_piece,
-			int work_cost, int work_rating, String work_uploadDate) {
+			int work_cost, int work_rating, String work_uploadDate, String work_tool) {
 		this.work_id = work_id;
 		this.work_artistId = work_artistId;
 		this.work_title = work_title;
@@ -22,6 +23,7 @@ public class WorkDto {
 		this.work_cost = work_cost;
 		this.work_rating = work_rating;
 		this.work_uploadDate = work_uploadDate;
+		this.work_tool = work_tool;
 	}
 
 	public int getWork_id() {
@@ -88,11 +90,15 @@ public class WorkDto {
 		this.work_uploadDate = work_uploadDate;
 	}
 
+	public String getWork_tool(){return work_tool;}
+
+	public void setWork_tool(String work_tool){this.work_tool = work_tool;}
+
 	@Override
 	public String toString() {
 		return "WorkDto [work_id=" + work_id + ", work_artistId=" + work_artistId + ", work_title=" + work_title
 				+ ", work_desc=" + work_desc + ", work_piece=" + work_piece + ", work_cost=" + work_cost
-				+ ", work_rating=" + work_rating + ", work_uploadDate=" + work_uploadDate + "]";
+				+ ", work_rating=" + work_rating + ", work_uploadDate=" + work_uploadDate + ", work_tool="+work_tool+"]";
 	}
 	
 }

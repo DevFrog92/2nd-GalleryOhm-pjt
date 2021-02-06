@@ -4,42 +4,44 @@
   <div class="stage">
    <div class="test">
     <div class="carousel">
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div> 
-      <div class="panel"><img src="../assets/images/2.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/3.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/4.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/5.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div> 
-      <div class="panel"><img src="../assets/images/2.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/3.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/4.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/5.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div> 
-      <div class="panel"><img src="../assets/images/2.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/3.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/4.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/5.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div> 
-      <div class="panel"><img src="../assets/images/2.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/3.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/4.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/5.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div> 
-      <div class="panel"><img src="../assets/images/2.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/3.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/4.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/5.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div> 
-      <div class="panel"><img src="../assets/images/2.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/3.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/4.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/5.png" alt=""></div>
-      <div class="panel"><img src="../assets/images/1.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/보노.png" alt=""></div> 
+      <div class="panel"><img src="../assets/images/너구리.png" alt=""></div>
+      <div class="panel"><img src="../assets/images/포로리.png" alt=""></div>
+      
+      
     </div>
    </div>
   </div>

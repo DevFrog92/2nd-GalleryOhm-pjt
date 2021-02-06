@@ -4,14 +4,11 @@ import router from '../router'
 const login = (context,userInfo) => {
   // console.log(context,userInfo.user_id,userInfo.user_password,'login');
   http.post(`/login/login?user_id=${userInfo.user_id}&user_password=${userInfo.user_password}`).then(response => {
-    // console.log(response);
-
-    // const url = URL.createObjectURL(response.data.user_profile);
-    // console.log(url);
     context.commit('login',response.data);
     http.defaults.headers.common[
       'auth-token'
     ] = `${response.data['auth_token']}`;
+    localStorage.setItem("user_nickName",response.data.user_nickName);
     router.push('/');
     
   }).catch(() => {
@@ -59,6 +56,7 @@ const addWork = (context, info) => {
   formData.append("work_desc", info.work_desc);
   formData.append("work_piece", info.work_piece);
   formData.append("work_rating", info.work_rating);
+  formData.append("work_tool", info.work_tool);
 
   for(let key of formData.entries()){
     console.log(`${key}`);
