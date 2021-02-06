@@ -33,6 +33,7 @@
     <select id="getAllWork" parameterType="int" resultType="work">
         select *
         from work
+        where work_rating = 0
         order by case
                      when #{sort} = 1 then work_uploadDate
                      end desc,
