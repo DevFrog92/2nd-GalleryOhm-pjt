@@ -87,7 +87,7 @@
 	</insert>
 
 	<select id="getAdultGallery" resultType="work">
-		select work_id
+		select *
 		from work
 		where work_rating >= 19
 	</select>
