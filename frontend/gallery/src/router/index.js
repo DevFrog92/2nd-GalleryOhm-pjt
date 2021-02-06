@@ -68,17 +68,17 @@ const routes = [
   },
   {
     path: "/RedGallery",
-    name: RedGallery,
+    name: "RedGallery",
     component: RedGallery,
   },
   {
     path: "/RedGallery/AdultPage",
-    name: AdultPage,
+    name: "AdultPage",
     component: AdultPage,
   },
   {
     path: "/SubGallery",
-    name: SubGallery,
+    name: "SubGallery",
     component: SubGallery,
   },
 ];
