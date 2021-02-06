@@ -195,4 +195,26 @@ public class GalleryController {
         }
         return new ResponseEntity<List<WorkDto>>(adultGallery,HttpStatus.OK);
     }
+
+    /*** 성인 갤러리 홀수 목록 반환 ***/
+    @ApiOperation(value = "성인 갤러리 작품 목록 반환.", response = List.class, notes = "getAdultGallery \n return List<WorkDto>")
+    @RequestMapping(value = "/getAdultGallery_odd", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAdultGallery_odd() throws Exception {
+        List<WorkDto> adultGallery_odd = galleryService.getAdultGallery_odd();
+        if(adultGallery_odd.isEmpty()){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(adultGallery_odd,HttpStatus.OK);
+    }
+
+    /*** 성인 갤러리 짝수 목록 반환 ***/
+    @ApiOperation(value = "성인 갤러리 작품 목록 반환.", response = List.class, notes = "getAdultGallery \n return List<WorkDto>")
+    @RequestMapping(value = "/getAdultGallery_even", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAdultGallery_even() throws Exception {
+        List<WorkDto> adultGallery_even = galleryService.getAdultGallery_even();
+        if(adultGallery_even.isEmpty()){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<WorkDto>>(adultGallery_even,HttpStatus.OK);
+    }
 }

@@ -92,4 +92,16 @@
 		where work_rating >= 19
 	</select>
 
+	<select id="getAdultGallery_odd" resultType="work">
+		select *
+		from work
+		where work_rating >= 19 and MOD(work_id, 2) = 1
+	</select>
+
+	<select id="getAdultGallery_even" resultType="work">
+		select *
+		from work
+		where work_rating >= 19 and MOD(work_id, 2) = 0
+	</select>
+
 </mapper>
