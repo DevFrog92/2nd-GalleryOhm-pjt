@@ -19,8 +19,7 @@
           </div>
           <div class="nickname">
             <div class="focus_container">
-              <input class="nickname_input" type="text" placeholder="재밌는 랜덤 닉네임이 주어집니다" readonly required="required"
-                v-model="nickName" />
+              <input class="nickname_input" type="text" placeholder="재밌는 랜덤 닉네임이 주어집니다" readonly required="required" />
               <span class="focus-border"></span>
             </div>
             <div class="random_btn_container">
@@ -52,7 +51,7 @@
           </div>
 
           <div id="terms_checkbox_id">
-            <input class="terms_checkbox" type="checkbox">
+            <input class="terms_checkbox" type="checkbox" required="required" >
             <button class="triggerTerms">약관에 동의 합니다.</button>
           </div>
           
@@ -195,12 +194,8 @@
           user_email: '',
           user_name: '',
           user_tel: '',
+          user_passwordConfirm:''
         },
-      }
-    },
-    computed: {
-      nickName() {
-        return this.$store.state.state.user_nickName
       }
     },
     created() {},
@@ -209,7 +204,6 @@
     },
     methods: {
       join() {
-        this.userInfo.user_nickName = this.nickName;
         init.join(this.userInfo);
         this.userInfo.user_password = '';
         // common.objectCelar(this.userInfo);
