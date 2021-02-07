@@ -9,6 +9,7 @@ import MainPage from '../pages/MainPage'
 import ItemListPage from '../pages/ItemLisetPage'
 import ItemDetailPage from '../pages/ItemDetailPage'
 import MyPage from '../pages/MyPage'
+import UserProfile from '../pages/UserProfile'
 import GalleryRenderPage from '../pages/GalleryRenderPage'
 import LoginSignup from '../pages/User/LoginSignup'
 import Settings from '../pages/Settings'
@@ -51,6 +52,13 @@ const routes = [
     path:'/mypage',
     name:'MyPage',
     component:MyPage,
+    props:true,
+  },
+  {
+    path:'/userprofile',
+    name:'UserProfile',
+    component:UserProfile,
+    props:true,
   },
   {
     path:'/galleryrender',

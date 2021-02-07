@@ -105,9 +105,8 @@ const design = () => {
     fourth.classList.add("active");
   });
   
-  
+
   const unsubBtn = document.querySelector('.unscribe_button');
-  console.log(unsubBtn)
   unsubBtn.addEventListener('click', e => {
     e.target.classList.add('delete')
     setTimeout(() => 
@@ -119,6 +118,8 @@ const design = () => {
 
 
   ////
+  if(!localStorage.getItem('checkPassword_state'))
+  {
   var password = document.querySelector('.setting_pw_check');
   var error = document.querySelector('.pw_error_message');
   var padlock = document.querySelector('.padlock');
@@ -174,6 +175,7 @@ const design = () => {
       }
     }, 100);
   },false);
+  }
 
 
   function unlock(){
@@ -186,11 +188,10 @@ const design = () => {
         window.location.href = '';
         localStorage.setItem('checkPassword_state',true);
         localStorage.removeItem('temp_check');
-      }, 900);
-    }, 600);
+      }, 700);
+    }, 500);
   }
   ///
-
 
 }
 
