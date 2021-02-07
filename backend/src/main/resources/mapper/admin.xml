@@ -79,8 +79,8 @@
 			LIMIT 10
 	</insert>
 
-	<insert id="renewAdultMainGallery_algorithm">
-		INSERT INTO maingallery(mainGallery_galleryId)
+	<insert id="renewMainAdultGallery_algorithm">
+		INSERT INTO mainadultgallery(mainAdultGallery_galleryId)
 			(SELECT gallery_id
 			 FROM gallery
 			 WHERE gallery_id

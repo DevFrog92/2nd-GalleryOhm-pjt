@@ -1,11 +1,9 @@
 package com.web.gallery.controller;
 
-import com.web.gallery.dto.HashTagDto;
-import com.web.gallery.dto.MainGalleryDto;
-import com.web.gallery.dto.SubGalleryDto;
-import com.web.gallery.dto.UserDto;
+import com.web.gallery.dto.*;
 import com.web.gallery.help.NumberResult;
 import com.web.gallery.service.AdminService;
+import com.web.gallery.service.GalleryService;
 import com.web.gallery.service.JwtService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private GalleryService galleryService;
 
     public static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
@@ -168,22 +169,48 @@ public class AdminController {
         return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "메인관 전시 작품(전시관) 선정 후 목록 조회 <전시관 아이디>", response = List.class)
+    @ApiOperation(value = "메인관 전시 작품(전시관) 선정 후 목록 조회 <전시관 아이디>", response = NumberResult.class)
     @RequestMapping(value = "/renewMainGallery", method = RequestMethod.GET)
     public ResponseEntity<List<MainGalleryDto>> renewMainGallery() {
         NumberResult ns = new NumberResult();
         List<MainGalleryDto> mainGalleryList = null;
+        List<MainAdultGalleryDto> adultMainGalleryList = null;
         try {
             adminService.renewMainGallery_delete();
+            adminService.renewMainAdultGallery_delete();
             adminService.renewMainGallery_algorithm(); // insert
-            mainGalleryList = adminService.renewMainGallery();
-            ns.setValue("renewMainGallery", mainGalleryList.size(), "succ");
+            adminService.renewMainAdultGallery_algorithm(); // insert
+            // mainGalleryList = adminService.renewMainGallery();
+            // adultMainGalleryList = adminService.renewMainAdultGallery();
+            ns.setValue("renewMainGallery", 10, "succ");
         } catch (Exception e) {
             e.printStackTrace();
             ns.setValue("renewMainGallery", 0, "fail");
             return new ResponseEntity<List<MainGalleryDto>>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<List<MainGalleryDto>>(mainGalleryList, HttpStatus.OK);
+    }
+
+    /**** 메인 갤러리 목록 조회 ****/
+    @ApiOperation(value = "메인 갤러리의 전시관 목록들을 조회한다.", response = List.class, notes = "getAllMainGallery()")
+    @RequestMapping(value = "/getAllMainGallery", method = RequestMethod.GET)
+    public ResponseEntity<List<GalleryDto>> getAllMainGallery() throws Exception{
+        List<GalleryDto> gallerys = galleryService.getAllMainGallery();
+        if(gallerys.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<GalleryDto>>(gallerys,HttpStatus.OK);
+    }
+
+    /**** 메인 갤러리 (연령 제한 작품 포함) 목록 조회 ****/
+    @ApiOperation(value = "메인 갤러리의 전시관 목록들을 조회한다.", response = List.class, notes = "getAllMainAdultGallery()")
+    @RequestMapping(value = "/getAllMainAdultGallery", method = RequestMethod.GET)
+    public ResponseEntity<List<GalleryDto>> getAllMainAdultGallery() throws Exception{
+        List<GalleryDto> adultGallerys = galleryService.getAllMainAdultGallery();
+        if(adultGallerys.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<GalleryDto>>(adultGallerys,HttpStatus.OK);
     }
 
     @ApiOperation(value = "서브관 전시 작품 선정 후 목록 조회 <작품 아이디>", response = List.class)
