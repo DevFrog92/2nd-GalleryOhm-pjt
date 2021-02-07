@@ -110,6 +110,11 @@
 			LIMIT 10
 	</insert>
 
+	<select id="getAllWork" resultType="work">
+		select *
+		from work
+	</select>
+
 	<delete id="renewMainGallery_delete">
 		truncate maingallery;
 	</delete>

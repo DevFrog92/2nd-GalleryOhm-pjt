@@ -1,9 +1,6 @@
 package com.web.gallery.service;
 import com.web.gallery.dao.AdminDaoImpl;
-import com.web.gallery.dto.HashTagDto;
-import com.web.gallery.dto.MainGalleryDto;
-import com.web.gallery.dto.SubGalleryDto;
-import com.web.gallery.dto.UserDto;
+import com.web.gallery.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -103,5 +100,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteMainGalleryKeyword() throws Exception {
         adminDao.deleteMainGalleryKeyword();
+    }
+
+    @Override
+    public List<WorkDto> getAllWork() {
+        return adminDao.getAllWork();
     }
 }

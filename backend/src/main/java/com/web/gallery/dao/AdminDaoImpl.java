@@ -89,4 +89,8 @@ public class AdminDaoImpl {
     public void deleteMainGalleryKeyword() {
         sqlSession.delete(ns + "deleteMainGalleryKeyword");
     }
+
+    public List<WorkDto> getAllWork() {
+        return sqlSession.selectList(ns + "getAllWork");
+    }
 }
