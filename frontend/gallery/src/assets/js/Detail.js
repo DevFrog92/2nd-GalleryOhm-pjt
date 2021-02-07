@@ -2,7 +2,6 @@
 
 const init = ()=>{
 
-
   const ROOT = document.documentElement;
   const MIN = 10;
   const THRESHOLD = innerHeight * (1.2 - 0.225);
