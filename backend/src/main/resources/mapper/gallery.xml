@@ -104,7 +104,7 @@
 			 RIGHT JOIN
 			 (SELECT galleryDetail_workId, galleryDetail_order
 			  FROM gallerydetail
-			  WHERE galleryDetail_galleryId = 52) AS detail
+			  WHERE galleryDetail_galleryId = #{galleryDetail_galleryId}) AS detail
 			 ON work.work_id = detail.galleryDetail_workId
 		ORDER BY galleryDetail_order;
 	</select>
