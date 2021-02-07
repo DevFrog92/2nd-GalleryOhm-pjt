@@ -42,7 +42,7 @@
               tag-pills
               size="lg"
               separator=" "
-              placeholder=""
+              placeholder="추가할 수 없습니다."
             >
             </b-form-tags>
             <b-button
