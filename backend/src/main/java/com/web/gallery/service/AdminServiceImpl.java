@@ -4,6 +4,7 @@ import com.web.gallery.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -43,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<String> getAllHashTag() throws Exception {
+    public List<HashTagDto> getAllHashTag() throws Exception {
         return adminDao.getAllHashTag();
     }
 
@@ -53,8 +54,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteHashTagFromTotal() throws Exception {
-        adminDao.deleteHashTagFromTotal();
+    public void deleteHashTagFromTotal(String hashtag_name) throws Exception {
+        adminDao.deleteHashTagFromTotal(hashtag_name);
     }
 
     @Override

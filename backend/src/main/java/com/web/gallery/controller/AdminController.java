@@ -72,18 +72,18 @@ public class AdminController {
 
     @ApiOperation(value = "전체 해시태그 목록을 조회한다.", response = List.class)
     @RequestMapping(value = "/getAllHashTag", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getAllHashTag() {
+    public ResponseEntity<List<HashTagDto>> getAllHashTag() {
         NumberResult ns = new NumberResult();
-        List<String> hashTagList = null;
+        List<HashTagDto> hashTagList = null;
         try {
             hashTagList = adminService.getAllHashTag();
             ns.setValue("getAllHashTag", hashTagList.size(), "succ");
         } catch (Exception e) {
             e.printStackTrace();
             ns.setValue("getAllHashTag", 0, "fail");
-            return new ResponseEntity<List<String>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<List<HashTagDto>>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<String>>(hashTagList, HttpStatus.OK);
+        return new ResponseEntity<List<HashTagDto>>(hashTagList, HttpStatus.OK);
     }
 
     @ApiOperation(value = "작품에 연령등급을 부여한다 ( -> Adult)", response = NumberResult.class)
@@ -180,13 +180,13 @@ public class AdminController {
 
     @ApiOperation(value = "해시태그 전체 작품에서 삭제", response = NumberResult.class)
     @RequestMapping(value = "/deleteHashTagFromTotal", method = RequestMethod.POST)
-    public ResponseEntity<NumberResult> deleteHashTagFromTotal(@RequestParam(value = "hasgtagList") List<String> hasgtagList) throws Exception {
+    public ResponseEntity<NumberResult> deleteHashTagFromTotal(@RequestParam(value = "hashtag_name") String hashtag_name) throws Exception {
         NumberResult ns = new NumberResult();
         try {
 //            adminService.deleteMainGalleryKeyword();
 //            adminService.addMainGalleryKeyword(keywordList);
-            adminService.deleteHashTagFromTotal();
-            adminService.addHashTagFromTotal(hasgtagList);
+            adminService.deleteHashTagFromTotal(hashtag_name);
+//            adminService.addHashTagFromTotal(hashtagList);
             ns.setValue("deleteHashTagFromTotal", 1, "succ");
         } catch (Exception e) {
             e.printStackTrace();

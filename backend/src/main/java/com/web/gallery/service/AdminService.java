@@ -25,13 +25,13 @@ public interface AdminService {
     List<String> getMainGalleryHashTag() throws Exception;
 
     // 전체 해시태그 목록 조회
-    List<String> getAllHashTag() throws Exception;
+    List<HashTagDto> getAllHashTag() throws Exception;
 
     // 해시태그 삭제 - 해당 작품에서 태그된 것만 삭제
     void deleteHashTagFromWork(HashTagDto hashTagDto) throws Exception;
 
     // 해시태그 삭제 - 전체 해시태그에서 삭제
-    void deleteHashTagFromTotal() throws Exception;
+    void deleteHashTagFromTotal(String hashtag_name) throws Exception;
 
     // 메인관 작품 선정 (전시관) 목록
     List<MainGalleryDto> renewMainGallery() throws Exception;
