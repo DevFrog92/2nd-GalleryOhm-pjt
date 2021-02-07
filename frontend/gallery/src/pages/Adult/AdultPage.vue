@@ -2,22 +2,24 @@
   <div class="subgallery">
     <hooper class="hooper1" :settings="hooperSettings" v-if="workList_odd.length != 0">
       <slide v-for="(work, i) in workList_odd" :key="i" :index="i">
-        <div
+        <!-- <div
           class="images"
           :style="work.work_piece"
-          @click="detailImage()"
+          @click="detailImage(work.work_piece)"
         >
-        </div>
+        </div> -->
+        <img id="img" class="images" :src="work.work_piece" :alt="work.work_title" @click="detailImage(work.work_id, work.work_piece)">
       </slide>
     </hooper>
 
     <hooper class="hooper2" :settings="hooperSettings" v-if="workList_even.length != 0">
       <slide v-for="(work, i) in workList_even" :key="i">
-        <div
+        <!-- <div
           class="images"
           :style="work.work_piece"
         >
-        </div>
+        </div> -->
+        <img class="images" :src="work.work_piece" :alt="work.work_title">
       </slide>
     </hooper>
   </div>
@@ -63,8 +65,10 @@ export default {
 
     },
     methods: {
-        detailImage() {
-            console.log("go to image detail");
+        detailImage(work_id, work_piece) {
+          // var width = document.getElementById("img").width;
+          // var height = document.getElementById("img").height;
+          console.log("[id:" + work_id + "] " + work_piece.length);
         },
         getOddList() {
             http
@@ -73,8 +77,8 @@ export default {
                     var workList = response.data;
 
                     for (var i = 0; i < workList.length; i++) {
-                        workList[i].work_piece = "background-image: url(data:image/jpeg;base64," +
-                                workList[i].work_piece + ")";
+                        workList[i].work_piece = "data:image/jpeg;base64," +
+                                workList[i].work_piece ;
                     }
 
                     this.workList_odd = workList;
@@ -89,8 +93,8 @@ export default {
                     var workList = response.data;
 
                     for (var i = 0; i < workList.length; i++) {
-                        workList[i].work_piece = "background-image: url(data:image/jpeg;base64," +
-                                workList[i].work_piece + ")";
+                        workList[i].work_piece = "data:image/jpeg;base64," +
+                                workList[i].work_piece;
                     }
 
                     this.workList_even = workList;
@@ -111,24 +115,23 @@ export default {
 .images {
   height: 40vh;
   width: 18em;
-  padding: 0 1vw;
-  margin: 13px;
-  /* border-radius: 5px; */
+  padding: 0.1vw 0.1vw;
+  margin-top: 15px;
   background-size: cover;
+  object-fit:cover;
   background-position: center;
   border-image: url('../../assets/images/frame4.png') 1 fill / 1px / 0.8rem round space ;
-  /* border-image: url('../../assets/images/frame4.png') 1 fill / 1px / 1px space; */
   border-image-repeat: round;
 }
 
 .hooper1 {
   height: 45vh;
-  padding: 0 1vw;
+  padding: 0 0vw;
   margin-top: 1vh;
 }
 .hooper2 {
   height: 45vh;
-  padding: 0 1vw;
+  padding: 0 0vw;
   margin-top: 3vh;
 }
 </style>
