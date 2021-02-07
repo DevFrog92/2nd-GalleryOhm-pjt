@@ -51,6 +51,7 @@
               @click="deleteHashtag()"
               >저장</b-button
             >
+            <p class="mt-2">hasgtagList: {{ hasgtagList }}</p>
           </div>
           <div class="mt">
             <label for="tags-pills">작품 해시태그 삭제</label>
@@ -105,7 +106,7 @@
           </div>
         </b-tab>
         <b-tab title="회원 관리">
-            <b-table :items="userList" ref="table"></b-table>
+          <b-table :items="userList" ref="table"></b-table>
         </b-tab>
       </b-tabs>
     </div>
@@ -194,6 +195,7 @@ export default {
       http.get(`/admin/getAllHashTag/`).then(
         (response) => {
           this.hasgtagList = response.data;
+          
         },
         (error) => {
           console.log(error);
@@ -235,8 +237,10 @@ export default {
       );
     },
     saveKeyword() {
-      console.log("==> " + this.keywordList);
-      http.post(`/admin/addMainGalleryKeyword`, this.keywordList).then(
+      var formData = new FormData();
+      formData.append("keywordList", this.keywordList);
+
+      http.post(`/admin/addMainGalleryKeyword`, formData).then(
         (response) => {
           console.log(response.data);
         },
@@ -246,8 +250,10 @@ export default {
       );
     },
     deleteHashtag() {
-      console.log("==> " + this.keywordList);
-      http.post(`/admin/deleteHashtagFromTotal`, this.keywordList).then(
+      var formData = new FormData();
+      formData.append("hasgtagList", this.hasgtagList);
+
+      http.post(`/admin/deleteHashtagFromTotal`, this.hasgtagList).then(
         (response) => {
           console.log(response.data);
         },
