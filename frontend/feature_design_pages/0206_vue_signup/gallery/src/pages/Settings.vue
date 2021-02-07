@@ -40,7 +40,28 @@
 
       <div id="first" class="active">
 
-        <h2>Thank you for subscirbe</h2><br>
+          <div class="pw_center" v-if="!checkPassword_state">
+            <label>
+              <div class="padlock">
+                <svg id="lock" viewbox="0 0 64 64">
+                  <circle stroke-width="2" fill="none" cx="32" cy="32" r="31" />
+                  <path d="M40.2,29v-4c0-4.5-3.7-8.2-8.2-8.2s-8.2,3.7-8.2,8.2v4H21v15h22V29H40.2z M27.2,25 c0-2.6,2.1-4.8,4.8-4.8s4.8,2.1,4.8,4.8v4h-9.5V25z" />
+                </svg>
+              </div>
+            </label>
+            <div class="pw_check_icon">
+              <input class="setting_pw_check" placeholder="Password" type="password" v-model="password_for_mod">
+              <div class="pw_check_arrow" @click="checkPassword" >
+                <svg id="arrow" viewbox="0 0 48 44">
+                  <polygon points="27.7,13.3 26.3,14.7 31.6,20 14,20 14,22 31.6,22 26.3,27.3 27.7,28.7 35.4,21 " />
+                </svg>
+              </div>
+              <div class="pw_error_message">Please try again.</div>
+            </div>
+          </div>
+
+
+        <!-- <h2>Thank you for subscirbe</h2><br>
         <h1>test website</h1>
         <h2>You can modify infomation in this page</h2>
         <div v-if="!checkPassword_state">
@@ -49,7 +70,7 @@
           <label for="password_for_mod">비빌번호</label>
           <input type="password" class="password_for_mod" v-model="password_for_mod">
           <button @click="checkPassword">check pw</button>
-        </div>
+        </div> -->
       </div>
 
 
