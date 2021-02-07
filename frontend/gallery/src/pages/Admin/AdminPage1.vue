@@ -194,7 +194,13 @@ export default {
     getAllHashtag() {
       http.get(`/admin/getAllHashTag/`).then(
         (response) => {
-          this.hashtagList = response.data;
+          const data = response.data;
+          for (var i = 0; i < data.length; i++) {
+            let h = {
+              hashtag: data[i].hashtag_name,
+            };
+            this.hashtagList.push(h);
+          }
         },
         (error) => {
           console.log(error);
