@@ -21,8 +21,8 @@
 
           <div class="picture_Age ">
             <p>작품 연령 선택</p>
-            <label><input type="radio" name="age" value="0" required @click="rating">전체관람</label>
-            <label class="gallery19"><input type="radio" name="age" required value="19" @click="rating">19금</label>
+            <label><input type="radio" name="age" value="0"  required @click="rating">전체관람</label>
+            <label class="gallery19"><input type="radio" name="age"  required value="19" @click="rating">19금</label>
           </div>
 
 
@@ -71,7 +71,7 @@
     mounted(){
       init.input();
       if(this.work_info){
-        console.log('',this.work_info)
+        console.log('asd',this.work_info.hashtags.includes('안녕'))
       this.img_url = this.work_info.work_piece;
       this.work_title = this.work_info.work_title;
       this.work_desc = this.work_info.work_desc;
@@ -85,15 +85,20 @@
     methods: {
       hash(){
         const hashTag =document.querySelectorAll('.tags-input span');
+
         for(let item of hashTag){
-          this.hashtag_list+=item.innerText+','
+          if(this.work_info.hashtags && !this.work_info.hashtags.includes(item.innerText)){
+            this.hashtag_list+=item.innerText+','
+          }
         }
+        console.log(this.hashtag_list)
       },
       Back(){
         this.$router.go(-1);
       },
       addWork: function () {
         // console.log(this.img_url.slice(23))
+        this.hash();
         if(this.mode){
 
           const byteCharacters = atob(this.img_url.slice(23));
@@ -108,13 +113,13 @@
         this.work_piece = file;
         this.$store.dispatch("modifyWork", {
             work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
-            // work_artistId: "ohj",
             work_id:this.work_info.work_id,
             work_title: this.work_title,
             work_desc: this.work_desc,
             work_piece: this.work_piece,
             work_rating: this.work_rating,
-            // work_tool: this.work_tool
+            work_tool: this.work_tool,
+            hashTags:this.hashtag_list,
           })
           .then(() => {
             // http.post("/work/addHashTag",{hashTags:this.hashtag_list,"hashtag_workId"})
@@ -126,12 +131,12 @@
           // 업로드한 파일로 부터 url 을 생성할 수 있다.
           this.$store.dispatch("addWork", {
               work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
-              // work_artistId: "ohj",
               work_title: this.work_title,
               work_desc: this.work_desc,
               work_piece: this.work_piece,
               work_rating: this.work_rating,
-              work_tool: this.work_tool
+              work_tool: this.work_tool,
+              hashTags:this.hashtag_list,
             })
             .then(() => {
               // http.post("/work/addHashTag",{hashTags:this.hashtag_list,"hashtag_workId"})

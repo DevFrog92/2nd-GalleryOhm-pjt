@@ -151,29 +151,31 @@
         <!-- 축하합니다 팝업창?------ -->
         <div class="register_artist_container">
           <div class="register_artist">
-            <input type="text" id="artistname" required="" />
+            <input type="text" id="artistname" required="" v-model="artist_nickName"/>
             <label for="artistname">필명</label>
-            <p class="registerinfo">* 미입력시 닉네임으로 대체됩니다.</p>
+            <p class="registerinfo" >* 미입력시 닉네임으로 대체됩니다.</p>
           </div>
           <div class="register_artist  bankname">
-            <input type="text" id="bank" required="" />
+            <input type="text" id="bank" required="" v-model="bank_name" />
             <label for="bank">은행명</label>
           </div>
           <div class="register_artist bankaccount ">
-            <input type="text" id="account" required="" />
+            <input type="text" id="account" required="" v-model="bank_account"/>
             <label for="account">계좌번호</label>
             <p class="registerinfo">* 후원을 위한 계좌번호를 입력해주세요.</p>
           </div>
 
           <div class="register_artist">
-            <input type="text" id="rank" required="" />
-            <label for="rank">rank</label>
-            <p class="registerinfo">* 랭크는 작가등록 후 gallery의 기준에 따라 자동으로 부여됩니다.
+            <!-- <input type="text" id="rank" required="" readonly :value="rank_new" /> -->
+            <!-- <label for="rank">rank</label> -->
+            <p class="rank__p">등급 <img src="../assets/images/rookie.png" alt=""></p>
+            <p class="registerinfo">* 등급은 작가등록 후 gallery의 등급기준에 따라 자동으로 부여됩니다.
               기준은 갤러리 소개에서 보실 수 있습니다.</p>
           </div>
             <div class="register_save_btn_container">
           <div class="registerSaveBtns">
-            <div class="registerSaveBtn" data-display="Register Artist"></div>
+            <div class="registerSaveBtn" v-if="user__type === '1'" data-display="Register Artist" @click="register_artist"></div>
+            <div class="registerSaveBtn" v-else data-display="Withdraw  Artist" @click="withdraw_artist"></div>
           </div>
         </div>
         </div>
@@ -224,6 +226,43 @@
           
         </div>
     </div>
+     <Modal v-if="showModal" @close="showModal = false">
+      <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+      <div slot="header" v-if="artist_resister === 'changeArtist'">
+        <h3>
+          작가 등록
+        </h3>
+        <i class="fas fa-times closeModalBtn" @click="showModal=false"></i>
+      </div>
+      <div slot="header" v-else>
+        <h3>
+          작가 해지
+        </h3>
+        <i class="fas fa-times closeModalBtn" @click="showModal=false"></i>
+      </div>
+
+      <div slot="body" v-if="artist_resister === 'changeArtist'">
+        <h3>{{userInfo.user_nickName}}작가님! 환영합니다.</h3>
+        <p>저희 SSAATCHI Gallery는 작가님의 다양한 작품 활동을 지원하기 위해서 최선을
+          다하고 있습니다. 문의가 있다면 언제나 저희에게 연락을 주십시오. 다시 한번 환영합니다!!
+        </p>
+      </div>
+      <div slot="body" v-else>
+        <h3>{{userInfo.user_nickName}}작가님!</h3>
+        <p>저희 SSAATCHI Gallery에서의 작가활동은 어떠셨나요? 다신 한번 만나뵙기를 기원하겠습니다. 작가님의 앞으로의 
+          작가활동을 저희 저희 SSAATCHI Gallery가 응원하겠습니다!!
+        </p>
+      </div>
+
+    
+      <div slot="footer">
+        <button class="closeRegisterGalleryBtn" @click="showModal=false">나가기</button>
+      </div>
+    </Modal>
+
   </div>
 </template>
 
@@ -232,6 +271,8 @@ import '../assets/css/Settings.css'
 import mod from '../assets/js/settings.js' 
 import http from '../api/http'
 import { mapState } from 'vuex'
+  import Modal from '../pages/Modal'
+
 export default {
   data(){
     return {
@@ -243,8 +284,18 @@ export default {
       checkPassword_state : localStorage.getItem('checkPassword_state'),
       self_nickName:'',
       self_mode:false,
+      artist_nickName:'',
+      bank_name:'',
+      bank_account:'',
+      rank_new:'Rookie',
+      artist_resister:"",
+      showModal: false,
+      user__type:localStorage.getItem('user_type'),
     }
   },
+  components:{
+    Modal
+},
   computed:{
     ...mapState(['state']),
   },
@@ -290,10 +341,41 @@ export default {
     },
     onClickUploadImage(){
       this.$refs.work_piece.click();
+    },
+    register_artist(){
+      const formData = {
+      "artist_account": this.bank_account,
+      "artist_bank": this.bank_name,
+      "artist_exp": 0,
+      "artist_id": localStorage.getItem('user_id'),
+      "artist_nickName": localStorage.getItem('user_nickName')
+      }
+      http.post("/artist/changeArtist",formData)
+      .then(response => {
+        console.log(response.data);
+        this.artist_resister = response.data.name;
+        this.showModal = true;
+        localStorage.setItem('user_type',2);
+        this.user__type = 2;
+
+      })
+    },
+    withdraw_artist(){
+      console.log(localStorage.getItem('user_id'))
+      http.post(`/artist/leaveArtist/${localStorage.getItem('user_id')}`)
+      .then(response=>{
+        this.artist_resister = response.data.name;
+        console.log(response.data);
+        this.showModal = true;
+        localStorage.setItem('user_type',1);
+        this.user__type = 1;
+
+      })
     }
 
   },
   created(){
+    this.rank_new = 'Rookie';
     http.get('/user/getUserInfo',{params:{user_id:localStorage.getItem('user_id')}})
     .then(response => {
       this.userInfo = response.data;
@@ -310,7 +392,7 @@ export default {
         // console.log(file);
         this.userInfo.user_profile = file;
       }else{
-        this.userInfo.user_profile = "../assets/images/Anonymous.png"
+        this.img_url = "../assets/images/Anonymous.png"
       }
     })
   }

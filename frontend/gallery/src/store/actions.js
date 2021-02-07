@@ -60,6 +60,7 @@ const addWork = (context, info) => {
   formData.append("work_piece", info.work_piece);
   formData.append("work_rating", info.work_rating);
   formData.append("work_tool", info.work_tool);
+  formData.append("hashTags", info.hashTags);
 
   for(let key of formData.entries()){
     console.log(`${key}`);
@@ -89,7 +90,9 @@ const modifyWork = (context, info) => {
   formData.append("work_desc", info.work_desc);
   formData.append("work_piece", info.work_piece);
   formData.append("work_rating", info.work_rating);
-  // formData.append("work_tool", info.work_tool);
+  formData.append("work_tool", info.work_tool);
+  formData.append("hashTags", info.hashTags);
+
 
   for(let key of formData.entries()){
     console.log(`${key}`);
@@ -163,4 +166,25 @@ const makeUserNickName = (context,payload) =>{
         context.commit('makeUserNickName',response.data);
       })
 }
-export default {login,findPw,findId,modifyUser,leaveUser,addWork,logout,checkPassword,makeUserNickName,modifyWork};
+
+const deleteWork = (context,payload) =>{
+  console.log('deleteWork',payload);
+  http.get(`/work/deleteWork/${payload}`)
+  .then(response =>{
+    console.log(response.data)
+  })
+}
+
+const BookMark = (context,payload) => {
+  http.get('/work/scrapWork/',{params:payload})
+  .then(response=>{
+    console.log(response.data);
+  })
+}
+const UnBookMark = (context,payload) => {
+  http.get('/work/clearToWorkScrap/',{params:payload})
+  .then(response=>{
+    console.log(response.data);
+  })
+}
+export default {login,findPw,findId,modifyUser,leaveUser,addWork,logout,checkPassword,makeUserNickName,modifyWork,deleteWork,BookMark,UnBookMark};

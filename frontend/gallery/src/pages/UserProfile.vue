@@ -14,7 +14,10 @@
         </div>
       </div>
       <div class="profile_about">
-        <h1 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span></h1>
+        <h1 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span>
+        </h1>
+        <span @click="unfollow" ><i class="icon-user-delete"></i></span>
+        <span @click="follow" ><i class="icon-user-add"></i></span>
         <div class="follow">
           <span>Post : {{posts}}</span>
           <span>Following : {{followings.length}}</span>
@@ -24,7 +27,6 @@
         </p>
         <span class="icon-pencil-alt-span" @click="[showModal=!showModal,modify_state=false]">
           <i class="icon-pencil-alt"></i></span>
-
       </div>
         <div class="profile_menu_footer">
           <div class="profile_menu">
@@ -85,15 +87,21 @@
 
     </div>
     <div class="forth__section">
+      <h1>DM</h1>
+      <div id="DM">
+        <input type="text" v-model="dm_title" placeholder="DM title">
+        <textarea name="DM" v-model="dm_content" placeholder="DM content"></textarea>
+      </div>
+      <button @click="DM">DM 날리기</button>
       <button @click="DMpull">DM 받아오기</button>
 
-      <ul class="dmlist">
-        <!-- <ul>
+      <div class="dmlist">
+        <ul>
           <li v-for="(item,index) of dm_list" :key="index">
             {{item}}
           </li>
-        </ul> -->
-      </ul>
+        </ul>
+      </div>
     </div>
 
     <Modal v-if="showModal&&Aboutmodal" @close="showModal = false">
@@ -142,7 +150,7 @@
       return {
         showModal: false,
         modify_state: false,
-        img_url: localStorage.getItem('user_profile'),
+        img_url: '',
         userInfo: {},
         test_url: '../assets/images/1.png',
         user_about: '',
@@ -152,10 +160,10 @@
         dm_content: '',
         dm_list: [],
         my_work_lists: [],
+        follow_state:false,
         followers:0,
         followings:0,
         posts:0,
-        my_gallery_list:[],
 
       }
     },
@@ -184,35 +192,30 @@
           })
       },
       DM() {
+        console.log(localStorage.getItem('props_id'));
         const test = {
           "message_content": this.dm_content,
           "message_id": 0,
           "message_isCheck": 0,
-          "message_receiverId": "yong",
+          "message_receiverId": localStorage.getItem('props_id'),
           "message_sendDate": "string",
-          "message_senderId": "testuser",
+          "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }
+        console.log('test',test);
         http.post('/message/sendMessage', test)
           .then(response => {
             console.log('DM', response.data)
             this.dm_title = "";
             this.dm_content = "";
+            alert('메세지를 보냈습니다.');
           })
       },
       DMpull() {
-        http.post('/message/getAllMyReceiveMessage',localStorage.getItem('user_id'))
+        http.post('/message/getAllMyReceiveMessage', localStorage.getItem('user_id'))
           .then(response => {
             console.log(response)
             this.dm_list = response.data;
-            for(let item of this.dm_list){
-              console.log(item.message_content);
-            let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');            
-            const dmList = document.querySelector('.dmlist');
-            const dmItem = document.createElement('li')
-            dmItem.innerHTML = "Sender user : "+item.message_senderId+" Content : "+dmContent;
-            dmList.appendChild(dmItem);
-            }
           })
       },
       galleryRender(){
@@ -221,30 +224,74 @@
       moveSettings(){
         this.$router.push('/settings');
       },
+      getInfo(){
+        const params = {user_id: localStorage.getItem('props_id')}
+      http.get('/user/getUserInfo', {params: params})
+        .then(response => {
+          console.log('data',response.data);
+          this.userInfo = response.data;
+          const userAbout = document.querySelector('.artist_about');
+          userAbout.innerHTML = this.userInfo.user_about;
+          if(this.userInfo.user_profile){
+            this.img_url = 'data:/image/jpeg;base64,'+this.userInfo.user_profile;
+          }
+          console.log(this.img_url)
+          console.log(response.data.user_about)
+          console.log('this',this.userInfo)
+          this.user_about = this.userInfo.user_about;
+          this.getMyWork();
+        })
+      },
+      getMyWork(){
+        const params = {user_id: localStorage.getItem('props_id')}
+
+        http.get('/work/getMyWorks/' + params.user_id)
+        .then(response => {
+          console.log(response.data);
+          this.my_work_lists = response.data;
+        })
+      },
       getAllMyFollowing(){
-        http.get('/follow/getAllMyFollowing',{params:{user_id:localStorage.getItem('user_id')}})
+        http.get('/follow/getAllMyFollowing',{params:{user_id:localStorage.getItem('props_id')}})
         .then(response =>{
           this.followings = response.data;
         })
       },
       getAllMyFollower(){
-        http.get('/follow/getAllMyFollower',{params:{user_id:localStorage.getItem('user_id')}})
+        http.get('/follow/getAllMyFollower',{params:{user_id:localStorage.getItem('props_id')}})
         .then(response =>{
           console.log(response.data);
           this.followers = response.data;
         })
       },
       getMyWorksCount(){
-        http.get('/work/getMyWorksCount/'+localStorage.getItem('user_id'))
+        http.get('/work/getMyWorksCount/'+localStorage.getItem('props_id'))
         .then(response=>{
           this.posts = response.data;
         })
       },
-      getMyGallery(){
-        http.get('/gallery/getMyGallery/'+localStorage.getItem('user_id'))
-        .then(respones=>{
-          this.my_gallery_list = respones.data;
-          console.log('getmygallery',this.my_gallery_list);
+      follow(){
+        const formData = {
+          follow_artistId: localStorage.getItem('props_id'),
+          follow_userId:localStorage.getItem('user_id')
+        }
+        http.post('/follow/follow',formData)
+        .then(response=>{
+          console.log(response.data);
+           this.getAllMyFollowing();
+          this.getAllMyFollower();
+        })
+      },
+      unfollow(){
+        const formData = {
+          follow_artistId: localStorage.getItem('props_id'),
+          follow_userId:localStorage.getItem('user_id')
+        }
+        http.post('/follow/cancelFollow',formData)
+        .then(response=>{
+          console.log(response.data);
+           this.getAllMyFollowing();
+          this.getAllMyFollower();
         })
       }
     },
@@ -253,51 +300,25 @@
         init.init();
       }, 1000)
     },
+     watch: {
+    $route(to, form) {
+     if (to.path !== form.path) this.getInfo();
+    },
+     },
     created() {
-      console.log('props_id',this.props_id);
-      // console.log(this.$store.state.state);
       this.getAllMyFollowing();
       this.getAllMyFollower();
       this.getMyWorksCount();
-      this.getMyGallery();
-      const params = {
-        user_id: this.props_id ? this.props_id:localStorage.getItem('user_id')
+      if (this.props_id !== undefined){
+        localStorage.setItem('props_id',this.props_id);
       }
-      console.log(this.props_id ? this.props_id:localStorage.getItem('user_id'));
-      http.get('/user/getUserInfo', {params: params})
-        .then(response => {
-          console.log('data',response.data);
-          this.userInfo = response.data;
-          console.log(response.data.user_about)
-          const userAbout = document.querySelector('.artist_about');
-          userAbout.innerHTML = this.userInfo.user_about;
-          this.user_about = this.userInfo.user_about;
-          if (response.data.user_profile !== null) {
-            localStorage.setItem("user_profile", "data:/image/jpeg;base64," + this.userInfo.user_profile);
-            this.img_url = "data:/image/jpeg;base64," + this.userInfo.user_profile;
-            const byteCharacters = atob(this.userInfo.user_profile);
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-              byteNumbers[i] = byteCharacters.charCodeAt(i);
-            }
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], {
-              type: 'image/jpeg'
-            });
-            const file = new File([blob], 'profile')
-            // console.log(file);
-            this.userInfo.user_profile = file;
-          }
-        })
-      http.get('/work/getMyWorks/' + params.user_id)
-        .then(response => {
-          console.log(response.data);
-          this.my_work_lists = response.data;
-        })
+      console.log('props_id',this.props_id);
+      // console.log(this.$store.state.state);
+      this.getInfo();
+      this.getMyWork();
+
 
       window.scrollTo(0,0);
-      
-
     }
   }
 </script>

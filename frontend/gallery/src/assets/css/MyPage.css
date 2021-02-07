@@ -734,3 +734,23 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 
 /* gallery- two */
 
+.icon-user-add,.icon-user-delete {
+  cursor: pointer;
+  font-size: 1rem;
+}
+.follow span {
+  margin-right:1rem;
+}
+
+.rank__p{
+  text-align: left;
+  padding-left: 0.1rem;
+  font-size: 15px;
+  line-height: 15px;
+}
+
+.rank__p > img {
+  margin-left: 1rem;
+  width:5rem;
+  height: 5rem;
+}
