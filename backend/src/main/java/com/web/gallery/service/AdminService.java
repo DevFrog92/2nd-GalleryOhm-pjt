@@ -1,9 +1,6 @@
 package com.web.gallery.service;
 
-import com.web.gallery.dto.HashTagDto;
-import com.web.gallery.dto.MainGalleryDto;
-import com.web.gallery.dto.SubGalleryDto;
-import com.web.gallery.dto.UserDto;
+import com.web.gallery.dto.*;
 
 import java.util.List;
 
@@ -59,4 +56,6 @@ public interface AdminService {
 
     // 메인 갤러리 키워드 전체 삭제
     void deleteMainGalleryKeyword() throws Exception;
+
+    List<WorkDto> getAllWork();
 }

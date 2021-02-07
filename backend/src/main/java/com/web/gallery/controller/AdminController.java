@@ -5,6 +5,7 @@ import com.web.gallery.help.NumberResult;
 import com.web.gallery.service.AdminService;
 import com.web.gallery.service.GalleryService;
 import com.web.gallery.service.JwtService;
+import com.web.gallery.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -45,6 +46,28 @@ public class AdminController {
             return new ResponseEntity<List<UserDto>>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<List<UserDto>>(userList, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "작품 전체를 반환한다.", response = List.class, notes = "getAllWork()")
+    @RequestMapping(value = "/getAllWork", method = RequestMethod.GET)
+    public ResponseEntity<List<WorkDto>> getAllWork() {
+        List<WorkDto> works = null;
+        HttpStatus status = null;
+
+        try {
+            works = adminService.getAllWork();
+
+            if (works != null) {
+
+                status = HttpStatus.OK;
+            } else {
+                status = HttpStatus.ACCEPTED;
+            }
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+
+        return new ResponseEntity<List<WorkDto>>(works, status);
     }
 
     @ApiOperation(value = "전체 해시태그 목록을 조회한다.", response = List.class)
@@ -189,7 +212,7 @@ public class AdminController {
             ns.setValue("renewMainGallery", 0, "fail");
             return new ResponseEntity<List<MainGalleryDto>>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<MainGalleryDto>>(mainGalleryList, HttpStatus.OK);
+        return new ResponseEntity<List<MainGalleryDto>>(ns, HttpStatus.OK);
     }
 
     /**** 메인 갤러리 목록 조회 ****/
