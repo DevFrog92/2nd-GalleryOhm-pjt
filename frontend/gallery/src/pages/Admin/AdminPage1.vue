@@ -33,6 +33,7 @@
           <!-- deleteHashTagFromWork -->
           <!-- deleteHashTagFromTotal -->
           <div class="mt">
+            <label for="tags-pills">전체 해시태그</label><br />
             <label for="tags-pills">해시태그 삭제</label>
             <b-form-tags
               input-id="tags-pills"
@@ -47,12 +48,33 @@
             <b-button
               variant="outline-primary"
               class="btn"
-              @click="saveHashtag()"
+              @click="deleteHashtag()"
               >저장</b-button
             >
           </div>
           <div class="mt">
             <label for="tags-pills">작품 해시태그 삭제</label>
+
+            <div>
+              <b-table :items="workHashtag" ref="table">
+                <b-table-column field="workHashtag" label="해시태그">
+                  <!-- <b-button
+                    outlined
+                    @click="func(items.hashtags)"
+                    >btn</b-button
+                  > -->
+                  <b-form-tags
+                    input-id="tags-pills"
+                    v-model="workHashtag"
+                    tag-variant="primary"
+                    tag-pills
+                    size="lg"
+                    separator=" "
+                  >
+                  </b-form-tags>
+                </b-table-column>
+              </b-table>
+            </div>
           </div>
         </b-tab>
         <b-tab title="작품 연령등급 관리">
@@ -60,7 +82,26 @@
           <!-- giveRating -->
           <!-- clearRating -->
           <div>
-            <b-table striped hover :items="items"></b-table>
+            <div class="item-lists">
+              <div class="grid" v-for="(img, i) in imgList" :key="i">
+                <img :src="img.work_piece" alt="DB이미지" />
+                <div class="grid__body" :data-value="img.work_id">
+                  <h1 v-text="img.work_rating"></h1>
+                  <!-- <p>Title : {{ img.work_title }}</p>
+                  <p>By : {{ img.work_artistId }}</p> -->
+                  <div v-if="img.work_rating === 0">
+                    <b-button @click="giveRating(img.work_id)"
+                      >연령 제한</b-button
+                    >
+                  </div>
+                  <div v-else-if="img.work_rating === 19">
+                    <b-button @click="clearRating(img.work_id)"
+                      >연령 제한 해제</b-button
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </b-tab>
       </b-tabs>
@@ -76,15 +117,39 @@ export default {
     return {
       keywordList: [],
       hasgtagList: [],
-      items: []
+      imgList: [],
+      items: [],
+      workHashtag: [],
     };
   },
   created() {
     this.getAllKeyword();
     this.getAllHashtag();
     this.getAllWork();
+    this.getWorkHashtag();
   },
+  mounted() {},
   methods: {
+    getWorkHashtag() {
+      http.get(`/admin/getAllWork`).then(
+        (response) => {
+          const data = response.data;
+          for (var i = 0; i < data.length; i++) {
+            let w = {
+              work_id: data[i].work_id,
+              work_title: data[i].work_title,
+              hashtags: data[i].hashtags,
+            };
+            this.items.push(w);
+            this.workHashtag.push(w);
+          }
+          console.log(this.items);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
     getAllKeyword() {
       http.get(`/admin/getMainGalleryKeyword/`).then(
         (response) => {
@@ -106,10 +171,33 @@ export default {
       );
     },
     getAllWork() {
-        http.get(`/work/getAllWork/`+ 1).then(
+      http.get(`/admin/getAllWork`).then(
         (response) => {
-            console.log(response.data);
-          this.items = response.data;
+          const data = response.data;
+          for (var i = 0; i < data.length; i++) {
+            data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
+          }
+          this.imgList = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    giveRating(work_id) {
+      http.post(`/admin/giveRating`, work_id).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    clearRating(work_id) {
+      http.post(`/admin/clearRating`, work_id).then(
+        (response) => {
+          console.log(response.data);
         },
         (error) => {
           console.log(error);
@@ -117,16 +205,27 @@ export default {
       );
     },
     saveKeyword() {
-      http.post(`/admin/addMainGalleryKeyword/`).then(
+      console.log("==> " + this.keywordList);
+      http.post(`/admin/addMainGalleryKeyword`, this.keywordList).then(
         (response) => {
-         console.log(response.data);
+          console.log(response.data);
         },
         (error) => {
           console.log(error);
         }
       );
     },
-    saveHashtag() {},
+    deleteHashtag() {
+      console.log("==> " + this.keywordList);
+      http.post(`/admin/deleteHashtagFromTotal`, this.keywordList).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
   },
 };
 </script>
