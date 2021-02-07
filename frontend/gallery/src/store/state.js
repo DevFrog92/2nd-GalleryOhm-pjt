@@ -3,6 +3,7 @@ const state  = {
   "user_id": localStorage.getItem('user_id'),
   "auth_token": localStorage.getItem('auth_token'),
   "user_nickName": localStorage.getItem('user_nickName'),
+  "user_profile":localStorage.getItem('user_profile'),
   "checkPasswordState":false,
 }
 

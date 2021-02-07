@@ -21,8 +21,8 @@
 
           <div class="picture_Age ">
             <p>작품 연령 선택</p>
-            <label><input type="radio" name="age" value="0" @click="rating">전체관람</label>
-            <label class="gallery19"><input type="radio" name="age" value="19" @click="rating">19금</label>
+            <label><input type="radio" name="age" value="0" required @click="rating">전체관람</label>
+            <label class="gallery19"><input type="radio" name="age" required value="19" @click="rating">19금</label>
           </div>
 
 
@@ -47,8 +47,10 @@
 
 
           <div class="uploadBtn">
-            <button @click="addWork">UPLOAD</button>
-            <button>뒤로가기</button>
+            <button v-if="mode" @click="addWork">MODIFY</button>
+            <button v-else @click="addWork">UPLOAD</button>
+            <button @click="Back">뒤로가기</button>
+            <button @click="hash">해쉬태그뽑기</button>
           </div>
 
         </div>
@@ -61,29 +63,84 @@
 
 <script>
   import '../assets/css/WorkUpLoadPage.css'
+  import init from '../assets/js/UploadWork'
+  // import http from '../api/http'
   export default {
     components: {},
-    created() {},
+    props:['work_info','mode'],
+    mounted(){
+      init.input();
+      if(this.work_info){
+        console.log('',this.work_info)
+      this.img_url = this.work_info.work_piece;
+      this.work_title = this.work_info.work_title;
+      this.work_desc = this.work_info.work_desc;
+      this.work_tool = this.work_info.work_tool;
+      }
+    },
+    created() {
+    },
     watch: {},
     computed: {},
     methods: {
+      hash(){
+        const hashTag =document.querySelectorAll('.tags-input span');
+        for(let item of hashTag){
+          this.hashtag_list+=item.innerText+','
+        }
+      },
+      Back(){
+        this.$router.go(-1);
+      },
       addWork: function () {
-        // console.log(this.$refs.work_piece.files);
-        // this.work_piece = this.$refs.work_piece.files[0];
-        console.log(this.work_piece)
-        // 업로드한 파일로 부터 url 을 생성할 수 있다.
-        this.$store.dispatch("addWork", {
+        // console.log(this.img_url.slice(23))
+        if(this.mode){
+
+          const byteCharacters = atob(this.img_url.slice(23));
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], {type: 'image/jpeg'});
+        const file = new File([blob],'profile')
+        // console.log(file);
+        this.work_piece = file;
+        this.$store.dispatch("modifyWork", {
             work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
             // work_artistId: "ohj",
+            work_id:this.work_info.work_id,
             work_title: this.work_title,
             work_desc: this.work_desc,
             work_piece: this.work_piece,
             work_rating: this.work_rating,
-            work_tool: this.work_tool
+            // work_tool: this.work_tool
           })
           .then(() => {
-            // console.log(data);
+            // http.post("/work/addHashTag",{hashTags:this.hashtag_list,"hashtag_workId"})
           });
+
+
+        }else{
+          console.log(this.work_piece)
+          // 업로드한 파일로 부터 url 을 생성할 수 있다.
+          this.$store.dispatch("addWork", {
+              work_artistId: localStorage.getItem('user_id'), //로컬스토리지 아이디 받아오기
+              // work_artistId: "ohj",
+              work_title: this.work_title,
+              work_desc: this.work_desc,
+              work_piece: this.work_piece,
+              work_rating: this.work_rating,
+              work_tool: this.work_tool
+            })
+            .then(() => {
+              // http.post("/work/addHashTag",{hashTags:this.hashtag_list,"hashtag_workId"})
+            });
+
+        }
+      
+        // console.log(this.$refs.work_piece.files);
+        // this.work_piece = this.$refs.work_piece.files[0];
       },
       onChangeImage(event) {
         const imgFile = event.target.files[0];
@@ -105,6 +162,7 @@
         work_piece: "",
         work_tool:"",
         img_url: '',
+        hashtag_list:"",
       };
     },
   };
