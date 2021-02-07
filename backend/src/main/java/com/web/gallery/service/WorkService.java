@@ -10,7 +10,7 @@ import java.util.List;
 public interface WorkService {
     
     // 작품 추가
-    void addWork(WorkDto work) throws Exception;
+    int addWork(WorkDto work) throws Exception;
 
     // 작품의 세부정보 리턴
     WorkDto getWork(int work_id) throws Exception;

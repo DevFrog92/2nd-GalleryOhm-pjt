@@ -32,17 +32,21 @@ public class WorkController {
 
     @ApiOperation(value = "작가가 작품을 등록한다.", response = NumberResult.class,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            notes = "addWork(String work_artistId, String work_title, String work_desc, MultipartFile work_piece, int work_rating[0 or 1], String work_tool)")
+            notes = "addWork(String work_artistId, String work_title, String work_desc, MultipartFile work_piece, int work_rating[0 or 19], String work_tool, String hashTags)")
     @RequestMapping(value = "/addWork", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> addWork(@RequestParam(value = "work_artistId") String work_artistId,
                                                 @RequestParam(value = "work_title") String work_title,
                                                 @RequestParam(value = "work_desc") String work_desc,
                                                 @RequestParam(value = "work_piece") MultipartFile work_piece,
                                                 @RequestParam(value = "work_rating") int work_rating,
-                                                @RequestParam(value = "work_tool") String work_tool) {
+                                                @RequestParam(value = "work_tool") String work_tool,
+                                                @RequestParam(value = "hashTags") String hashTags) {
         HttpStatus status = null;
         NumberResult ns = new NumberResult();
         WorkDto work = new WorkDto();
+        HashTagDto hashtag = new HashTagDto();
+        int work_id = 0;
+        List<String> listHashTags = Arrays.asList(hashTags.split(","));
 
         try {
             work.setWork_artistId(work_artistId);
@@ -57,7 +61,23 @@ public class WorkController {
                 work.setWork_rating(0);
             }
 
-            workService.addWork(work);
+            work_id = workService.addWork(work);
+
+            if (workService.countWorkHashTag(work_id) + listHashTags.size() > 10) {
+                ns.setValue("해시태그의 개수가 10개가 넘어갑니다.", 0, "fail");
+                status = HttpStatus.ACCEPTED;
+
+                return new ResponseEntity<>(ns, status);
+            } else {
+                for (String hashtag_name : listHashTags) {
+                    hashtag.setHashtag_name(hashtag_name);
+                    hashtag.setHashtag_workId(work_id);
+
+                    if (workService.isCheckHashTag(hashtag) == 0) {
+                        workService.addHashTag(hashtag);
+                    }
+                }
+            }
 
             ns.setValue("작품이 등록되었습니다.", 1, "succ");
 
@@ -248,7 +268,7 @@ public class WorkController {
     }
 
     @ApiOperation(value = "작품 코스트 부여 여부를 반환한다.", response = Integer.class,
-            notes = "isCheckCost(String cost_userId, int cost_id) => 0(좋아요 o), 1(좋아요x)")
+            notes = "isCheckCost(String cost_userId, int cost_id) => 1(좋아요 o), 0(좋아요 x)")
     @RequestMapping(value = "/isCheckCost", method = RequestMethod.GET)
     public ResponseEntity<Integer> isCheckCost(@RequestParam(value = "cost_userId") String cost_userId,
                                                @RequestParam(value = "cost_workId") int cost_workId) {
@@ -324,7 +344,7 @@ public class WorkController {
     }
 
     @ApiOperation(value = "작품의 즐겨찾기 여부를 반환한다.", response = Integer.class,
-            notes = "isCheckScrap(String scrap_userId, int scrap_workId)")
+            notes = "isCheckScrap(String scrap_userId, int scrap_workId) => 1(좋아요 o), 0(좋아요 x)")
     @RequestMapping(value = "/isCheckScrap", method = RequestMethod.GET)
     public ResponseEntity<Integer> isCheckScrap(@RequestParam(value = "scrap_userId") String scrap_userId,
                                                 @RequestParam(value = "scrap_workId") int scrap_workId) {
@@ -391,7 +411,7 @@ public class WorkController {
     }
 
     @ApiOperation(value = "작품에 지정된 해시태그를 저장한다.", response = NumberResult.class,
-            notes = "addHashTag(List<String> hashtags, int hashtag_workId)")
+            notes = "addHashTag(String hashtags, int hashtag_workId)")
     @RequestMapping(value = "/addHashTag", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> addHashTag(@RequestParam(value = "hashTags") String hashTags,
                                                    @RequestParam(value = "hashtag_workId") int hashtag_workId) {

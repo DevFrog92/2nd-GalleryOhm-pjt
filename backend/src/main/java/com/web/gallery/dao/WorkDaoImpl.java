@@ -18,8 +18,12 @@ public class WorkDaoImpl {
     @Autowired
     private SqlSession sqlSession;
 
-    public void addWork(WorkDto work) {
+    public int addWork(WorkDto work) {
         sqlSession.insert(ns + "addWork", work);
+
+        int work_id = sqlSession.selectOne(ns+"getRecentWork");
+
+        return work_id;
     }
 
     public WorkDto getWork(int work_id) {

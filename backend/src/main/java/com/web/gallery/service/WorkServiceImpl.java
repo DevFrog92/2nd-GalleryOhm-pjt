@@ -17,8 +17,8 @@ public class WorkServiceImpl implements WorkService{
     private WorkDaoImpl workDao;
 
     @Override
-    public void addWork(WorkDto work) throws Exception {
-        workDao.addWork(work);
+    public int addWork(WorkDto work) throws Exception {
+        return workDao.addWork(work);
     }
 
     @Override
