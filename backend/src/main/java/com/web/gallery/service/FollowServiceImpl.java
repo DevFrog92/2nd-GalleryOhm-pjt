@@ -32,4 +32,9 @@ public class FollowServiceImpl implements FollowService {
     public List<String> getAllMyFollower(String user_id) throws Exception {
         return followDao.getAllMyFollower(user_id);
     }
+
+    @Override
+    public int isCheckFollow(FollowDto follow) throws Exception {
+        return followDao.isCheckFollow(follow);
+    }
 }
