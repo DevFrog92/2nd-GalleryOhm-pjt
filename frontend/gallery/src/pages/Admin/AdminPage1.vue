@@ -37,12 +37,12 @@
             <label for="tags-pills">해시태그 삭제</label>
             <b-form-tags
               input-id="tags-pills"
-              v-model="hasgtagList"
+              v-model="hashtagList"
               tag-variant="primary"
               tag-pills
               size="lg"
               separator=" "
-              placeholder=""
+              placeholder="추가할 수 없습니다."
             >
             </b-form-tags>
             <b-button
@@ -51,7 +51,7 @@
               @click="deleteHashtag()"
               >저장</b-button
             >
-            <p class="mt-2">hasgtagList: {{ hasgtagList }}</p>
+            <p class="mt-2">hasgtagList: {{ hashtagList }}</p>
           </div>
           <div class="mt">
             <label for="tags-pills">작품 해시태그 삭제</label>
@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       keywordList: [],
-      hasgtagList: [],
+      hashtagList: [],
       imgList: [],
       items: [],
       workHashtag: [],
@@ -194,8 +194,13 @@ export default {
     getAllHashtag() {
       http.get(`/admin/getAllHashTag/`).then(
         (response) => {
-          this.hasgtagList = response.data;
-          
+          const data = response.data;
+          for (var i = 0; i < data.length; i++) {
+            let h = {
+              hashtag: data[i].hashtag_name,
+            };
+            this.hashtagList.push(h);
+          }
         },
         (error) => {
           console.log(error);
@@ -251,9 +256,9 @@ export default {
     },
     deleteHashtag() {
       var formData = new FormData();
-      formData.append("hasgtagList", this.hasgtagList);
+      formData.append("hashtagList", this.hashtagList);
 
-      http.post(`/admin/deleteHashtagFromTotal`, this.hasgtagList).then(
+      http.post(`/admin/deleteHashTagFromTotal`, formData).then(
         (response) => {
           console.log(response.data);
         },

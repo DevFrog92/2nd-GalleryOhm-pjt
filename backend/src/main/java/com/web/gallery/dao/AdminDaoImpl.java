@@ -20,7 +20,7 @@ public class AdminDaoImpl {
         return sqlSession.selectList(ns + "getAllUser");
     }
 
-    public List<String> getAllHashTag() throws SQLException {
+    public List<HashTagDto> getAllHashTag() throws SQLException {
         return sqlSession.selectList(ns + "getAllHashTag");
     }
 
@@ -48,8 +48,8 @@ public class AdminDaoImpl {
         sqlSession.delete(ns + "deleteHashTagFromWork", hashTagDto);
     }
 
-    public void deleteHashTagFromTotal() {
-        sqlSession.delete(ns + "deleteHashTagFromTotal");
+    public void deleteHashTagFromTotal(String hashtag_name) {
+        sqlSession.delete(ns + "deleteHashTagFromTotal", hashtag_name);
     }
 
     public List<MainGalleryDto> renewMainGallery() {
