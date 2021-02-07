@@ -1,5 +1,7 @@
+// import { Store } from "vuex";
+
 const login = (state,payload) => { 
-  // console.log(payload,'mutatins');
+  localStorage.setItem('user_profile',"data:/image/jpeg;base64," +payload['user_profile']);
   changeInfo(state,payload);
 }
 
