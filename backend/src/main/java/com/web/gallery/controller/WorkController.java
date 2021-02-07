@@ -96,9 +96,13 @@ public class WorkController {
     public ResponseEntity<WorkDto> getWork(@PathVariable("work_id") int work_id) {
         WorkDto work = null;
         HttpStatus status = null;
+        List<String> hashTags = null;
 
         try {
             work = workService.getWork(work_id);
+            hashTags = workService.getWorkHashTag(work_id);
+
+            work.setHashtags(hashTags.toArray(new String[0]));
 
             status = HttpStatus.OK;
         } catch (Exception e) {
@@ -111,16 +115,20 @@ public class WorkController {
 
     @ApiOperation(value = "작품의 내용을 수정한다", response = NumberResult.class,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            notes = "modifyWork(String work_id, String work_title, String work_desc, MultipartFile work_piece, int work_rating[0 or 1])")
+            notes = "modifyWork(String work_id, String work_title, String work_desc, MultipartFile work_piece, int work_rating[0 or 19], String hashTags)")
     @RequestMapping(value = "/modifyWork", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> modifyWork(@RequestParam(value = "work_id") int work_id,
                                                    @RequestParam(value = "work_title") String work_title,
                                                    @RequestParam(value = "work_desc") String work_desc,
                                                    @RequestParam(value = "work_piece") MultipartFile work_piece,
-                                                   @RequestParam(value = "work_rating") int work_rating) {
+                                                   @RequestParam(value = "work_rating") int work_rating,
+                                                   @RequestParam(value = "hashTags") String hashTags) {
         HttpStatus status = null;
         NumberResult ns = new NumberResult();
         WorkDto work = new WorkDto();
+
+        List<String> listHashTags = Arrays.asList(hashTags.split(","));
+        HashTagDto hashtag = new HashTagDto();
 
         try {
             work.setWork_id(work_id);
@@ -130,6 +138,7 @@ public class WorkController {
             work.setWork_rating(work_rating);
 
             workService.modifyWork(work);
+
 
             ns.setValue("작품이 수정되었습니다.", 1, "succ");
 
