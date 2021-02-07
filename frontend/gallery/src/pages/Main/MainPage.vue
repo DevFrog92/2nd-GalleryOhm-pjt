@@ -6,34 +6,27 @@
       v-if="workList_odd.length != 0"
     >
       <slide v-for="(work, i) in workList_odd" :key="i" :index="i">
-        <div class="images">
-          <img :src="work.work_piece" :alt="work.work_title" />
-          <div
-            class="slide_body"
-            @click="detailImage(work.work_id, work.work_piece)"
-          >
-            <h1 v-text="work.work_title"></h1>
-            <p>By : {{ work.work_artistId }}</p>
-          </div>
-        </div>
-      </slide>
-    </hooper>
+        <!-- <div
+          class="images"
+          :style="work.work_piece"
+          @click="detailImage(work.work_piece)"
+        >
+        </div> -->
 
-    <hooper
-      class="hooper2"
-      :settings="hooperSettings"
-      v-if="workList_even.length != 0"
-    >
-      <slide v-for="(work, i) in workList_even" :key="i">
-        <div class="images">
-        <img :src="work.work_piece" :alt="work.work_title" />
-        <div
-            class="slide_body"
-            @click="detailImage(work.work_id, work.work_piece)"
-          >
-            <h1 v-text="work.work_title"></h1>
-            <p>By : {{ work.work_artistId }}</p>
+        <div class="img">
+          <p class="number">{{ i }}</p>
+          <div class="content">
+            <h1>미친</h1>
+            <h1>피카소</h1>
           </div>
+          <img
+            class="images"
+            :src="work.work_piece"
+            :alt="work.work_title"
+            @click="detailImage(work.work_id, work.work_piece)"
+          />
+          <p></p>
+          <p class="name">작가이름, 2020.01.03</p>
         </div>
       </slide>
     </hooper>
@@ -56,7 +49,7 @@ export default {
             itemsToShow: 6,
           },
           1500: {
-            itemsToShow: 5,
+            itemsToShow: 2.8,
           },
           1100: {
             itemsToShow: 3.5,
@@ -85,7 +78,8 @@ export default {
       console.log("[id:" + work_id + "] " + work_piece.length);
     },
     getOddList() {
-      http.get(`/gallery/getAdultGallery_odd/`).then(
+      http;
+      http.get(`/gallery/getAllSubGallery_odd`).then(
         (response) => {
           var workList = response.data;
 
@@ -123,97 +117,68 @@ export default {
 </script>
 
 <style scoped>
-.subgallery {
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+html,
+body {
   height: 100%;
-  background-color: #c20a0a;
 }
 
+.subgallery {
+  height: 100%;
+  /* background-color: #C20A0A; */
+  /* transform: rotate(-8deg); */
+}
+.number {
+  font-size: 2rem;
+  padding-left: 20%;
+  text-align: left;
+}
 .images {
-  height: 40vh;
-  width: 18em;
+  height: 65vh;
+  width: 23em;
   padding: 0.1vw 0.1vw;
-  margin-top: 15px;
-  margin-left: 10%;
+  margin-top: 0px;
   background-size: cover;
   object-fit: cover;
-  background-position: center center;
+  background-position: center;
   border-image: url("../../assets/images/frame4.png") 1 fill / 1px / 0.8rem
     round space;
   border-image-repeat: round;
-  overflow: hidden;
+}
+.img {
   position: relative;
-  transform: scale(1);
+  height: 100vh;
+  background-size: cover;
 }
 
-.images img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* transform: scale(1.2); */
-  /* transition: transform 0.3s ease-in-out; */
-  display: block;
-}
-
-.images .slide_body {
+.img .content {
   position: absolute;
-  width: 90%;
-  height: 90%;
-  top: 5%;
-  left: 5%;
-  display: grid;
-  align-content: center;
+  top: 40%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   text-align: center;
-  border: 1px solid #fff;
-  color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  transform: scale(1.2);
-  transition: all 0.3s ease-in-out;
-  pointer-events: visible;
 }
-
-.images .slide_body h1,
-.images .slide_body p {
-  opacity: 0;
-  transition: all 0.4s;
+.img .content h1 {
+  font-size: 10rem;
+  font-family: "Hanna", sans-serif;
+  color:rgb(46, 211, 31);
 }
-
-.images .slide_body h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  transform: translate(0, -0.7rem);
-}
-
-.images .slide_body p {
-  font-size: 0.8rem;
-  transform: translate(0, 0.7rem);
-}
-
-.images:hover img {
-  /* filter: grayscale(100%); */
-  /* filter: invert(100%); */
-  /* filter: opacity(70%); */
-  /* filter: blur(5px); */
-  filter: brightness(40%);
-}
-
-.images:hover .slide_body {
-  transform: scale(1);
-}
-
-.images .slide_body:hover h1,
-.images .slide_body:hover p {
-  opacity: 1;
-  transform: scale(1);
-}
-
 .hooper1 {
-  height: 45vh;
+  height: 80vh;
+  width: 110vw;
   padding: 0 0vw;
-  margin-top: 1vh;
+  margin-top: 7.5vh;
+  transform: rotate(-7deg);
+  /* transform: scale(1.2); */
 }
-.hooper2 {
-  height: 45vh;
-  padding: 0 0vw;
-  margin-top: 3vh;
+.img .number{
+    font-size: 2rem;
+   font-family: "Hanna", sans-serif; 
+}
+.name{
+    font-size:1rem;
+    font-family: "Hanna", sans-serif; 
 }
 </style>

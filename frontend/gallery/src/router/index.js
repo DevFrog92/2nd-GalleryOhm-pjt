@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 //  main page
-import MainPage from "../pages/MainPage";
+import MainPage from '../pages/Main/MainPage';
 
 import ItemListPage from "../pages/ItemLisetPage";
 import ItemDetailPage from "../pages/ItemDetailPage";
@@ -17,8 +17,7 @@ import RedGallery from "../pages/Adult/RedGallery";
 import AdultPage from "../pages/Adult/AdultPage";
 
 import SubGallery from "../pages/Sub/SubGalleryPage";
-import MainPageTest1 from '../pages/Main/MainPageTest1';
-import MainPageTest2 from '../pages/Main/MainPageTest2';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -81,16 +80,6 @@ const routes = [
     path: "/SubGallery",
     name: "SubGallery",
     component: SubGallery,
-  },
-  {
-    path:'/mainpagetest1',
-    name:'MainPageTest1',
-    component:MainPageTest1,
-  },
-  {
-    path:'/mainpagetest2',
-    name:'MainPageTest2',
-    component:MainPageTest2,
   }
 ];
 
