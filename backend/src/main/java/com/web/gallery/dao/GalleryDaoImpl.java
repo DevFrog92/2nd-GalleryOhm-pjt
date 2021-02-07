@@ -110,4 +110,8 @@ public class GalleryDaoImpl {
     public int getGalleryId(int gallery_mainWorkId) {
         return sqlSession.selectOne(ns + "getGalleryId", gallery_mainWorkId);
     }
+
+    public List<GalleryDto> getAllMainAdultGallery() {
+        return sqlSession.selectList(ns + "getAllMainAdultGallery");
+    }
 }

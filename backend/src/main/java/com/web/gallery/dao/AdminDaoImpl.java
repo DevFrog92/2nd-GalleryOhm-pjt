@@ -77,4 +77,12 @@ public class AdminDaoImpl {
     public void renewSubGallery_delete() {
         sqlSession.delete(ns + "renewSubGallery_delete");
     }
+
+    public void renewMainAdultGallery_algorithm() {
+        sqlSession.insert(ns + "renewMainAdultGallery_algorithm");
+    }
+
+    public void renewMainAdultGallery_delete() {
+        sqlSession.delete(ns + "renewMainAdultGallery_delete");
+    }
 }

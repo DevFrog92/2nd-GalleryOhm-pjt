@@ -137,4 +137,9 @@ public class GalleryServiceImpl implements GalleryService {
     public int getGalleryId(int gallery_mainWorkId) {
         return galleryDao.getGalleryId(gallery_mainWorkId);
     }
+
+    @Override
+    public List<GalleryDto> getAllMainAdultGallery() {
+        return galleryDao.getAllMainAdultGallery();
+    }
 }

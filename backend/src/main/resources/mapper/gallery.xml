@@ -66,6 +66,15 @@
 		SELECT * FROM gallery
 		WHERE gallery_id
 				  IN (SELECT mainGallery_galleryId FROM maingallery)
+			AND
+		ORDER BY gallery_footPrint DESC
+	</select>
+
+	<select id="getAllMainAdultGallery">
+		SELECT * FROM gallery
+		WHERE gallery_id
+			IN (SELECT mainadultgallery_galleryId FROM mainadultgallery)
+		  AND
 		ORDER BY gallery_footPrint DESC
 	</select>
 
@@ -103,7 +112,7 @@
 			 RIGHT JOIN
 			 (SELECT galleryDetail_workId, galleryDetail_order
 			  FROM gallerydetail
-			  WHERE galleryDetail_galleryId = 52) AS detail
+			  WHERE galleryDetail_galleryId = #{galleryDetail_galleryId}) AS detail
 			 ON work.work_id = detail.galleryDetail_workId
 		ORDER BY galleryDetail_order;
 	</select>
