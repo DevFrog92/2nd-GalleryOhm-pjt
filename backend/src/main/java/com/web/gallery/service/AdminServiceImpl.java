@@ -31,8 +31,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addMainGalleryHashTag(String keyword_name) throws Exception {
-        adminDao.addMainGalleryHashTag(keyword_name);
+    public void addMainGalleryKeyword(List<String> keywordList) throws Exception {
+        adminDao.addMainGalleryKeyword(keywordList);
     }
 
     @Override
@@ -98,5 +98,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void renewSubGallery_delete() throws Exception {
         adminDao.renewSubGallery_delete();
+    }
+
+    @Override
+    public void deleteMainGalleryKeyword() throws Exception {
+        adminDao.deleteMainGalleryKeyword();
     }
 }

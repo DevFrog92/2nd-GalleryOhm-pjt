@@ -19,7 +19,7 @@ public interface AdminService {
     void clearRating(int work_id) throws Exception;
 
     // 추천 키워드(해시태그) 추가
-    void addMainGalleryHashTag(String keyword_name) throws Exception;
+    void addMainGalleryKeyword(List<String> keywordList) throws Exception;
 
     // 추천 키워드(해시태그) 삭제
     void deleteMainGalleryHashTag(String keyword_name) throws Exception;
@@ -56,4 +56,7 @@ public interface AdminService {
     void renewSubGallery_algorithm() throws Exception;
 
     void renewSubGallery_delete() throws Exception;
+
+    // 메인 갤러리 키워드 전체 삭제
+    void deleteMainGalleryKeyword() throws Exception;
 }

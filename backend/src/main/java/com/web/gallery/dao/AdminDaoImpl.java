@@ -32,8 +32,8 @@ public class AdminDaoImpl {
         sqlSession.update(ns + "clearRating", work_id);
     }
 
-    public void addMainGalleryHashTag(String keyword_name) {
-        sqlSession.update(ns + "addMainGalleryHashTag", keyword_name);
+    public void addMainGalleryKeyword(List<String> keywordList) {
+        sqlSession.update(ns + "addMainGalleryKeyword", keywordList);
     }
 
     public void deleteMainGalleryHashTag(String keyword_name) {
@@ -84,5 +84,9 @@ public class AdminDaoImpl {
 
     public void renewMainAdultGallery_delete() {
         sqlSession.delete(ns + "renewMainAdultGallery_delete");
+    }
+
+    public void deleteMainGalleryKeyword() {
+        sqlSession.delete(ns + "deleteMainGalleryKeyword");
     }
 }
