@@ -18,8 +18,12 @@ public class WorkDaoImpl {
     @Autowired
     private SqlSession sqlSession;
 
-    public void addWork(WorkDto work) {
+    public int addWork(WorkDto work) {
         sqlSession.insert(ns + "addWork", work);
+
+        int work_id = sqlSession.selectOne(ns+"getRecentWork");
+
+        return work_id;
     }
 
     public WorkDto getWork(int work_id) {
@@ -98,5 +102,9 @@ public class WorkDaoImpl {
 
     public List<WorkDto> searchByHashTag(List<String> hashtags) {
         return sqlSession.selectList(ns+"searchByHashTag", hashtags);
+    }
+
+    public void deleteHashTag(int work_id) {
+        sqlSession.delete(ns+"deleteHashTag",work_id);
     }
 }
