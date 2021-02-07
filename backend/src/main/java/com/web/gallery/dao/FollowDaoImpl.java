@@ -30,4 +30,8 @@ public class FollowDaoImpl {
     public List<String> getAllMyFollower(String user_id) {
         return sqlSession.selectList(ns + "getAllMyFollower", user_id);
     }
+
+    public int isCheckFollow(FollowDto follow) {
+        return sqlSession.selectOne(ns+"isCheckFollow",follow);
+    }
 }
