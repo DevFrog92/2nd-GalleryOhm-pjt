@@ -193,26 +193,24 @@ public class AdminController {
         return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "메인관 전시 작품(전시관) 선정 후 목록 조회 <전시관 아이디>", response = NumberResult.class)
+    @ApiOperation(value = "메인관 전시 작품(전시관) 선정", response = NumberResult.class)
     @RequestMapping(value = "/renewMainGallery", method = RequestMethod.GET)
-    public ResponseEntity<List<MainGalleryDto>> renewMainGallery() {
+    public ResponseEntity<NumberResult> renewMainGallery() {
         NumberResult ns = new NumberResult();
-        List<MainGalleryDto> allMainGalleryList = null;
 
         try {
             adminService.renewMainGallery_delete();
             adminService.renewMainAdultGallery_delete();
             adminService.renewMainGallery_algorithm(); // insert
             adminService.renewMainAdultGallery_algorithm(); // insert
-            allMainGalleryList = adminService.renewMainGallery();
-//            allMainGalleryList.addAll(adminService.renewMainAdultGallery());
+
             ns.setValue("renewMainGallery", 10, "succ");
         } catch (Exception e) {
             e.printStackTrace();
             ns.setValue("renewMainGallery", 0, "fail");
-            return new ResponseEntity<List<MainGalleryDto>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<MainGalleryDto>>(allMainGalleryList, HttpStatus.OK);
+        return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
     }
 
     /**** 메인 갤러리 목록 조회 ****/

@@ -141,4 +141,8 @@
 	<delete id="renewSubGallery_delete">
 		truncate subgallery
 	</delete>
+
+	<delete id="renewMainAdultGallery_delete">
+		truncate mainadultgallery
+	</delete>
 </mapper>

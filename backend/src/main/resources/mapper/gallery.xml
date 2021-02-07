@@ -65,15 +65,13 @@
 		SELECT * FROM gallery
 		WHERE gallery_id
 				  IN (SELECT mainGallery_galleryId FROM maingallery)
-			AND
 		ORDER BY gallery_footPrint DESC
 	</select>
 
-	<select id="getAllMainAdultGallery">
+	<select id="getAllMainAdultGallery" resultType="gallery">
 		SELECT * FROM gallery
 		WHERE gallery_id
 			IN (SELECT mainadultgallery_galleryId FROM mainadultgallery)
-		  AND
 		ORDER BY gallery_footPrint DESC
 	</select>
 
