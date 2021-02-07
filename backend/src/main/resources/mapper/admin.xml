@@ -58,11 +58,11 @@
 			hashtag_name = #{hashtag_name} and hashtag_workId = #{hashtag_workId}
 	</delete>
 
-	<delete id="deleteHashTagFromTotal" parameterType="hashTag">
-		delete from hashtag
-		where
-			hashtag_name = #{hashtag_name}
-	</delete>
+<!--	<delete id="deleteHashTagFromTotal" parameterType="hashTag">-->
+<!--		delete from hashtag-->
+<!--		where-->
+<!--			hashtag_name = #{hashtag_name}-->
+<!--	</delete>-->
 
 	<select id="renewMainGallery" resultType="mainGallery">
 		select mainGallery_galleryId from maingallery
