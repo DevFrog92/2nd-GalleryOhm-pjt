@@ -203,7 +203,7 @@ public class AdminController {
     }
 
     /**** 메인 갤러리 (연령 제한 작품 포함) 목록 조회 ****/
-    @ApiOperation(value = "메인 갤러리의 전시관 목록들을 조회한다.", response = List.class, notes = "getAllMainAdultGallery()")
+    @ApiOperation(value = "메인 갤러리의 전시관 목록들을 조회한다. (19 Adult)", response = List.class, notes = "getAllMainAdultGallery()")
     @RequestMapping(value = "/getAllMainAdultGallery", method = RequestMethod.GET)
     public ResponseEntity<List<GalleryDto>> getAllMainAdultGallery() throws Exception{
         List<GalleryDto> adultGallerys = galleryService.getAllMainAdultGallery();
