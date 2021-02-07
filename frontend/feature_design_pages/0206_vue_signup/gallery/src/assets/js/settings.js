@@ -138,3 +138,59 @@ export default {design,modifyUser,checkPassword,makeUserNickName,leaveUser};
 //   }
 //   e.preventDefault();
 // }));
+
+
+
+
+
+
+
+// var password = document.querySelector('.setting_pw_check');
+// var error = document.querySelector('.pw_error_message');
+// var padlock = document.querySelector('.padlock');
+// var arrow = document.querySelector('.pw_check_arrow');
+// var input = document.querySelector('.pw_check_icon');
+// var pass = "dupa";
+// password.addEventListener('keypress', function(e){
+// var key = e.which || e.keyCode;
+// if(key === 13){
+//   if(password.value != ""){
+//     if(password.value != pass){
+//       error.classList.add('show');
+//       padlock.classList.remove('unlock');
+//     }else{
+//       error.classList.remove('show');
+//       unlock();
+//     }
+//   }
+// }
+// });
+// password.addEventListener('keyup', function(){
+// if(password.value == ""){
+//   error.classList.remove('show');
+//   padlock.classList.remove('unlock');
+//   arrow.classList.remove('show');
+// }else{
+//   arrow.classList.add('show');
+// }
+// });
+// arrow.addEventListener('click', function(){
+//   if(password.value != pass){
+//     error.classList.add('show');
+//     padlock.classList.remove('unlock');
+//   }else{
+//     error.classList.remove('show');
+//     unlock();
+//   }
+// },false);
+// function unlock(){
+//   padlock.classList.add('unlock');
+//   input.classList.add('unlock');
+//   setTimeout(function(){
+//     padlock.classList.add('hide');
+//     setTimeout(function(){
+//       // If the password is correct
+//       window.location.href = '';
+//     }, 900);
+//   }, 600);
+// }
