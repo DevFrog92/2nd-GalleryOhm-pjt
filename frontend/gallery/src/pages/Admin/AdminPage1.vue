@@ -104,6 +104,9 @@
             </div>
           </div>
         </b-tab>
+        <b-tab title="회원 관리">
+            <b-table :items="userList" ref="table"></b-table>
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -120,6 +123,7 @@ export default {
       imgList: [],
       items: [],
       workHashtag: [],
+      userList: [],
     };
   },
   created() {
@@ -127,9 +131,35 @@ export default {
     this.getAllHashtag();
     this.getAllWork();
     this.getWorkHashtag();
+    this.getAllUser();
   },
   mounted() {},
   methods: {
+    getAllUser() {
+      http.get(`/admin/getAllUser`).then(
+        (response) => {
+          const data = response.data;
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].user_id != "admin") {
+              let u = {
+                id: data[i].user_id,
+                name: data[i].user_name,
+                nickName: data[i].user_nickName,
+                email: data[i].user_email,
+                tel: data[i].user_tel,
+                birth: data[i].user_birth,
+                createDate: data[i].user_createDate,
+                about: data[i].user_about,
+              };
+              this.userList.push(u);
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
     getWorkHashtag() {
       http.get(`/admin/getAllWork`).then(
         (response) => {
