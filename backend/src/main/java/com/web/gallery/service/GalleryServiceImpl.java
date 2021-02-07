@@ -3,13 +3,11 @@ package com.web.gallery.service;
 import com.web.gallery.dao.GalleryDaoImpl;
 import com.web.gallery.dto.GalleryDto;
 import com.web.gallery.dto.WorkDto;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class GalleryServiceImpl implements GalleryService {
@@ -123,5 +121,25 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     public List<WorkDto> getAllSubGallery_even() {
         return galleryDao.getAllSubGallery_even();
+    }
+
+    @Override
+    public List<HashMap<String, Integer>> isAdultGallery(int gallery_id) {
+        return galleryDao.isAdultGallery(gallery_id);
+    }
+
+    @Override
+    public void updateGalleryForAdult(int gallery_id) {
+        galleryDao.updateGalleryForAdult(gallery_id);
+    }
+
+    @Override
+    public int getGalleryId(int gallery_mainWorkId) {
+        return galleryDao.getGalleryId(gallery_mainWorkId);
+    }
+
+    @Override
+    public List<GalleryDto> getAllMainAdultGallery() {
+        return galleryDao.getAllMainAdultGallery();
     }
 }
