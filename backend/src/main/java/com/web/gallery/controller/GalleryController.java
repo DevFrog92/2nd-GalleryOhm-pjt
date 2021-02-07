@@ -43,10 +43,21 @@ public class GalleryController {
         NumberResult nr = new NumberResult();
         System.out.println(gallery_workIdList.toString());
         if(galleryService.addArtistGallery(gallery_name, gallery_desc, gallery_artistId, gallery_mainWorkId)==1) {
-            if(galleryService.addArtistGalleryDetail(gallery_workIdList)>=1) {    // 작품에 추가.
+            int gallery_id = galleryService.getGalleryId(gallery_mainWorkId);
+            if(galleryService.addArtistGalleryDetail(gallery_workIdList) >= 1) {    // 작품에 추가.
+                boolean isCheck = false;
+                List<HashMap<String, Integer>> ratingList = (List<HashMap<String, Integer>>) galleryService.isAdultGallery(gallery_id);
+                for (int i = 0; i < ratingList.size(); i++)
+                    if (ratingList.get(i).get("work_rating") == 19)
+                        isCheck = true;
+                if (isCheck) {
+                    // 갤러리 작품 중 연령 제한 작품이 포함되어 있는 경우
+                    galleryService.updateGalleryForAdult(gallery_id);
+                }
                 nr.setValue("addArtistGallery", 1, "succ");
             }
         } else{
+            nr.setValue("addArtistGallery", 0, "fail");
             return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);

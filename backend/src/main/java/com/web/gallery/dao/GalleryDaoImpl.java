@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class GalleryDaoImpl {
@@ -98,5 +97,17 @@ public class GalleryDaoImpl {
 
     public List<WorkDto> getAllSubGallery_even(){
         return sqlSession.selectList(ns+"getAllSubGallery_even");
+    }
+
+    public List<HashMap<String, Integer>> isAdultGallery(int gallery_id) {
+        return sqlSession.selectList(ns + "isAdultGallery", gallery_id);
+    }
+
+    public void updateGalleryForAdult(int gallery_id) {
+        sqlSession.update(ns + "updateGalleryForAdult", gallery_id);
+    }
+
+    public int getGalleryId(int gallery_mainWorkId) {
+        return sqlSession.selectOne(ns + "getGalleryId", gallery_mainWorkId);
     }
 }
