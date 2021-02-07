@@ -103,4 +103,8 @@ public class WorkDaoImpl {
     public List<WorkDto> searchByHashTag(List<String> hashtags) {
         return sqlSession.selectList(ns+"searchByHashTag", hashtags);
     }
+
+    public void deleteHashTag(int work_id) {
+        sqlSession.delete(ns+"deleteHashTag",work_id);
+    }
 }

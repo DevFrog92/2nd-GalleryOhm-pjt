@@ -63,7 +63,7 @@ public class WorkController {
 
             work_id = workService.addWork(work);
 
-            if (workService.countWorkHashTag(work_id) + listHashTags.size() > 10) {
+            if (listHashTags.size() > 10) {
                 ns.setValue("해시태그의 개수가 10개가 넘어갑니다.", 0, "fail");
                 status = HttpStatus.ACCEPTED;
 
@@ -139,6 +139,23 @@ public class WorkController {
 
             workService.modifyWork(work);
 
+            if (listHashTags.size() > 10) {
+                ns.setValue("해시태그의 개수가 10개가 넘어갑니다.", 0, "fail");
+                status = HttpStatus.ACCEPTED;
+
+                return new ResponseEntity<>(ns, status);
+            } else {
+                workService.deleteHashTag(work_id);
+
+                for (String hashtag_name : listHashTags) {
+                    hashtag.setHashtag_name(hashtag_name);
+                    hashtag.setHashtag_workId(work_id);
+
+                    if (workService.isCheckHashTag(hashtag) == 0) {
+                        workService.addHashTag(hashtag);
+                    }
+                }
+            }
 
             ns.setValue("작품이 수정되었습니다.", 1, "succ");
 

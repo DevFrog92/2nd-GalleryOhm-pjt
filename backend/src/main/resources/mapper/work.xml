@@ -173,4 +173,9 @@
         from work
         order by work_id desc limit 1
     </select>
+
+    <select id="deleteHashTag" parameterType="int">
+        delete from hashtag
+        where hashtag_workId = #{work_id}
+    </select>
 </mapper>

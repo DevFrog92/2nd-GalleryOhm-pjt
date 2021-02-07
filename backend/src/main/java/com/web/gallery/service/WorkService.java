@@ -68,4 +68,7 @@ public interface WorkService {
 
     // 해시태그로 작품 검색
     List<WorkDto> searchByHashTag(List<String> hashtags) throws Exception;
+
+    // 해시태그 목록 삭제
+    void deleteHashTag(int work_id) throws Exception;
 }

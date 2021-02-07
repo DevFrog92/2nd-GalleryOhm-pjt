@@ -115,4 +115,9 @@ public class WorkServiceImpl implements WorkService{
     public List<WorkDto> searchByHashTag(List<String> hashtags) throws Exception {
         return workDao.searchByHashTag(hashtags);
     }
+
+    @Override
+    public void deleteHashTag(int work_id) throws Exception {
+        workDao.deleteHashTag(work_id);
+    }
 }
