@@ -94,23 +94,24 @@ public class AdminController {
     }
 
     @ApiOperation(value = "메인관 전시 작품(전시관) 추천 키워드 추가", response = NumberResult.class)
-    @RequestMapping(value = "/addMainGalleryHashTag", method = RequestMethod.POST)
-    public ResponseEntity<NumberResult> addMainGalleryHashTag(@RequestBody String keyword_name) throws Exception {
+    @RequestMapping(value = "/addMainGalleryKeyword", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> addMainGalleryKeyword(@RequestParam(value = "keywordList") List<String> keywordList) throws Exception {
         NumberResult ns = new NumberResult();
         try {
-            adminService.addMainGalleryHashTag(keyword_name);
-            ns.setValue("addMainGalleryHashTag", 1, "succ");
+            adminService.deleteMainGalleryKeyword();
+            adminService.addMainGalleryKeyword(keywordList);
+            ns.setValue("addMainGalleryKeyword", 1, "succ");
         } catch (Exception e) {
             e.printStackTrace();
-            ns.setValue("addMainGalleryHashTag", 0, "fail");
+            ns.setValue("addMainGalleryKeyword", 0, "fail");
             return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
     }
 
     @ApiOperation(value = "메인관 전시 작품(전시관) 추천 키워드 삭제", response = NumberResult.class)
-    @RequestMapping(value = "/deleteMainGalleryHashTag", method = RequestMethod.POST)
-    public ResponseEntity<NumberResult> deleteMainGalleryHashTag(@RequestBody String keyword_name) throws Exception {
+    @RequestMapping(value = "/deleteMainGalleryKeyword", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> deleteMainGalleryKeyword(@RequestBody String keyword_name) throws Exception {
         NumberResult ns = new NumberResult();
         try {
             adminService.deleteMainGalleryHashTag(keyword_name);
@@ -124,8 +125,8 @@ public class AdminController {
     }
 
     @ApiOperation(value = "메인관 전시 작품(전시관) 추천 키워드 전체 목록 조회", response = List.class)
-    @RequestMapping(value = "/getMainGalleryHashTag", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getMainGalleryHashTag() {
+    @RequestMapping(value = "/getMainGalleryKeyword", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> getMainGalleryKeyword() {
         NumberResult ns = new NumberResult();
         List<String> keywordList = null;
         try {

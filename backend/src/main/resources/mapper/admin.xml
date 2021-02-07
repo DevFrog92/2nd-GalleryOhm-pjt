@@ -20,10 +20,18 @@
 		UPDATE work SET work_rating = 0 where work_id = #{work_id};
 	</update>
 
-	<insert id="addMainGalleryHashTag" parameterType="string">
-		insert into keyword(keyword_name)
-		values (#{keyword_name})
+	<insert id="addMainGalleryKeyword" parameterType="list">
+		INSERT INTO
+		keyword(keyword_name)
+		VALUES
+		<foreach collection="list" index="i" item="keyword_name" separator=",">
+			(#{keyword_name})
+		</foreach>
 	</insert>
+
+	<delete id="deleteMainGalleryKeyword">
+		truncate keyword
+	</delete>
 
 	<delete id="deleteMainGalleryHashTag" parameterType="string">
 		delete from keyword
