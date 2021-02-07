@@ -73,6 +73,30 @@
 								  FROM keyword)
 						  )
 				   )
+				 AND gallery_rating = 0
+			)
+				ORDER BY gallery_footPrint DESC
+			LIMIT 10
+	</insert>
+
+	<insert id="renewAdultMainGallery_algorithm">
+		INSERT INTO maingallery(mainGallery_galleryId)
+			(SELECT gallery_id
+			 FROM gallery
+			 WHERE gallery_id
+				 IN
+				   (SELECT galleryDetail_galleryId
+					FROM gallerydetail
+					WHERE galleryDetail_workId
+							  IN
+						  (SELECT hashtag_workId
+						   FROM hashtag
+						   WHERE hashtag_name
+									 IN
+								 (SELECT keyword_name
+								  FROM keyword)
+						  )
+				   )
 			)
 				ORDER BY gallery_footPrint DESC
 			LIMIT 10

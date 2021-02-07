@@ -2,10 +2,9 @@ package com.web.gallery.service;
 
 import com.web.gallery.dto.GalleryDto;
 import com.web.gallery.dto.WorkDto;
-import org.hibernate.jdbc.Work;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface GalleryService {
 
@@ -62,4 +61,13 @@ public interface GalleryService {
 
     // 서브 갤러리 짝수 작품 목록 반환
     List<WorkDto> getAllSubGallery_even();
+
+    // 연령 제한 작품 포함 여부 체크
+    List<HashMap<String, Integer>> isAdultGallery(int gallery_id);
+
+    // 갤러리 연령 등급 업데이트
+    void updateGalleryForAdult(int gallery_id);
+
+    // 갤러리 메인 아이디 받아오기
+    int getGalleryId(int gallery_mainWorkId);
 }

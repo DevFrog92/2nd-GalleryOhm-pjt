@@ -19,6 +19,26 @@
 
 	</insert>
 
+	<select id="getGalleryId" parameterType="int" resultType="int">
+		select gallery_id
+		from gallery
+		where gallery_mainWorkId = #{gallery_mainWorkId}
+	</select>
+
+	<select id="isAdultGallery" parameterType="int" resultType="hashmap">
+		select w.work_rating
+		from work as w
+				 join galleryDetail as g
+					  on w.work_id = g.galleryDetail_workId
+		where galleryDetail_galleryId = #{galleryDetail_galleryId}
+	</select>
+
+	<update id="updateGalleryForAdult" parameterType="int">
+		update gallery
+		set gallery_rating = 19
+		where gallery_id = #{gallery_id}
+	</update>
+
 	<update id="modifyArtistGallery" parameterType="gallery">
 		UPDATE gallery
 		SET gallery_name = #{gallery_name},
@@ -46,6 +66,7 @@
 		SELECT * FROM gallery
 		WHERE gallery_id
 				  IN (SELECT mainGallery_galleryId FROM maingallery)
+			AND
 		ORDER BY gallery_footPrint DESC
 	</select>
 
@@ -83,7 +104,7 @@
 			 RIGHT JOIN
 			 (SELECT galleryDetail_workId, galleryDetail_order
 			  FROM gallerydetail
-			  WHERE galleryDetail_galleryId = 52) AS detail
+			  WHERE galleryDetail_galleryId = #{galleryDetail_galleryId}) AS detail
 			 ON work.work_id = detail.galleryDetail_workId
 		ORDER BY galleryDetail_order;
 	</select>

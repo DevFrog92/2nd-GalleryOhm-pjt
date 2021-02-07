@@ -17,8 +17,8 @@ public class WorkServiceImpl implements WorkService{
     private WorkDaoImpl workDao;
 
     @Override
-    public void addWork(WorkDto work) throws Exception {
-        workDao.addWork(work);
+    public int addWork(WorkDto work) throws Exception {
+        return workDao.addWork(work);
     }
 
     @Override
@@ -114,5 +114,10 @@ public class WorkServiceImpl implements WorkService{
     @Override
     public List<WorkDto> searchByHashTag(List<String> hashtags) throws Exception {
         return workDao.searchByHashTag(hashtags);
+    }
+
+    @Override
+    public void deleteHashTag(int work_id) throws Exception {
+        workDao.deleteHashTag(work_id);
     }
 }

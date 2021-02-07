@@ -33,6 +33,7 @@
     <select id="getAllWork" parameterType="int" resultType="work">
         select *
         from work
+        where work_rating = 0
         order by case
                      when #{sort} = 1 then work_uploadDate
                      end desc,
@@ -88,10 +89,10 @@
 
     <select id="isCheckCost" parameterType="cost" resultType="int">
         select IF(
-                    (select count(*)
-                        from cost
-                        where cost_userId = #{cost_userId}
-                              and cost_workId = #{cost_workId}) > 0, 0, 1)
+                           (select count(*)
+                            from cost
+                            where cost_userId = #{cost_userId}
+                              and cost_workId = #{cost_workId}) > 0, 1, 0)
     </select>
 
     <delete id="clearToWorkCost" parameterType="cost">
@@ -111,7 +112,7 @@
                            (select count(*)
                             from scrap
                             where scrap_userId = #{scrap_userId}
-                              and scrap_workId = #{scrap_workId}) > 0, 0, 1)
+                              and scrap_workId = #{scrap_workId}) > 0, 1, 0)
     </select>
 
     <delete id="clearToWorkScrap" parameterType="scrap">
@@ -165,5 +166,16 @@
             group_concat(hashtag_name) like CONCAT('%', #{hashtag_name}, '%')
         </foreach>
         )
+    </select>
+
+    <select id="getRecentWork" resultType="int">
+        select work_id
+        from work
+        order by work_id desc limit 1
+    </select>
+
+    <select id="deleteHashTag" parameterType="int">
+        delete from hashtag
+        where hashtag_workId = #{work_id}
     </select>
 </mapper>
