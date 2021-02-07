@@ -17,4 +17,7 @@ public interface FollowService {
 
     // 팔로워 목록 조회
     List<String> getAllMyFollower(String user_id) throws Exception;
+
+    // 팔로우 여부 조회
+    int isCheckFollow(FollowDto follow) throws Exception;
 }
