@@ -20,7 +20,7 @@ public class AdminDaoImpl {
         return sqlSession.selectList(ns + "getAllUser");
     }
 
-    public List<String> getAllHashTag() throws SQLException {
+    public List<HashTagDto> getAllHashTag() throws SQLException {
         return sqlSession.selectList(ns + "getAllHashTag");
     }
 
@@ -32,8 +32,8 @@ public class AdminDaoImpl {
         sqlSession.update(ns + "clearRating", work_id);
     }
 
-    public void addMainGalleryHashTag(String keyword_name) {
-        sqlSession.update(ns + "addMainGalleryHashTag", keyword_name);
+    public void addMainGalleryKeyword(List<String> keywordList) {
+        sqlSession.update(ns + "addMainGalleryKeyword", keywordList);
     }
 
     public void deleteMainGalleryHashTag(String keyword_name) {
@@ -48,8 +48,8 @@ public class AdminDaoImpl {
         sqlSession.delete(ns + "deleteHashTagFromWork", hashTagDto);
     }
 
-    public void deleteHashTagFromTotal(HashTagDto hashTagDto) {
-        sqlSession.delete(ns + "deleteHashTagFromTotal", hashTagDto);
+    public void deleteHashTagFromTotal(String hashtag_name) {
+        sqlSession.delete(ns + "deleteHashTagFromTotal", hashtag_name);
     }
 
     public List<MainGalleryDto> renewMainGallery() {
@@ -84,5 +84,17 @@ public class AdminDaoImpl {
 
     public void renewMainAdultGallery_delete() {
         sqlSession.delete(ns + "renewMainAdultGallery_delete");
+    }
+
+    public void deleteMainGalleryKeyword() {
+        sqlSession.delete(ns + "deleteMainGalleryKeyword");
+    }
+
+    public List<WorkDto> getAllWork() {
+        return sqlSession.selectList(ns + "getAllWork");
+    }
+
+    public void addHashTagFromTotal(List<String> hashTagList) {
+        sqlSession.insert(ns + "addHashTagFromTotal", hashTagList);
     }
 }
