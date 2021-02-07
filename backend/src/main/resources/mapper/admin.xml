@@ -55,7 +55,7 @@
 	<delete id="deleteHashTagFromWork" parameterType="hashTag">
 		delete from hashtag
 		where
-			hashtag_name = #{hashtag_name} and hashtag_workId = #{hashtag_workId}
+			hashtag_name = #{hashtag_name} and hashtag_id = #{hashtag_id}
 	</delete>
 
 <!--	<delete id="deleteHashTagFromTotal" parameterType="hashTag">-->
