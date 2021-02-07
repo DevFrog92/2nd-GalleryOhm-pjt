@@ -24,7 +24,8 @@ import SubGallery from "../pages/Sub/SubGalleryPage";
 import GalleryCategoryPage from '../pages/GalleryCategoryPage'
 
 
-
+import AdminPage1 from '../pages/Admin/AdminPage1'
+import AdminPage2 from '../pages/Admin/AdminPage2'
 
 
 Vue.use(VueRouter)
@@ -97,8 +98,16 @@ const routes = [
     name:"GalleryCategoryPage",
     component:GalleryCategoryPage
   },
-  
-
+  {
+    path:'/AdminPage1',
+    name:"AdminPage1",
+    component:AdminPage1
+  },
+  {
+    path:'/AdminPage2',
+    name:"AdminPage2",
+    component:AdminPage2
+  },
 ]
 
 const router = new VueRouter({
