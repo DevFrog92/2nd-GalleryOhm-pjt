@@ -53,8 +53,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteHashTagFromTotal(HashTagDto hashTagDto) throws Exception {
-        adminDao.deleteHashTagFromTotal(hashTagDto);
+    public void deleteHashTagFromTotal() throws Exception {
+        adminDao.deleteHashTagFromTotal();
     }
 
     @Override
@@ -105,5 +105,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<WorkDto> getAllWork() {
         return adminDao.getAllWork();
+    }
+
+    @Override
+    public void addHashTagFromTotal(List<String> hashTagList) {
+        adminDao.addHashTagFromTotal(hashTagList);
     }
 }

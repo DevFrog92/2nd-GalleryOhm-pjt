@@ -48,8 +48,8 @@ public class AdminDaoImpl {
         sqlSession.delete(ns + "deleteHashTagFromWork", hashTagDto);
     }
 
-    public void deleteHashTagFromTotal(HashTagDto hashTagDto) {
-        sqlSession.delete(ns + "deleteHashTagFromTotal", hashTagDto);
+    public void deleteHashTagFromTotal() {
+        sqlSession.delete(ns + "deleteHashTagFromTotal");
     }
 
     public List<MainGalleryDto> renewMainGallery() {
@@ -92,5 +92,9 @@ public class AdminDaoImpl {
 
     public List<WorkDto> getAllWork() {
         return sqlSession.selectList(ns + "getAllWork");
+    }
+
+    public void addHashTagFromTotal(List<String> hashTagList) {
+        sqlSession.insert(ns + "addHashTagFromTotal", hashTagList);
     }
 }

@@ -180,10 +180,13 @@ public class AdminController {
 
     @ApiOperation(value = "해시태그 전체 작품에서 삭제", response = NumberResult.class)
     @RequestMapping(value = "/deleteHashTagFromTotal", method = RequestMethod.POST)
-    public ResponseEntity<NumberResult> deleteHashTagFromTotal(@RequestBody HashTagDto hashTagDto) throws Exception {
+    public ResponseEntity<NumberResult> deleteHashTagFromTotal(@RequestParam(value = "HashTagList") List<String> HashTagList) throws Exception {
         NumberResult ns = new NumberResult();
         try {
-            adminService.deleteHashTagFromTotal(hashTagDto);
+//            adminService.deleteMainGalleryKeyword();
+//            adminService.addMainGalleryKeyword(keywordList);
+            adminService.deleteHashTagFromTotal();
+            adminService.addHashTagFromTotal(HashTagList);
             ns.setValue("deleteHashTagFromTotal", 1, "succ");
         } catch (Exception e) {
             e.printStackTrace();

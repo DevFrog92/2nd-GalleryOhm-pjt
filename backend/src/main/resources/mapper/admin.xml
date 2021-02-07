@@ -29,6 +29,15 @@
 		</foreach>
 	</insert>
 
+	<insert id="addHashTagFromTotal" parameterType="list">
+		INSERT INTO
+		hashtag(hashtag_name)
+		VALUES
+		<foreach collection="list" index="i" item="hashtag_name" separator=",">
+			(#{hashtag_name})
+		</foreach>
+	</insert>
+
 	<delete id="deleteMainGalleryKeyword">
 		truncate keyword
 	</delete>
@@ -116,7 +125,11 @@
 	</select>
 
 	<delete id="renewMainGallery_delete">
-		truncate maingallery;
+		truncate maingallery
+	</delete>
+
+	<delete id="deleteHashTagFromTotal">
+		truncate hashtag
 	</delete>
 
 	<insert id="renewSubGallery_insert" parameterType="list">

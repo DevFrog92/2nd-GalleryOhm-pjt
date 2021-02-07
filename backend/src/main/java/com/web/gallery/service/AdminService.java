@@ -31,7 +31,7 @@ public interface AdminService {
     void deleteHashTagFromWork(HashTagDto hashTagDto) throws Exception;
 
     // 해시태그 삭제 - 전체 해시태그에서 삭제
-    void deleteHashTagFromTotal(HashTagDto hashTagDto) throws Exception;
+    void deleteHashTagFromTotal() throws Exception;
 
     // 메인관 작품 선정 (전시관) 목록
     List<MainGalleryDto> renewMainGallery() throws Exception;
@@ -58,4 +58,6 @@ public interface AdminService {
     void deleteMainGalleryKeyword() throws Exception;
 
     List<WorkDto> getAllWork();
+
+    void addHashTagFromTotal(List<String> hashTagList);
 }
