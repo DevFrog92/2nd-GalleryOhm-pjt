@@ -8,7 +8,18 @@
           @click="detailImage(work.work_piece)"
         >
         </div> -->
-        <img id="img" class="images" :src="work.work_piece" :alt="work.work_title" @click="detailImage(work.work_id, work.work_piece)">
+        
+        <div class="img">
+          <p>오현정바보</p>
+          <div class="content">
+            <h1>Hello!</h1>
+            <h2>My name is nunu</h2>
+        </div>
+        <img class="images" :src="work.work_piece" :alt="work.work_title" @click="detailImage(work.work_id, work.work_piece)">
+        <p></p>
+        <p>작가이름, 2020.01.03</p>
+        </div>
+        
       </slide>
     </hooper>
 
@@ -32,7 +43,7 @@ export default {
                         itemsToShow: 6
                     },
                     1500: {
-                        itemsToShow: 3
+                        itemsToShow: 2.8
                     },
                     1100: {
                         itemsToShow: 3.5
@@ -111,7 +122,7 @@ html,body {
 
 .images {
   height: 60vh;
-  width: 26em;
+  width: 28em;
   padding: 0.1vw 0.1vw;
   margin-top: 15px;
   background-size: cover;
@@ -120,7 +131,23 @@ html,body {
   border-image: url('../../assets/images/frame4.png') 1 fill / 1px / 0.8rem round space ;
   border-image-repeat: round;
 }
+.img{
+    position: relative;
+    /* background-image: url(https://jaguar.ssl.cdn.sdlmedia.com/636353687510047376OV.jpg?v=24);                                                                */
+    height: 100vh;
+    background-size: cover;
+  }
 
+.img .content{
+     position: absolute;
+     top:75%;
+     left:50%;
+     transform: translate(-50%, -50%);                                                                   
+     font-size:5rem;
+     color: white;
+     z-index: 2;
+     text-align: center;
+  }
 .hooper1 {
   height: 80vh;
   width: 110vw;
@@ -128,10 +155,5 @@ html,body {
   margin-top: 15vh;
   transform: rotate(-8deg);
   /* transform: scale(1.2); */
-}
-.hooper2 {
-  height: 45vh;
-  padding: 0 0vw;
-  margin-top: 3vh;
 }
 </style>
