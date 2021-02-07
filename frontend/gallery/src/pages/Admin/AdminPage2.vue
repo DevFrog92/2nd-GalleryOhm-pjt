@@ -73,28 +73,8 @@
             >
           </div>
           <div class="mt">
-            <div class="gallery-page-content">
-              <div class="gallery-card">
-                <div class="gallery-content">
-                  <h2 class="gallery-title">Mountain View</h2>
-                  <p class="gallery-copy">
-                    Check out all of these gorgeous mountain trips with
-                    beautiful views of, you guessed it, the mountains
-                  </p>
-                  <button class="gallery-btn">
-                    View Trips
-                  </button>
-                </div>
-              </div>
-              <div class="gallery-card">
-                <div class="gallery-content">
-                  <h2 class="gallery-title">To The Beach</h2>
-                  <p class="gallery-copy">
-                    Plan your next beach trip with these fabulous destinations
-                  </p>
-                  <button class="gallery-btn">View Trips</button>
-                </div>
-              </div>
+            <div class="gallery-page-content" v-if="updateMain">
+              갱신완료
             </div>
           </div>
         </b-tab>
@@ -113,9 +93,62 @@
                 class="gallery-card"
                 v-for="(items, i) in subGallery"
                 :key="i"
+                :style="{
+                  backgroundImage:
+                    'url(data:image/jpeg;base64,' + items.work_piece + ')',
+                }"
               >
                 <div class="gallery-content">
-                  <h2 class="gallery-title">{{ items.subGallery_workId }}</h2>
+                  <h2 class="gallery-title">{{ items.work_id }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="성인용 메인갤러리 반환">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="getAllMainAdultGallery()"
+              >반환</b-button
+            >
+          </div>
+          <div class="mt">
+            <div
+              class="gallery-page-content"
+              v-if="mainAdultGallery.length != 0"
+            >
+              <div
+                class="gallery-card"
+                v-for="(items, i) in mainAdultGallery"
+                :key="i"
+              >
+                <div class="gallery-content">
+                  <h2 class="gallery-title">{{ items.gallery_id }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="미성년자용 메인 갤러리 반환">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="getAllMainGallery()"
+              >갱신</b-button
+            >
+          </div>
+          <div class="mt">
+            <div class="gallery-page-content" v-if="mainGallery.length != 0">
+              <div
+                class="gallery-card"
+                v-for="(items, i) in mainGallery"
+                :key="i"
+              >
+                <div class="gallery-content">
+                  <h2 class="gallery-title">{{ items.gallery_id }}</h2>
                 </div>
               </div>
             </div>
@@ -136,6 +169,11 @@ export default {
       hasgtagList: [],
       items: [],
       subGallery: [],
+      mainAdultGallery: [],
+      mainAdultGalleryThum: [],
+      mainGallery: [],
+      mainGalleryThum: [],
+      updateMain: false,
     };
   },
   created() {
@@ -190,6 +228,11 @@ export default {
       http.get(`/admin/renewMainGallery`).then(
         (response) => {
           console.log(response);
+
+          if (response.status == 200) {
+            // this.getAllMainAdultGallery();
+            this.updateMain = true;
+          }
         },
         (error) => {
           console.log(error);
@@ -199,13 +242,40 @@ export default {
     updateSubGallery() {
       http.get(`/admin/renewSubGallery`).then(
         (response) => {
-          console.log(response.data);
-          this.subGallery = response.data;
+          //   console.log(response.data);
+          if (response.status == 200) {
+            this.getAllSubGallery();
+          }
         },
         (error) => {
           console.log(error);
         }
       );
+    },
+    getAllMainAdultGallery() {
+      http.get(`/admin/getAllMainAdultGallery`).then(
+        (response) => {
+          this.mainAdultGallery = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getAllMainGallery() {
+      http.get(`/admin/getAllMainGallery`).then(
+        (response) => {
+          this.mainGallery = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getAllSubGallery() {
+      http.get(`/gallery/getAllSubGallery`).then((response) => {
+        this.subGallery = response.data;
+      });
     },
   },
 };
@@ -260,7 +330,10 @@ export default {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1),
     0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1),
     0 16px 16px rgba(0, 0, 0, 0.1);
+  background-position: center;
+  background-size: cover;
 }
+
 @media (min-width: 600px) {
   .gallery-card {
     height: 450px;
