@@ -70,6 +70,14 @@
 		ORDER BY gallery_footPrint DESC
 	</select>
 
+	<select id="getAllMainAdultGallery">
+		SELECT * FROM gallery
+		WHERE gallery_id
+			IN (SELECT mainadultgallery_galleryId FROM mainadultgallery)
+		  AND
+		ORDER BY gallery_footPrint DESC
+	</select>
+
 	<delete id="deleteGalleryToMainGallery" parameterType="int">
 		DELETE FROM maingallery
 		WHERE mainGallery_galleryId = #{mainGallery_galleryId}

@@ -76,8 +76,18 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public void renewMainAdultGallery_algorithm() throws Exception {
+        adminDao.renewMainAdultGallery_algorithm();
+    }
+
+    @Override
     public void renewMainGallery_delete() throws Exception {
         adminDao.renewMainGallery_delete();
+    }
+
+    @Override
+    public void renewMainAdultGallery_delete() throws Exception {
+        adminDao.renewMainAdultGallery_delete();
     }
 
     @Override
