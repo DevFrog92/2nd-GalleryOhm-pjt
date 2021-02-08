@@ -4,12 +4,12 @@
     <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
     <div v-for="(img, i) in imgList" :key="i">
       <div class="image" @mouseover="changePage(i + 1)">
-          <router-link active-class="active" to="/test/GalleryJ/DetailPage">
+          <router-link class="router-link" to="/test/GalleryJ/DetailPage">
         <img class="img" :src="img.work_piece" :alt="img.work_title" />
-        </router-link>
         <div class="content">
           <h1 class="text">{{ img.work_title }}</h1>
         </div>
+        </router-link>
         <p class="info">By {{ img.work_artistId }}, {{ img.work_uploadDate }}</p>
       </div>
     </div>
@@ -147,5 +147,8 @@ export default {
     color: black;
     transform: scale(1.2);
     font-family: "Hanna", sans-serif;
+}
+.router-link  {
+    text-decoration: none;
 }
 </style>
