@@ -9,7 +9,7 @@
           <div class="focus_container">
             <div id="id_uniqe_check">
               <div class="id_unique">
-                <input id="unique_user_id" type="text" placeholder="ID" required v-model="userInfo.user_id"
+                <input id="unique_user_id" type="text" autocomplete="off" placeholder="ID" required v-model="userInfo.user_id"
                   @blur="checkId" />
                 <span class="focus-border"></span>
               </div>
@@ -38,22 +38,23 @@
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input type="text" placeholder="이름" required="required" v-model="userInfo.user_name" />
+            <input type="text" placeholder="이름" autocomplete="off" required="required" v-model="userInfo.user_name" />
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input type="email" placeholder="Email" required="required" v-model="userInfo.user_email" />
+            <input type="email" placeholder="Email" autocomplete="off" required="required" v-model="userInfo.user_email" />
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input type="tel" placeholder="Phone" required="required" v-model="userInfo.user_tel" />
+            <input type="tel" placeholder="Phone" autocomplete="off" required="required" v-model="userInfo.user_tel" />
             <span class="focus-border"></span>
           </div>
-
+          <form >
           <div id="terms_checkbox_id">
-            <input class="terms_checkbox" type="checkbox" required="required" >
+            <input class="terms_checkbox" type="checkbox" required="true" >
             <button class="triggerTerms">약관에 동의 합니다.</button>
           </div>
+          </form>
           
 
 
