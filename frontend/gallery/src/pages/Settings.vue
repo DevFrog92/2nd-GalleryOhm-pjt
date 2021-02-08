@@ -361,8 +361,7 @@ export default {
       })
     },
     withdraw_artist(){
-      console.log(localStorage.getItem('user_id'))
-      http.post(`/artist/leaveArtist/${localStorage.getItem('user_id')}`)
+      http.post(`/artist/leaveArtist?artist_id=`+localStorage.getItem('user_id'))
       .then(response=>{
         this.artist_resister = response.data.name;
         console.log(response.data);
