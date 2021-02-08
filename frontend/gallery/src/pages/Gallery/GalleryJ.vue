@@ -8,9 +8,10 @@
           <!-- 필명 -->
           <h1 class="text">{{ img.work_artistId }}</h1>
         </div>
-        <router-link to="/test/GalleryJ/DetailPage">
+        <router-link active-class="active" to="/test/GalleryJ/DetailPage">
         <img class="img" :src="img.work_piece" :alt="img.work_title" />
         </router-link>
+        <p class="info">{{ img.work_title }}, {{ img.work_uploadDate }}</p>
       </div>
     </div>
   </div>
@@ -78,7 +79,7 @@ export default {
 
 .image .content {
   position: relative;
-  top: 54%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   /* color: white; */
@@ -89,11 +90,17 @@ export default {
 .text {
   /* -webkit-text-stroke: 3px rgb(46, 211, 31);
   -webkit-text-fill-color: transparent; */
-  font-size: 4rem;
+  /* font-size: 4rem; */
   color: black;
-  font-family: "Hanna", sans-serif;
+    transform: scale(3);
+font-family: "Hanna", sans-serif;
 }
-
+.info {
+    padding-top: 2%;
+    color: black;
+    transform: scale(1.2);
+    font-family: "Hanna", sans-serif;
+}
 /* .text {
 -webkit-text-stroke: 3px rgb(46, 211, 31);
   -webkit-text-fill-color: transparent;
