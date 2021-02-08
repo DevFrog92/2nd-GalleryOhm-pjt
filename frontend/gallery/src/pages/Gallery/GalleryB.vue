@@ -4,14 +4,14 @@
     <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
     <div v-for="(img, i) in imgList" :key="i">
       <div class="image" @mouseover="changePage(i + 1)">
-        <img :src="img.work_piece" :alt="img.work_title" />
-        <div class="content">
-          <!-- 작품명 -->
-          <h1 class="text">{{ img.work_title }}</h1>
-        </div>
-        <div class="bottom">
-          <!-- 작가, 올린날짜 -->
-        </div>
+        <router-link active-class="active" to="/test/GalleryJ/DetailPage">
+          <img class="img" :src="img.work_piece" :alt="img.work_title" />
+          <div class="content">
+            <!-- 작품명 -->
+            <h1 class="text">{{ img.work_title }}</h1>
+          </div>
+          <p class="info">{{ img.work_artistId }}, {{ img.work_uploadDate }}</p>
+        </router-link>
       </div>
     </div>
   </div>
@@ -60,26 +60,6 @@ export default {
   background-color: #fcf1e7;
 }
 
-.galleryType {
-  position: fixed;
-  transform: rotate(-90deg);
-  left: 5vw;
-  top: 45vh;
-}
-
-.page {
-  position: fixed;
-  transform: rotate(90deg);
-  right: 5vw;
-  top: 45vh;
-}
-
-.galleryType,
-.page {
-  color: #175711;
-  font-family: "Hanna", sans-serif;
-}
-
 .subgallery::-webkit-scrollbar {
   display: none;
 }
@@ -109,14 +89,6 @@ export default {
   transition: 0.9s;
 }
 
-.image img:hover {
-  -webkit-transform: scale(1.02);
-  -moz-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  -o-transform: scale(1.02);
-  transform: scale(1.02);
-}
-
 .image .content {
   position: relative;
   top: -35%;
@@ -125,11 +97,45 @@ export default {
 }
 
 .image .content .text {
-  -webkit-text-stroke: 3px rgb(46, 211, 31);
-  -webkit-text-fill-color: transparent;
+  color: black;
   font-family: "Hanna", sans-serif;
   transform: scale(3);
   opacity: 0;
+}
+
+.info {
+  padding-top: 2%;
+  color: black;
+  transform: scale(1.2);
+  font-family: "Hanna", sans-serif;
+}
+
+.galleryType {
+  position: fixed;
+  transform: rotate(-90deg) scale(1.2);
+  left: 2vw;
+  top: 45vh;
+}
+
+.page {
+  position: fixed;
+  transform: rotate(90deg) scale(1.2);
+  right: 2vw;
+  top: 45vh;
+}
+
+.galleryType,
+.page {
+  color: #175711;
+  font-family: "Hanna", sans-serif;
+}
+
+.image img:hover {
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 .image img:hover ~ .content .text,
