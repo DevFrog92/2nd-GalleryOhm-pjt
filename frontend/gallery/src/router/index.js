@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 //  main page
-import MainPage from '../pages/MainPage'
+import MainPage from '../pages/Main/MainPage'
 
 
 
@@ -28,6 +28,11 @@ import GalleryCategoryPage from '../pages/GalleryCategoryPage'
 import AdminPage1 from '../pages/Admin/AdminPage1'
 import AdminPage2 from '../pages/Admin/AdminPage2'
 
+// Gallery BJO
+import GalleryTest from '../pages/Gallery/GalleryTest'
+import GalleryB from '../pages/Gallery/GalleryB'
+import GalleryJ from '../pages/Gallery/GalleryJ'
+import GalleryO from '../pages/Gallery/GalleryO'
 
 Vue.use(VueRouter)
 
@@ -116,6 +121,26 @@ const routes = [
     name:"AdminPage2",
     component:AdminPage2
   },
+  {
+    path:'/test/GalleryB',
+    name:"GalleryB",
+    component:GalleryB
+  },
+  {
+    path:'/test/GalleryJ',
+    name:"GalleryJ",
+    component:GalleryJ
+  },
+  {
+    path:'/test/GalleryO',
+    name:"GalleryO",
+    component:GalleryO
+  },
+  {
+    path:'/test',
+    name:"GalleryTest",
+    component:GalleryTest
+  }
 ]
 
 const router = new VueRouter({
