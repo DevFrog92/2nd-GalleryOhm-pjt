@@ -210,6 +210,8 @@ export default {
       );
     },
     getAllHashtag() {
+      this.hashtagList = [];
+      
       http.get(`/admin/getAllHashTag/`).then(
         (response) => {
           const data = response.data;
@@ -282,6 +284,8 @@ export default {
       http.post(`/admin/deleteHashTagFromTotal`, formData).then(
         (response) => {
           console.log(response.data);
+
+          this.getAllHashtag();
         },
         (error) => {
           console.log(error);
