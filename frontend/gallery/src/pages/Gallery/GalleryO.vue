@@ -277,7 +277,7 @@ export default {
   font-size: 1rem;
   padding: 0.4rem;
   font-weight: 900;
-  right: 50%;
+  right: 3%;
   bottom: 3%;
   border: 4px solid #222;
   border-radius: 1rem;
