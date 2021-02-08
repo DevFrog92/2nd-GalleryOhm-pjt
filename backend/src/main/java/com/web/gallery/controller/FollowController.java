@@ -1,5 +1,6 @@
 package com.web.gallery.controller;
 
+import com.web.gallery.dto.CostDto;
 import com.web.gallery.dto.FollowDto;
 import com.web.gallery.help.NumberResult;
 import com.web.gallery.service.FollowService;
@@ -82,5 +83,27 @@ public class FollowController {
             return new ResponseEntity<List<String>>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<List<String>>(followerList, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "팔로우 여부 반환", response = Integer.class,
+            notes = "isCheckFollow(String follow_artistId, String follow_userId) => 1(팔로우 o), 0(팔로우 x)")
+    @RequestMapping(value = "/isCheckFollow", method = RequestMethod.GET)
+    public ResponseEntity<Integer> isCheckFollow(@RequestParam(value = "follow_artistId") String follow_artistId,
+                                               @RequestParam(value = "follow_userId") String follow_userId) {
+        int check = 0;
+        HttpStatus status = null;
+        FollowDto follow = new FollowDto();
+
+        try {
+            follow.setFollow_artistId(follow_artistId);
+            follow.setFollow_userId(follow_userId);
+            check = followService.isCheckFollow(follow);
+
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+
+        return new ResponseEntity<>(check, status);
     }
 }

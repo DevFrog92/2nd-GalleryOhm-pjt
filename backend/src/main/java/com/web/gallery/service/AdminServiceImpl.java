@@ -1,12 +1,10 @@
 package com.web.gallery.service;
 import com.web.gallery.dao.AdminDaoImpl;
-import com.web.gallery.dto.HashTagDto;
-import com.web.gallery.dto.MainGalleryDto;
-import com.web.gallery.dto.SubGalleryDto;
-import com.web.gallery.dto.UserDto;
+import com.web.gallery.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -31,8 +29,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addMainGalleryHashTag(String keyword_name) throws Exception {
-        adminDao.addMainGalleryHashTag(keyword_name);
+    public void addMainGalleryKeyword(List<String> keywordList) throws Exception {
+        adminDao.addMainGalleryKeyword(keywordList);
     }
 
     @Override
@@ -46,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<String> getAllHashTag() throws Exception {
+    public List<HashTagDto> getAllHashTag() throws Exception {
         return adminDao.getAllHashTag();
     }
 
@@ -56,8 +54,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteHashTagFromTotal(HashTagDto hashTagDto) throws Exception {
-        adminDao.deleteHashTagFromTotal(hashTagDto);
+    public void deleteHashTagFromTotal(String hashtag_name) throws Exception {
+        adminDao.deleteHashTagFromTotal(hashtag_name);
     }
 
     @Override
@@ -98,5 +96,20 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void renewSubGallery_delete() throws Exception {
         adminDao.renewSubGallery_delete();
+    }
+
+    @Override
+    public void deleteMainGalleryKeyword() throws Exception {
+        adminDao.deleteMainGalleryKeyword();
+    }
+
+    @Override
+    public List<WorkDto> getAllWork() {
+        return adminDao.getAllWork();
+    }
+
+    @Override
+    public void addHashTagFromTotal(List<String> hashTagList) {
+        adminDao.addHashTagFromTotal(hashTagList);
     }
 }

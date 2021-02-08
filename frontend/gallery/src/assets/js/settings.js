@@ -1,14 +1,13 @@
 import store from '../../store/store'
-
 const design = () => {
   const modMainBtn = document.querySelector(".modmain");
-  const modMainIcon = modMainBtn.firstChild;
+  // const modMainIcon = modMainBtn.firstChild;
   const modUser = document.querySelector(".moduser");
-  // const modMypage = document.querySelector(".modpage");
+  const modMypage = document.querySelector(".modpage");
   const unscribe = document.querySelector(".unscribe");
-  const modUserIcon = modUser.firstChild;
+  // const modUserIcon = modUser.firstChild;
   // const modMypageIcon = modMypage.firstChild;
-  const unscribeIcon = unscribe.firstChild;
+  // const unscribeIcon = unscribe.firstChild;
   const line = document.querySelector("#line");
   const first = document.querySelector("#first");
   const second = document.querySelector("#second");
@@ -20,13 +19,13 @@ const design = () => {
 
   modMainBtn.addEventListener("click", () => {
     modMainBtn.classList.add("active");
-    modMainIcon.classList.add("active");
+    // modMainIcon.classList.add("active");
     modUser.classList.remove("active");
-    // modMypage.classList.remove("active");
+    modMypage.classList.remove("active");
     unscribe.classList.remove("active");
-    modUserIcon.classList.remove("active");
+    // modUserIcon.classList.remove("active");
     // modMypageIcon.classList.remove("active");
-    unscribeIcon.classList.remove("active");
+    // unscribeIcon.classList.remove("active");
     line.classList.add("one");
     line.classList.remove("two");
     line.classList.remove("three");
@@ -35,43 +34,43 @@ const design = () => {
 
   modUser.addEventListener("click", () => {
     modUser.classList.add("active");
-    modUserIcon.classList.add("active");
+    // modUserIcon.classList.add("active");
     modMainBtn.classList.remove("active");
-    // modMypage.classList.remove("active");
+    modMypage.classList.remove("active");
     unscribe.classList.remove("active");
-    modMainIcon.classList.remove("active");
+    // modMainIcon.classList.remove("active");
     // modMypageIcon.classList.remove("active");
-    unscribeIcon.classList.remove("active");
+    // unscribeIcon.classList.remove("active");
     line.classList.add("two");
     line.classList.remove("one");
     line.classList.remove("three");
     line.classList.remove("four");
   });
 
-  // modMypage.addEventListener("click", () => {
-  //   modMypage.classList.add("active");
-  //   modMypageIcon.classList.add("active");
-  //   modMainBtn.classList.remove("active");
-  //   modUser.classList.remove("active");
-  //   unscribe.classList.remove("active");
-  //   modMainIcon.classList.remove("active");
-  //   modUserIcon.classList.remove("active");
-  //   unscribeIcon.classList.remove("active");
-  //   line.classList.add("three");
-  //   line.classList.remove("two");
-  //   line.classList.remove("one");
-  //   line.classList.remove("four");
-  // });
+  modMypage.addEventListener("click", () => {
+    modMypage.classList.add("active");
+    // modMypageIcon.classList.add("active");
+    modMainBtn.classList.remove("active");
+    modUser.classList.remove("active");
+    unscribe.classList.remove("active");
+    // modMainIcon.classList.remove("active");
+    // modUserIcon.classList.remove("active");
+    // unscribeIcon.classList.remove("active");
+    line.classList.add("three");
+    line.classList.remove("two");
+    line.classList.remove("one");
+    line.classList.remove("four");
+  });
 
   unscribe.addEventListener("click", () => {
     unscribe.classList.add("active");
-    unscribeIcon.classList.add("active");
+    // unscribeIcon.classList.add("active");
     modMainBtn.classList.remove("active");
-    // modMypage.classList.remove("active");
+    modMypage.classList.remove("active");
     modUser.classList.remove("active");
-    modMainIcon.classList.remove("active");
+    // modMainIcon.classList.remove("active");
     // modMypageIcon.classList.remove("active");
-    modUserIcon.classList.remove("active");
+    // modUserIcon.classList.remove("active");
     line.classList.add("four");
     line.classList.remove("one");
     line.classList.remove("three");
@@ -92,12 +91,12 @@ const design = () => {
     fourth.classList.remove("active");
   });
 
-  // modMypage.addEventListener("click", () => {
-  //   first.classList.remove("active");
-  //   second.classList.remove("active");
-  //   third.classList.add("active");
-  //   fourth.classList.remove("active");
-  // });
+  modMypage.addEventListener("click", () => {
+    first.classList.remove("active");
+    second.classList.remove("active");
+    third.classList.add("active");
+    fourth.classList.remove("active");
+  });
 
   unscribe.addEventListener("click", () => {
     first.classList.remove("active");
@@ -105,6 +104,95 @@ const design = () => {
     third.classList.remove("active");
     fourth.classList.add("active");
   });
+  
+
+  const unsubBtn = document.querySelector('.unscribe_button');
+  unsubBtn.addEventListener('click', e => {
+    e.target.classList.add('delete')
+    setTimeout(() => 
+      e.target.classList.remove('delete')
+      // leaveUser(localStorage.getItem('user_id'))
+      , 3200);
+  e.preventDefault();
+  });
+
+
+  ////
+  if(!localStorage.getItem('checkPassword_state'))
+  {
+  var password = document.querySelector('.setting_pw_check');
+  var error = document.querySelector('.pw_error_message');
+  var padlock = document.querySelector('.padlock');
+  var arrow = document.querySelector('.pw_check_arrow');
+  var input = document.querySelector('.pw_check_icon');
+  password.addEventListener('keypress', function(e){
+  var key = e.which || e.keyCode;
+  if(key === 13){
+    const userInfo ={
+      "user_id":localStorage.getItem('user_id')
+    }
+    checkPassword(userInfo,password.value);
+    setTimeout(() => {
+      const pass = localStorage.getItem('temp_check');
+      if(password.value != ""){
+        if(!pass){
+          console.log('err');
+          error.classList.add('show');
+          padlock.classList.remove('unlock');
+        }else{
+          error.classList.remove('show');
+          unlock();
+        }
+      }      
+    }, 100);
+  }
+  });
+  password.addEventListener('keyup', function(){
+  if(password.value == ""){
+    error.classList.remove('show');
+    padlock.classList.remove('unlock');
+    arrow.classList.remove('show');
+  }else{
+    arrow.classList.add('show');
+  }
+  });
+
+
+  arrow.addEventListener('click', function(){
+    const userInfo ={
+      "user_id":localStorage.getItem('user_id')
+    }
+    checkPassword(userInfo,password.value);
+    setTimeout(() => {
+      const pass = localStorage.getItem('temp_check');
+      console.log(pass);
+      if(!pass){
+        error.classList.add('show');
+        padlock.classList.remove('unlock');
+      }else{
+        error.classList.remove('show');
+        unlock();
+      }
+    }, 100);
+  },false);
+  }
+
+
+  function unlock(){
+    padlock.classList.add('unlock');
+    input.classList.add('unlock');
+    setTimeout(function(){
+      padlock.classList.add('hide');
+      setTimeout(function(){
+        // If the password is correct
+        window.location.href = '';
+        localStorage.setItem('checkPassword_state',true);
+        localStorage.removeItem('temp_check');
+      }, 700);
+    }, 500);
+  }
+  ///
+
 }
 
 const modifyUser = (userInfo) => {
@@ -126,3 +214,71 @@ const leaveUser = (user_id) => {
 
 }
 export default {design,modifyUser,checkPassword,makeUserNickName,leaveUser};
+
+
+
+
+// 이거 추가해주세요!!!!!!!!!!!!!!!!!!!
+// document.querySelectorAll('.button').forEach(button => button.addEventListener('click', e => {
+//   if(!button.classList.contains('delete')) {
+//       button.classList.add('delete');
+//       setTimeout(() => button.classList.remove('delete'), 3200);
+//   }
+//   e.preventDefault();
+// }));
+
+
+
+
+
+
+
+// var password = document.querySelector('.setting_pw_check');
+// var error = document.querySelector('.pw_error_message');
+// var padlock = document.querySelector('.padlock');
+// var arrow = document.querySelector('.pw_check_arrow');
+// var input = document.querySelector('.pw_check_icon');
+// var pass = "dupa";
+// password.addEventListener('keypress', function(e){
+// var key = e.which || e.keyCode;
+// if(key === 13){
+//   if(password.value != ""){
+//     if(password.value != pass){
+//       error.classList.add('show');
+//       padlock.classList.remove('unlock');
+//     }else{
+//       error.classList.remove('show');
+//       unlock();
+//     }
+//   }
+// }
+// });
+// password.addEventListener('keyup', function(){
+// if(password.value == ""){
+//   error.classList.remove('show');
+//   padlock.classList.remove('unlock');
+//   arrow.classList.remove('show');
+// }else{
+//   arrow.classList.add('show');
+// }
+// });
+// arrow.addEventListener('click', function(){
+//   if(password.value != pass){
+//     error.classList.add('show');
+//     padlock.classList.remove('unlock');
+//   }else{
+//     error.classList.remove('show');
+//     unlock();
+//   }
+// },false);
+// function unlock(){
+//   padlock.classList.add('unlock');
+//   input.classList.add('unlock');
+//   setTimeout(function(){
+//     padlock.classList.add('hide');
+//     setTimeout(function(){
+//       // If the password is correct
+//       window.location.href = '';
+//     }, 900);
+//   }, 600);
+// }

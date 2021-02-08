@@ -8,8 +8,8 @@
 		select * from user where user_type in (1, 2)
 	</select>
 
-	<select id="getAllHashTag" resultType="string">
-		select hashtag_name from hashtag group by hashtag_name
+	<select id="getAllHashTag" resultType="hashTag">
+		select * from hashtag group by hashtag_name
 	</select>
 
 	<update id="giveRating" parameterType="int">
@@ -20,10 +20,27 @@
 		UPDATE work SET work_rating = 0 where work_id = #{work_id};
 	</update>
 
-	<insert id="addMainGalleryHashTag" parameterType="string">
-		insert into keyword(keyword_name)
-		values (#{keyword_name})
+	<insert id="addMainGalleryKeyword" parameterType="list">
+		INSERT INTO
+		keyword(keyword_name)
+		VALUES
+		<foreach collection="list" index="i" item="keyword_name" separator=",">
+			(#{keyword_name})
+		</foreach>
 	</insert>
+
+	<insert id="addHashTagFromTotal" parameterType="list">
+		INSERT INTO
+		hashtag(hashtag_name)
+		VALUES
+		<foreach collection="list" index="i" item="hashtag_name" separator=",">
+			(#{hashtag_name})
+		</foreach>
+	</insert>
+
+	<delete id="deleteMainGalleryKeyword">
+		truncate keyword
+	</delete>
 
 	<delete id="deleteMainGalleryHashTag" parameterType="string">
 		delete from keyword
@@ -38,14 +55,14 @@
 	<delete id="deleteHashTagFromWork" parameterType="hashTag">
 		delete from hashtag
 		where
-			hashtag_name = #{hashtag_name} and hashtag_workId = #{hashtag_workId}
+			hashtag_name = #{hashtag_name} and hashtag_id = #{hashtag_id}
 	</delete>
 
-	<delete id="deleteHashTagFromTotal" parameterType="hashTag">
-		delete from hashtag
-		where
-			hashtag_name = #{hashtag_name}
-	</delete>
+<!--	<delete id="deleteHashTagFromTotal" parameterType="hashTag">-->
+<!--		delete from hashtag-->
+<!--		where-->
+<!--			hashtag_name = #{hashtag_name}-->
+<!--	</delete>-->
 
 	<select id="renewMainGallery" resultType="mainGallery">
 		select mainGallery_galleryId from maingallery
@@ -102,8 +119,19 @@
 			LIMIT 10
 	</insert>
 
+	<select id="getAllWork" resultType="work">
+		select *
+		from work
+	</select>
+
 	<delete id="renewMainGallery_delete">
-		truncate maingallery;
+		truncate maingallery
+	</delete>
+
+	<delete id="deleteHashTagFromTotal" parameterType="string">
+		delete from hashtag
+		where
+			hashtag_name = #{hashtag_name}
 	</delete>
 
 	<insert id="renewSubGallery_insert" parameterType="list">
@@ -127,5 +155,9 @@
 
 	<delete id="renewSubGallery_delete">
 		truncate subgallery
+	</delete>
+
+	<delete id="renewMainAdultGallery_delete">
+		truncate mainadultgallery
 	</delete>
 </mapper>

@@ -1,71 +1,95 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 //  main page
-import MainPage from "../pages/MainPage";
+import MainPage from '../pages/MainPage'
 
-import ItemListPage from "../pages/ItemLisetPage";
-import ItemDetailPage from "../pages/ItemDetailPage";
-import MyPage from "../pages/MyPage";
-import GalleryRenderPage from "../pages/GalleryRenderPage";
-import LoginSignup from "../pages/User/LoginSignup";
-import Settings from "../pages/Settings";
-import WorkUpLoad from "../pages/WorkUpLoadPage";
 
-import DragAndDrop from "../pages/DragAndDrop";
+
+import ItemListPage from '../pages/ItemLisetPage'
+import ItemDetailPage from '../pages/ItemDetailPage'
+import MyPage from '../pages/MyPage'
+import UserProfile from '../pages/UserProfile'
+import GalleryRenderPage from '../pages/GalleryRenderPage'
+import LoginSignup from '../pages/User/LoginSignup'
+import Settings from '../pages/Settings'
+import WorkUpLoad from '../pages/WorkUpLoadPage'
+
+
+import DragAndDrop from '../pages/DragAndDrop'
 import RedGallery from "../pages/Adult/RedGallery";
 import AdultPage from "../pages/Adult/AdultPage";
 
 import SubGallery from "../pages/Sub/SubGalleryPage";
-import MainPageTest1 from '../pages/Main/MainPageTest1';
-import MainPageTest2 from '../pages/Main/MainPageTest2';
-Vue.use(VueRouter);
+
+import GalleryCategoryPage from '../pages/GalleryCategoryPage'
+
+
+import AdminPage1 from '../pages/Admin/AdminPage1'
+import AdminPage2 from '../pages/Admin/AdminPage2'
+
+
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "MainPage",
-    component: MainPage,
+    path: '/',
+    name: 'MainPage',
+    component: MainPage
   },
   {
-    path: "/detail",
-    name: "ItemDetailPage",
+    path: '/detail',
+    name: 'ItemDetailPage',
     component: ItemDetailPage,
+    props:true
   },
   {
-    path: "/listitem",
-    name: "ItemListPage",
-    component: ItemListPage,
+    path:'/listitem',
+    name:'ItemListPage',
+    component:ItemListPage
   },
   {
-    path: "/mypage",
-    name: "MyPage",
-    component: MyPage,
+    path:'/mypage',
+    name:'MyPage',
+    component:MyPage,
+    props:true,
   },
   {
-    path: "/galleryrender",
-    name: "GalleryRenderPage",
-    component: GalleryRenderPage,
+    path:'/userprofile',
+    name:'UserProfile',
+    component:UserProfile,
+    props:true,
   },
   {
-    path: "/loginsignup",
-    name: "LoginSignup",
-    component: LoginSignup,
+    path:'/galleryrender',
+    name:'GalleryRenderPage',
+    component:GalleryRenderPage,
   },
   {
-    path: "/settings",
-    name: "Settings",
-    component: Settings,
+    path:'/loginsignup',
+    name:"LoginSignup",
+    component:LoginSignup,
   },
   {
-    path: "/workupload",
-    name: "WorkUpLoad",
-    component: WorkUpLoad,
+    path:'/settings',
+    name:"Settings",
+    component:Settings,
   },
   {
-    path: "/creategallery",
-    name: "DragAndDrop",
-    component: DragAndDrop,
+    path:'/workupload',
+    name:'WorkUpLoad',
+    component:WorkUpLoad,
+    props:true,
+  },
+  {
+    path:'/RedGallery/AdultPage',
+    name:'AdultPage',
+    component:AdultPage
+  },
+  {
+    path:'/creategallery',
+    name:"DragAndDrop",
+    component:DragAndDrop
   },
   {
     path: "/RedGallery",
@@ -73,31 +97,31 @@ const routes = [
     component: RedGallery,
   },
   {
-    path: "/RedGallery/AdultPage",
-    name: "AdultPage",
-    component: AdultPage,
-  },
-  {
     path: "/SubGallery",
     name: "SubGallery",
     component: SubGallery,
   },
   {
-    path:'/mainpagetest1',
-    name:'MainPageTest1',
-    component:MainPageTest1,
+    path:'/gallerycategory',
+    name:"GalleryCategoryPage",
+    component:GalleryCategoryPage
   },
   {
-    path:'/mainpagetest2',
-    name:'MainPageTest2',
-    component:MainPageTest2,
-  }
-];
+    path:'/AdminPage1',
+    name:"AdminPage1",
+    component:AdminPage1
+  },
+  {
+    path:'/AdminPage2',
+    name:"AdminPage2",
+    component:AdminPage2
+  },
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
