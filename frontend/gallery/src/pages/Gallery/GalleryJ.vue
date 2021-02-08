@@ -1,16 +1,16 @@
 <template>
-  <div class="subgallery">
-    <p class="galleryType">서브갤러리</p>
+  <div class="subgallery" v-if="imgList.length != 0">
+    <p class="galleryType">레드 갤러리</p>
     <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
     <div v-for="(img, i) in imgList" :key="i">
       <div class="image" @mouseover="changePage(i + 1)">
-        <div class="content">
-          <!-- 필명 -->
-          <h1 class="text">{{ img.work_artistId }}</h1>
-        </div>
-        <router-link to="/test/GalleryJ/DetailPage">
+          <router-link class="router-link" to="/test/GalleryJ/DetailPage">
         <img class="img" :src="img.work_piece" :alt="img.work_title" />
+        <div class="content">
+          <h1 class="text">{{ img.work_title }}</h1>
+        </div>
         </router-link>
+        <p class="info">By {{ img.work_artistId }}, {{ img.work_uploadDate }}</p>
       </div>
     </div>
   </div>
@@ -28,8 +28,8 @@ export default {
   },
   components: {},
   created() {
-    // http.get(`/gallery/getAdultGallery`).then(
-    http.get(`/gallery/getAllSubGallery`).then(
+    http.get(`/gallery/getAdultGallery`).then(
+    // http.get(`/gallery/getAllSubGallery`).then(
       (response) => {
         var data = response.data;
         for (var i = 0; i < data.length; i++) {
@@ -60,91 +60,95 @@ export default {
   overflow-x: hidden;
   background-color: #c20a0a;
 }
-
 .image {
-  display: block;
+  position: relative;
   width: auto;
   height: 100vh;
   z-index: 1;
-  /* 
-  position: relative;
-  overflow: hidden; */
 }
 
 .image img {
   height: 80vh;
-  width: auto;
+  max-width: 90vw;
+  position: relative;
+  top: 10vh;
+
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.9s;
 }
 
 .image .content {
   position: relative;
-  top: 54%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* color: white; */
+  top: -35%;
   z-index: 2;
   text-align: center;
 }
 
-.text {
+.image .content .text {
   /* -webkit-text-stroke: 3px rgb(46, 211, 31);
   -webkit-text-fill-color: transparent; */
-  font-size: 4rem;
   color: black;
+  font-family: "Hanna", sans-serif;
+  transform: scale(3);
+  opacity: 0;
+}
+
+.info {
+  padding-top: 2%;
+  color: black;
+  transform: scale(1.2);
   font-family: "Hanna", sans-serif;
 }
 
-/* .text {
--webkit-text-stroke: 3px rgb(46, 211, 31);
-  -webkit-text-fill-color: transparent;
-  font-size: 10rem;
-  font-family: "Hanna", sans-serif;
-} */
-
 .galleryType {
   position: fixed;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scale(1.2);
   left: 2vw;
-  top: 50vh;
-
-  /* -webkit-text-stroke: 3px rgb(46, 211, 31);
-  -webkit-text-fill-color: transparent; */
-  color: #175711;
-  font-size: 1rem;
-  font-family: "Hanna", sans-serif;
+  top: 45vh;
 }
 
 .page {
   position: fixed;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(1.2);;
   right: 2vw;
-  top: 50vh;
+  top: 45vh;
+}
 
-  /* -webkit-text-stroke: 3px rgb(46, 211, 31);
-  -webkit-text-fill-color: transparent; */
+.galleryType,
+.page {
   color: #175711;
-  font-size: 1rem;
   font-family: "Hanna", sans-serif;
 }
 
-.img {
-    -webkit-transform:scale(1);
-    -moz-transform:scale(1);
-    -ms-transform:scale(1); 
-    -o-transform:scale(1);  
-    transform:scale(1);
-    -webkit-transition:.3s;
-    -moz-transition:.3s;
-    -ms-transition:.3s;
-    -o-transition:.3s;
-    transition:0.9s;
-}
-.img:hover {
-    -webkit-transform:scale(1.02);
-    -moz-transform:scale(1.02);
-    -ms-transform:scale(1.02);   
-    -o-transform:scale(1.02);
-    transform:scale(1.02);
+.image img:hover {
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+  transform: scale(1.02);
 }
 
+.image img:hover ~ .content .text,
+.image .content:hover .text {
+  opacity: 1;
+  transform: scale(3.3);
+  transition: all 1.2s;
+}
+.info {
+    padding-top: 5%;
+    color: black;
+    transform: scale(1.2);
+    font-family: "Hanna", sans-serif;
+}
+.router-link  {
+    text-decoration: none;
+}
 </style>

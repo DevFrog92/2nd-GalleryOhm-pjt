@@ -35,6 +35,7 @@ import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
 import DetailPage from '../pages/Gallery/DetailPage'
 
+import GalleryOWorks from '../pages/Gallery/GalleryO_works'
 Vue.use(VueRouter)
 
 const routes = [
@@ -146,7 +147,12 @@ const routes = [
     path:'/test/GalleryJ/DetailPage',
     name:"DetailPage",
     component:DetailPage
-  }
+  },
+  {
+    path:'/test/GalleryO/works',
+    name:"GalleryO_works",
+    component:GalleryOWorks
+  },
 ]
 
 const router = new VueRouter({
