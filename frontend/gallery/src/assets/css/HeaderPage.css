@@ -135,3 +135,7 @@ transform: translate(-2rem,-1rem) scale(0.7);
 .router {
   text-decoration: none !important;
 }
+
+header{
+  position: fixed;
+}
