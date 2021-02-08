@@ -33,6 +33,7 @@ import GalleryTest from '../pages/Gallery/GalleryTest'
 import GalleryB from '../pages/Gallery/GalleryB'
 import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
+import DetailPage from '../pages/Gallery/DetailPage'
 
 Vue.use(VueRouter)
 
@@ -140,6 +141,11 @@ const routes = [
     path:'/test',
     name:"GalleryTest",
     component:GalleryTest
+  },
+  {
+    path:'/test/GalleryJ/DetailPage',
+    name:"DetailPage",
+    component:DetailPage
   }
 ]
 

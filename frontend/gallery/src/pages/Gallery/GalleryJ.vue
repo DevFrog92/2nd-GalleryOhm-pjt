@@ -1,14 +1,16 @@
 <template>
   <div class="subgallery">
-      <p class="galleryType">서브갤러리</p>
+    <p class="galleryType">서브갤러리</p>
     <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
     <div v-for="(img, i) in imgList" :key="i">
-      <div class="image" @mouseover="changePage(i+1)">
+      <div class="image" @mouseover="changePage(i + 1)">
         <div class="content">
           <!-- 필명 -->
           <h1 class="text">{{ img.work_artistId }}</h1>
         </div>
-        <img :src="img.work_piece" :alt="img.work_title" />
+        <router-link to="/test/GalleryJ/DetailPage">
+        <img class="img" :src="img.work_piece" :alt="img.work_title" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -26,6 +28,7 @@ export default {
   },
   components: {},
   created() {
+    // http.get(`/gallery/getAdultGallery`).then(
     http.get(`/gallery/getAllSubGallery`).then(
       (response) => {
         var data = response.data;
@@ -42,7 +45,7 @@ export default {
     this.nowPage = 1;
   },
   methods: {
-      changePage(i) {
+    changePage(i) {
       this.nowPage = i;
     },
   },
@@ -54,6 +57,8 @@ export default {
 
 .subgallery {
   height: 100vh;
+  overflow-x: hidden;
+  background-color: #c20a0a;
 }
 
 .image {
@@ -61,7 +66,7 @@ export default {
   width: auto;
   height: 100vh;
   z-index: 1;
-/* 
+  /* 
   position: relative;
   overflow: hidden; */
 }
@@ -81,31 +86,65 @@ export default {
   text-align: center;
 }
 
-.image .content .text {
--webkit-text-stroke: 3px rgb(46, 211, 31);
-  -webkit-text-fill-color: transparent;
-  font-size: 10rem;
-  font-family: "Hanna", sans-serif;
-} 
-
- img:hover .text {
--webkit-text-stroke: 3px rgb(46, 211, 31);
-  -webkit-text-fill-color: transparent;
-  font-size: 10rem;
+.text {
+  /* -webkit-text-stroke: 3px rgb(46, 211, 31);
+  -webkit-text-fill-color: transparent; */
+  font-size: 4rem;
+  color: black;
   font-family: "Hanna", sans-serif;
 }
+
+/* .text {
+-webkit-text-stroke: 3px rgb(46, 211, 31);
+  -webkit-text-fill-color: transparent;
+  font-size: 10rem;
+  font-family: "Hanna", sans-serif;
+} */
 
 .galleryType {
   position: fixed;
   transform: rotate(-90deg);
-  left: 5vw;
-  top: 45vh;
+  left: 2vw;
+  top: 50vh;
+
+  /* -webkit-text-stroke: 3px rgb(46, 211, 31);
+  -webkit-text-fill-color: transparent; */
+  color: #175711;
+  font-size: 1rem;
+  font-family: "Hanna", sans-serif;
 }
 
 .page {
   position: fixed;
   transform: rotate(90deg);
-  right: 5vw;
-  top: 45vh;
+  right: 2vw;
+  top: 50vh;
+
+  /* -webkit-text-stroke: 3px rgb(46, 211, 31);
+  -webkit-text-fill-color: transparent; */
+  color: #175711;
+  font-size: 1rem;
+  font-family: "Hanna", sans-serif;
 }
+
+.img {
+    -webkit-transform:scale(1);
+    -moz-transform:scale(1);
+    -ms-transform:scale(1); 
+    -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:0.9s;
+}
+.img:hover {
+    -webkit-transform:scale(1.02);
+    -moz-transform:scale(1.02);
+    -ms-transform:scale(1.02);   
+    -o-transform:scale(1.02);
+    transform:scale(1.02);
+}
+
 </style>
