@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 //  main page
-import MainPage from '../pages/MainPage'
+import MainPage from '../pages/Main/MainPage'
 
 
 
