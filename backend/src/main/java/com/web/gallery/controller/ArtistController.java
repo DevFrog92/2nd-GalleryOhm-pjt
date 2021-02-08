@@ -27,7 +27,7 @@ public class ArtistController {
     private JwtService jwtService;
 
     @ApiOperation(value = "작가의 아이디로 작가의 정보를 반환한다.", response = ArtistDto.class, notes = "getArtistInfo(artist_id) \n \t return ArtistDto")
-    @RequestMapping(value = "/getArtistInfo/{artist_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getArtistInfo", method = RequestMethod.GET)
     public ResponseEntity<ArtistDto> getArtistInfo(@PathVariable String artist_id) throws Exception{
         ArtistDto artist = null;
         artist = artistService.getArtistInfo(artist_id);
@@ -51,8 +51,8 @@ public class ArtistController {
     }
 
     @ApiOperation(value = "작가 등록을 해지한다.", response = NumberResult.class, notes = "leaveArtist(artist_id)")
-    @RequestMapping(value = "/leaveArtist/{artist_id}", method = RequestMethod.POST)
-    public ResponseEntity<NumberResult> leaveArtist(String artist_id) throws Exception{
+    @RequestMapping(value = "/leaveArtist", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> leaveArtist(@RequestParam(value = "artist_id") String artist_id) throws Exception{
         NumberResult nr = new NumberResult();
         if(artistService.leaveArtist(artist_id)==1) {
             nr.setValue("leaveArtist", 1, "succ");
