@@ -1,0 +1,104 @@
+<template>
+  <div class="main_gallery_works_container">
+    <p class="main_galleryType">메인 갤러리</p>
+    <div class="main_work_page">{{ nowPage }} / {{ imgList.length }}</div>
+    <div v-for="(img, i) in imgList" :key="i" @mouseover="changePage(i+1)">
+      <div class="main_gallery_works">
+        <div class="content">
+          <!-- 작품 제목 -->
+          <h1 class="text">{{ img.work_title }}</h1>
+        </div>
+        <img :src="img.work_piece" :alt="img.work_title" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import http from "../../api/http.js";
+
+export default {
+  data() {
+    return {
+      imgList: [],
+      nowPage: 1,
+    };
+  },
+  components: {},
+  created() {
+    http.get(`/gallery/getAllSubGallery`).then(
+      (response) => {
+        var data = response.data;
+        for (var i = 0; i < data.length; i++) {
+          data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
+        }
+        this.imgList = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.nowPage = 1;
+  },
+  methods: {
+      changePage(i) {
+      this.nowPage = i;
+    },
+  },
+};
+
+</script>
+
+<style scoped>
+.main_gallery_works_container {
+  height: 100%;
+  text-align: center;
+  padding-top: 7%;
+}
+
+.main_gallery_works{
+  display: block;
+  width: auto;
+  height: 100vh;
+}
+
+.main_gallery_works img {
+  height: 80vh;
+  width: auto;
+  margin: -8.7rem;
+  left: -100rem;
+}
+
+.main_galleryType {
+  position: fixed;
+  transform: rotate(-90deg);
+  left: 5vw;
+  top: 45vh;
+  color: #175711;
+}
+
+.main_work_page {
+  position: fixed;
+  transform: rotate(90deg);
+  right: 5vw;
+  top: 45vh;
+  color: #175711;
+}
+
+.main_gallery_works .content {
+  position: relative;
+  top:42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* color: white; */
+  z-index: 2;
+  text-align: center;
+}
+
+.main_gallery_works .content .text {
+  -webkit-text-stroke: 3px rgb(46, 211, 31);
+  -webkit-text-fill-color: transparent;
+  font-size: 7rem;
+  font-family: "Hanna", sans-serif;
+}
+</style>
