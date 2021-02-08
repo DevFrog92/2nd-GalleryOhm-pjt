@@ -42,7 +42,7 @@
 
 .work_view {
     height: 170vh;
-    background-color:#175711;
+    background-color:gray;
 }
 .work_view .title {
     padding-top: 20%;
