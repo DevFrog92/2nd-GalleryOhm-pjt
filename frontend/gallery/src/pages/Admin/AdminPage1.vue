@@ -34,37 +34,55 @@
           <!-- deleteHashTagFromTotal -->
           <div class="mt">
             <label for="tags-pills">전체 해시태그</label><br />
-            <label for="tags-pills">해시태그 삭제</label>
-            <b-form-tags
+            <label for="tags-pills">해시태그 목록</label>
+            <!-- <b-form-tags
               input-id="tags-pills"
               v-model="hashtagList"
               tag-variant="primary"
               tag-pills
               size="lg"
               separator=" "
-              placeholder="추가할 수 없습니다."
+              placeholder="삭제만"
             >
-            </b-form-tags>
-            <b-button
+            </b-form-tags> -->
+
+            <b-list-group horizontal>
+              <b-container class="bv-example-row">
+                <b-row>
+                  <b-list-group-item
+                    v-for="(hashtag, index) in hashtagList"
+                    :key="index"
+                  >
+                    <b-col>
+                      <b-button @click="deleteHashtag(hashtag.hashtag_name)">{{
+                        hashtag.hashtag_name
+                      }}</b-button>
+                    </b-col>
+                  </b-list-group-item>
+                </b-row>
+              </b-container>
+            </b-list-group>
+
+            <!-- <b-button
               variant="outline-primary"
               class="btn"
               @click="deleteHashtag()"
               >저장</b-button
-            >
-            <p class="mt-2">hasgtagList: {{ hashtagList }}</p>
+            > -->
+            <!-- <p class="mt-2">hasgtagList: {{ hashtagList }}</p> -->
           </div>
-          <div class="mt">
+          <!-- <div class="mt">
             <label for="tags-pills">작품 해시태그 삭제</label>
 
             <div>
               <b-table :items="workHashtag" ref="table">
-                <b-table-column field="workHashtag" label="해시태그">
-                  <!-- <b-button
+                <b-table-column field="workHashtag" label="해시태그"> -->
+          <!-- <b-button
                     outlined
                     @click="func(items.hashtags)"
                     >btn</b-button
                   > -->
-                  <b-form-tags
+          <!-- <b-form-tags
                     input-id="tags-pills"
                     v-model="workHashtag"
                     tag-variant="primary"
@@ -76,7 +94,7 @@
                 </b-table-column>
               </b-table>
             </div>
-          </div>
+          </div> -->
         </b-tab>
         <b-tab title="작품 연령등급 관리">
           <!-- 작품 연령등급 부여/해제 -->
@@ -192,12 +210,15 @@ export default {
       );
     },
     getAllHashtag() {
+      this.hashtagList = [];
+      
       http.get(`/admin/getAllHashTag/`).then(
         (response) => {
           const data = response.data;
           for (var i = 0; i < data.length; i++) {
+            // this.hashtagList.push(data[i].hashtag_name);
             let h = {
-              hashtag: data[i].hashtag_name,
+              hashtag_name: data[i].hashtag_name,
             };
             this.hashtagList.push(h);
           }
@@ -254,13 +275,17 @@ export default {
         }
       );
     },
-    deleteHashtag() {
+    deleteHashtag(hashtag) {
       var formData = new FormData();
-      formData.append("hashtagList", this.hashtagList);
+      formData.append("hashtag_name", hashtag);
+
+      console.log(formData);
 
       http.post(`/admin/deleteHashTagFromTotal`, formData).then(
         (response) => {
           console.log(response.data);
+
+          this.getAllHashtag();
         },
         (error) => {
           console.log(error);
