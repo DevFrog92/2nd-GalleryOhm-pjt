@@ -24,10 +24,13 @@
         <hooper-navigation slot="hooper-addons"></hooper-navigation>
       </hooper>
     </div>
+
     <div class="main_overlay"></div>
     <div class="main_click_works_wrapper">
       <GalleryOWorks />
     </div>
+
+    <div class="main_move_to_top">TOP</div>
   </div>
 </template>
 
@@ -40,14 +43,17 @@ export default {
       hooperSettings: {
         infiniteScroll: true,
         breakpoints: {
-          2400: {
+          2900:{
+            itemsToShow: 9,
+          },
+          2600: {
             itemsToShow: 7,
           },
           1800: {
             itemsToShow: 5,
           },
           1700: {
-            itemsToShow: 4.5,
+            itemsToShow: 4,
           },
           1600: {
             itemsToShow: 4,
@@ -56,13 +62,19 @@ export default {
             itemsToShow: 3,
           },
           1400: {
-            itemsToShow: 2.7,
+            itemsToShow: 3,
           },
           1100: {
-            itemsToShow: 2.5,
+            itemsToShow: 3,
+          },
+          900: {
+            itemsToShow: 2,
+          },
+          500: {
+            itemsToShow: 2
           },
           0: {
-            itemsToShow: 2.5,
+            itemsToShow: 1,
           },
         },
       },
@@ -81,7 +93,38 @@ export default {
     this.getOddList();
     this.getEvenList();
   },
-  updated() {},
+  updated() {
+    // Move To Top
+    const topBtn = document.querySelector(".main_move_to_top");
+    function scrollIt(ele) {
+      console.log(ele);
+      topBtn.classList.add("main_move_to_top_show");
+      window.scrollTo({
+        behavior: "smooth",
+        left: 0,
+        top: ele.offsetTop,
+      });
+    }
+
+    function topclickHandler() {
+      const first = document.querySelector(".main_hooper_wrapper");
+      scrollIt(first);
+    }
+
+    topBtn.addEventListener("click", topclickHandler);
+
+    window.addEventListener("scroll", function () {
+      let position_2 = document
+        .querySelector(".main_hooper_wrapper")
+        .getBoundingClientRect().top;
+      if (position_2 <= 0) {
+        topBtn.classList.add("main_move_to_top_show");
+      }
+      if (position_2 === window.innerHeight) {
+        topBtn.classList.remove("main_move_to_top_show");
+      }
+    });
+  },
   methods: {
     detailImage(work_id, work_piece) {
       // var width = document.getElementById("img").width;
@@ -130,6 +173,13 @@ export default {
         top: document.querySelector(".main_click_works_wrapper").offsetTop,
       });
     },
+    moveToTop() {
+      window.scrollTo({
+        behavior: "smooth",
+        left: 0,
+        top: document.querySelector(".main_hooper_wrapper").offsetTop,
+      });
+    },
   },
 };
 </script>
@@ -155,8 +205,8 @@ export default {
 .main_click_works_wrapper {
   display: flex;
   padding-left: 30%;
-  
-  background-color: #FCF1E7;
+
+  background-color: #fcf1e7;
 }
 
 /* Hooper */
@@ -165,7 +215,7 @@ export default {
   padding-left: 18%;
   text-align: left;
   margin: 0;
-  -webkit-text-stroke: 2px #FCF1E7;
+  -webkit-text-stroke: 2px #fcf1e7;
   -webkit-text-fill-color: transparent;
 }
 .main_hooper_wrapper .images {
@@ -208,7 +258,7 @@ export default {
   text-align: center;
   font-size: 1rem;
   font-family: "Hanna", sans-serif;
-  color:  #FCF1E7;
+  color: #fcf1e7;
 }
 .Main_container {
   /* title */
@@ -221,39 +271,26 @@ export default {
   text-align: left;
 }
 
-/* 지워도 됌 */
-.hooper-next,
-.hooper-prev {
-  top: 95.5%;
-  bottom: 8%;
-  font-size: 5rem;
+/* Move To Top */
+.main_move_to_top {
+  position: absolute;
+  font-size: 1rem;
+  padding: 0.4rem;
+  font-weight: 900;
+  right: 50%;
+  bottom: 3%;
+  border: 4px solid #222;
+  border-radius: 1rem;
+  color: white;
+  opacity: 0;
+  transition: 2s;
+  cursor: pointer;
+  background: #222;
+  transform: translateX(50%);
 }
-.hooper-next {
-  right: 40%;
-}
-.hooper-prev {
-  left: 40%;
-}
-.hooper {
-  height: 70vh;
-  width: 55vw;
-}
-.hooper-indicator {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background-color: darkgrey;
-}
-.hooper-indicator.is-active {
-  background-color: white;
-}
-svg.icon.icon-arrowRight {
-  fill: #fff;
-}
-svg.icon.icon-arrowLeft {
-  fill: #fff;
-}
-.hooper-slide.is-current {
-  transform: scale(1);
+.main_move_to_top_show {
+  opacity: 1;
+  z-index: 999;
+  position: fixed;
 }
 </style>

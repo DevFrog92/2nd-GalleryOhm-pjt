@@ -6,7 +6,7 @@
       <div class="main_gallery_works">
         <div class="content">
           <!-- 작품 제목 -->
-          <h1 class="text">{{ img.work_artistId }}</h1>
+          <h1 class="text">{{ img.work_title }}</h1>
         </div>
         <img :src="img.work_piece" :alt="img.work_title" />
       </div>
@@ -65,6 +65,8 @@ export default {
 .main_gallery_works img {
   height: 80vh;
   width: auto;
+  margin: -8.7rem;
+  left: -100rem;
 }
 
 .main_galleryType {
@@ -85,18 +87,18 @@ export default {
 
 .main_gallery_works .content {
   position: relative;
+  top:42%;
   left: 50%;
   transform: translate(-50%, -50%);
   /* color: white; */
   z-index: 2;
   text-align: center;
-  background-color: blue;
 }
 
 .main_gallery_works .content .text {
   -webkit-text-stroke: 3px rgb(46, 211, 31);
   -webkit-text-fill-color: transparent;
-  font-size: 10rem;
+  font-size: 7rem;
   font-family: "Hanna", sans-serif;
 }
 </style>
