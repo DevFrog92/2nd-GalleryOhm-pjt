@@ -1,32 +1,46 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
+.about {
+/*    position: absolute;*/
+    width: 100%;
+  height: 100%;
+    font-size: 100%;
+/*  text-align: center;*/
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
 
 .about_grid {
+/*  position: relative;*/
     list-style: none;
+  width: 50%;
+  height: 100%;
+margin: 5rem 0rem 0 5rem;      
+
 }
 
 .about_con {
     box-sizing: border-box;
     display: inline-block;
-    margin-right: -.25em;
+    margin-right: -0.5em;
     min-height: 1px;
-    padding-left: 40px;
+    padding-left: 5rem;
     vertical-align: top;
 }
 
 .about_left_size {
-    width: 33.33333%;
+  position: relative;
+    width: 30%;
 }
 
 .about_right_size {
-    width: 66.66666%;
+position: relative;
+  width:70%;
+  height: 100%;
 }
 
-.about {
-    position: relative;
-    max-width: 80%;
-    font-size: 20px;
-}
+
 
 .about .menu div {
     padding: 15px 20px 15px 40px;
@@ -38,6 +52,7 @@
     vertical-align: middle;
     font-weight: 700;
     transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+  font-size: 1.1rem;
 }
 
 .about .menu div:hover {
@@ -53,6 +68,7 @@
     background-color: #303F9F;
     border-radius: 100%;
     transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+  pointer-events: none;
 }
 
 .about .menu div.active span.light {
@@ -62,6 +78,16 @@
     width: 3px;
     top: 0;
     border-radius: 0;
+    pointer-events: none;
+
+}
+
+.about .menu div.active span{
+  pointer-events: none;
+}
+
+.about .menu div span{
+  pointer-events: none;
 }
 
 .about .menu div.active {
@@ -69,7 +95,9 @@
     padding: 15px 20px 15px 20px;
 }
 
-ul.about_content {
+.about_content {
+  width: 100%;
+  height: 100%;
     position: relative;
     height: 0px;
     list-style: none;
@@ -78,7 +106,9 @@ ul.about_content {
     transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-ul.about_content li {
+.about_content li {
+  width: 100%;
+  height: 100%;
     opacity: 0;
     transform: translateX(50px);
     position: absolute;
@@ -86,13 +116,85 @@ ul.about_content li {
     transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-ul.about_content li.active {
+.about_content li.active {
+  width: 100vh;
     transition-delay: .3s;
     z-index: 2;
     opacity: 1;
     transform: translateX(0px);
 }
 
-ul.about_content li p {
-    margin: 0;
+.aboutgallery {
+  width: 100%;
+}
+
+.aboutgallery img{
+  width: 37%;
+}
+
+.gallery_about_img img{
+    width: 103%;
+}
+.aboutgallery_info1 {
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  line-height: 29px;
+  margin-top:38px;
+  font-weight: 550;
+}
+.aboutgallery_info1_1{
+    font-size: 18px;
+  letter-spacing: 0.5px;
+  line-height: 29px;
+  margin-top: 15px;
+}
+.aboutgallery_info2{
+  font-size: 18px;
+letter-spacing: 1px;
+  line-height: 30px;
+  margin-top: 20px;
+}
+.aboutgallery_info3{
+   font-size: 19px;
+letter-spacing: 1px;
+  line-height: 30px;
+  margin-top: 30px;
+  font-weight: bold;
+  font-style: italic;
+  text-indent: 34px;
+}
+.aboutgallery_info3_1{
+  font-size:22px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  font-weight: bold;
+/*  font-style: italic;*/
+  text-indent: 90px;
+  margin-bottom: 70px;
+}
+.aboutteam_name img{
+  width: 30%;
+}
+
+.aboutteam_info1{
+  margin-top: 10px;
+  font-size:17px;
+  letter-spacing: 1px;
+  line-height: 26px;
+}
+.aboutteam_sb img {
+  width: 24%;
+  margin: 2.5rem 0;
+}
+
+.aboutteam_hj img, .aboutteam_mj img {
+  width: 22.1%;
+}
+.aboutteam_yj img, .aboutteam_ys img{
+  width: 21.8%;
+}
+.aboutteam_hj, .aboutteam_yj, .aboutteam_mj, .aboutteam_ys{
+  display: inline;
+  margin-left: 1.7rem;
+  
 }

@@ -1,18 +1,28 @@
-// Acc
-$(document).on("click", ".about .menu div", function() {
-	var numberIndex = $(this).index();
+const divs = document.querySelectorAll('.menu div');
+const lis = document.querySelectorAll('.about_con li');
 
-	if (!$(this).is("active")) {
-		$(".about .menu div").removeClass("active");
-		$(".about ul li").removeClass("active");
+divs.forEach(target => {
+  target.addEventListener('click',function(e){
+    checkDivIndex(divs,e.target.dataset.value);
+    checkLiIndex(lis,e.target.dataset.value);
+  })
+})
 
-		$(this).addClass("active");
-		$(".about ul").find("li:eq(" + numberIndex + ")").addClass("active");
 
-		var listItemHeight = $(".about ul")
-			.find("li:eq(" + numberIndex + ")")
-			.innerHeight();
-		$(".about ul").height(listItemHeight + "px");
-	}
-});
+const checkDivIndex = (divs,index) =>{
+  for(let item of divs ){
+    if(item.classList.contains('active')){
+        item.classList.remove('active');
+        divs[index-1].classList.add('active');
+    }
+  }
+}
 
+const checkLiIndex = (lis,index) =>{
+  for(let item of lis ){
+    if(item.classList.contains('active')){
+        item.classList.remove('active');
+        lis[index-1].classList.add('active');
+    }
+  }
+}
