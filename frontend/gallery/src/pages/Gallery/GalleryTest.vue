@@ -16,16 +16,10 @@
     >
 
     <div class="btn2">
-      <router-link to="/test/resize1"
-        ><b-button>리사이징 1</b-button></router-link
+      <router-link to="/test/uploadImageResize"
+        ><b-button>이미지 업로드 (리사이징)</b-button></router-link
       >
     </div>
-    <router-link to="/test/resize2"
-      ><b-button class="b4">리사이징 2</b-button></router-link
-    >
-    <router-link to="/test/resize3"
-      ><b-button class="b5">리사이징 3</b-button></router-link
-    >
   </div>
 </template>
 
