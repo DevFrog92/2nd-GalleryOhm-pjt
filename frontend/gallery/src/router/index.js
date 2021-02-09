@@ -34,6 +34,9 @@ import GalleryB from '../pages/Gallery/GalleryB'
 import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
 import DetailPage from '../pages/Gallery/DetailPage'
+import resize1 from '../pages/Gallery/resize1'
+import resize2 from '../pages/Gallery/resize2'
+import resize3 from '../pages/Gallery/resize3'
 
 import GalleryOWorks from '../pages/Gallery/GalleryO_works'
 Vue.use(VueRouter)
@@ -152,6 +155,21 @@ const routes = [
     path:'/test/GalleryO/works',
     name:"GalleryO_works",
     component:GalleryOWorks
+  },
+  {
+    path:'/test/resize1',
+    name:"resize1",
+    component:resize1
+  },
+  {
+    path:'/test/resize2',
+    name:"resize2",
+    component:resize2
+  },
+  {
+    path:'/test/resize3',
+    name:"resize3",
+    component:resize3
   },
 ]
 
