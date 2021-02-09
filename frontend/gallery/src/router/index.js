@@ -34,7 +34,7 @@ import GalleryB from '../pages/Gallery/GalleryB'
 import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
 import DetailPage from '../pages/Gallery/DetailPage'
-import resize2 from '../pages/Gallery/resize2'
+import uploadImageResize from '../pages/Gallery/uploadImageResize'
 
 import GalleryOWorks from '../pages/Gallery/GalleryO_works'
 Vue.use(VueRouter)
@@ -155,9 +155,9 @@ const routes = [
     component:GalleryOWorks
   },
   {
-    path:'/test/resize2',
-    name:"resize2",
-    component:resize2
+    path:'/test/uploadImageResize',
+    name:"uploadImageResize",
+    component:uploadImageResize
   },
 ]
 

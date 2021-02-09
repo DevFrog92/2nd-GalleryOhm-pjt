@@ -16,8 +16,8 @@
     >
 
     <div class="btn2">
-      <router-link to="/test/resize2"
-        ><b-button>리사이징 2</b-button></router-link
+      <router-link to="/test/uploadImageResize"
+        ><b-button>이미지 업로드 (리사이징)</b-button></router-link
       >
     </div>
   </div>
