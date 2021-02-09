@@ -114,4 +114,8 @@ public class GalleryDaoImpl {
     public List<GalleryDto> getAllMainAdultGallery() {
         return sqlSession.selectList(ns + "getAllMainAdultGallery");
     }
+
+    public List<GalleryDto> getALlGallery() {
+        return sqlSession.selectList(ns+"getAllGallery");
+    }
 }

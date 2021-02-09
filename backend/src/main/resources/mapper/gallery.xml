@@ -1,149 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.gallery.dao.galleryDao">
-	<insert id="addArtistGallery" parameterType="gallery">
-		INSERT INTO
-		gallery(gallery_name, gallery_desc, gallery_artistId, gallery_mainWorkId)
-		VALUES (#{gallery_name}, #{gallery_desc}, #{gallery_artistId}, #{gallery_mainWorkId})
-	</insert>
+    <insert id="addArtistGallery" parameterType="gallery">
+        INSERT INTO gallery(gallery_name, gallery_desc, gallery_artistId, gallery_mainWorkId)
+        VALUES (#{gallery_name}, #{gallery_desc}, #{gallery_artistId}, #{gallery_mainWorkId})
+    </insert>
 
-	<insert id="addArtistGalleryDetail" parameterType="list">
-			INSERT INTO
-			gallerydetail(galleryDetail_galleryId, galleryDetail_workId, galleryDetail_order)
-			VALUES
-			<foreach collection="list" index="i" item="gallery_workId" separator=",">
-			       ((SELECT gallery_id FROM gallery WHERE gallery_mainWorkId = #{list[0]}), #{gallery_workId}, ${i}+1)
-			</foreach>
-	</insert>
+    <insert id="addArtistGalleryDetail" parameterType="list">
+        INSERT INTO
+        gallerydetail(galleryDetail_galleryId, galleryDetail_workId, galleryDetail_order)
+        VALUES
+        <foreach collection="list" index="i" item="gallery_workId" separator=",">
+            ((SELECT gallery_id FROM gallery WHERE gallery_mainWorkId = #{list[0]}), #{gallery_workId}, ${i}+1)
+        </foreach>
+    </insert>
 
-	<select id="getGalleryId" parameterType="int" resultType="int">
-		select gallery_id
-		from gallery
-		where gallery_mainWorkId = #{gallery_mainWorkId}
-	</select>
+    <select id="getGalleryId" parameterType="int" resultType="int">
+        select gallery_id
+        from gallery
+        where gallery_mainWorkId = #{gallery_mainWorkId}
+    </select>
 
-	<select id="isAdultGallery" parameterType="int" resultType="hashmap">
-		select w.work_rating
-		from work as w
-				 join galleryDetail as g
-					  on w.work_id = g.galleryDetail_workId
-		where galleryDetail_galleryId = #{galleryDetail_galleryId}
-	</select>
+    <select id="isAdultGallery" parameterType="int" resultType="hashmap">
+        select w.work_rating
+        from work as w
+                 join galleryDetail as g
+                      on w.work_id = g.galleryDetail_workId
+        where galleryDetail_galleryId = #{galleryDetail_galleryId}
+    </select>
 
-	<update id="updateGalleryForAdult" parameterType="int">
-		update gallery
-		set gallery_rating = 19
-		where gallery_id = #{gallery_id}
-	</update>
+    <update id="updateGalleryForAdult" parameterType="int">
+        update gallery
+        set gallery_rating = 19
+        where gallery_id = #{gallery_id}
+    </update>
 
-	<update id="modifyArtistGallery" parameterType="gallery">
-		UPDATE gallery
-		SET gallery_name = #{gallery_name},
-		    gallery_desc = #{gallery_desc},
-		    gallery_mainWorkId = #{gallery_mainWorkId}
-		WHERE gallery_id = #{gallery_id}
-	</update>
+    <update id="modifyArtistGallery" parameterType="gallery">
+        UPDATE gallery
+        SET gallery_name       = #{gallery_name},
+            gallery_desc       = #{gallery_desc},
+            gallery_mainWorkId = #{gallery_mainWorkId}
+        WHERE gallery_id = #{gallery_id}
+    </update>
 
-	<delete id="deleteArtistGalleryDetail" parameterType="int">
-		DELETE FROM gallerydetail
-		WHERE gallerydetail_galleryId = #{gallery_id}
-	</delete>
+    <delete id="deleteArtistGalleryDetail" parameterType="int">
+        DELETE
+        FROM gallerydetail
+        WHERE gallerydetail_galleryId = #{gallery_id}
+    </delete>
 
-	<delete id="deleteArtistGallery" parameterType="int">
-		DELETE FROM gallery
-		WHERE gallery_id = #{gallery_id}
-	</delete>
+    <delete id="deleteArtistGallery" parameterType="int">
+        DELETE
+        FROM gallery
+        WHERE gallery_id = #{gallery_id}
+    </delete>
 
-	<select id="getGallery" parameterType="int" resultType="gallery">
-		SELECT * FROM gallery
-		WHERE gallery_id = #{gallery_id}
-	</select>
+    <select id="getGallery" parameterType="int" resultType="gallery">
+        SELECT *
+        FROM gallery
+        WHERE gallery_id = #{gallery_id}
+    </select>
 
-	<select id="getAllMainGallery" resultType="gallery">
-		SELECT * FROM gallery
-		WHERE gallery_id
-				  IN (SELECT mainGallery_galleryId FROM maingallery)
-		ORDER BY gallery_footPrint DESC
-	</select>
+    <select id="getAllMainGallery" resultType="gallery">
+        SELECT *
+        FROM gallery
+        WHERE gallery_id
+                  IN (SELECT mainGallery_galleryId FROM maingallery)
+        ORDER BY gallery_footPrint DESC
+    </select>
 
-	<select id="getAllMainAdultGallery" resultType="gallery">
-		SELECT * FROM gallery
-		WHERE gallery_id
-			IN (SELECT mainadultgallery_galleryId FROM mainadultgallery)
-		ORDER BY gallery_footPrint DESC
-	</select>
+    <select id="getAllMainAdultGallery" resultType="gallery">
+        SELECT *
+        FROM gallery
+        WHERE gallery_id
+                  IN (SELECT mainadultgallery_galleryId FROM mainadultgallery)
+        ORDER BY gallery_footPrint DESC
+    </select>
 
-	<delete id="deleteGalleryToMainGallery" parameterType="int">
-		DELETE FROM maingallery
-		WHERE mainGallery_galleryId = #{mainGallery_galleryId}
-	</delete>
+    <delete id="deleteGalleryToMainGallery" parameterType="int">
+        DELETE
+        FROM maingallery
+        WHERE mainGallery_galleryId = #{mainGallery_galleryId}
+    </delete>
 
-	<select id="getAllSubGallery" resultType="work">
-		SELECT * FROM work
-		WHERE work_id
-				  IN (SELECT subGallery_workId FROM subgallery)
-	</select>
+    <select id="getAllSubGallery" resultType="work">
+        SELECT *
+        FROM work
+        WHERE work_id
+                  IN (SELECT subGallery_workId FROM subgallery)
+    </select>
 
-	<select id="getAllSubGallery_odd" resultType="work">
-		SELECT * FROM work
-		WHERE MOD(work_id, 2) = 1 and work_id
-				  IN (SELECT subGallery_workId FROM subgallery)
-	</select>
+    <select id="getAllSubGallery_odd" resultType="work">
+        SELECT *
+        FROM work
+        WHERE MOD(work_id, 2) = 1
+          and work_id
+            IN (SELECT subGallery_workId FROM subgallery)
+    </select>
 
-	<select id="getAllSubGallery_even" resultType="work">
-		SELECT * FROM work
-		WHERE MOD(work_id, 2) = 0 and work_id
-			IN (SELECT subGallery_workId FROM subgallery)
-	</select>
+    <select id="getAllSubGallery_even" resultType="work">
+        SELECT *
+        FROM work
+        WHERE MOD(work_id, 2) = 0
+          and work_id
+            IN (SELECT subGallery_workId FROM subgallery)
+    </select>
 
-	<delete id="deleteWorkToSubGallery" parameterType="int">
-		DELETE FROM subgallery
-		WHERE subGallery_workId = #{subGallery_workId}
-	</delete>
+    <delete id="deleteWorkToSubGallery" parameterType="int">
+        DELETE
+        FROM subgallery
+        WHERE subGallery_workId = #{subGallery_workId}
+    </delete>
 
-	<select id="getArtistGallery" parameterType="int" resultType="work">
-		select work.*
-		FROM work
-			 RIGHT JOIN
-			 (SELECT galleryDetail_workId, galleryDetail_order
-			  FROM gallerydetail
-			  WHERE galleryDetail_galleryId = #{galleryDetail_galleryId}) AS detail
-			 ON work.work_id = detail.galleryDetail_workId
-		ORDER BY galleryDetail_order;
-	</select>
+    <select id="getArtistGallery" parameterType="int" resultType="work">
+        select work.*
+        FROM work
+                 RIGHT JOIN
+             (SELECT galleryDetail_workId, galleryDetail_order
+              FROM gallerydetail
+              WHERE galleryDetail_galleryId = #{galleryDetail_galleryId}) AS detail
+             ON work.work_id = detail.galleryDetail_workId
+        ORDER BY galleryDetail_order;
+    </select>
 
-	<select id="getMyGallery" parameterType="String" resultType="gallery">
-		SELECT * FROM gallery
-		WHERE gallery_artistId = #{gallery_artistId}
-	</select>
+    <select id="getMyGallery" parameterType="String" resultType="gallery">
+        SELECT *
+        FROM gallery
+        WHERE gallery_artistId = #{gallery_artistId}
+    </select>
 
-	<insert id="giveFootPrintToGallery" parameterType="hashmap">
-		INSERT INTO footprint
-		VALUES(#{footPrint_galleryId},#{footPrint_userId})
-	</insert>
+    <insert id="giveFootPrintToGallery" parameterType="hashmap">
+        INSERT INTO footprint
+        VALUES (#{footPrint_galleryId}, #{footPrint_userId})
+    </insert>
 
-	<select id="getAdultGallery" resultType="work">
-		select *
-		from work
-		where work_rating >= 19
-		and
-		(TIMESTAMPDIFF(day, work_uploadDate, now()) <![CDATA[ < ]]> 30)
-		order by work_cost, work_uploadDate desc
-		LIMIT 15
-	</select>
+    <select id="getAdultGallery" resultType="work">
+        select *
+        from work
+        where work_rating >= 19
+          and (TIMESTAMPDIFF(day, work_uploadDate, now()) <![CDATA[ < ]]> 30)
+        order by work_cost, work_uploadDate desc LIMIT 15
+    </select>
 
-	<select id="getAdultGallery_odd" resultType="work">
-		select *
-		from work
-		where work_rating >= 19 and MOD(work_id, 2) = 1
-	</select>
+    <select id="getAdultGallery_odd" resultType="work">
+        select *
+        from work
+        where work_rating >= 19
+          and MOD(work_id, 2) = 1
+    </select>
 
-	<select id="getAdultGallery_even" resultType="work">
-		select *
-		from work
-		where work_rating >= 19 and MOD(work_id, 2) = 0
-	</select>
+    <select id="getAdultGallery_even" resultType="work">
+        select *
+        from work
+        where work_rating >= 19
+          and MOD(work_id, 2) = 0
+    </select>
 
+    <select id="getAllGallery" resultType="gallery">
+        select *
+        from gallery
+    </select>
 </mapper>

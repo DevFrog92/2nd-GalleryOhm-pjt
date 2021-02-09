@@ -73,4 +73,7 @@ public interface GalleryService {
 
     /**** 메인 갤러리의 모든 전시관 목록들을 조회한다. (연령 제한 작품 포함) ****/
     List<GalleryDto> getAllMainAdultGallery();
+
+    // 모든 갤러리 목록 반환
+    List<GalleryDto> getAllGallery() throws Exception;
 }
