@@ -4,8 +4,11 @@
     <div class="preview">
       <div class="container">
         <div class="work_view">
+          <!-- 첫 div 정보 -->
           <div class="title">
+            <!-- title -->
             <h1 lass="title_text">TITLE</h1>
+            <!-- 액자 이미지 -->
             <div class="title_img">
               <img class="work" src="https://source.unsplash.com/random/1" />
             </div>
@@ -41,6 +44,7 @@
 }
 
 .work_view .title_img img {
+  border: 10px white solid;
 }
 
 /* .work_view .title {
