@@ -1,7 +1,6 @@
 import  router from '../../router'
 const init =()=>{
   const itemList = document.querySelector('.item-lists');
-  console.log(itemList);
 
   function clickHandler(e) {
     console.log(e.target)
@@ -61,6 +60,7 @@ input.addEventListener('blur', () => {
     }, 100);
   }, 800);
 });
+
 
 }
 
