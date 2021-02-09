@@ -143,7 +143,7 @@ export default {
   transition: all 1.2s;
 }
 .info {
-    padding-top: 5%;
+    padding-top: 3%;
     color: black;
     transform: scale(1.2);
     font-family: "Hanna", sans-serif;
