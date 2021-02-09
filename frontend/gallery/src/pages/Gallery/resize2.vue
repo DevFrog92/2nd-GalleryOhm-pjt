@@ -11,7 +11,7 @@
             :debug="1"
             doNotResize="gif"
             :autoRotate="true"
-            outputFormat="file"
+            outputFormat="blob"
             @input="setImage"
           >
             <label for="fileInput" slot="upload-label">
@@ -149,16 +149,9 @@ export default {
       this.$router.go(-1);
     },
     addWork: function () {
-      // console.log(this.img_url.slice(23))
       this.hash();
       if (this.mode) {
-        const byteCharacters = atob(this.img_url.slice(23));
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: "image/jpeg" });
+        const blob = this.img_url;  
         const file = new File([blob], "profile");
         // console.log(file);
         this.work_piece = file;
@@ -200,7 +193,7 @@ export default {
     setImage: function (output) {
       this.hasImage = true;
       this.work_piece = output;
-      this.img_url = URL.createObjectURL(output);
+      this.img_url = output;
     },
     onClickUploadImage() {
       this.$refs.work_piece.click();
