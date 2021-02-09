@@ -5,44 +5,49 @@
 }
 
 .My_profile_container {
-  width:97%;
-/*  width: 100vw;*/
+  width: 100%;
   height: 400vh;
   overflow: hidden;
   text-align: left;
+  background-color: #f4f5f9;
+  /* background-color: rgb(44, 49, 57); */
 }
 
 .profile_wrapper,.second__section,.third__section,.forth__section{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .profile_wrapper {
-  /* background-image: url('../images/mypagebackground.jpg'); */
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: contain;
+  padding-left: 3rem;
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-5%);
+  transform: translate(0,-5%);
 }
+
 
 .profile_border {
   height: 97%;
   width: 97%;
   background: transparent;
   border-radius: 20px;
-  transition: border 1s;
+  transition: border 500ms;
   position: relative;
 }
+
+
 .profile_border:hover {
   border: 2px solid #fff;
 }
+
+
 .profile_card {
-  height: 60%;
-  width: 20%;
-  background-image: url('../images/ssaatchi.png') ;
+  height: 610px;
+  width: 400px;
+  background-image: url('../images/rookie.png') ;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -50,41 +55,132 @@
   transition: all 0.9s;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 70px 100px -60px #000;
+  box-shadow: 0 70px 100px -50px #000;
+  
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  perspective: 800px;
+  
+  perspective: 1200px;
+}
+
+@media (max-width:1400px){
+  .profile_card {
+    height: 610px;
+    width: 390px;
+  }
+}
+@media (max-width:1024px){
+  .profile_card {
+    height: 510px;
+    width: 320px;
+  }
+}
+@media (max-width:768px){
+  .profile_card {
+    height: 330px;
+    width: 220px;
+  }
+  .profile_wrapper {
+    display: block;
+    margin:0 auto;
+  }
+  .profile_card, .profile_about {
+    margin: 0 auto;
+  }
+
+  .profile_card{
+    margin-top: 15rem;
+  }
 }
 
 
 .profile_card1 {
-  /* background: url("../images/Sydney.jpg"); */
-  transition: all 1s ease;
+  /* transition: all 1s ease; */
+  opacity: 0;
   background-image: url('../images/Anonymous.png') ;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
-/*  background-size: 300px;*/
+  animation: aboutani 2s forwards;
 }
 
 
 
 .profile_about {
-  opacity: 1;
-  margin-left :6rem;
-  width:30%;
+  padding-left: 4rem ;
+  opacity: 0;
+  width:40%;
   height:25rem;
-  transition: 2s; 
+  transform: translate3d(0,-200px,0);
+  animation: aboutani 1s forwards;
   position: relative;
+  /* color:white; */
+  mix-blend-mode: difference;
+
+}
+
+@keyframes aboutani {
+  to {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+
+
+.artist_about {
+  margin-top: 2.5rem;
+  font-size: 1.2rem;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  mix-blend-mode: difference;
+}
+.artist_about_div {
+  position: relative;
+  mix-blend-mode: difference;
 }
 
 
 .icon-pencil-alt-span{
+  mix-blend-mode: difference;
   position: absolute;
   right:0;
 }
+
+.modal_modify_about{
+
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+}
+
+#artist_about_modify {
+  resize: none;
+  height: 150px;
+  width: 100%;
+  border: 0;
+  padding: 10px 12px;
+  margin: 3px 0;
+  border: 2px solid #dfdfdf;
+  background-color: white;
+  font-size: 17px;
+}
+.modify_btn {
+  position: absolute;
+  right: 0;
+}
+
+
+#artist_about_modify:focus {
+  outline: none;
+  border: 2px solid red;
+}
+
+
+
+
 
 .profile_card1:hover {
   background-image:inherit;
@@ -133,26 +229,24 @@
 }
 
 .profile_user_name{
-  margin-bottom:1rem;
-  font-size: 3rem;
+  margin-bottom:.9rem;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
 .profile_user_name .profile_batch {
   font-size : 0.58rem;
-  font-weight: 800;
+  font-weight: 780;
   position: relative;
   top:-1.3rem;
   left:0.5rem;
-  padding: 0.2rem;
+  padding: 0.1rem;
   color: white;
   background-color: tomato;
   border: 2px solid tomato;
   border-radius: 0.4rem;
+  mix-blend-mode: difference;
 }
-
-
-
 
 
 
@@ -160,10 +254,8 @@
 
 .profile_menu_footer{
   position: absolute;
-  left:50%;
-  top:70%;
+  bottom:0%;
   width:100%;
-  transform: translateX(-2.2%);
 }
 
 .profile_menu {
@@ -182,7 +274,7 @@
   
 }
 
-.profile_menu:hover {
+.profile_menu {
   pointer-events: all;
 }
 .profile_label {
@@ -241,8 +333,13 @@
   transition-delay: 0s;
 }
 .profile_menu:hover .profile_item {
-  opacity: 1;
-  top: 0px;
+  animation: menuani 2s forwards;
+}
+@keyframes menuani{
+  to {
+    opacity: 1;
+    top: 0px;
+  }
 }
 .profile_item:nth-child(1) {
   transition-delay: 0.45s;
@@ -418,21 +515,6 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 #DM input:focus {
   outline: none;
   border-bottom: 2px solid red;
-
-}
-
-.artist_about {
-  position: relative;
-  margin-top: 2.5rem;
-  font-size: 1.5rem;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  display: -webkit-box; 
-  -webkit-line-clamp: 5; /* 라인수 */ 
-  -webkit-box-orient: vertical; 
-  word-wrap:break-word; 
-  line-height: 1.2em; 
-  height: 4.7em;
 
 }
 

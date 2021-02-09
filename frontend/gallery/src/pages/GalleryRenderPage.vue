@@ -15,7 +15,7 @@
               {{gallery_info.gallery_artistId}}
             </div>
             <div class="gallery__desc__show">
-              Explore 
+              Explore
             </div>
           </div>
           <div class="gallery__desc__aside_desc">
@@ -88,7 +88,7 @@
     mounted() {
       setTimeout(() => {
           init.init();
-        }, 100),
+        }, 1000),
         setTimeout(() => {
           this.tts();
         }, 500)
