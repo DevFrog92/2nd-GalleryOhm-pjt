@@ -128,6 +128,10 @@
 		select *
 		from work
 		where work_rating >= 19
+		and
+		(TIMESTAMPDIFF(day, work_uploadDate, now()) <![CDATA[ < ]]> 30)
+		order by work_cost, work_uploadDate desc
+		LIMIT 15
 	</select>
 
 	<select id="getAdultGallery_odd" resultType="work">
