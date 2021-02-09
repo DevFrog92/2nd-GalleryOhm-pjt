@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="headState">
     <HeaderPage></HeaderPage>
-    </div>
     <router-view :key="$route.fullPath"/>
   </div>
 </template>
@@ -14,18 +12,11 @@ import HeaderPage from './pages/HeaderPage'
 export default {
   data(){
     return {
-      headState:true,
     }
   },
   components:{
     HeaderPage
   },
-  watch:{
-    $route(to){
-      if(to.path === ''){this.headState=false;}
-      else{this.headState=true;}
-    }
-  }
 }
 </script>
 
