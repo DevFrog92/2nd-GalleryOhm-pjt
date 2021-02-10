@@ -10,20 +10,17 @@
             <h1 class="title_text">TITLE</h1>
             <!-- 액자 이미지 -->
             <div class="title_img">
-              <img class="work" :src="imgSrc" />
+              <img class="work" src="../../assets/images/t.jpeg" />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="pullImg type-b"
-      :style="'background-image: url(' + imgSrc + ');'"
-    ></div>
+    <div class="pullImg type-b"></div>
     <div class="detail">
       <div class="img_box">
         <div class="img">
-          <img :src="imgSrc" alt="" />
+          <img src="../../assets/images/t.jpeg" alt="" />
         </div>
       </div>
       <div class="info_box">
@@ -68,7 +65,7 @@ export default {
     };
   },
   mounted() {
-    this.imgSrc = "https://source.unsplash.com/random/1";
+    this.imgSrc = "../../assets/images/t.jpeg";
   },
 };
 </script>
@@ -77,7 +74,7 @@ export default {
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
 .preview {
-  background-color: gray;
+  background-color: #fcf1e7;
   color: black;
 }
 
@@ -112,6 +109,7 @@ export default {
   width: 100%;
   overflow: hidden;
 
+  background-image: url("../../assets/images/t.jpeg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -119,7 +117,7 @@ export default {
 
 .detail {
   height: 100vh;
-  background-color: gray;
+  background-color: #fcf1e7;
   display: flex;
   justify-content: space-around;
 }
