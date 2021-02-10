@@ -45,7 +45,8 @@ const init = () => {
   
     for(var i = 0; i < items.length; i++) {
         let item = items[i],
-            box = item.getElementsByClassName('item__3d-frame')[0],
+            // box = item.getElementsByClassName('item__3d-frame')[0],
+            box = item.getElementsByClassName('gallery__image')[0],
             title = item.getElementsByClassName('item__title')[0];
         if(i == (index - 1)) {
             item.classList.add('carousel__slider__item--active');
