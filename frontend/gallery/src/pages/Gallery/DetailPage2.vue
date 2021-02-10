@@ -1,59 +1,67 @@
 <template>
-  <div class="detailPage">
-    <!-- ( 배경 : 어두운색) -->
-    <div class="preview">
-      <div class="container">
-        <div class="work_view">
-          <!-- 첫 div 정보 -->
-          <div class="title">
-            <!-- title -->
-            <h1 class="title_text">TITLE</h1>
-            <!-- 액자 이미지 -->
-            <div class="title_img">
-              <img class="work" src="../../assets/images/t.jpeg" />
+  <div >
+    <div class="detailPage">
+      <!-- ( 배경 : 어두운색) -->
+      <div class="preview">
+        <div class="container">
+          <div class="work_view">
+            <!-- 첫 div 정보 -->
+            <div class="title">
+              <!-- title -->
+              <h1 class="title_text">그 여름 버스에서</h1>
+              <!-- 액자 이미지 -->
+              <div class="title_img">
+                <img class="work" src="../../assets/images/t.jpeg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pullImg type-b"></div>
+      <div class="detail">
+        <div class="img_box">
+          <div class="img">
+            <img src="../../assets/images/t.jpeg" alt="" />
+          </div>
+        </div>
+        <div class="info_box">
+          <div class="info">
+            <!-- 작품 이름 -->
+            <div class="first">그 여름 버스에서</div>
+            <!-- 작가 이름-->
+            <div class="name">By 신모래</div>
+            <!-- 작품 설명 -->
+            <div class="desc">
+              Giclée fine art print on premium archival smooth paper,
+            </div>
+            <div class="desc">
+              290 gsm, 21.5 mil. Print includes a white border.
+            </div>
+            <div class="desc">
+              Solid-wood framing options available View more information
+            </div>
+            <!-- 작품 사이즈 -->
+            <div class="size">1024 x 1024</div>
+            <div class="btn">
+              <div class="button-container-3">
+                <span class="mas">scrap</span>
+                <button type="button" name="Hover">scrap</button>
+              </div>
+              <div class="lbtn button-container-3bb">
+                <span class="mas">cost</span>
+                <button type="button" name="Hover">cost</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="pullImg type-b"></div>
-    <div class="detail">
-      <div class="img_box">
-        <div class="img">
-          <img src="../../assets/images/t.jpeg" alt="" />
-        </div>
+    <footer>
+      <div class="foot">
+        <p class="t">wwater@google.com</p>
+        <p class="t">tel.010-4433-212</p>
       </div>
-      <div class="info_box">
-        <div class="info">
-          <!-- 작품 이름 -->
-          <div class="first">그 여름 버스에서</div>
-          <!-- 작가 이름-->
-          <div class="name">By 신모래</div>
-          <!-- 작품 설명 -->
-          <div class="desc">
-            Giclée fine art print on premium archival smooth paper,
-          </div>
-          <div class="desc">
-            290 gsm, 21.5 mil. Print includes a white border.
-          </div>
-          <div class="desc">
-            Solid-wood framing options available View more information
-          </div>
-          <!-- 작품 사이즈 -->
-          <div class="size">1024 x 1024</div>
-          <div class="btn">
-            <div class="button-container-3">
-              <span class="mas">scrap</span>
-              <button type="button" name="Hover">scrap</button>
-            </div>
-            <div class="lbtn button-container-3bb">
-              <span class="mas">cost</span>
-              <button type="button" name="Hover">cost</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -73,8 +81,12 @@ export default {
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
+.detailPage {
+  padding-bottom: 100px;
+}
+
 .preview {
-  background-color: #fcf1e7;
+  background-color: #ffe8e8;
   color: black;
 }
 
@@ -116,10 +128,11 @@ export default {
 }
 
 .detail {
-  height: 100vh;
+  height: 60vh;
   background-color: #fcf1e7;
   display: flex;
   justify-content: space-around;
+   background-color: #ffdcdc;
 }
 
 .detail .img_box {
@@ -143,7 +156,6 @@ export default {
   height: 50vh;
   margin-top: 25vh;
 }
-
 .detail .info_box {
   order: flex;
   width: 45%;
@@ -177,6 +189,20 @@ export default {
 
 .detail .info_box .btn {
   margin-top: 3vh;
+}
+footer {
+  height: 100px;
+  margin-top: -100px;
+  background-color: #ffdcdc;
+}
+footer .foot {
+  padding-top: 1%;
+  /* margin-left: 10%; */
+  width: 100vw;
+}
+footer .foot .t {
+  color: gray;
+  font-family: "Hanna", sans-serif;
 }
 </style>
 

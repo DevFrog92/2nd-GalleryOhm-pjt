@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="d3">
     <!-- ( 배경 : 어두운색) -->
     <div class="work_view">
       <div class="title">
@@ -51,11 +52,28 @@
       </div>
     </div>
   </div>
+    <footer><div class="foot">
+      <p class="t">wwater@google.com</p>
+      <p class="t">tel.010-4433-212</p>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
-
+.d3 {
+  padding-bottom: 100px;
+}
+footer .foot {
+  padding-top:2%;
+  /* margin-left: 10%; */
+  width: 100vw;
+}
+footer .foot .t{
+   color: gray;
+  font-family: "Hanna", sans-serif;
+}
 .work_view {
   height: 296.3vh;
   width: 100%;
@@ -160,6 +178,11 @@ margin-left: 10%;
   /* transform: scale(1.1); */
   color: black;
   font-family: "Hanna", sans-serif;
+}
+footer {
+  height: 100px;
+  margin-top: -100px;
+  background-color: #faf2f2;;
 }
 </style>
 

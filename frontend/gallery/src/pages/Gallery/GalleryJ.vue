@@ -63,6 +63,7 @@ export default {
   height: 100vh;
   overflow-x: hidden;
   background-color: #c20a0a;
+  
 }
 .image {
   position: relative;
@@ -159,4 +160,5 @@ export default {
 .router-link {
   text-decoration: none;
 }
+
 </style>
