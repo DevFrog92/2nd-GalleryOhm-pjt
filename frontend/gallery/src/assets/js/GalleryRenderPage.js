@@ -6,9 +6,16 @@ const init = () => {
   const  items = document.querySelectorAll('.carousel__slider__item');
   const  prevBtn = document.querySelector('.carousel__prev');
   const  nextBtn = document.querySelector('.carousel__next');
-  
-  var width, height, totalWidth, margin = 20,
+  const exploreBtn = document.querySelector('.gallery__desc__show');
+  const galleryDesc = document.querySelector('.gallery__desc__front');
+  exploreBtn.addEventListener('click',function(){
+    galleryDesc.classList.add('gallery__desc__front_hidden');
+  })
+
+  var width, height, totalWidth = 20,
+    margin=160,
     currIndex = 0;
+
   
     resize();
     move(Math.floor(items.length / 2));
@@ -18,7 +25,7 @@ const init = () => {
   function resize() {
   
   //      width = Math.max(window.innerWidth * .25, 275),
-    width = window.innerHeight * .4,
+    width = window.innerHeight * 0.7,
     height = window.innerHeight * .4,
     totalWidth = width * items.length;
   
@@ -42,7 +49,7 @@ const init = () => {
             title = item.getElementsByClassName('item__title')[0];
         if(i == (index - 1)) {
             item.classList.add('carousel__slider__item--active');
-            box.style.transform = "perspective(1200px)";
+            box.style.transform = "perspective(1200px) scale3D(1.3,1.3,1.3) translate3D(0,-20px,0)";
             title.style.transform = "perspective(1200px)";
         } else {
           item.classList.remove('carousel__slider__item--active');
