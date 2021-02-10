@@ -1,8 +1,8 @@
 
 .sub_create_gallery_wrap {
-  width: 100%;
+  width: 97%;
   height: 100vh;
-  background: #0c2329;
+  background: rgb(44, 49, 57);
   overflow: hidden;
   padding:1px;
   box-sizing: border-box;
@@ -23,7 +23,7 @@
   padding:0.4rem;
   border: 2px solid orange;
   overflow: hidden;
-  background: #00251a;
+  background:  rgb(44, 49, 57);
 
 }
 
@@ -45,7 +45,7 @@
 
 .sub_main__carousel {
 /*  top: 10%;*/
-  background: #0c2329;
+  background:  rgb(44, 49, 57);
   position: relative;
   display: block;
   padding: .3% .6%;
