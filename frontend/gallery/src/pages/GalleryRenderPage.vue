@@ -43,8 +43,10 @@
     </div>
     <div class="main__carousel">
       <div class="carousel__body">
-        <div class="carousel__prev"><i class="icon-left-open"></i></div>
-        <div class="carousel__next"><i class="icon-right-open"></i></div>
+        <div class="move__button">
+          <div class="carousel__prev"><i class="icon-left-open"></i></div>
+          <div class="carousel__next"><i class="icon-right-open"></i></div>
+        </div>
         <div class="carousel__slider">
           <div
             class="carousel__slider__item"
