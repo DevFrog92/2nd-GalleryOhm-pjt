@@ -254,7 +254,7 @@ input[value="on"]:checked ~ .lamp:before {
 
 .main__carousel {
   /* top:25%; */
-  top: 23%;
+  top: 22%;
   position: relative;
   display: block;
 /*  width: 100%;*/
@@ -283,12 +283,12 @@ input[value="on"]:checked ~ .lamp:before {
 }
 
 .carousel__prev {
-  left: 34.8%;
+  left: 34.9%;
   
 }
 
 .carousel__next {
-  right: 35%;
+  right: 34%;
 }
 
 @media (max-width:1400px){
@@ -362,6 +362,8 @@ input[value="on"]:checked ~ .lamp:before {
   transition: transform 1s ease-in-out;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+
+  margin-left: 0.3vw;
 }
 
 .item__3d-frame__box--front{
