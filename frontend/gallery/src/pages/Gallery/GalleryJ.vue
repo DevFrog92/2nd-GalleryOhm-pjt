@@ -1,19 +1,23 @@
 <template>
+<div>
   <div class="subgallery" v-if="imgList.length != 0">
     <p class="galleryType">레드 갤러리</p>
     <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
     <div v-for="(img, i) in imgList" :key="i">
       <div class="image" @mouseover="changePage(i + 1)">
-          <router-link class="router-link" to="/test/GalleryJ/DetailPage">
-        <img class="img" :src="img.work_piece" :alt="img.work_title" />
-        <div class="content">
-          <h1 class="text">{{ img.work_title }}</h1>
-        </div>
+        <router-link class="router-link" to="/test/GalleryJ/DetailPage">
+          <img class="img" :src="img.work_piece" :alt="img.work_title" />
+          <div class="content">
+            <h1 class="text">{{ img.work_title }}</h1>
+          </div>
         </router-link>
-        <p class="info">By {{ img.work_artistId }}, {{ img.work_uploadDate }}</p>
+        <p class="info" style="padding-top: 5%">
+          By {{ img.work_artistId }}, {{ img.work_uploadDate }}
+        </p>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -29,7 +33,7 @@ export default {
   components: {},
   created() {
     http.get(`/gallery/getAdultGallery`).then(
-    // http.get(`/gallery/getAllSubGallery`).then(
+      // http.get(`/gallery/getAllSubGallery`).then(
       (response) => {
         var data = response.data;
         for (var i = 0; i < data.length; i++) {
@@ -72,6 +76,8 @@ export default {
   max-width: 90vw;
   position: relative;
   top: 10vh;
+  border: 50px white solid;
+  outline: 25px solid black;
 
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -83,6 +89,8 @@ export default {
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.9s;
+
+  filter: drop-shadow(10px 10px 10px #000);
 }
 
 .image .content {
@@ -102,7 +110,7 @@ export default {
 }
 
 .info {
-  padding-top: 2%;
+  /* padding-top: 6%; */
   color: black;
   transform: scale(1.2);
   font-family: "Hanna", sans-serif;
@@ -117,7 +125,7 @@ export default {
 
 .page {
   position: fixed;
-  transform: rotate(90deg) scale(1.2);;
+  transform: rotate(90deg) scale(1.2);
   right: 2vw;
   top: 45vh;
 }
@@ -143,12 +151,12 @@ export default {
   transition: all 1.2s;
 }
 .info {
-    padding-top: 3%;
-    color: black;
-    transform: scale(1.2);
-    font-family: "Hanna", sans-serif;
+  padding-top: 3%;
+  color: black;
+  transform: scale(1.2);
+  font-family: "Hanna", sans-serif;
 }
-.router-link  {
-    text-decoration: none;
+.router-link {
+  text-decoration: none;
 }
 </style>
