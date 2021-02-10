@@ -50,12 +50,12 @@ const init = () => {
             title = item.getElementsByClassName('item__title')[0];
         if(i == (index - 1)) {
             item.classList.add('carousel__slider__item--active');
-            box.style.transform = "perspective(1200px) scale3D(1.3,1.3,1.3) translate3D(0,-20px,0)";
-            title.style.transform = "perspective(1200px)";
+            box.style.transform = "perspective(1000px) scale3D(1.3,1.3,1.3) translate3D(0,-20px,0)";
+            title.style.transform = "perspective(1000px)";
         } else {
           item.classList.remove('carousel__slider__item--active');
-            box.style.transform = "perspective(1200px) rotateY(" + (i < (index - 1) ? 40 : -40) + "deg)";
-            title.style.transform = "perspective(1200px) rotateY(" + (i < (index - 1) ? 40 : -40) + "deg)";
+            box.style.transform = "perspective(1000px) rotateY(" + (i < (index - 1) ? 40 : -40) + "deg)";
+            title.style.transform = "perspective(1000px) rotateY(" + (i < (index - 1) ? 40 : -40) + "deg)";
             
         }
     }
