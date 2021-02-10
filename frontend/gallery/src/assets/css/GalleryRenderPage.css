@@ -253,7 +253,8 @@ input[value="on"]:checked ~ .lamp:before {
 }
 
 .main__carousel {
-  top:25%;
+  /* top:25%; */
+  top: 23%;
   position: relative;
   display: block;
 /*  width: 100%;*/
@@ -264,7 +265,7 @@ input[value="on"]:checked ~ .lamp:before {
 .carousel__prev,
 .carousel__next {
   position: absolute;
-  bottom: -5%;
+  bottom: -15%;
   
   transition: transform 0.25s ease;
 }
@@ -348,9 +349,12 @@ input[value="on"]:checked ~ .lamp:before {
   outline: 25px solid black;
   filter: drop-shadow(10px 10px 10px #000);
 
-  height: 40vh;
-  width: auto;
+  /* height: 40vh;
+  width: auto; */
 
+  /* height: auto; */
+  width: 20vw;
+  max-height: 40vh fit-content;
 
   position: relative;
   /* width: 100%;
