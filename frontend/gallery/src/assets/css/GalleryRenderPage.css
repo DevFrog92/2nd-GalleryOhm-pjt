@@ -342,7 +342,14 @@ input[value="on"]:checked ~ .lamp:before {
   transform-style: preserve-3d;
 }
 
+.carousel__body .carousel__slider__item .gallery__image{
+  border: 50px white solid;
+  outline: 25px solid black;
+  filter: drop-shadow(10px 10px 10px #000);
 
+  height: 30vh;
+  width: auto;
+}
 
 .item__3d-frame__box--front{
   padding: 2rem;
