@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <div class="detailPage">
       <!-- ( 배경 : 어두운색) -->
       <div class="preview">
@@ -55,13 +55,15 @@
           </div>
         </div>
       </div>
-    </div>
-    <footer>
-      <div class="foot">
-        <p class="t">wwater@google.com</p>
-        <p class="t">tel.010-4433-212</p>
+      <div class="footer">
+        <footer>
+          <div class="foot">
+            <p class="t">wwater@google.com</p>
+            <p class="t">tel.010-4433-212</p>
+          </div>
+        </footer>
       </div>
-    </footer>
+    </div>
   </div>
 </template>
 
@@ -80,10 +82,6 @@ export default {
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
-
-.detailPage {
-  padding-bottom: 100px;
-}
 
 .preview {
   background-color: #ffe8e8;
@@ -128,11 +126,11 @@ export default {
 }
 
 .detail {
-  height: 60vh;
+  height: 70vh;
   background-color: #fcf1e7;
   display: flex;
   justify-content: space-around;
-   background-color: #ffdcdc;
+  background-color: #ffdcdc;
 }
 
 .detail .img_box {
@@ -145,7 +143,6 @@ export default {
 .detail .img_box .img {
   display: inline-block;
   padding: 0;
-  /* padding-right: 5%; */
 }
 
 .detail .img_box .img img {
@@ -154,7 +151,7 @@ export default {
   margin-right: auto;
   border: 10px white solid;
   height: 50vh;
-  margin-top: 25vh;
+  margin-top: 14vh;
 }
 .detail .info_box {
   order: flex;
@@ -190,19 +187,27 @@ export default {
 .detail .info_box .btn {
   margin-top: 3vh;
 }
-footer {
-  height: 100px;
-  margin-top: -100px;
+
+.footer{
+  display: block;
   background-color: #ffdcdc;
+  padding-top: 10vh;
 }
+
+footer {
+  height: 80px;
+}
+
 footer .foot {
   padding-top: 1%;
   /* margin-left: 10%; */
-  width: 100vw;
+  width: 100%;
 }
+
 footer .foot .t {
   color: gray;
   font-family: "Hanna", sans-serif;
+  margin: 0;
 }
 </style>
 
