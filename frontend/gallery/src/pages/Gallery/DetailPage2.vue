@@ -78,6 +78,7 @@ export default {
 
 .preview {
   background-color: gray;
+  color: black;
 }
 
 .container {
@@ -150,6 +151,7 @@ export default {
   width: 45%;
   height: 100%;
   position: relative;
+  color: black;
 }
 
 .detail .info_box .info {
