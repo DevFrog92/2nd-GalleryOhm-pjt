@@ -283,12 +283,12 @@ input[value="on"]:checked ~ .lamp:before {
 }
 
 .carousel__prev {
-  left: 40%;
+  left: 34.8%;
   
 }
 
 .carousel__next {
-  right: 40%;
+  right: 35%;
 }
 
 @media (max-width:1400px){
