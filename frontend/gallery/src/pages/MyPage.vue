@@ -1,8 +1,11 @@
 <template>
   <div class="My_profile_container">
     <div class="profile_wrapper">
-      <div class="profile_card profile_card1"
-        :style="{backgroundImage:'url('+this.img_url+')'}">
+
+
+
+
+      <div class="profile_card profile_card1" :style="{backgroundImage:'url('+this.img_url+')'}">
         <div class="profile_border">
           <h2 class="profile_card_user_name">{{userInfo.user_id}}</h2>
           <div class="profile_icons">
@@ -13,29 +16,45 @@
           </div>
         </div>
       </div>
+
+
+
+
       <div class="profile_about">
-        <h1 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span></h1>
+        <h2 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span></h2>
         <div class="follow">
           <span>Post : {{posts}}</span>
           <span>Following : {{followings.length}}</span>
           <span>Follower : {{followers.length}}</span>
-          </div>
-        <p class="artist_about">{{this.user_about}}
-        </p>
-        <span class="icon-pencil-alt-span" @click="[showModal=!showModal,modify_state=false]">
-          <i class="icon-pencil-alt"></i></span>
-
-      </div>
-        <div class="profile_menu_footer">
-          <div class="profile_menu">
-            <div class="profile_label">More info</div>
-            <div class="profile_spacer"></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">Settings</span></div>
-          </div>
         </div>
+        <div class="artist_about_div">
+        <p class="artist_about">{{this.user_about}}</p>
+        <div v-if="modifyabout" class="modal_modify_about">
+        <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"  v-model="user_about"></textarea>
+        <div class="modify_btn" @click='registerUserAbout'>Edit</div>
+        </div>
+        </div>
+        <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
+        <i  class="icon-pencil-alt">pencile</i></span>
+      
+      
+      
+      <div class="profile_menu_footer">
+        <div class="profile_menu">
+          <div class="profile_label">More info</div><br>
+          <div class="profile_spacer"></div>
+          <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
+          <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
+          <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
+          <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">Settings</span></div>
+        </div>
+      </div>
+      
+      </div>
+
+
+
+
     </div>
     <div class="move_to_top">TOP</div>
 
@@ -61,25 +80,28 @@
     </div>
     <div class="third__section">
       <div class="third__section__wrapper">
-      <div class='gallery_container'>
-        <div class='thumb album-thumb' v-for='(item,index) of ["January","February","March","April","May","Jun","July","Agust","September","October","November","December"]' :key="index">
-          <div class='thumb-container'>
-            <div class='images-container'>
-              <img v-for="(work,index) of my_work_lists" :key="index" :src=' "data:image/jpeg;base64,"+work.work_piece' class='thumb-image'>
-              <!-- <img class='thumb-image'> -->
-              <!-- <img class='thumb-image'> -->
-            </div>
-            <div class='photo-count'>
-              <div class='content'>
-                <div class='number'>{{my_work_lists.length}}</div>
-                <div class='label'>PHOTOS</div>
+        <div class='gallery_container'>
+          <div class='thumb album-thumb'
+            v-for='(item,index) of ["January","February","March","April","May","Jun","July","Agust","September","October","November","December"]'
+            :key="index">
+            <div class='thumb-container'>
+              <div class='images-container'>
+                <img v-for="(work,index) of my_work_lists" :key="index"
+                  :src=' "data:image/jpeg;base64,"+work.work_piece' class='thumb-image'>
+                <!-- <img class='thumb-image'> -->
+                <!-- <img class='thumb-image'> -->
+              </div>
+              <div class='photo-count'>
+                <div class='content'>
+                  <div class='number'>{{my_work_lists.length}}</div>
+                  <div class='label'>PHOTOS</div>
+                </div>
               </div>
             </div>
+            <div class='title'>
+              {{item}}
+            </div>
           </div>
-          <div class='title'>
-            {{item}}
-          </div>
-        </div>
         </div>
       </div>
 
@@ -121,7 +143,7 @@
       </div>
 
       <div slot="footer" v-if="!modify_state">
-        <button class="registerGallery" @click="registerUserAbour">등록하기</button>
+        <button class="registerGallery" @click="registerUserAbout">등록하기</button>
         <button class="closeRegisterGalleryBtn" @click="showModal=false">나가기</button>
       </div>
       <div slot="footer" v-else>
@@ -152,19 +174,20 @@
         dm_content: '',
         dm_list: [],
         my_work_lists: [],
-        followers:0,
-        followings:0,
-        posts:0,
-        my_gallery_list:[],
+        followers: 0,
+        followings: 0,
+        posts: 0,
+        my_gallery_list: [],
+        modifyabout:false,
 
       }
     },
     components: {
       Modal
     },
-    props:["props_id"],
+    props: ["props_id"],
     methods: {
-      registerUserAbour() {
+      registerUserAbout() {
         let userAbout = this.user_about.replace(/(?:\r\n|\r|\n)/g, '<br/>');
         this.user_about = userAbout;
         console.log(userAbout);
@@ -181,6 +204,7 @@
           .then(response => {
             this.modify_state = true;
             console.log('user_about', response);
+            this.modifyabout = !this.modifyabout;
           })
       },
       DM() {
@@ -201,51 +225,59 @@
           })
       },
       DMpull() {
-        http.post('/message/getAllMyReceiveMessage',localStorage.getItem('user_id'))
+        http.post('/message/getAllMyReceiveMessage', localStorage.getItem('user_id'))
           .then(response => {
             console.log(response)
             this.dm_list = response.data;
-            for(let item of this.dm_list){
+            for (let item of this.dm_list) {
               console.log(item.message_content);
-            let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');            
-            const dmList = document.querySelector('.dmlist');
-            const dmItem = document.createElement('li')
-            dmItem.innerHTML = "Sender user : "+item.message_senderId+" Content : "+dmContent;
-            dmList.appendChild(dmItem);
+              let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+              const dmList = document.querySelector('.dmlist');
+              const dmItem = document.createElement('li')
+              dmItem.innerHTML = "Sender user : " + item.message_senderId + " Content : " + dmContent;
+              dmList.appendChild(dmItem);
             }
           })
       },
-      galleryRender(){
+      galleryRender() {
         this.$router.push('/galleryrender');
       },
-      moveSettings(){
+      moveSettings() {
         this.$router.push('/settings');
       },
-      getAllMyFollowing(){
-        http.get('/follow/getAllMyFollowing',{params:{user_id:localStorage.getItem('user_id')}})
-        .then(response =>{
-          this.followings = response.data;
-        })
+      getAllMyFollowing() {
+        http.get('/follow/getAllMyFollowing', {
+            params: {
+              user_id: localStorage.getItem('user_id')
+            }
+          })
+          .then(response => {
+            this.followings = response.data;
+          })
       },
-      getAllMyFollower(){
-        http.get('/follow/getAllMyFollower',{params:{user_id:localStorage.getItem('user_id')}})
-        .then(response =>{
-          console.log(response.data);
-          this.followers = response.data;
-        })
+      getAllMyFollower() {
+        http.get('/follow/getAllMyFollower', {
+            params: {
+              user_id: localStorage.getItem('user_id')
+            }
+          })
+          .then(response => {
+            console.log(response.data);
+            this.followers = response.data;
+          })
       },
-      getMyWorksCount(){
-        http.get('/work/getMyWorksCount/'+localStorage.getItem('user_id'))
-        .then(response=>{
-          this.posts = response.data;
-        })
+      getMyWorksCount() {
+        http.get('/work/getMyWorksCount/' + localStorage.getItem('user_id'))
+          .then(response => {
+            this.posts = response.data;
+          })
       },
-      getMyGallery(){
-        http.get('/gallery/getMyGallery/'+localStorage.getItem('user_id'))
-        .then(respones=>{
-          this.my_gallery_list = respones.data;
-          console.log('getmygallery',this.my_gallery_list);
-        })
+      getMyGallery() {
+        http.get('/gallery/getMyGallery/' + localStorage.getItem('user_id'))
+          .then(respones => {
+            this.my_gallery_list = respones.data;
+            console.log('getmygallery', this.my_gallery_list);
+          })
       }
     },
     mounted() {
@@ -254,19 +286,21 @@
       }, 1000)
     },
     created() {
-      console.log('props_id',this.props_id);
+      console.log('props_id', this.props_id);
       // console.log(this.$store.state.state);
       this.getAllMyFollowing();
       this.getAllMyFollower();
       this.getMyWorksCount();
       this.getMyGallery();
       const params = {
-        user_id: this.props_id ? this.props_id:localStorage.getItem('user_id')
+        user_id: this.props_id ? this.props_id : localStorage.getItem('user_id')
       }
-      console.log(this.props_id ? this.props_id:localStorage.getItem('user_id'));
-      http.get('/user/getUserInfo', {params: params})
+      console.log(this.props_id ? this.props_id : localStorage.getItem('user_id'));
+      http.get('/user/getUserInfo', {
+          params: params
+        })
         .then(response => {
-          console.log('data',response.data);
+          console.log('data', response.data);
           this.userInfo = response.data;
           console.log(response.data.user_about)
           const userAbout = document.querySelector('.artist_about');
@@ -295,8 +329,8 @@
           this.my_work_lists = response.data;
         })
 
-      window.scrollTo(0,0);
-      
+      window.scrollTo(0, 0);
+
 
     }
   }

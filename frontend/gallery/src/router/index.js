@@ -38,6 +38,10 @@ import DetailPage2 from '../pages/Gallery/DetailPage2'
 import uploadImageResize from '../pages/Gallery/uploadImageResize'
 
 import GalleryOWorks from '../pages/Gallery/GalleryO_works'
+
+
+import testmainpage from '../pages/testmainpage'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -165,6 +169,11 @@ const routes = [
     name:"uploadImageResize",
     component:uploadImageResize
   },
+  {
+    path:'/testmainpage',
+    name:'testmainpage',
+    component:testmainpage
+  }
 ]
 
 const router = new VueRouter({
