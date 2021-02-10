@@ -4,7 +4,11 @@
     <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
     <div v-for="(img, i) in imgList" :key="i">
       <div class="image" @mouseover="changePage(i + 1)">
-        <router-link class="router-link" active-class="active" to="/test/GalleryJ/DetailPage">
+        <router-link
+          class="router-link"
+          active-class="active"
+          to="/test/GalleryJ/DetailPage2"
+        >
           <img class="img" :src="img.work_piece" :alt="img.work_title" />
           <div class="content">
             <!-- 작품명 -->
@@ -76,6 +80,8 @@ export default {
   max-width: 90vw;
   position: relative;
   top: 10vh;
+  border: 50px white solid;
+  outline: 25px solid black;
 
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -87,6 +93,8 @@ export default {
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.9s;
+
+  filter: drop-shadow(10px 10px 10px #000);
 }
 
 .image .content {
@@ -104,7 +112,7 @@ export default {
 }
 
 .info {
-  padding-top: 2%;
+  padding-top: 4%;
   color: black;
   transform: scale(1.2);
   font-family: "Hanna", sans-serif;
@@ -145,7 +153,7 @@ export default {
   transition: all 1.2s;
 }
 
-.router-link  {
-    text-decoration: none;
+.router-link {
+  text-decoration: none;
 }
 </style>
