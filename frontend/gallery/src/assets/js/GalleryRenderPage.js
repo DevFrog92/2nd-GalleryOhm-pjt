@@ -34,6 +34,7 @@ const init = () => {
     for(var i = 0; i < items.length; i++) {
         let item = items[i];
         item.style.width = (width - (margin * 2)) + "px";
+        // item.style.width = (width - (margin * 2)) + "px";
         item.style.height = height + "px";
     }
   }
@@ -49,7 +50,7 @@ const init = () => {
             title = item.getElementsByClassName('item__title')[0];
         if(i == (index - 1)) {
             item.classList.add('carousel__slider__item--active');
-            box.style.transform = "perspective(1200px) scale3D(1.3,1.3,1.3) translate3D(0,-20px,0)";
+            box.style.transform = "perspective(1200px) scale3D(1.5,1.5,1.5) translate3D(0,-20px,0)";
             title.style.transform = "perspective(1200px)";
         } else {
           item.classList.remove('carousel__slider__item--active');

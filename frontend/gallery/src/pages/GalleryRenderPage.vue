@@ -85,6 +85,7 @@
         gallery_info: {},
       }
     },
+    props:['props_id'],
     mounted() {
       setTimeout(() => {
           init.init();
@@ -94,36 +95,35 @@
         }, 500)
     },
     created() {
-      return http.get(`/gallery/getMyGallery/${localStorage.getItem('user_id')}`)
-        .then((response) => {
-          console.log(response.data)
-          this.gallery_info = response.data[response.data.length - 1];
-          this.gallery_id = response.data[response.data.length - 1].gallery_id
-          http.get(`/gallery/getArtistGallery/${this.gallery_id}`)
+      console.log('gallery render page');
+      this.getArtistGallery();
+      this.getGAllery();
+    },
+    methods: {
+      getArtistGallery(){
+       http.get(`/gallery/getArtistGallery/${this.props_id}`)
             .then((response) => {
+              console.log('Get gallery data to render page')
               const workList = response.data;
               for (let i = 0; i < workList.length; i++) {
                 workList[i].work_piece = "data:image/jpeg;base64," + workList[i].work_piece;
-                console.log(workList[i].work_id);
               }
               this.work_list = workList;
-            })
-            .then(() => {
-              http.get(`/gallery/getGallery/${this.gallery_id}`)
-                .then(response => {
-                  this.gallery_desc = response.data.gallery_desc;
-                })
+              console.log("gallery work list",this.work_list);
             })
             .catch((err) => {
               console.log(err);
             })
+      },
+      getGAllery(){
+        http.get(`/gallery/getGallery/${this.props_id}`)
+                .then(response => {
+                  console.log('get gellery info',response.data);
+                  this.gallery_info = response.data;
+                  this.gallery_desc = this.gallery_info.gallery_desc;
         })
-
-
-    },
-    methods: {
+      },
       tts: function () {
-        console.log(this.gallery_desc);
         return http
           .post(
             `/kakao/makeVoice_byteArr`, {

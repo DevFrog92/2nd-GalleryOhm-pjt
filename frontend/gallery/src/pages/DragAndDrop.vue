@@ -8,19 +8,7 @@
             <div class="sub_carousel__next"><i class="icon-right-open"></i></div>
             <div class="sub_carousel__slider">
               <!--              -->
-              <div class="sub_carousel__slider__item">
-                <div class="sub_item__3d-frame">
-                  <div class="sub_item__3d-frame__box sub_item__3d-frame__box--front">
-                    <div class="empty">
-                    </div>
-                  </div>
-                  <div class="sub_item__3d-frame__box sub_item__3d-frame__box--left"></div>
-                  <div class="sub_item__3d-frame__box sub_item__3d-frame__box--right"> </div>
-                </div>
-                <div class="sub_item__title">
-                  <h1></h1>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -30,6 +18,12 @@
     </div>
     <div class="sub_all_works_container">
 
+      <div class="empty_block" >
+        <div class="empty">
+          <div class="fill">
+          </div>
+        </div>
+      </div>
       <div class="empty_block" v-for="(item,index) of work_list" :key="index">
         <div class="empty">
           <div class="fill" :data-value="item.work_id" draggable="true"
@@ -43,12 +37,10 @@
 
     </div>
     
-    <a href="#" @click="plusDivs(-1)">prev</a>
-    <a href="#" @click="plusDivs(1)">next</a>
 
     <button class="gallery_list_btn" @click="clickEventHandler">전시관 등록</button>
 
-    <Modal v-if="showModal" @close="showModal = false">
+    <Modal v-if="showModal_register" @close="showModal_register = false">
       <!--
       you can use custom content here to overwrite
       default content
@@ -57,7 +49,7 @@
         <h3>
           전시관 등록
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="showModal=false"></i>
+        <i class="fas fa-times closeModalBtn" @click="showModal_register=false"></i>
       </div>
 
       <div slot="body" v-if="!register_state">
@@ -65,7 +57,7 @@
           <label for="gallery_name"></label>
           <input type="text" id="gallery_name" placeholder="전시관 이름을 작성해 주세요." v-model="gallery_name">
         </div>
-        <div class="desc_of_gallery" v-if="!register_state">
+        <div class="desc_of_gallery" >
           <label for="gallery_desc"></label>
           <textarea type="textarea" id="gallery_desc" placeholder="전시관 소개글을 작성해 주세요." v-model="gallery_desc"></textarea>
         </div>
@@ -78,12 +70,44 @@
 
       <div slot="footer" v-if="!register_state">
         <button class="registerGallery" @click="makeGallery">등록하기</button>
-        <button class="closeRegisterGalleryBtn" @click="showModal=false">나가기</button>
+        <button class="closeRegisterGalleryBtn" @click="showModal_register=false">나가기</button>
+      </div>
+      <div slot="footer" v-else>
+        <button class="closeRegisterGalleryBtn" @click="goToMypage">마이페이지로 이동</button>
+      </div>
+    </Modal>
+    <Modal v-if="showModal_modify" @close="showModal_modify= false">
+     <div slot="header">
+        <h3>
+          전시관 수정
+        </h3>
+        <i class="fas fa-times closeModalBtn" @click="showModal_modify=false"></i>
+      </div>
+
+      <div slot="body" v-if="modify_state">
+        <div class="name_of_gallery">
+          <label for="gallery_name"></label>
+          <input type="text" id="gallery_name" placeholder="전시관 이름을 작성해 주세요." v-model="gallery_info.gallery_name">
+        </div>
+        <div class="desc_of_gallery" >
+          <label for="gallery_desc"></label>
+          <textarea type="textarea" id="gallery_desc" placeholder="전시관 소개글을 작성해 주세요." v-model="gallery_info.gallery_desc"></textarea>
+        </div>
+      </div>
+      <div slot="body" v-else>
+        <h3>전시관이 성공적으로 수정되었습니다.</h3>
+        <p>수정된 전시관 이름 : {{gallery_info.gallery_name}}</p>
+      </div>
+
+      <div slot="footer" v-if="modify_state">
+        <button class="registerGallery" @click="modifyArtistGallery">등록하기</button>
+        <button class="closeRegisterGalleryBtn" @click="showModal_modify=false">나가기</button>
       </div>
       <div slot="footer" v-else>
         <button class="registerGallery" @click="galleryrender">전시관으로 이동</button>
         <button class="closeRegisterGalleryBtn" @click="goToMypage">마이페이지로 이동</button>
       </div>
+
     </Modal>
   </div>
 
@@ -103,25 +127,51 @@
       return {
         work_list: [],
         galleryIdArray: [],
-        showModal: false,
+        showModal_register: false,
         gallery_desc: "",
         gallery_name: "",
         register_state: false,
         currIndex:0,
+        gallery_works:[],
+        modify_state:false,
+        gallery_info:[],
+        showModal_modify:false,
       }
     },
     components: {
       Modal
     },
+    props:['props_id'],
     mounted() {
       setTimeout(() => {
-        init.init();
+        init.init(this.gallery_works,this.gallery_works.length);
       }, 1000)
     },
     created() {
-      const user_id = localStorage.getItem('user_id')
-      return http.get(`/work/getMyWorks/${user_id}`)
-        .then(response => {
+      this.getMyWorks();
+      if(this.props_id !== undefined){
+        this.getGalleryInfo();
+        this.getGallery();
+      }
+    },
+    methods: {
+      getGallery(){
+        http.get('/gallery/getGallery/'+this.props_id)
+        .then(response =>{
+          this.gallery_info = response.data;
+          console.log('this gallery info',this.gallery_info)
+        })
+      },
+      getGalleryInfo(){
+        http.get('/gallery/getArtistGallery/'+this.props_id)
+        .then(response =>{
+          this.gallery_works = response.data;
+          console.log('gallery works',this.gallery_works)
+        })  
+      },
+      getMyWorks(){
+        http.get(`/work/getMyWorks/${localStorage.getItem('user_id')}`)
+          .then(response => {
           const workList = response.data;
           console.log('worklist',workList);
           for (let i = 0; i < workList.length; i++) {
@@ -133,19 +183,40 @@
         .catch((err) => {
           console.log(err);
         })
-    },
-    methods: {
+      },
       clickEventHandler(e) {
         e.preventDefault();
         const emptyContainer = document.querySelectorAll('.sub_carousel__slider .empty');
         for (const emptyItem of emptyContainer) {
           let item = emptyItem.childNodes;
-          console.log(item);
-          if (item[0]) {
+          console.log(item)
+          if (item[1]) {
+            this.galleryIdArray.push(item[1].dataset.value);
+          }else if(item[0]){
             this.galleryIdArray.push(item[0].dataset.value);
           }
         }
-        this.showModal = !this.showModal;
+        console.log(this.galleryIdArray)
+        if(this.gallery_works.length >0){
+          this.modify_state = true;
+          this.showModal_modify = true;
+        }else{
+          this.showModal_register =true;
+        }
+      },
+      modifyArtistGallery(){
+        const formdata = new FormData();
+        formdata.append('gallery_artistId', localStorage.getItem('user_id'));
+        formdata.append('gallery_desc', this.gallery_info.gallery_desc);
+        formdata.append('gallery_mainWorkId', this.galleryIdArray[0]);
+        formdata.append('gallery_id', this.gallery_info.gallery_id);
+        formdata.append('gallery_name', this.gallery_info.gallery_name);
+        formdata.append('gallery_workIdList', this.galleryIdArray);
+        http.post('/gallery/modifyArtistGallery',formdata)
+        .then(response =>{
+          console.log('succ modify gallery',response.data);
+          this.modify_state = false;
+        })
       },
       makeGallery() {
         const formdata = new FormData();
@@ -164,29 +235,11 @@
             console.log(err);
           })
       },
-      moveTo(index){
-
-        // TODO: 슬라이더 만들어야 한다. 추가적으로 전시관에서 사진 확대 기능 추가해야 한다.
-
-
-          const  items = document.querySelectorAll('.empty_block');
-          const slider = document.querySelector('.sub_all_works_container');
-
-          slider.style.width = 150*items.length + "px";
-          console.log(150*items.length + "px");
-          console.log(index);
-
-          // console.log("move",index);
-          // if(index < 1) index = items.length;
-          // if(index > items.length) index = 1;
-          // this.currIndex = index;
-          // slider.style.transform = "translate3d(" + ((index * -width) + (width / 2) + window.innerWidth / 2) + "px, 0, 0)";
-      },
       goToMypage(){
         this.$router.push('/mypage');
       },
       galleryrender(){
-        this.$router.push('/galleryrender');
+        this.$router.push({name:'GalleryRenderPage',params:{props_id:this.gallery_info.gallery_id}});
       }
     }
   }
