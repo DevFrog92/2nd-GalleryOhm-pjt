@@ -97,6 +97,7 @@
       },
       change_followes_works() {
         this.render_image = this.following_work;
+        console.log('follow',this.render_image)
         this.resetAll();
         this.no_works = false;
         this.following_list=[];
@@ -106,9 +107,9 @@
         this.$router.push('/workupload');
       },
       resetAll() {
-        this.getAllWorks();
+        // this.getAllWorks();
         this.filter__hashs = [];
-        this.render_image = this.imgList
+        // this.render_image = this.imgList
       },
       searchTag() {
         if(this.searchHashtag !== ""){

@@ -24,32 +24,35 @@
         <h2 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span></h2>
         <div class="follow">
           <span>Post : {{posts}}</span>
-          <span>Following : {{followings.length}}</span>
-          <span>Follower : {{followers.length}}</span>
+          <span @click="following_view">Following : {{followings.length}}</span>
+          <span @click="follower_view">Follower : {{followers.length}}</span>
+          <!-- <span  @close="showModal=true">Follower : {{followers.length}}</span> -->
         </div>
         <div class="artist_about_div">
-        <p class="artist_about">{{this.user_about}}</p>
-        <div v-if="modifyabout" class="modal_modify_about">
-        <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"  v-model="user_about"></textarea>
-        <div class="modify_btn" @click='registerUserAbout'>Edit</div>
-        </div>
+          <p class="artist_about">{{this.user_about}}</p>
+          <div v-if="modifyabout" class="modal_modify_about">
+            <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
+              v-model="user_about"></textarea>
+            <div class="modify_btn" @click='registerUserAbout'>Edit</div>
+          </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-        <i  class="icon-pencil-alt">pencile</i></span>
-      
-      
-      
-      <div class="profile_menu_footer">
-        <div class="profile_menu">
-          <div class="profile_label">More info</div><br>
-          <div class="profile_spacer"></div>
-          <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
-          <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
-          <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
-          <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">Settings</span></div>
+          <i class="icon-pencil-alt">pencile</i></span>
+
+
+
+        <div class="profile_menu_footer">
+          <div class="profile_menu">
+            <div class="profile_label">More info</div>
+            <div class="profile_spacer"></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="4">Scrap</span></div>
+            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">Settings</span></div>
+          </div>
         </div>
-      </div>
-      
+
       </div>
 
 
@@ -59,31 +62,38 @@
     <div class="move_to_top">TOP</div>
 
     <div class="second__section">
+    <h1>{{userInfo.user_id}}의 전시관</h1>
+    <div class="my_works">
+    <div class="poster_card1" :data-value="my_gallery_1.gallery_id">
+      <div v-if="my_gallery_1.gallery_id" class="gallery_modify" @click="modifyGallery(my_gallery_1.gallery_id)">수정</div>
+      <div v-if="my_gallery_1.gallery_id" class="gallery_delete" @click="[delete_gallery_id=my_gallery_1.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_1.gallery_name]">삭제</div>
+      <div v-else class="plus_gallery"  @click="CreateGallery">+</div>
+     <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
+      <img v-else src="../assets/images/1.png" alt="">
 
-      <div class="galelry-page-content">
-        <div class="gallery-card">
-          <div class="gallery-content">
-            <h2 class="gallery-title">Mountain View</h2>
-            <p class="gallery-copy">Check out all of these gorgeous mountain trips with beautiful views of, you guessed
-              it, the mountains</p><button class="gallery-btn" @click="galleryRender">View Trips</button>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <div class="gallery-content">
-            <h2 class="gallery-title">To The Beach</h2>
-            <p class="gallery-copy">Plan your next beach trip with these fabulous destinations</p><button
-              class="gallery-btn">View Trips</button>
-          </div>
-        </div>
-      </div>
+      <h3>{{my_gallery_1.gallery_name}}</h3>
+      <p>Created By {{my_gallery_1.gallery_artistId}} {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</p>
+    </div>
+
+    <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
+      <div v-if="my_gallery_2.gallery_id"  class="gallery_modify" @click="modifyGallery(my_gallery_2.gallery_id)">수정</div>
+      <div v-if="my_gallery_2.gallery_id"  class="gallery_delete" @click="[delete_gallery_id=my_gallery_2.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_2.gallery_name]">삭제</div>
+      <div v-else class="plus_gallery" @click="CreateGallery">+</div>
+      <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
+      <img v-else src="../assets/images/1.png" alt="">
+          <h3>{{my_gallery_2.gallery_name}}</h3>
+      <p>Created By {{my_gallery_2.gallery_artistId}} {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</p>
+    </div>
+  </div>
+
 
     </div>
+
+    
     <div class="third__section">
       <div class="third__section__wrapper">
         <div class='gallery_container'>
-          <div class='thumb album-thumb'
-            v-for='(item,index) of ["January","February","March","April","May","Jun","July","Agust","September","October","November","December"]'
-            :key="index">
+          <div class='thumb album-thumb' v-for='(item,index) of ["January"]' :key="index">
             <div class='thumb-container'>
               <div class='images-container'>
                 <img v-for="(work,index) of my_work_lists" :key="index"
@@ -110,46 +120,127 @@
       <button @click="DMpull">DM 받아오기</button>
 
       <ul class="dmlist">
-        <!-- <ul>
+        <ul>
           <li v-for="(item,index) of dm_list" :key="index">
             {{item}}
           </li>
-        </ul> -->
+        </ul>
       </ul>
+      <div>
+        <h3>Follower</h3>
+        <ul>
+          <li class="followers" v-for="(item2,index) of followers" :key="index">
+            {{item2}}
+          </li>
+        </ul>
+        <h3>Following</h3>
+        <ul>
+          <li class="followings" v-for="(item3,index) of followings" :key="index">
+            {{item3}}
+          </li>
+        </ul>
+
+      </div>
     </div>
 
-    <Modal v-if="showModal&&Aboutmodal" @close="showModal = false">
-      <!--
-      you can use custom content here to overwrite
-      default content
-    -->
+
+    <div class="fifth__section">
+      <h1>Scrap</h1>
+      <div class="outer-wrapper">
+        <div class="scroll-wrapper">
+          <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
+            <img :src="'data:/image/jpeg;base64,'+item.work_piece" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <Modal v-if="showModal" @close="showModal = false">
       <div slot="header">
         <h3>
-          사용자 정보 수정
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="showModal=false"></i>
+        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing()]"></i>
       </div>
 
-      <div slot="body" v-if="!modify_state">
-        <div class="desc_of_gallery" v-if="!modify_state">
-          <label for="user_about"></label>
-          <textarea type="textarea" id="user_about" placeholder="짧은 본인 소개글을 작성해 주세요." v-model="user_about"></textarea>
+      <div slot="body">
+        <div class="notification__wrapper">
+          <div class="notifications" v-if="modal_following">
+            <div class="notifications__item" v-for="(people,index) of followings" :key="index">
+              <div class="notifications__item__avatar">
+                <img src="../assets/images/user.png" />
+              </div>
+              <div class="notifications__item__content">
+                <span class="notifications__item__title">{{people}}</span>
+                <span class="notifications__item__message">Just started following you</span>
+              </div>
+              <div>
+                <div class="notifications__item__option archive js-option">
+                  <i class="fas fa-folder" :data-name="people"></i>
+                </div>
+                <div class="notifications__item__option delete js-option">
+                  <i class="fas fa-trash" :data-name="people"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notifications" v-else>
+            <div class="notifications__item" v-for="(people,index) of followers" :key="index">
+              <div class="notifications__item__avatar">
+                <img src="../assets/images/user.png" />
+              </div>
+              <div class="notifications__item__content">
+                <span class="notifications__item__title">{{people}}</span>
+                <span class="notifications__item__message">Just started following you</span>
+              </div>
+              <div>
+                <div class="notifications__item__option archive js-option">
+                  <i class="fas fa-folder" :data-name="people"></i>
+                </div>
+                <div class="notifications__item__option delete js-option">
+                  <i class="fas fa-trash" :data-name="people"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div slot="body" v-else>
-        <h3>소개글이 성공적으로 등록되었습니다.</h3>
-        <p>{{user_about}}</p>
-      </div>
-
-      <div slot="footer" v-if="!modify_state">
-        <button class="registerGallery" @click="registerUserAbout">등록하기</button>
-        <button class="closeRegisterGalleryBtn" @click="showModal=false">나가기</button>
-      </div>
-      <div slot="footer" v-else>
-        <button class="closeRegisterGalleryBtn" @click="showModal=false">나가기</button>
+      <div slot="footer">
+        <button class="closeRegisterGalleryBtn"
+          @click="[showModal=false,getAllMyFollowing()]">나가기</button>
       </div>
     </Modal>
+
+    <Modal v-if="delete_gallery" @close="delete_gallery= false">
+     <div slot="header">
+        <h3>
+          전시관 삭제
+        </h3>
+        <i class="fas fa-times closeModalBtn" @click="delete_gallery=false"></i>
+      </div>
+
+      <div slot="body" v-if="!delete_gallery_state">
+       <h3>전시관을 삭제하시겠습니까?</h3>
+        <p>삭제할 전시관 이름 : {{delete_gallery_name}}</p>
+      </div>
+      <div slot="body" v-else>
+        <h3>전시관이 성공적으로 삭제되었습니다.</h3>
+        <p>삭제된 전시관 이름 : {{delete_gallery_name}}</p>
+      </div>
+
+      <div slot="footer" v-if="!delete_gallery_state">
+        <button class="registerGallery" @click="deleteGallery(delete_gallery_id)">삭제하기</button>
+        <button class="closeRegisterGalleryBtn" @click="delete_gallery=false">나가기</button>
+      </div>
+      <div slot="footer" v-else>
+        <button class="closeRegisterGalleryBtn" @click="refresh">나가기</button>
+      </div>
+
+    </Modal>
+
+
+
   </div>
 </template>
 
@@ -178,7 +269,16 @@
         followings: 0,
         posts: 0,
         my_gallery_list: [],
-        modifyabout:false,
+        modifyabout: false,
+        scrap_list: [],
+        modal_follower: false,
+        modal_following: false,
+        my_gallery_1:{},
+        my_gallery_2:{},
+        my_gallery_poster:[],
+        delete_gallery:false,
+        delete_gallery_state:false,
+        delete_gallery_name:'',
 
       }
     },
@@ -187,10 +287,44 @@
     },
     props: ["props_id"],
     methods: {
+      refresh(){
+        this.$router.go();
+      },
+      CreateGallery(){
+        this.$router.push('/creategallery');
+      },
+      deleteGallery(gallery_id){
+        console.log('지운다')
+        http.post('/gallery/deleteArtistGallery/'+gallery_id)
+        .then(response => {
+          this.getMyGallery();
+          console.log('response.data', response.data);
+          this.delete_gallery_state = true;
+          
+        })
+      },
+      modifyGallery(gallery_id){
+        this.$router.push({name:'DragAndDrop',params:{props_id:gallery_id}});
+      },
+      following_view() {
+        console.log('Show me following')
+        this.modal_following = true;
+        setTimeout(() => {
+          init.follow_modal();
+        }, 200);
+        this.showModal = true;
+
+      },
+      follower_view() {
+        console.log('Show me follower')
+        setTimeout(() => {
+          init.follow_modal();
+        }, 200);
+        this.showModal = true;
+      },
       registerUserAbout() {
         let userAbout = this.user_about.replace(/(?:\r\n|\r|\n)/g, '<br/>');
         this.user_about = userAbout;
-        console.log(userAbout);
         const userAboutTag = document.querySelector('.artist_about');
         userAboutTag.innerHTML = this.user_about;
         const formData = new FormData();
@@ -203,7 +337,7 @@
           })
           .then(response => {
             this.modify_state = true;
-            console.log('user_about', response);
+            console.log('Register user_about', response);
             this.modifyabout = !this.modifyabout;
           })
       },
@@ -219,7 +353,7 @@
         }
         http.post('/message/sendMessage', test)
           .then(response => {
-            console.log('DM', response.data)
+            console.log('Send DM', response.data)
             this.dm_title = "";
             this.dm_content = "";
           })
@@ -227,10 +361,9 @@
       DMpull() {
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('user_id'))
           .then(response => {
-            console.log(response)
+            console.log('Get all my dm list',response.data);
             this.dm_list = response.data;
             for (let item of this.dm_list) {
-              console.log(item.message_content);
               let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
               const dmList = document.querySelector('.dmlist');
               const dmItem = document.createElement('li')
@@ -252,6 +385,7 @@
             }
           })
           .then(response => {
+            console.log('Get all my followings',response.data);
             this.followings = response.data;
           })
       },
@@ -262,73 +396,138 @@
             }
           })
           .then(response => {
-            console.log(response.data);
+            console.log('Get all my followers',response.data);
             this.followers = response.data;
           })
       },
       getMyWorksCount() {
         http.get('/work/getMyWorksCount/' + localStorage.getItem('user_id'))
           .then(response => {
+            console.log('Get all my works count',response.data);
             this.posts = response.data;
           })
       },
       getMyGallery() {
         http.get('/gallery/getMyGallery/' + localStorage.getItem('user_id'))
-          .then(respones => {
-            this.my_gallery_list = respones.data;
-            console.log('getmygallery', this.my_gallery_list);
+          .then(response => {
+            console.log('Get my gallery',response.data);
+            if(response.data.length !== 2){
+              if(response.data.length === 1){
+                this.my_gallery_list = response.data;
+                this.my_gallery_1 = this.my_gallery_list[0];
+                this.getMyGalleryDetail(this.my_gallery_1.gallery_id);
+                this.my_gallery_2 = {
+                  "gallery_id": '',
+                  "gallery_name": "",
+                  "gallery_desc": "",
+                  "gallery_artistId": "",
+                  "gallery_writeTime": "",
+                  "gallery_mainWorkId": '',
+                  "gallery_footPrint": ''
+                }
+              }else{
+                this.my_gallery_list = response.data;
+                this.my_gallery_1 = {
+                  "gallery_id": '',
+                  "gallery_name": "",
+                  "gallery_desc": "",
+                  "gallery_artistId": "",
+                  "gallery_writeTime": "",
+                  "gallery_mainWorkId": '',
+                  "gallery_footPrint": ''
+                }
+                this.my_gallery_2 = {
+                  "gallery_id": '',
+                  "gallery_name": "",
+                  "gallery_desc": "",
+                  "gallery_artistId": "",
+                  "gallery_writeTime": "",
+                  "gallery_mainWorkId": '',
+                  "gallery_footPrint": ''
+                }
+              }
+            }else{
+              this.my_gallery_list = response.data;
+              this.my_gallery_1 = this.my_gallery_list[0];
+              this.getMyGalleryDetail(this.my_gallery_1.gallery_id);
+              this.my_gallery_2 = this.my_gallery_list[1];
+              this.getMyGalleryDetail(this.my_gallery_2.gallery_id);
+            }
+          })
+      },
+      getAllScrapWork() {
+        http.get('/work/getAllScrapWork/' + localStorage.getItem('user_id'))
+          .then(response => {
+            console.log('Get all scrap',response.data);
+            this.scrap_list = response.data;
+          })
+      },
+      getMyWorks() {
+        http.get('/work/getMyWorks/' + localStorage.getItem('user_id'))
+          .then(response => {
+            console.log('Get my works', response.data);
+            this.my_work_lists = response.data;
+          })
+      },
+      getMyGalleryDetail(gallery_id){
+        http.get('http://localhost:7080/artGallery/api/gallery/getArtistGallery/'+gallery_id)
+        .then(response => {
+          this.my_gallery_poster.push(response.data[0].work_piece);
+        })
+      },
+      getUserInfo() {
+        http.get('/user/getUserInfo', {
+            params: {
+              user_id: localStorage.getItem('user_id')
+            }
+          })
+          .then(response => {
+            console.log('Get user Info',response.data);
+            this.userInfo = response.data;
+
+            const userAbout = document.querySelector('.artist_about');
+            userAbout.innerHTML = this.userInfo.user_about;
+            this.user_about = this.userInfo.user_about;
+
+            if (response.data.user_profile !== null) {
+              localStorage.setItem("user_profile", "data:/image/jpeg;base64," + this.userInfo.user_profile);
+              this.img_url = "data:/image/jpeg;base64," + this.userInfo.user_profile;
+              // DB에서 응답 받은 이미지 파일을 다시 파일 형태로 변환 -> settings에서 필요
+              // const byteCharacters = atob(this.userInfo.user_profile);
+              // const byteNumbers = new Array(byteCharacters.length);
+              // for (let i = 0; i < byteCharacters.length; i++) {
+              //   byteNumbers[i] = byteCharacters.charCodeAt(i);
+              // }
+              // const byteArray = new Uint8Array(byteNumbers);
+              // const blob = new Blob([byteArray], {
+              //   type: 'image/jpeg'
+              // });
+              // const file = new File([blob], 'profile')
+              // // console.log(file);
+              // this.userInfo.user_profile = file;
+            }
           })
       }
     },
     mounted() {
       setTimeout(() => {
         init.init();
-      }, 1000)
+      }, 600)
     },
     created() {
-      console.log('props_id', this.props_id);
-      // console.log(this.$store.state.state);
+      this.getUserInfo();
+      // following 목록
       this.getAllMyFollowing();
+      // follower 목록
       this.getAllMyFollower();
+      // 전체 포스팅 글 숫자
       this.getMyWorksCount();
+      // 나의 전시관 가지고 오기
       this.getMyGallery();
-      const params = {
-        user_id: this.props_id ? this.props_id : localStorage.getItem('user_id')
-      }
-      console.log(this.props_id ? this.props_id : localStorage.getItem('user_id'));
-      http.get('/user/getUserInfo', {
-          params: params
-        })
-        .then(response => {
-          console.log('data', response.data);
-          this.userInfo = response.data;
-          console.log(response.data.user_about)
-          const userAbout = document.querySelector('.artist_about');
-          userAbout.innerHTML = this.userInfo.user_about;
-          this.user_about = this.userInfo.user_about;
-          if (response.data.user_profile !== null) {
-            localStorage.setItem("user_profile", "data:/image/jpeg;base64," + this.userInfo.user_profile);
-            this.img_url = "data:/image/jpeg;base64," + this.userInfo.user_profile;
-            const byteCharacters = atob(this.userInfo.user_profile);
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-              byteNumbers[i] = byteCharacters.charCodeAt(i);
-            }
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], {
-              type: 'image/jpeg'
-            });
-            const file = new File([blob], 'profile')
-            // console.log(file);
-            this.userInfo.user_profile = file;
-          }
-        })
-      http.get('/work/getMyWorks/' + params.user_id)
-        .then(response => {
-          console.log(response.data);
-          this.my_work_lists = response.data;
-        })
-
+      //  즐겨 찾기 목록 가지고 오기
+      this.getAllScrapWork();
+      // 나의 전체 작품 가지고 오기 
+      this.getMyWorks();
       window.scrollTo(0, 0);
 
 

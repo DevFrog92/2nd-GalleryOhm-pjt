@@ -28,7 +28,7 @@ public class ArtistController {
 
     @ApiOperation(value = "작가의 아이디로 작가의 정보를 반환한다.", response = ArtistDto.class, notes = "getArtistInfo(artist_id) \n \t return ArtistDto")
     @RequestMapping(value = "/getArtistInfo", method = RequestMethod.GET)
-    public ResponseEntity<ArtistDto> getArtistInfo(@PathVariable String artist_id) throws Exception{
+    public ResponseEntity<ArtistDto> getArtistInfo(@RequestParam(value = "artist_id") String artist_id) throws Exception{
         ArtistDto artist = null;
         artist = artistService.getArtistInfo(artist_id);
         if(artist == null){

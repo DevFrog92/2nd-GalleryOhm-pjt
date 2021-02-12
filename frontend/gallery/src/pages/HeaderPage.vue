@@ -1,6 +1,5 @@
 <template>
   <header id='headerpage-header'>
-    <div class="header-container">
       <nav id="nav"><button class="nav-icon" id="nav-icon"><span></span></button>
         <ul class="nav_ul" v-if="loginState">
           <li><router-link  class="router" to="/listitem">Works</router-link></li>
@@ -13,7 +12,6 @@
           <li><router-link class="nav-item" to="/loginsignup">Login & Signup</router-link></li>
         </ul>
       </nav>
-    </div>
   </header>
 </template>
 
