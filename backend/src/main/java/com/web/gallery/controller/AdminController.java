@@ -216,6 +216,23 @@ public class AdminController {
         return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "신인작가 조건(올린 작품 10개 이상 전적 있는 경우) exp up", response = NumberResult.class)
+    @RequestMapping(value = "/renewArtistExp", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> renewArtistExp() {
+        NumberResult ns = new NumberResult();
+
+        try {
+            adminService.renewArtistExp();
+
+            ns.setValue("renewArtistExp", 1, "succ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ns.setValue("renewArtistExp", 0, "fail");
+            return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
+    }
+
     /**** 메인 갤러리 목록 조회 ****/
     @ApiOperation(value = "메인 갤러리의 전시관 목록들을 조회한다.", response = List.class, notes = "getAllMainGallery()")
     @RequestMapping(value = "/getAllMainGallery", method = RequestMethod.GET)

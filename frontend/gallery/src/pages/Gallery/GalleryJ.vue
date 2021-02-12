@@ -2,7 +2,7 @@
   <div>
     <div class="intro">
       <!-- 입장 animation -->
-      <div class="enter" @click="clickEnter">Enter</div>
+      <div class="enter" @click="clickEnter"></div>
       <div class="door">
         <div class="left"></div>
         <!-- <div class="line"></div> -->
@@ -100,7 +100,8 @@ export default {
 .subgallery {
   height: 100vh;
   overflow-x: hidden;
-  background-color: #c20a0a;
+  /* background-color: #c20a0a; */
+  background-image: url("../../assets/images/red.png");
 }
 .image {
   position: relative;
@@ -204,7 +205,7 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #c20a0a;
+  background-color: #ff1919;
 }
 
 .door {
@@ -250,7 +251,7 @@ export default {
   float: left;
   /* border-right: solid 2.5px #111; */
   /* border-right: 10px solid #f90000; */
-  box-shadow: 5px 0px 0px #ff1919, inset -10px 0px 150px #ff1919;
+  /* box-shadow:inset -100px 0px 250px #ff1919 */
 }
 
 .door .right {
@@ -258,7 +259,7 @@ export default {
   /* border-left: solid 2.5px #111; */
   /* border-left: 10px solid #f90000; */
   /* box-shadow: -5px 0 0 #f90000; */
-  box-shadow: -5px 0px 0px #ff1919, inset 10px 0px 150px #ff1919;
+  /* box-shadow: inset 100px 0px 250px #ff1919 */
 }
 
 .enter {
@@ -269,8 +270,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 30px;
-  width: 50px;
+  height: 20px;
+  width: 20px;
   text-align: center;
   line-height: 30px;
   border-radius: 5px;
