@@ -41,6 +41,8 @@ import GalleryOWorks from '../pages/Gallery/GalleryO_works'
 
 
 import testmainpage from '../pages/testmainpage'
+import gridTestPage from '../pages/gridTestPage'
+import About from '../pages/About'
 
 Vue.use(VueRouter)
 
@@ -77,6 +79,7 @@ const routes = [
     path:'/galleryrender',
     name:'GalleryRenderPage',
     component:GalleryRenderPage,
+    props:true,
   },
   {
     path:'/loginsignup',
@@ -102,7 +105,8 @@ const routes = [
   {
     path:'/creategallery',
     name:"DragAndDrop",
-    component:DragAndDrop
+    component:DragAndDrop,
+    props:true
   },
   {
     path: "/RedGallery",
@@ -173,6 +177,16 @@ const routes = [
     path:'/testmainpage',
     name:'testmainpage',
     component:testmainpage
+  },
+  {
+    path:'/gridtestpage',
+    name:'gridTestPage',
+    component:gridTestPage
+  },
+  {
+    path:'/about',
+    name:'About',
+    component:About,
   }
 ]
 

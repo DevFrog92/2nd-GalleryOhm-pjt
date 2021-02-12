@@ -16,17 +16,16 @@
       <div class="profile_about">
         <h1 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span>
         </h1>
-        <span @click="unfollow" ><i class="icon-user-delete"></i></span>
-        <span @click="follow" ><i class="icon-user-add"></i></span>
+        <div v-if="user_follow_state1">
+        <span @click="unfollow" v-if="user_follow_state2" ><i class="icon-user-delete"></i></span>
+        <span @click="follow" v-else ><i class="icon-user-add"></i></span>
+        </div>
         <div class="follow">
           <span>Post : {{posts}}</span>
           <span>Following : {{followings.length}}</span>
           <span>Follower : {{followers.length}}</span>
           </div>
-        <p class="artist_about">{{this.user_about}}
-        </p>
-        <span class="icon-pencil-alt-span" @click="[showModal=!showModal,modify_state=false]">
-          <i class="icon-pencil-alt"></i></span>
+        <p class="artist_about">{{this.user_about}}</p>
       </div>
         <div class="profile_menu_footer">
           <div class="profile_menu">
@@ -35,7 +34,6 @@
             <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">Settings</span></div>
           </div>
         </div>
     </div>
@@ -93,7 +91,6 @@
         <textarea name="DM" v-model="dm_content" placeholder="DM content"></textarea>
       </div>
       <button @click="DM">DM 날리기</button>
-      <button @click="DMpull">DM 받아오기</button>
 
       <div class="dmlist">
         <ul>
@@ -140,8 +137,8 @@
 </template>
 
 <script>
-  import '../assets/css/MyPage.css'
-  import init from '../assets/js/MyPage'
+  import '../assets/css/UserProfile.css'
+  import init from '../assets/js/UserProfile'
   import Modal from '../pages/Modal'
   import http from '../api/http'
 
@@ -164,6 +161,8 @@
         followers:0,
         followings:0,
         posts:0,
+        user_follow_state1:true,
+        user_follow_state2:false,
 
       }
     },
@@ -172,27 +171,7 @@
     },
     props:["props_id"],
     methods: {
-      registerUserAbour() {
-        let userAbout = this.user_about.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-        this.user_about = userAbout;
-        console.log(userAbout);
-        const userAboutTag = document.querySelector('.artist_about');
-        userAboutTag.innerHTML = this.user_about;
-        const formData = new FormData();
-        formData.append("user_about", this.user_about);
-        formData.append('user_id', localStorage.getItem('user_id'));
-        http.post('/user/modifyUserAbout', formData, {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => {
-            this.modify_state = true;
-            console.log('user_about', response);
-          })
-      },
       DM() {
-        console.log(localStorage.getItem('props_id'));
         const test = {
           "message_content": this.dm_content,
           "message_id": 0,
@@ -202,7 +181,6 @@
           "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }
-        console.log('test',test);
         http.post('/message/sendMessage', test)
           .then(response => {
             console.log('DM', response.data)
@@ -211,62 +189,53 @@
             alert('메세지를 보냈습니다.');
           })
       },
-      DMpull() {
-        http.post('/message/getAllMyReceiveMessage', localStorage.getItem('user_id'))
-          .then(response => {
-            console.log(response)
-            this.dm_list = response.data;
-          })
-      },
       galleryRender(){
         this.$router.push('/galleryrender');
       },
-      moveSettings(){
-        this.$router.push('/settings');
-      },
       getInfo(){
-        const params = {user_id: localStorage.getItem('props_id')}
-      http.get('/user/getUserInfo', {params: params})
+        http.get('/user/getUserInfo', {params:{user_id: localStorage.getItem('props_id')}})
         .then(response => {
-          console.log('data',response.data);
+          console.log('Get props info data',response.data);
           this.userInfo = response.data;
           const userAbout = document.querySelector('.artist_about');
           userAbout.innerHTML = this.userInfo.user_about;
-          if(this.userInfo.user_profile){
-            this.img_url = 'data:/image/jpeg;base64,'+this.userInfo.user_profile;
-          }
-          console.log(this.img_url)
-          console.log(response.data.user_about)
-          console.log('this',this.userInfo)
+          this.img_url = 'data:/image/jpeg;base64,'+this.userInfo.user_profile;
           this.user_about = this.userInfo.user_about;
-          this.getMyWork();
         })
       },
       getMyWork(){
         const params = {user_id: localStorage.getItem('props_id')}
-
         http.get('/work/getMyWorks/' + params.user_id)
         .then(response => {
-          console.log(response.data);
+          console.log('Get all Props works',response.data);
+        
           this.my_work_lists = response.data;
         })
       },
       getAllMyFollowing(){
         http.get('/follow/getAllMyFollowing',{params:{user_id:localStorage.getItem('props_id')}})
         .then(response =>{
+          console.log('Get all my Props following',response.data);
+          if(response.data.includes(localStorage.getItem('user_id'))){
+            this.user_follow_state1 = false;
+          }
           this.followings = response.data;
         })
       },
       getAllMyFollower(){
         http.get('/follow/getAllMyFollower',{params:{user_id:localStorage.getItem('props_id')}})
         .then(response =>{
-          console.log(response.data);
+          console.log('Get all my Props followers',response.data);
+          if(response.data.includes(localStorage.getItem('user_id'))){
+            this.user_follow_state2=true;
+          }
           this.followers = response.data;
         })
       },
       getMyWorksCount(){
         http.get('/work/getMyWorksCount/'+localStorage.getItem('props_id'))
         .then(response=>{
+          console.log('Get props all works count')
           this.posts = response.data;
         })
       },
@@ -276,8 +245,8 @@
           follow_userId:localStorage.getItem('user_id')
         }
         http.post('/follow/follow',formData)
-        .then(response=>{
-          console.log(response.data);
+        .then(()=>{
+          console.log('Props follow')
            this.getAllMyFollowing();
           this.getAllMyFollower();
         })
@@ -288,8 +257,10 @@
           follow_userId:localStorage.getItem('user_id')
         }
         http.post('/follow/cancelFollow',formData)
-        .then(response=>{
-          console.log(response.data);
+        .then(()=>{
+          console.log('Props unfollow')
+            this.user_follow_state2=false;
+
            this.getAllMyFollowing();
           this.getAllMyFollower();
         })
@@ -300,16 +271,14 @@
         init.init();
       }, 1000)
     },
-     watch: {
-    $route(to, form) {
-     if (to.path !== form.path) this.getInfo();
-    },
-     },
     created() {
+      console.log('유저 페이지 들어왔어',this.props_id);
       this.getAllMyFollowing();
       this.getAllMyFollower();
       this.getMyWorksCount();
-      if (this.props_id !== undefined){
+      this.getMyWork();
+
+      if (this.props_id !== undefined ){
         localStorage.setItem('props_id',this.props_id);
       }
       console.log('props_id',this.props_id);
