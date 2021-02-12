@@ -1,19 +1,52 @@
 import router from '../../router'
-// import http from '../../api/http'
+import http from '../../api/http'
 const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
-  // const gallery1 = document.querySelector(".poster_card1");
-  // const gallery2 = document.querySelector(".poster_card2");
-  // gallery1.addEventListener('click',function(e){
-  //   console.log('click event',e.target.dataset.value);
-  //   router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
-  // })
-  // gallery2.addEventListener('click',function(e){
-  //   console.log('click event',e.target.dataset.value);
-  //   router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
-  // })
+  const gallery1 = document.querySelector(".poster_card1");
+  const gallery2 = document.querySelector(".poster_card2");
+  
+
+  
+  
+
+  gallery1.addEventListener('click',function(e){
+    console.log('click event',e.target.dataset.value);
+    if(e.target.dataset.value){
+    router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
+    }
+  })
+
+
+  gallery2.addEventListener('click',function(e){
+    console.log('click event',e.target.dataset.value);
+    if(e.target.dataset.value){
+      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
+    }
+  })
+  const pintModal = document.querySelector('.third__section__wrapper .photo-count')
+  const seasonModal = document.querySelector('.pinter__side .photo-count')
+  const exitSide = document.querySelector('.exit_side')
+  const exitSeason = document.querySelector('.exit_season')
+  
+  pintModal.addEventListener('click',function(){
+    const pintSide = document.querySelector('.pinter__side');
+    pintSide.classList.add('active_side');
+  })
+  exitSide.addEventListener('click',function(){
+    const pintSide = document.querySelector('.pinter__side');
+    pintSide.classList.remove('active_side');
+  })
+  exitSeason.addEventListener('click',function(){
+    const season = document.querySelector('.show_season_works')
+    season.classList.remove('active_season');
+  })
+  seasonModal.addEventListener('click',function(){
+    console.log('season click')
+    const season = document.querySelector('.show_season_works')
+    season.classList.add('active_season');
+  })
 
 
 function manuclickHandler(e){
@@ -171,6 +204,70 @@ const moveToArtistPage = ()=>{
     console.log('이동할게 이제',localStorage.getItem('props_id'));
     router.push({name:'UserProfile',params:{props_id: localStorage.getItem('props_id')}});
   }
+
+
+
+}
+
+const message_read = (message_id)=>{
+  const formData = new FormData()
+  formData.append('message_ids',Array(message_id))
+  http.post('/message/checkMessage/',formData)
+  .then(response => {
+    console.log('read message',response.data);
+  })
+}
+
+
+const DMModal =() =>{
+  const DMList = document.querySelector('.dm__list');
+
+  const dmOption = document.querySelectorAll('.dm-option')
+
+  dmOption.forEach(btn => {
+    btn.addEventListener('click',function(e){
+      console.log('click to delete',e.target)
+      const DMLIST = document.querySelectorAll('.DM__item')
+      for(let item of DMLIST){
+        if(e.target.dataset.value === item.dataset.name){
+          item.classList.add('delete');
+          // const formData = {
+          //   message_ids: Array(e.target.dataset.value)
+          // }
+          // http.post('/message/deleteMessage',formData)
+          // .then(response => {
+          //  console.log('remove message',response.data);    
+          // })
+        }
+      }
+    })
+  })
+
+  console.log('DM__list',DMList);
+  DMList.addEventListener('click',function(e){
+    if(e.target.classList.contains('DM__item'))
+    {
+      console.log('읽음 처리 합니다.')
+      console.log(JSON.parse(e.target.dataset.value));
+      const response_data = JSON.parse(e.target.dataset.value);
+      
+      message_read(response_data.message_id);
+      e.target.classList.add('DM__item__read')
+      const sender_name = document.querySelector('.sender_name');
+      const sender_title = document.querySelector('.sender_title');
+      const sender_content = document.querySelector('.sender_content');
+      const sendersender_time_name = document.querySelector('.sender_time');
+      const sendersender_date_name = document.querySelector('.sender_date');
+      sender_name.innerText = response_data.message_senderId;
+      sender_title.innerText ="Title. " + response_data.message_title;
+      sender_content.innerText = response_data.message_content;
+      sendersender_time_name.innerText = response_data.message_sendDate.slice(11);
+      sendersender_date_name.innerText = response_data.message_sendDate.slice(0,11);
+      // 
+      const showDmContent = document.querySelector('.showDmContent')
+      showDmContent.classList.add('showDmContentActive');
+    }
+  })
 }
 
 
@@ -184,4 +281,4 @@ const moveToArtistPage = ()=>{
 //     console.log(response.data,'unfollow');
 //   })
 // }
-export default {init,follow_modal};
+export default {init,follow_modal,DMModal};
