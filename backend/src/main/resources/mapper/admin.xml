@@ -171,4 +171,20 @@
     <delete id="renewMainAdultGallery_delete">
         truncate mainadultgallery
     </delete>
+
+    <update id="renewArtistExp">
+        update artist,
+            (
+                select work_artistId, count(work_id) as cnt
+                from work
+                group by work_artistId
+            ) as workCnt
+        set artist.artist_exp = 2
+        where
+                artist.artist_id = workCnt.work_artistId
+            and
+                workCnt.cnt > 10
+            and
+                artist.artist_exp = 1;
+    </update>
 </mapper>
