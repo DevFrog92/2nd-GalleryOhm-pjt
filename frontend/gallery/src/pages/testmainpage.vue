@@ -44,7 +44,7 @@
 <script>
   import "../assets/css/testmaingallery.css";
   import http from "../api/http.js";
-  import init from '../assets/js/Works'
+  import init from '../assets/js/AllGallery'
   export default {
     data: () => {
       return {
@@ -188,6 +188,9 @@
             console.log(this.following_work)
 
           })
+      },
+      getAllGallerys(){
+        console.log('Get all gallerys')
       }
     },
     created() {
