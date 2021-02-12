@@ -41,6 +41,7 @@ import GalleryOWorks from '../pages/Gallery/GalleryO_works'
 
 import testmainpage from '../pages/testmainpage'
 import gridTestPage from '../pages/gridTestPage'
+import About from '../pages/About'
 
 Vue.use(VueRouter)
 
@@ -175,6 +176,11 @@ const routes = [
     path:'/gridtestpage',
     name:'gridTestPage',
     component:gridTestPage
+  },
+  {
+    path:'/about',
+    name:'About',
+    component:About,
   }
 ]
 

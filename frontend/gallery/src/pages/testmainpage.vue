@@ -1,37 +1,39 @@
 <template>
-  <div class="gallery_item-list-container">
-    <div class="gallery_works__plus" @click="moveAddWrok">
-      PLUS
-    </div>
-    <div class="gallery_works__like" @click="change_like_works">
-      Like
-    </div>
-    <div class="gallery_works__follow" @click="change_followes_works">
-      follow
-    </div>
-    <div class="gallery_change_date_works" @click="change_date_works">
-      date
-    </div>
-
-
-    <div class="gallery_spinner" v-if="spinner_state">
-      <div class="gallery_loader">
-        <div class="gallery_box"></div>
-        <div class="gallery_box"></div>
+  <div class="gallery__poster__wrapper">
+    <div class="gallery_poster-list-container">
+      <div class="gallery_works__plus" @click="moveAddWrok">
+        PLUS
       </div>
-    </div>
+      <div class="gallery_works__like" @click="change_like_works">
+        Like
+      </div>
+      <div class="gallery_works__follow" @click="change_followes_works">
+        follow
+      </div>
+      <div class="gallery_change_date_works" @click="change_date_works">
+        date
+      </div>
 
 
-    <div class="gallery_item-lists">
-      <div class="gallery_grid" v-for="(img, i) in render_image" :key="i">
-        <div class="gallery__poster">
-          <div class="poster__header">Why so serious?</div>
-          <div class="poster__aside">
-            Created by yong 2012-02-10 ~
-          </div>
-          <div class="poster__section" :style="{backgroundImage:'url('+img.work_piece+')'}"></div>
-          <div class="poster__footer">
-            © 2021. yong su Co. all rights reserved.
+      <div class="gallery_spinner" v-if="spinner_state">
+        <div class="gallery_loader">
+          <div class="gallery_box"></div>
+          <div class="gallery_box"></div>
+        </div>
+      </div>
+
+
+      <div class="gallery_poster-lists">
+        <div class="gallery_poster_grid" v-for="(img, i) in render_image" :key="i">
+          <div class="gallery__poster">
+            <div class="poster__header">Why so serious?</div>
+            <div class="poster__aside">
+              Created by yong 2012-02-10 ~
+            </div>
+            <div class="poster__section" :style="{backgroundImage:'url('+img.work_piece+')'}"></div>
+            <div class="poster__footer">
+              © 2021. yong su Co. all rights reserved.
+            </div>
           </div>
         </div>
       </div>
