@@ -94,7 +94,7 @@
 	width: 100%;
 	/* border-radius: 5px; */
 	display: block;
-	object-fit: cover;
+	object-fit: contain;
 	transform: scale(1.2);
 	transition: transform .3s ease-in-out;
 	pointer-events: none;
