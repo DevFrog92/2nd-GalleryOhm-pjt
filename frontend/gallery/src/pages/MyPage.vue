@@ -60,8 +60,8 @@
         <div @click="DMsideclose">exit</div>
         <div class="contact_to_me">
           <ul class="DMList">
-            <div :class="!dm.message_isCheck ? 'DM__item DM__item__read ' : 'DM__item' " v-for="(dm,index) of dm_list" :key="index" :data-name='dm.message_id'
-              :data-value="JSON.stringify(dm)">
+            <div :class="!dm.message_isCheck ? 'DM__item DM__item__read ' : 'DM__item' " v-for="(dm,index) of dm_list"
+              :key="index" :data-name='dm.message_id' :data-value="JSON.stringify(dm)">
               <div class="DM__item__avatar">
                 <img src="../assets/images/user.png" />
               </div>
@@ -69,9 +69,10 @@
                 <span class="DM__item__title">{{dm.message_senderId}}</span>
                 <span class="DM__item__message">{{dm.message_title}} -{{dm.message_sendDate}}</span>
               </div>
-                <div class="DM__item__option delete dm-option" :data-value="dm.message_id" @click="DmDelete(dm.message_id)">
-                  <i class="fas fa-trash"></i>
-                </div>
+              <div class="DM__item__option delete dm-option" :data-value="dm.message_id"
+                @click="DmDelete(dm.message_id)">
+                <i class="fas fa-trash"></i>
+              </div>
             </div>
           </ul>
         </div>
@@ -92,11 +93,11 @@
           </div>
           <div class="message__reply">
             <div class="message__reply__titie">
-          <label for="response_message_title" class="response_title">제목 : </label>
-          <input type="text" id="response_message_title" v-model="dm_title">
+              <label for="response_message_title" class="response_title">제목 : </label>
+              <input type="text" id="response_message_title" v-model="dm_title">
             </div>
 
-          <textarea name="response_message" id="response_message" v-model="dm_content" ></textarea>
+            <textarea name="response_message" id="response_message" v-model="dm_content"></textarea>
           </div>
           <div class="send_btn" @click="DM">답장 보내기</div>
         </div>
@@ -112,7 +113,7 @@
     <div class="move_to_top">TOP</div>
 
     <div class="second__section">
-      <h1>{{userInfo.user_id}}의 전시관</h1>
+      <h1>{{userInfo.user_nickName}}의 전시관</h1>
       <div class="my_works">
         <div class="poster_card1" :data-value="my_gallery_1.gallery_id">
           <div v-if="my_gallery_1.gallery_id" class="gallery_modify" @click="modifyGallery(my_gallery_1.gallery_id)">수정
@@ -149,64 +150,63 @@
 
 
     <div class="third__section">
+      <h1>{{userInfo.user_nickName}}의 작품</h1>
       <div class="third__section__wrapper">
-        <div class="timeline_entries">
-          <div class="timeline_entry" v-for="(item,index) in Object.keys(my_work_lists)" :key="index">
-            <div class="timeline_title big">{{item}}</div>
-            <div class="timeline_body">
-              <div class='gallery_container'>
-                <div class='thumb album-thumb'>
-                  <div class='thumb-container'>
-                    <div class='images-container'>
-                      <!-- <img v-for="(work,index) of all_my_works_year" :key="index"
-                        :src=' "data:image/jpeg;base64,"+work.work_piece' class='thumb-image'> -->
-                    </div>
-                    <div class='photo-count' @click="showPinterSide=true">
-                      <div class='content'>
-                        <div class='number'>{{my_work_lists.length}}</div>
-                        <div class='label'>PHOTOS</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class='title'>
-                    <!-- {{item}} -->
-                  </div>
+
+        <!-- season -->
+        <div class="options">
+          <div class="options_wrapper">
+            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_first" :key="index"
+              style="--optionBackground:url(https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg);">
+              <div class="shadow"></div>
+              <div class="label">
+                <div class="icon">
+                  <i class="fas fa-walking"></i>
+                </div>
+                <div class="info">
+                  <div class="show__my__pint" @click="show_pint_woks(index,1)">그림보러 가기</div>
+                  <div class="main">{{index}}</div>
+                  <div class="sub">Omuke trughte a otufta</div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="options_wrapper">
+
+            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_second" :key="index"
+              style="--optionBackground:url(https://66.media.tumblr.com/8b69cdde47aa952e4176b4200052abf4/tumblr_o51p7mFFF21qho82wo1_1280.jpg);">
+              <div class="shadow"></div>
+              <div class="label">
+                <div class="icon">
+                  <i class="fas fa-snowflake"></i>
+                </div>
+                <div class="info">
+                  <div class="show__my__pint" @click="show_pint_woks(index,2)">그림보러 가기</div>
+                  <div class="main">{{index}}</div>
+                  <div class="sub">Omuke trughte a otufta</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
 
 
-
+        <!-- season -->
 
         <div class="pinter__side">
-          <div class='gallery_container' v-for="(works,index) of all_my_works_year['2021']" :key="index">
-            <div v-if="works.length >0">
-              <div class='thumb album-thumb'>
-                <div class='thumb-container'>
-                  <div class='images-container'>
-                    <img v-for="(work,index) of works" :key="index" :src=' "data:image/jpeg;base64,"+work.work_piece'
-                      class='thumb-image'>
-                  </div>
-                  <div class='photo-count'>
-                    <div class='content'>
-                      <div class='number'>{{my_work_lists.length}}</div>
-                      <div class='label'>PHOTOS</div>
-                    </div>
-                  </div>
-                </div>
-                <div class='title'>
-                  {{index}} 월
+          <div class="pinter_item-lists">
+              <div class="pinter_grid" v-for="(img, i) in pinter_image" :key="i" :data-value="img.work_id">
+                <img :src="'data:image/jpeg;base64,'+img.work_piece" alt="DB이미지" />
+                <div class="pinter_grid__body" :data-value="img.work_id">
+                  <h1 >수정</h1>
+                  <h1 >삭제</h1>
                 </div>
               </div>
-            </div>
-          </div>
           <div class="exit_side">X</div>
-        </div>
-        <div class="show_season_works">
-          <div class="exit_season">X</div>
+          </div>
         </div>
       </div>
     </div>
@@ -214,7 +214,7 @@
 
 
     <div class="forth__section">
-      <h1>Scrap</h1>
+      <h1>{{userInfo.user_nickName}}의 즐겨찾기</h1>
       <div class="outer-wrapper">
         <div class="scroll-wrapper">
           <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
@@ -350,13 +350,16 @@
         delete_gallery_state: false,
         delete_gallery_name: '',
         all_my_works_year: {},
-        all_my_works_month: {
+        all_my_works_month_first: {
           '01': [],
           '02': [],
           '03': [],
           '04': [],
           '05': [],
           '06': [],
+        },
+        all_my_works_month_second: {
+
           '07': [],
           '08': [],
           '09': [],
@@ -367,6 +370,7 @@
         showPinterSide: false,
         showDm: false,
         showDMSide: false,
+        pinter_image:[],
 
       }
     },
@@ -375,6 +379,15 @@
     },
     props: ["props_id"],
     methods: {
+      show_pint_woks(index,season){
+        if(season == 1){
+          this.pinter_image = this.all_my_works_month_first[index]
+        }else{
+          this.pinter_image = this.all_my_works_month_second[index]
+        }
+        console.log(this.pinter_image,'show')
+
+      },
       DMsideopen() {
         const DMList = document.querySelector('.dm__list');
         DMList.classList.add('show_dm_side');
@@ -389,17 +402,17 @@
       },
       DmDelete(id) {
         // const DMList = document.querySelector('.DMList')
-        setTimeout(()=>{
+        setTimeout(() => {
           console.log('DM Delete', id);
           const DMLIST = document.querySelectorAll('.DM__item')
-          for(let item of DMLIST){
-            if(item.dataset.name == id){
+          for (let item of DMLIST) {
+            if (item.dataset.name == id) {
               console.log('지운다.')
               item.remove()
             }
           }
           console.log('뺀다')
-        },1400);
+        }, 1400);
       },
       refresh() {
         this.$router.go();
@@ -585,23 +598,18 @@
       getMyWorks() {
         http.get('/work/getMyWorks/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get my works', response.data, response.data.length);
-            for (let item of response.data) {
-              let itemYear = item.work_uploadDate.slice(0, 4);
-              if (!Object.keys(this.all_my_works_year).includes(itemYear)) {
-                this.all_my_works_year[itemYear] = this.all_my_works_month;
-              }
-            }
+
             console.log('Create year category', this.all_my_works_year);
             for (let item of response.data) {
-              let itemYear = item.work_uploadDate.slice(0, 4);
               let itemMonth = item.work_uploadDate.slice(5, 7)
-              this.all_my_works_year[itemYear][itemMonth].push(item);
+              if(Object.keys(this.all_my_works_month_first).includes(itemMonth)){
+                console.log('itemMonth', itemMonth)
+              this.all_my_works_month_first[itemMonth].push(item);
+              }else{
+                this.all_my_works_month_second[itemMonth].push(item);
+              }
             }
-
-
-            this.my_work_lists = this.all_my_works_year;
-            console.log('this.all_my_monyth', this.all_my_works_year)
+            console.log(this.all_my_works_month_first,this.all_my_works_month_second)
           })
       },
       getMyGalleryDetail(gallery_id) {

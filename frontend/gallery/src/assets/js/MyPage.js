@@ -6,6 +6,27 @@ const init = () => {
   const topBtn = document.querySelector(".move_to_top");
   const gallery1 = document.querySelector(".poster_card1");
   const gallery2 = document.querySelector(".poster_card2");
+
+  const options = document.querySelector('.options')
+  let activeOption = document.querySelector('.active')
+  if(activeOption === null){
+    activeOption = document.querySelectorAll('.option')[0]
+    activeOption.classList.add('active')
+    
+  }
+  
+
+  options.addEventListener('click',function(e){
+      if(e.target.classList.contains('option')){
+      if(e.target.dataset.value !== activeOption.dataset.value ){
+        activeOption.classList.remove('active');
+        e.target.classList.add('active');
+        activeOption = e.target;
+      }
+      }
+    })
+
+
   
 
   
@@ -25,35 +46,50 @@ const init = () => {
       router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
     }
   })
-  const pintModal = document.querySelector('.third__section__wrapper .photo-count')
-  const seasonModal = document.querySelector('.pinter__side .photo-count')
+  const pintModal = document.querySelector('.third__section')
+  // const seasonModal = document.querySelector('.pinter__side .photo-count')
   const exitSide = document.querySelector('.exit_side')
-  const exitSeason = document.querySelector('.exit_season')
-  
-  pintModal.addEventListener('click',function(){
-    const pintSide = document.querySelector('.pinter__side');
-    pintSide.classList.add('active_side');
-  })
+  // const exitSeason = document.querySelector('.exit_season')
+  pintModal.addEventListener('click',function(e){
+    if(e.target.classList.contains('show__my__pint')){
+      gotoDetail()
+      const pintSide = document.querySelector('.pinter__side');
+      pintSide.classList.add('active_side');
+    }
+    })
   exitSide.addEventListener('click',function(){
-    const pintSide = document.querySelector('.pinter__side');
-    pintSide.classList.remove('active_side');
-  })
-  exitSeason.addEventListener('click',function(){
-    const season = document.querySelector('.show_season_works')
-    season.classList.remove('active_season');
-  })
-  seasonModal.addEventListener('click',function(){
-    console.log('season click')
-    const season = document.querySelector('.show_season_works')
-    season.classList.add('active_season');
+    console.log('click')
+      const pintSide = document.querySelector('.pinter__side');
+      pintSide.classList.remove('active_side');
+    })
+  // exitSeason.addEventListener('click',function(){
+  //   const season = document.querySelector('.show_season_works')
+  //   season.classList.remove('active_season');
+  // })
+  // seasonModal.addEventListener('click',function(){
+  //   console.log('season click')
+  //   const season = document.querySelector('.show_season_works')
+  //   season.classList.add('active_season');
+  // })
+function gotoDetail(){
+  console.log('실행한다.')
+  const imgList = document.querySelector('.pinter_item-lists')
+  imgList.addEventListener('click',function(e){
+    if(e.target.classList.contains('pinter_grid__body')){
+      const work_id = e.target.dataset.value
+      console.log(work_id)
+      router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+    }
   })
 
+}
 
 function manuclickHandler(e){
   const targetItem = e.target;
   if(targetItem.classList.contains("profile_menu_item")){
     let goToElem;
     if(targetItem.dataset.value === "1"){
+      console.log('click')
       goToElem = document.querySelector('.second__section');
     }else if(targetItem.dataset.value === "2"){
       goToElem = document.querySelector('.third__section');
@@ -88,13 +124,16 @@ topBtn.addEventListener('click',topclickHandler)
 
 
 window.addEventListener('scroll',function(){
-  let position_2 = document.querySelector('.second__section').getBoundingClientRect().top;
-  if(position_2 <= 0 ){
-    topBtn.classList.add('move_to_top_show');
-  }
-  if(position_2 === window.innerHeight){
-
-    topBtn.classList.remove('move_to_top_show');
+  let position = document.querySelector('.second__section');
+  if(position){
+  let position_2 = position.getBoundingClientRect().top;
+    if(position_2 <= 0 ){
+      topBtn.classList.add('move_to_top_show');
+    }
+    if(position_2 === window.innerHeight){
+  
+      topBtn.classList.remove('move_to_top_show');
+    }
   }
 })
 
