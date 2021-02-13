@@ -250,4 +250,22 @@ public class GalleryController {
         }
         return new ResponseEntity<List<WorkDto>>(adultGallery_even,HttpStatus.OK);
     }
+
+    /*** 전체 갤러리 반환 ***/
+    @ApiOperation(value="전체 갤러리 목록 반환", response = List.class, notes = "getAllGallery()")
+    @RequestMapping(value = "/getAllGallery", method = RequestMethod.GET)
+    public ResponseEntity<List<GalleryDto>> getAllGallery(){
+        HttpStatus status = null;
+        List<GalleryDto> gallerys = null;
+
+        try {
+            gallerys = galleryService.getAllGallery();
+
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+
+        return new ResponseEntity<>(gallerys, status);
+    }
 }
