@@ -1,76 +1,147 @@
 <template>
   <div>
-      <!-- ( 배경 : 어두운색) -->
-      <div class="work_view">
-    <div class="title">
-      <h1 lass="title_text">TITLE</h1>
-    </div>
-    <div class="image_frame">
-        <!-- 흰색 액자 이미지  -->
-      <img class="work" src="../../assets/images/4.png"/>
-    </div>
-    <div class="image">
-        <!-- 프레임 없는 큰~~ 이미지 -->
-      <img class="work2" src="../../assets/images/4.png"/>
-    </div>
-    </div>
-    <!-- 작품 정보 (배경 : 밝은색)-->
-    <div class="info">
-      <!-- 왼쪽 -->
-      <div class="left">
-        <!-- 작은 이미지 -->
-        <img />
-      </div>
-      <!-- 오른쪽 -->
-      <div class="right">
-          <!-- 작품 이름 -->
-          <h1>귀염둥이 발레리나</h1>
-          <!-- 작가 이름-->
-          <h1>빈</h1>
-          <!-- 작품 설명 -->
-          <h1>예쁘냐</h1>
-          <!-- 작품 사이즈 -->
-          <h1>1024 x 1024</h1>
-          <!-- $ 버튼 -->
-      </div>
-    </div>
+    <div class="promo" style="--overlay-color: hotpink">
+    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
+    <h2 class="title" data-cta="Get out there →">Nightlife</h2>
+</div>
+<div class="promo" style="--overlay-color: yellow">
+    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
+    <h2 class="title" data-cta="Find yours →">Quiet Time</h2>
+</div>
+<div class="promo" style="--overlay-color: dodgerblue">
+    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
+    <h2 class="title" data-cta="Grab a board →">Surf's Up!</h2>
+</div>
+<div class="promo" style="--overlay-color: darkgreen">
+    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
+    <h2 class="title" data-cta="Take a walk →">Day Hikes</h2>
+</div>
   </div>
 </template>
 
 <style scoped>
-@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@import url("https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap");
 
-.work_view {
-    height: 170vh;
-    background-color:gray;
+:root {
+  --src: url(https://images.unsplash.com/photo-1554620121-59e7f3f6e3a4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy);
+  --size: 60vmin;
+  --space: 8vmin;
+  --duration: 300ms;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --bounce-out: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.work_view .title {
-    padding-top: 20%;
-    padding-bottom: 10%;
+
+* {
+  box-sizing: border-box;
 }
-.work_view .title_text {
-    font-size: 4rem;
-    color: #FCF1E7;
-    font-family: "Hanna", sans-serif;
+
+body {
+  display: grid;
+  place-items: center;
+  grid-gap: var(--space);
+  margin: 0 auto;
+  padding: var(--space);
+  font-family: "Sura", sans-serif;
+  color: white;
+  background-color: rgb(29, 30, 34);
 }
-.image_frame {
-background-size: cover;
+
+.promo {
   position: relative;
-  }
-.image_frame img {
-    height: 40vh;
-    border: 10px white solid;
+  cursor: pointer;
+  width: var(--size);
+  height: var(--size);
 }
-.image {
-    padding-top: 20%;
+
+.title {
+  --font-size: calc(var(--size) / 8);
+
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: var(--font-size);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translate(-10%, -50%);
+  transition: transform var(--duration) var(--ease-out);
+  pointer-events: none;
 }
-.info {
-    height: 50vh;
+
+.title::after {
+  content: attr(data-cta);
+  display: inline-block;
+  margin-left: 1.5vmin;
+  font-size: calc(var(--font-size) / 3.25);
+  font-weight: 400;
+  letter-spacing: 0.125vmin;
+  opacity: 0;
+  transform: translateX(-25%);
+  transition: transform var(--duration) var(--ease-out),
+    opacity var(--duration) var(--ease-out);
 }
-.info .left {
-    width: 50vw;
+
+.image-wrapper {
+  /* width: var(--size);
+  height: var(--size); */
+  width: 50vw;
+  height: auto;
+  overflow: hidden;
+  clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 0 50%, 0% 0%);
+  transition: transform var(--duration) var(--ease-out),
+    clip-path var(--duration) var(--ease-out);
 }
-.info .right {
-    left: 50%;
+
+.image-wrapper img {
+  position: relative;
+  /* width: 120%;
+  height: 100%; */
+  object-fit: cover;
+  transform: translateX(-10%);
+  transition: transform var(--duration) var(--ease-out);
 }
+
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* width: 100%;
+  height: 100%; */
+  width: 50vw;
+  height: auto;
+  background-color: var(--overlay-color);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transform: translateZ(0);
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.promo:hover img {
+  transform: translateX(0);
+}
+
+.promo:hover .image-wrapper {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+  transform: translateX(25%);
+  transition-timing-function: var(--bounce-out);
+}
+
+.promo:hover .title {
+  transform: translate(5%, -50%);
+  transition-timing-function: var(--bounce-out);
+}
+
+.promo:hover .title::after {
+  opacity: 1;
+  transform: translateX(0);
+  transition-timing-function: var(--bounce-out);
+}
+
+.promo:hover .image-wrapper::after {
+  opacity: 1;
+}
+
 </style>

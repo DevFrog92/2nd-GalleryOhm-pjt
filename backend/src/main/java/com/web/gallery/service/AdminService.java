@@ -60,4 +60,6 @@ public interface AdminService {
     List<WorkDto> getAllWork();
 
     void addHashTagFromTotal(List<String> hashTagList);
+
+    void renewArtistExp();
 }

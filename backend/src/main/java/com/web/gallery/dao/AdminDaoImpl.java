@@ -97,4 +97,8 @@ public class AdminDaoImpl {
     public void addHashTagFromTotal(List<String> hashTagList) {
         sqlSession.insert(ns + "addHashTagFromTotal", hashTagList);
     }
+
+    public void renewArtistExp() {
+        sqlSession.update(ns + "renewArtistExp");
+    }
 }
