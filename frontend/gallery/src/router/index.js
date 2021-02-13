@@ -34,6 +34,7 @@ import GalleryB from '../pages/Gallery/GalleryB'
 import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
 import DetailPage from '../pages/Gallery/DetailPage'
+import DetailPage2 from '../pages/Gallery/DetailPage2'
 import uploadImageResize from '../pages/Gallery/uploadImageResize'
 
 import GalleryOWorks from '../pages/Gallery/GalleryO_works'
@@ -156,6 +157,11 @@ const routes = [
     path:'/test/GalleryJ/DetailPage',
     name:"DetailPage",
     component:DetailPage
+  },
+  {
+    path:'/test/GalleryJ/DetailPage2',
+    name:"DetailPage2",
+    component:DetailPage2
   },
   {
     path:'/test/GalleryO/works',
