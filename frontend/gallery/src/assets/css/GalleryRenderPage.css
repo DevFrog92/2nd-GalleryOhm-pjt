@@ -517,6 +517,25 @@ background-repeat: no-repeat;
   cursor: pointer;
 }
 
+.foot_print {
+  width: 25%;
+    height: auto;
+  position: absolute;
+  z-index: 70;
+  left: -10.43%;
+  top: 10%;
+  color: #333;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.foot_print img {
+  width: 8%;
+    height: auto;
+  position: absolute;
+  top: 0.3rem;
+}
+
 .close__btn {
   z-index: 70;
   position: absolute;
