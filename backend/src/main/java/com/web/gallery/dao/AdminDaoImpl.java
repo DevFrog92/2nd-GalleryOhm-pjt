@@ -97,4 +97,20 @@ public class AdminDaoImpl {
     public void addHashTagFromTotal(List<String> hashTagList) {
         sqlSession.insert(ns + "addHashTagFromTotal", hashTagList);
     }
+
+    public void renewArtistExp() {
+        sqlSession.update(ns + "renewArtistExp");
+    }
+
+    public void updateArtistExpUp(String artist_id) {
+        sqlSession.update(ns + "updateArtistExpUp", artist_id);
+    }
+
+    public void updateArtistExpDown(String artist_id) {
+        sqlSession.update(ns + "updateArtistExpDown", artist_id);
+    }
+
+    public List<ArtistDto> getAllArtist() {
+        return sqlSession.selectList(ns + "getAllArtist");
+    }
 }

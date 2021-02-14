@@ -1,17 +1,46 @@
 <template>
   <header id='headerpage-header'>
-      <nav id="nav"><button class="nav-icon" id="nav-icon"><span></span></button>
-        <ul class="nav_ul" v-if="loginState">
-          <li><router-link  class="router" to="/listitem">Works</router-link></li>
-          <li><router-link  class="router" to="/gallerycategory">Gallery</router-link></li>
-          <li><router-link  class="router" to="/mypage">Mypage</router-link></li>
-          <li><router-link  class="router" to="/about">About</router-link></li>
-          <li><a  href="#" @click="logout">Logout</a></li>
-        </ul>
-        <ul class="nav_ul" v-else>
-          <li><router-link class="nav-item" to="/loginsignup">Login & Signup</router-link></li>
-        </ul>
-      </nav>
+      <nav class="nav">
+    <input type="checkbox" class="nav__cb" id="menu-cb" />
+    <div class="nav__content">
+      <ul class="nav__items"  v-if="loginState">
+        <li class="nav__item">
+          <span class="nav__item-text">
+           <router-link  class="router" to="/listitem">Works</router-link>
+          </span>
+        </li>
+        <li class="nav__item">
+          <span class="nav__item-text">
+            <router-link  class="router" to="/gallerycategory">Gallery</router-link>
+          </span>
+        </li>
+        <li class="nav__item">
+          <span class="nav__item-text">
+            <a class="router" @click="moveToMypage">Mypage</a>
+          </span>
+        </li>
+        <li class="nav__item">
+          <span class="nav__item-text">
+            <router-link  class="router" to="/about">About</router-link>
+          </span>
+        </li>
+          <li class="nav__item">
+          <span class="nav__item-text">
+            <a  href="#" @click="logout">Logout</a>
+          </span>
+        </li>
+      </ul>
+      <ul class="nav__items" v-else>
+         <li class="nav__item">
+          <span class="nav__item-text">
+      <router-link class="nav-item" to="/loginsignup">로그인</router-link>
+          </span>
+        </li>
+      </ul>
+      
+    </div>
+    <label class="nav__btn" for="menu-cb"></label>
+  </nav>
   </header>
 </template>
 
@@ -21,7 +50,9 @@
   export default {
     name: 'HeaderPage',
     data() {
-      return {}
+      return {
+        user_type:localStorage.getItem('user_type'),
+      }
     },
     computed: {
       loginState() {
@@ -31,7 +62,9 @@
     mounted() {
       init.init();
     },
-    created() {},
+    created() {
+      console.log('user_type',this.user_type);
+    },
     methods: {
       logout() {
         const logout_check = confirm('로그아웃하시겠습니까?');
@@ -46,6 +79,15 @@
           }
         }
       },
+      moveToMypage(){
+        console.log('누른다 ')
+        this.user_type = localStorage.getItem('user_type');
+        if(this.user_type === '1'){
+          this.$router.push('/guestpage');
+        }else if(this.user_type === '2'){
+          this.$router.push('/mypage')
+        }
+      }
     }
   }
 </script>

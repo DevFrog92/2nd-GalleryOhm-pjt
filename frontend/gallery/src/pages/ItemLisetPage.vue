@@ -15,9 +15,9 @@
     <div class="search-bar">
       <div class="search__bar">
         <svg xmlns="http://www.w3.org/2000/svg" width="355.5" height="87.99">
-          <path class="right" fill="none" stroke="rgb(44, 49, 57)" stroke-width="5" stroke-miterlimit="10"
+          <path class="right" fill="none" stroke="#ff6060" stroke-width="7" stroke-miterlimit="10"
             d="M177.75 85.99h133.5c23.334 0 42.25-18.916 42.25-42.25C352.944 20.528 333.967 2 310.748 2H177.75" />
-          <path class="left" fill="none" stroke="rgb(44, 49, 57)" stroke-width="5" stroke-miterlimit="10"
+          <path class="left" fill="none" stroke="#ff6060" stroke-width="7" stroke-miterlimit="10"
             d="M177.75 85.99H44.25C20.916 85.99 2 67.074 2 43.74 2.556 20.528 21.533 2 44.752 2H177.75" />
         </svg>
 
@@ -29,17 +29,21 @@
     </div>
 
     <div v-show="filter__hashs.length >0" class="filter__hashs">
-      <div>{{filter__hashs}}</div><button @click="resetAll">clear</button>
+      <span v-for="(hash,index) of filter__hashs" :key="index" class="hash__word">
+        {{hash}}
+        <span class="delete__hash__word" @click="delete__hash__word(index)">X</span>
+      </span>
+      <button @click="resetAll">clear</button>
     </div>
     <div class="no_works" v-if="no_works">
       검색한 태그와 관련한 작품이 없습니다.
     </div>
 
     <div class="spinner" v-if="spinner_state">
-<div class="loader">
-  <div class="box"></div>
-  <div class="box"></div>
-</div>
+      <div class="loader">
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
     </div>
 
     <div class="item-lists" v-else>
@@ -70,37 +74,62 @@
         most_like: [],
         following_list: [],
         spinner_state: false,
-        no_works:false,
-
+        no_works: false,
+        hashTagsObject: {},
+        checkhashimages:[],
+        resetarray:[]
       };
     },
     mounted() {
       setTimeout(() => {
         init.init();
 
-      }, 500)
+      }, 700)
     },
     methods: {
+      delete__hash__word(index) {
+        this.resetarray = [];
+        delete this.hashTagsObject[this.filter__hashs[index]];
+        this.filter__hashs.splice(index, 1);
+        console.log('reset render image',this.render_image)
+        for (let items of Object.values(this.hashTagsObject)) {
+          for (let item of Object.values(items)) {
+            console.log('items add ',this.render_image,item);
+            if(!this.render_image.includes(item)){
+              console.log('push 한다.')
+              this.resetarray.push(item);
+            }
+          }
+        }
+        this.render_image = this.resetarray
+        if(!this.resetarray.length){
+          console.log('안에 그림이 없어')
+          this.no_works = true
+        }else{
+          console.log('안에 그림이 있어')
+          this.no_works = false
+        }
+      },
       change_date_works() {
         this.render_image = this.imgList;
         this.resetAll();
         this.no_works = false;
-        this.following_list=[];
+        this.following_list = [];
 
       },
       change_like_works() {
         this.render_image = this.most_like;
         this.resetAll();
         this.no_works = false;
-        this.following_list=[];
+        this.following_list = [];
 
       },
       change_followes_works() {
         this.render_image = this.following_work;
-        console.log('follow',this.render_image)
+        console.log('follow', this.render_image)
         this.resetAll();
         this.no_works = false;
-        this.following_list=[];
+        this.following_list = [];
 
       },
       moveAddWrok() {
@@ -109,32 +138,49 @@
       resetAll() {
         // this.getAllWorks();
         this.filter__hashs = [];
+        this.checkhashimages = [];
         // this.render_image = this.imgList
       },
       searchTag() {
-        if(this.searchHashtag !== ""){
+        console.log('hashs',this.searchHashtag)
+        if (this.searchHashtag.trim() !== "" && !Object.keys(this.hashTagsObject).includes(this.searchHashtag.trim())) {
 
-        console.log('sdf',this.searchHashtag)
-        // this.filter__hashs = [];
-        http.get(`/work/searchByHashTag?hashtags=${this.searchHashtag}`).then(
-          (response) => {
-            const data = response.data;
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-              data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
-            }
+          console.log('sdf', this.searchHashtag.trim())
+          // this.filter__hashs = [];
+          http.get(`/work/searchByHashTag?hashtags=${this.searchHashtag.trim()}`).then(
+            (response) => {
+              const data = response.data;
+              for (var i = 0; i < data.length; i++) {
+                data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
+              }
 
-            this.render_image = data;
-            this.filter__hashs.push(this.searchHashtag);
-            this.searchHashtag = "";
-            if(!data.length){
-              this.no_works = true;
-              this.getAllWorks();
-            }
-          },
-          (error) => {
-            console.log(error);
-          })
+              this.hashTagsObject[this.searchHashtag.trim()] = data;
+              console.log('hash tag image', this.hashTagsObject)
+              this.filter__hashs.push(this.searchHashtag);
+              this.searchHashtag = "";
+              if (data.length === 0) {
+                this.no_works = true;
+                // this.getAllWorks();
+              } else {
+                this.render_image = [];
+                for (let items of Object.values(this.hashTagsObject)) {
+                  for (let item of Object.values(items)) {
+                    if(!this.checkhashimages.includes(item)){
+                      this.checkhashimages.push(item);
+                      console.log('push 한다 정말')
+                      this.render_image.push(item);
+                    }
+                  }
+                }
+                console.log('this render image', this.render_image);
+                this.no_works = false;
+              }
+            },
+            (error) => {
+              console.log(error);
+            })
+        } else {
+          this.searchHashtag = "";
         }
 
       },

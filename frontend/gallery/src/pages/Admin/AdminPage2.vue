@@ -154,6 +154,16 @@
             </div>
           </div>
         </b-tab>
+        <b-tab title="신인작가 Exp 갱신">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="artistExpUp()"
+              >작가 Exp Up</b-button 
+            >
+          </div>
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -182,6 +192,16 @@ export default {
     this.getAllWork();
   },
   methods: {
+    artistExpUp() {
+      http.post(`/admin/renewArtistExp/`).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
     getAllKeyword() {
       http.get(`/admin/getMainGalleryKeyword/`).then(
         (response) => {

@@ -1,76 +1,397 @@
 <template>
   <div>
+    <div class="detailPage">
       <!-- ( 배경 : 어두운색) -->
-      <div class="work_view">
-    <div class="title">
-      <h1 lass="title_text">TITLE</h1>
-    </div>
-    <div class="image_frame">
-        <!-- 흰색 액자 이미지  -->
-      <img class="work" src="../../assets/images/4.png"/>
-    </div>
-    <div class="image">
-        <!-- 프레임 없는 큰~~ 이미지 -->
-      <img class="work2" src="../../assets/images/4.png"/>
-    </div>
-    </div>
-    <!-- 작품 정보 (배경 : 밝은색)-->
-    <div class="info">
-      <!-- 왼쪽 -->
-      <div class="left">
-        <!-- 작은 이미지 -->
-        <img />
+      <div class="preview">
+        <div class="container">
+          <div class="work_view">
+            <!-- 첫 div 정보 -->
+            <div class="title">
+              <!-- title -->
+              <h1 class="title_text">{{work_info.work_title}}</h1>
+              <!-- 액자 이미지 -->
+              <div class="title_img">
+                <img class="work" src="../../assets/images/t.jpeg" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- 오른쪽 -->
-      <div class="right">
-          <!-- 작품 이름 -->
-          <h1>귀염둥이 발레리나</h1>
-          <!-- 작가 이름-->
-          <h1>빈</h1>
-          <!-- 작품 설명 -->
-          <h1>예쁘냐</h1>
-          <!-- 작품 사이즈 -->
-          <h1>1024 x 1024</h1>
-          <!-- $ 버튼 -->
+      <div class="pullImg type-b"></div>
+      <div class="detail">
+        <div class="img_box">
+          <div class="img">
+            <img src="../../assets/images/t.jpeg" alt="" />
+          </div>
+        </div>
+        <div class="info_box">
+          <div class="info">
+            <!-- 작품 이름 -->
+            <div class="first">{{work_info.work_title}}</div>
+            <!-- 작가 이름-->
+            <div class="name">{{work_info.work_artistId}}</div>
+            <!-- 작품 설명 -->
+            <div class="desc">
+              {{work_info.work_desc}}
+            </div>
+            <!-- 작품 설명 -->
+            <div class="size">
+              {{work_info.work_tool}}
+            </div>
+            <!-- 작품 사이즈 -->
+            <div class="size">??????</div>
+            <div class="btn">
+              <div class="button-container-3">
+                <span class="mas">scrap</span>
+                <button type="button" name="Hover">scrap</button>
+              </div>
+              <div class="lbtn button-container-3bb">
+                <span class="mas">cost</span>
+                <button type="button" name="Hover">cost</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <footer>
+          <div class="foot">
+            <p class="t">wwater@google.com</p>
+            <p class="t">tel.010-4433-212</p>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+import http from '../../api/http'
+
+export default {
+  name: 'detailPage',
+  data() {
+    return {
+      work_info :{},
+      work_id_store:'',
+      imgSrc: "",
+    };
+  },
+   props:[
+    'work_id'
+  ],
+  created() {
+    console.log("===> props ===> "+this.work_id);
+    this.getWorkDetail(this.work_id);
+  },
+  mounted() {
+    this.imgSrc = "../../assets/images/t.jpeg";
+  },
+  methods: {
+    getWorkDetail(work_id){
+      http.get(`/work/getWork/${work_id}`)
+          .then(response=>{
+            this.work_info = response.data;
+            this.total_like = response.data.work_cost;
+            console.log(this.total_like)
+            this.work_info.work_piece = "data:image/jpeg;base64," + response.data.work_piece;
+            this.img_url = this.work_info.work_piece;
+            console.log('getinfo',this.work_info);
+          })
+    },
+  },
+};
+</script>
+
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
+.preview {
+  background-color: #ffe8e8;
+  color: black;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
 .work_view {
-    height: 170vh;
-    background-color:gray;
+  padding-top: 28vh;
+  padding-bottom: 28vh;
 }
-.work_view .title {
-    padding-top: 20%;
-    padding-bottom: 10%;
+
+.work_view .title .title_text {
+  font-size: 10rem;
+  font-family: "Hanna", sans-serif;
 }
-.work_view .title_text {
-    font-size: 4rem;
-    color: #FCF1E7;
-    font-family: "Hanna", sans-serif;
+
+.work_view .title_img {
+  margin-top: 28vh;
+  width: 100%;
+  height: auto;
 }
-.image_frame {
-background-size: cover;
+
+.work_view .title_img img {
+  border: 10px white solid;
+}
+
+.pullImg {
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+
+  background-image: url("../../assets/images/t.jpeg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.detail {
+  height: 70vh;
+  background-color: #fcf1e7;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ffdcdc;
+}
+
+.detail .img_box {
+  order: flex;
+  width: 45%;
+  height: 100%;
+  top: 0%;
+}
+
+.detail .img_box .img {
+  display: inline-block;
+  padding: 0;
+}
+
+.detail .img_box .img img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 10px white solid;
+  height: 50vh;
+  margin-top: 14vh;
+}
+.detail .info_box {
+  order: flex;
+  width: 45%;
+  height: 100%;
   position: relative;
+  color: black;
+}
+
+.detail .info_box .info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Hanna", sans-serif;
+  width: 80%;
+}
+
+.detail .info_box .info .first {
+  font-size: 40px;
+}
+
+.detail .info_box .info .name {
+  margin-top: 2vh;
+  font-size: 20px;
+}
+
+.detail .info_box .info .desc {
+  margin-top: 1vh;
+  font-size: 15px;
+}
+
+.detail .info_box .btn {
+  margin-top: 3vh;
+}
+
+.footer{
+  display: block;
+  background-color: #ffdcdc;
+  padding-top: 10vh;
+}
+
+footer {
+  height: 80px;
+}
+
+footer .foot {
+  padding-top: 1%;
+  /* margin-left: 10%; */
+  width: 100%;
+}
+
+footer .foot .t {
+  color: gray;
+  font-family: "Hanna", sans-serif;
+  margin: 0;
+}
+</style>
+
+<style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100");
+@import url("https://fonts.googleapis.com/earlyaccess/hanna.css");
+
+@mixin button($bcolor, $url, $x1, $y1, $bor, $col) {
+  background: $bcolor;
+  -webkit-mask: url($url);
+  mask: url($url);
+  -webkit-mask-size: $x1 $y1;
+  mask-size: $x1 $y1;
+  border: $bor;
+  color: $col;
+}
+
+.mas {
+  position: absolute;
+  color: #000;
+  text-align: center;
+  width: 101%;
+  font-family: "Hanna", sans-serif;
+  font-weight: 300;
+  position: absolute;
+  font-size: 22px;
+  margin-top: 8px;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+@-webkit-keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
   }
-.image_frame img {
-    height: 40vh;
-    border: 10px white solid;
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
 }
-.image {
-    padding-top: 20%;
+
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
 }
-.info {
-    height: 50vh;
+
+@-webkit-keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
 }
-.info .left {
-    width: 50vw;
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
 }
-.info .right {
-    left: 50%;
+
+.button-container-3 {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: 50%;
+  overflow: hidden;
+  border: 1px solid #000;
+  font-family: "Hanna", sans-serif;
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  border-radius: 8px;
+
+  button {
+    width: 101%;
+    height: 100%;
+    font-family: "Hanna", sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    @include button(
+      #000,
+      "https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png",
+      7100%,
+      100%,
+      none,
+      #fff
+    );
+    cursor: pointer;
+    -webkit-animation: ani2 0.7s steps(70) forwards;
+    animation: ani2 0.7s steps(70) forwards;
+
+    &:hover {
+      -webkit-animation: ani 0.7s steps(70) forwards;
+      animation: ani 0.7s steps(70) forwards;
+    }
+  }
+}
+
+.button-container-3bb {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: 25%;
+  overflow: hidden;
+  border: 1px solid #000;
+  font-family: "Hanna", sans-serif;
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  border-radius: 8px;
+
+  button {
+    width: 101%;
+    height: 100%;
+    font-family: "Hanna", sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    @include button(
+      #000,
+      "https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png",
+      7100%,
+      100%,
+      none,
+      #fff
+    );
+    cursor: pointer;
+    -webkit-animation: ani2 0.7s steps(70) forwards;
+    animation: ani2 0.7s steps(70) forwards;
+
+    &:hover {
+      -webkit-animation: ani 0.7s steps(70) forwards;
+      animation: ani 0.7s steps(70) forwards;
+    }
+  }
 }
 </style>

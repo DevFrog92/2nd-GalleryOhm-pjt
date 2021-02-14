@@ -12,7 +12,7 @@
             <i class="profile_icon icon-instagram-1" aria-hidden="true"></i>
             <i class="profile_icon icon-facebook-1" aria-hidden="true"></i>
             <i class="profile_icon icon-bookmark" aria-hidden="true"></i>
-            <span class="profile_icon_span"><i class="profile_icon icon-chat" aria-hidden="true"></i></span>
+            <i class="profile_icon icon-chat" aria-hidden="true" @click="DMsideopen"></i>
           </div>
         </div>
       </div>
@@ -21,11 +21,12 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span></h2>
+        <h2 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span><span
+            @click="showDm=true">Bell</span></h2>
         <div class="follow">
-          <span>Post : {{posts}}</span>
-          <span @click="following_view">Following : {{followings.length}}</span>
-          <span @click="follower_view">Follower : {{followers.length}}</span>
+          <span>작품 수 : {{posts}}</span>
+          <span @click="following_view">팔로잉 : {{followings.length}}</span>
+          <span @click="follower_view">팔로워 : {{followers.length}}</span>
           <!-- <span  @close="showModal=true">Follower : {{followers.length}}</span> -->
         </div>
         <div class="artist_about_div">
@@ -37,130 +38,199 @@
           </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-          <i class="icon-pencil-alt">pencile</i></span>
+          <i class="icon-pencil-alt">자기소개 수정</i></span>
 
 
 
         <div class="profile_menu_footer">
           <div class="profile_menu">
-            <div class="profile_label">More info</div>
+            <div class="profile_label">더보기</div>
             <div class="profile_spacer"></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="4">Scrap</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">Settings</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
+            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
+      </div>
+
+
+      <div class="dm__list">
+        <div @click="DMsideclose">exit</div>
+        <div class="contact_to_me">
+          <ul class="DMList">
+            <div :class="!dm.message_isCheck ? 'DM__item DM__item__read ' : 'DM__item' " v-for="(dm,index) of dm_list"
+              :key="index" :data-name='dm.message_id' :data-value="JSON.stringify(dm)">
+              <div class="DM__item__avatar">
+                <img src="../assets/images/user.png" />
+              </div>
+              <div class="DM__item__content">
+                <span class="DM__item__title">{{dm.message_senderId}}</span>
+                <span class="DM__item__message">{{dm.message_title}} -{{dm.message_sendDate}}</span>
+              </div>
+              <div class="DM__item__option delete dm-option" :data-value="dm.message_id"
+                @click="DmDelete(dm.message_id)">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="showDmContent">
+          <div class="message__name__cover">
+            <div class="sender_name"></div>
+          </div>
+          <div class="message__title__cover">
+            <div class="sender_title"></div>
+            <div class="message__date__tiem">
+              <div class="sender_date"></div>
+              <div class="sender_time"></div>
+            </div>
+          </div>
+
+          <div class="message__content__cover">
+            <div class="sender_content"></div>
+          </div>
+          <div class="message__reply">
+            <div class="message__reply__titie">
+              <label for="response_message_title" class="response_title">제목 : </label>
+              <input type="text" id="response_message_title" v-model="dm_title">
+            </div>
+
+            <textarea name="response_message" id="response_message" v-model="dm_content"></textarea>
+          </div>
+          <div class="send_btn" @click="DM">답장 보내기</div>
+        </div>
+      </div>
+
+      <div class="DmSendModal">
 
       </div>
 
 
 
-
     </div>
-    <div class="move_to_top">TOP</div>
+    <div class="move_to_top">위로가기</div>
 
     <div class="second__section">
-    <h1>{{userInfo.user_id}}의 전시관</h1>
-    <div class="my_works">
-    <div class="poster_card1" :data-value="my_gallery_1.gallery_id">
-      <div v-if="my_gallery_1.gallery_id" class="gallery_modify" @click="modifyGallery(my_gallery_1.gallery_id)">수정</div>
-      <div v-if="my_gallery_1.gallery_id" class="gallery_delete" @click="[delete_gallery_id=my_gallery_1.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_1.gallery_name]">삭제</div>
-      <div v-else class="plus_gallery"  @click="CreateGallery">+</div>
-     <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
-      <img v-else src="../assets/images/1.png" alt="">
+      <h1>{{userInfo.user_nickName}}의 전시관</h1>
+      <div class="my_works">
+        <div class="poster_card1" :data-value="my_gallery_1.gallery_id">
+          <div v-if="my_gallery_1.gallery_id" class="gallery_modify" @click="modifyGallery(my_gallery_1.gallery_id)">수정
+          </div>
+          <div v-if="my_gallery_1.gallery_id" class="gallery_delete"
+            @click="[delete_gallery_id=my_gallery_1.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_1.gallery_name]">
+            삭제</div>
+          <div v-else class="plus_gallery" @click="CreateGallery">+</div>
+          <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
+          <img v-else src="../assets/images/1.png" alt="">
 
-      <h3>{{my_gallery_1.gallery_name}}</h3>
-      <p>Created By {{my_gallery_1.gallery_artistId}} {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</p>
-    </div>
+          <h3>{{my_gallery_1.gallery_name}}</h3>
+          <p v-if="my_gallery_1.gallery_id">Created By {{my_gallery_1.gallery_artistId}}
+            {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</p>
+        </div>
 
-    <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
-      <div v-if="my_gallery_2.gallery_id"  class="gallery_modify" @click="modifyGallery(my_gallery_2.gallery_id)">수정</div>
-      <div v-if="my_gallery_2.gallery_id"  class="gallery_delete" @click="[delete_gallery_id=my_gallery_2.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_2.gallery_name]">삭제</div>
-      <div v-else class="plus_gallery" @click="CreateGallery">+</div>
-      <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
-      <img v-else src="../assets/images/1.png" alt="">
+        <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
+          <div v-if="my_gallery_2.gallery_id" class="gallery_modify" @click="modifyGallery(my_gallery_2.gallery_id)">수정
+          </div>
+          <div v-if="my_gallery_2.gallery_id" class="gallery_delete"
+            @click="[delete_gallery_id=my_gallery_2.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_2.gallery_name]">
+            삭제</div>
+          <div v-else class="plus_gallery" @click="CreateGallery">+</div>
+          <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
+          <img v-else src="../assets/images/1.png" alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>
-      <p>Created By {{my_gallery_2.gallery_artistId}} {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</p>
-    </div>
-  </div>
+          <p v-if="my_gallery_2.gallery_id">Created By {{my_gallery_2.gallery_artistId}}
+            {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</p>
+        </div>
+      </div>
 
 
     </div>
 
-    
+
     <div class="third__section">
+      <h1>{{userInfo.user_nickName}}의 작품</h1>
       <div class="third__section__wrapper">
-        <div class='gallery_container'>
-          <div class='thumb album-thumb' v-for='(item,index) of ["January"]' :key="index">
-            <div class='thumb-container'>
-              <div class='images-container'>
-                <img v-for="(work,index) of my_work_lists" :key="index"
-                  :src=' "data:image/jpeg;base64,"+work.work_piece' class='thumb-image'>
-                <!-- <img class='thumb-image'> -->
-                <!-- <img class='thumb-image'> -->
-              </div>
-              <div class='photo-count'>
-                <div class='content'>
-                  <div class='number'>{{my_work_lists.length}}</div>
-                  <div class='label'>PHOTOS</div>
+
+        <!-- season -->
+        <div class="options">
+          <div class="options_wrapper">
+            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_first" :key="index"
+              style="--optionBackground:url(https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg);">
+              <div class="shadow"></div>
+              <div class="label">
+                <div class="icon">
+                  <i class="fas fa-walking"></i>
+                </div>
+                <div class="info">
+                  <div class="show__my__pint" @click="show_pint_woks(index,1)">그림보러 가기</div>
+                  <div class="main">{{index}}</div>
+                  <div class="sub">Omuke trughte a otufta</div>
                 </div>
               </div>
             </div>
-            <div class='title'>
-              {{item}}
+          </div>
+          <div class="options_wrapper">
+
+            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_second" :key="index"
+              style="--optionBackground:url(https://66.media.tumblr.com/8b69cdde47aa952e4176b4200052abf4/tumblr_o51p7mFFF21qho82wo1_1280.jpg);">
+              <div class="shadow"></div>
+              <div class="label">
+                <div class="icon">
+                  <i class="fas fa-snowflake"></i>
+                </div>
+                <div class="info">
+                  <div class="show__my__pint" @click="show_pint_woks(index,2)">그림보러 가기</div>
+                  <div class="main">{{index}}</div>
+                  <div class="sub">Omuke trughte a otufta</div>
+                </div>
+              </div>
             </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- season -->
+
+        <div class="pinter__side">
+          <div class="pinter_item-lists">
+              <div class="pinter_grid" v-for="(img, i) in pinter_image" :key="i" :data-value="img.work_id">
+                <img :src="'data:image/jpeg;base64,'+img.work_piece" alt="DB이미지" />
+                <div class="pinter_grid__body" :data-value="img.work_id">
+                  <div class="pinter_grid__bod__modify" >수정</div>
+                  <div class="pinter_grid__body__delete">삭제</div>
+                </div>
+              </div>
+          <div class="exit_side">X</div>
           </div>
         </div>
       </div>
-
     </div>
+
+
+
     <div class="forth__section">
-      <button @click="DMpull">DM 받아오기</button>
-
-      <ul class="dmlist">
-        <ul>
-          <li v-for="(item,index) of dm_list" :key="index">
-            {{item}}
-          </li>
-        </ul>
-      </ul>
-      <div>
-        <h3>Follower</h3>
-        <ul>
-          <li class="followers" v-for="(item2,index) of followers" :key="index">
-            {{item2}}
-          </li>
-        </ul>
-        <h3>Following</h3>
-        <ul>
-          <li class="followings" v-for="(item3,index) of followings" :key="index">
-            {{item3}}
-          </li>
-        </ul>
-
-      </div>
-    </div>
-
-
-    <div class="fifth__section">
-      <h1>Scrap</h1>
+      <h1>{{userInfo.user_nickName}}의 즐겨찾기</h1>
       <div class="outer-wrapper">
         <div class="scroll-wrapper">
           <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
-            <img :src="'data:/image/jpeg;base64,'+item.work_piece" alt="">
+            <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece" alt="">
           </div>
         </div>
       </div>
+
     </div>
+
 
 
     <Modal v-if="showModal" @close="showModal = false">
       <div slot="header">
         <h3>
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing()]"></i>
+        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
       </div>
 
       <div slot="body">
@@ -172,7 +242,7 @@
               </div>
               <div class="notifications__item__content">
                 <span class="notifications__item__title">{{people}}</span>
-                <span class="notifications__item__message">Just started following you</span>
+                <!-- <span class="notifications__item__message">Just started following you</span> -->
               </div>
               <div>
                 <div class="notifications__item__option archive js-option">
@@ -191,7 +261,7 @@
               </div>
               <div class="notifications__item__content">
                 <span class="notifications__item__title">{{people}}</span>
-                <span class="notifications__item__message">Just started following you</span>
+                <!-- <span class="notifications__item__message">Just started following you</span> -->
               </div>
               <div>
                 <div class="notifications__item__option archive js-option">
@@ -207,13 +277,12 @@
       </div>
 
       <div slot="footer">
-        <button class="closeRegisterGalleryBtn"
-          @click="[showModal=false,getAllMyFollowing()]">나가기</button>
+        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
       </div>
     </Modal>
 
     <Modal v-if="delete_gallery" @close="delete_gallery= false">
-     <div slot="header">
+      <div slot="header">
         <h3>
           전시관 삭제
         </h3>
@@ -221,7 +290,7 @@
       </div>
 
       <div slot="body" v-if="!delete_gallery_state">
-       <h3>전시관을 삭제하시겠습니까?</h3>
+        <h3>전시관을 삭제하시겠습니까?</h3>
         <p>삭제할 전시관 이름 : {{delete_gallery_name}}</p>
       </div>
       <div slot="body" v-else>
@@ -273,12 +342,34 @@
         scrap_list: [],
         modal_follower: false,
         modal_following: false,
-        my_gallery_1:{},
-        my_gallery_2:{},
-        my_gallery_poster:[],
-        delete_gallery:false,
-        delete_gallery_state:false,
-        delete_gallery_name:'',
+        my_gallery_1: {},
+        my_gallery_2: {},
+        my_gallery_poster: [],
+        delete_gallery: false,
+        delete_gallery_state: false,
+        delete_gallery_name: '',
+        all_my_works_year: {},
+        all_my_works_month_first: {
+          '01': [],
+          '02': [],
+          '03': [],
+          '04': [],
+          '05': [],
+          '06': [],
+        },
+        all_my_works_month_second: {
+
+          '07': [],
+          '08': [],
+          '09': [],
+          '10': [],
+          '11': [],
+          '12': []
+        },
+        showPinterSide: false,
+        showDm: false,
+        showDMSide: false,
+        pinter_image:[],
 
       }
     },
@@ -287,24 +378,64 @@
     },
     props: ["props_id"],
     methods: {
-      refresh(){
+      show_pint_woks(index,season){
+        if(season == 1){
+          this.pinter_image = this.all_my_works_month_first[index]
+        }else{
+          this.pinter_image = this.all_my_works_month_second[index]
+        }
+        console.log(this.pinter_image,'show')
+
+      },
+      DMsideopen() {
+        const DMList = document.querySelector('.dm__list');
+        DMList.classList.add('show_dm_side');
+        init.DMModal();
+      },
+      DMsideclose() {
+        const DMList = document.querySelector('.dm__list');
+        DMList.classList.remove('show_dm_side');
+      },
+      DmRead(message_id) {
+        console.log('Dm Read', message_id);
+      },
+      DmDelete(id) {
+        // const DMList = document.querySelector('.DMList')
+        setTimeout(() => {
+          console.log('DM Delete', id);
+          const DMLIST = document.querySelectorAll('.DM__item')
+          for (let item of DMLIST) {
+            if (item.dataset.name == id) {
+              console.log('지운다.')
+              item.remove()
+            }
+          }
+          console.log('뺀다')
+        }, 1400);
+      },
+      refresh() {
         this.$router.go();
       },
-      CreateGallery(){
+      CreateGallery() {
         this.$router.push('/creategallery');
       },
-      deleteGallery(gallery_id){
+      deleteGallery(gallery_id) {
         console.log('지운다')
-        http.post('/gallery/deleteArtistGallery/'+gallery_id)
-        .then(response => {
-          this.getMyGallery();
-          console.log('response.data', response.data);
-          this.delete_gallery_state = true;
-          
-        })
+        http.post('/gallery/deleteArtistGallery/' + gallery_id)
+          .then(response => {
+            this.getMyGallery();
+            console.log('response.data', response.data);
+            this.delete_gallery_state = true;
+
+          })
       },
-      modifyGallery(gallery_id){
-        this.$router.push({name:'DragAndDrop',params:{props_id:gallery_id}});
+      modifyGallery(gallery_id) {
+        this.$router.push({
+          name: 'DragAndDrop',
+          params: {
+            props_id: gallery_id
+          }
+        });
       },
       following_view() {
         console.log('Show me following')
@@ -342,13 +473,16 @@
           })
       },
       DM() {
+        const reply_id = document.querySelector('.sender_name')
+        console.log(reply_id.innerText);
+
         const test = {
           "message_content": this.dm_content,
           "message_id": 0,
-          "message_isCheck": 0,
-          "message_receiverId": "yong",
+          "message_isCheck": 1,
+          "message_receiverId": reply_id.innerText,
           "message_sendDate": "string",
-          "message_senderId": "testuser",
+          "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }
         http.post('/message/sendMessage', test)
@@ -361,15 +495,12 @@
       DMpull() {
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get all my dm list',response.data);
+            console.log('Get all my dm list', response.data);
             this.dm_list = response.data;
-            for (let item of this.dm_list) {
-              let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-              const dmList = document.querySelector('.dmlist');
-              const dmItem = document.createElement('li')
-              dmItem.innerHTML = "Sender user : " + item.message_senderId + " Content : " + dmContent;
-              dmList.appendChild(dmItem);
-            }
+            // for (let item of this.dm_list) {
+            //   let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+            //   dmItem.innerHTML = "Sender user : " + item.message_senderId + " Content : " + dmContent;
+            // }
           })
       },
       galleryRender() {
@@ -385,7 +516,7 @@
             }
           })
           .then(response => {
-            console.log('Get all my followings',response.data);
+            console.log('Get all my followings', response.data);
             this.followings = response.data;
           })
       },
@@ -396,23 +527,24 @@
             }
           })
           .then(response => {
-            console.log('Get all my followers',response.data);
+            console.log('Get all my followers', response.data);
             this.followers = response.data;
           })
       },
       getMyWorksCount() {
         http.get('/work/getMyWorksCount/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get all my works count',response.data);
+            console.log('Get all my works count', response.data);
+
             this.posts = response.data;
           })
       },
       getMyGallery() {
         http.get('/gallery/getMyGallery/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get my gallery',response.data);
-            if(response.data.length !== 2){
-              if(response.data.length === 1){
+            console.log('Get my gallery', response.data);
+            if (response.data.length !== 2) {
+              if (response.data.length === 1) {
                 this.my_gallery_list = response.data;
                 this.my_gallery_1 = this.my_gallery_list[0];
                 this.getMyGalleryDetail(this.my_gallery_1.gallery_id);
@@ -425,7 +557,7 @@
                   "gallery_mainWorkId": '',
                   "gallery_footPrint": ''
                 }
-              }else{
+              } else {
                 this.my_gallery_list = response.data;
                 this.my_gallery_1 = {
                   "gallery_id": '',
@@ -446,7 +578,7 @@
                   "gallery_footPrint": ''
                 }
               }
-            }else{
+            } else {
               this.my_gallery_list = response.data;
               this.my_gallery_1 = this.my_gallery_list[0];
               this.getMyGalleryDetail(this.my_gallery_1.gallery_id);
@@ -458,22 +590,32 @@
       getAllScrapWork() {
         http.get('/work/getAllScrapWork/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get all scrap',response.data);
+            console.log('Get all scrap', response.data);
             this.scrap_list = response.data;
           })
       },
       getMyWorks() {
         http.get('/work/getMyWorks/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get my works', response.data);
-            this.my_work_lists = response.data;
+
+            console.log('Create year category', this.all_my_works_year);
+            for (let item of response.data) {
+              let itemMonth = item.work_uploadDate.slice(5, 7)
+              if(Object.keys(this.all_my_works_month_first).includes(itemMonth)){
+                console.log('itemMonth', itemMonth)
+              this.all_my_works_month_first[itemMonth].push(item);
+              }else{
+                this.all_my_works_month_second[itemMonth].push(item);
+              }
+            }
+            console.log(this.all_my_works_month_first,this.all_my_works_month_second)
           })
       },
-      getMyGalleryDetail(gallery_id){
-        http.get('http://localhost:7080/artGallery/api/gallery/getArtistGallery/'+gallery_id)
-        .then(response => {
-          this.my_gallery_poster.push(response.data[0].work_piece);
-        })
+      getMyGalleryDetail(gallery_id) {
+        http.get('http://localhost:7080/artGallery/api/gallery/getArtistGallery/' + gallery_id)
+          .then(response => {
+            this.my_gallery_poster.push(response.data[0].work_piece);
+          })
       },
       getUserInfo() {
         http.get('/user/getUserInfo', {
@@ -482,7 +624,7 @@
             }
           })
           .then(response => {
-            console.log('Get user Info',response.data);
+            console.log('Get user Info', response.data);
             this.userInfo = response.data;
 
             const userAbout = document.querySelector('.artist_about');
@@ -512,7 +654,7 @@
     mounted() {
       setTimeout(() => {
         init.init();
-      }, 600)
+      }, 1000)
     },
     created() {
       this.getUserInfo();
@@ -528,6 +670,7 @@
       this.getAllScrapWork();
       // 나의 전체 작품 가지고 오기 
       this.getMyWorks();
+      this.DMpull();
       window.scrollTo(0, 0);
 
 

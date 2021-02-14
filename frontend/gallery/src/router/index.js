@@ -9,7 +9,8 @@ import MainPage from '../pages/Main/MainPage'
 import ItemListPage from '../pages/ItemLisetPage'
 import ItemDetailPage from '../pages/ItemDetailPage'
 import MyPage from '../pages/MyPage'
-import UserProfile from '../pages/UserProfile'
+import UserProfile from '../pages/MyPageForArtist'
+import GuestProfile from '../pages/MyPageForGuest'
 import GalleryRenderPage from '../pages/GalleryRenderPage'
 import LoginSignup from '../pages/User/LoginSignup'
 import Settings from '../pages/Settings'
@@ -34,6 +35,7 @@ import GalleryB from '../pages/Gallery/GalleryB'
 import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
 import DetailPage from '../pages/Gallery/DetailPage'
+import DetailPage2 from '../pages/Gallery/DetailPage2'
 import uploadImageResize from '../pages/Gallery/uploadImageResize'
 
 import GalleryOWorks from '../pages/Gallery/GalleryO_works'
@@ -158,6 +160,11 @@ const routes = [
     component:DetailPage
   },
   {
+    path:'/test/GalleryJ/DetailPage2',
+    name:"DetailPage2",
+    component:DetailPage2
+  },
+  {
     path:'/test/GalleryO/works',
     name:"GalleryO_works",
     component:GalleryOWorks
@@ -181,6 +188,12 @@ const routes = [
     path:'/about',
     name:'About',
     component:About,
+  },
+  {
+    path:'/guestpage',
+    name:'GuestProfile',
+    component:GuestProfile,
+    props:true,
   }
 ]
 

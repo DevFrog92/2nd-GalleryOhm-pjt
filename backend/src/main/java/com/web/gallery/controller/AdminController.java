@@ -48,6 +48,22 @@ public class AdminController {
         return new ResponseEntity<List<UserDto>>(userList, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "작가 목록을 반환한다.", response = List.class)
+    @RequestMapping(value = "/getAllArtist", method = RequestMethod.GET)
+    public ResponseEntity<List<ArtistDto>> getAllArtist() {
+        NumberResult ns = new NumberResult();
+        List<ArtistDto> artistList = null;
+        try {
+            artistList = adminService.getAllArtist();
+            ns.setValue("getAllArtist", artistList.size(), "succ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ns.setValue("getAllArtist", 0, "fail");
+            return new ResponseEntity<List<ArtistDto>>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<ArtistDto>>(artistList, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "작품 전체를 반환한다.", response = List.class, notes = "getAllWork()")
     @RequestMapping(value = "/getAllWork", method = RequestMethod.GET)
     public ResponseEntity<List<WorkDto>> getAllWork() {
@@ -216,6 +232,23 @@ public class AdminController {
         return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "신인작가 조건(올린 작품 10개 이상 전적 있는 경우) exp up", response = NumberResult.class)
+    @RequestMapping(value = "/renewArtistExp", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> renewArtistExp() {
+        NumberResult ns = new NumberResult();
+
+        try {
+            adminService.renewArtistExp();
+
+            ns.setValue("renewArtistExp", 1, "succ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ns.setValue("renewArtistExp", 0, "fail");
+            return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
+    }
+
     /**** 메인 갤러리 목록 조회 ****/
     @ApiOperation(value = "메인 갤러리의 전시관 목록들을 조회한다.", response = List.class, notes = "getAllMainGallery()")
     @RequestMapping(value = "/getAllMainGallery", method = RequestMethod.GET)
@@ -255,5 +288,38 @@ public class AdminController {
         }
         return new ResponseEntity<List<SubGalleryDto>>(subGalleryList, HttpStatus.OK);
     }
+
+    /** 작가 Exp Up */
+    @ApiOperation(value = "작가 Exp up", response = NumberResult.class)
+    @RequestMapping(value = "/updateArtistExpUp", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> updateArtistExpUp(@RequestParam(value = "artist_id") String artist_id) throws Exception {
+        NumberResult ns = new NumberResult();
+        try {
+            adminService.updateArtistExpUp(artist_id);
+            ns.setValue("updateArtistExpUp", 1, "succ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ns.setValue("updateArtistExpUp", 0, "fail");
+            return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
+    }
+
+    /** 작가 Exp Down */
+    @ApiOperation(value = "작가 Exp down", response = NumberResult.class)
+    @RequestMapping(value = "/updateArtistExpDown", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> updateArtistExpDown(@RequestParam(value = "artist_id") String artist_id) throws Exception {
+        NumberResult ns = new NumberResult();
+        try {
+            adminService.updateArtistExpDown(artist_id);
+            ns.setValue("updateArtistExpDown", 1, "succ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ns.setValue("updateArtistExpDown", 0, "fail");
+            return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<NumberResult>(ns, HttpStatus.OK);
+    }
+
 
 }
