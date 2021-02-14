@@ -133,6 +133,6 @@ public class GalleryDaoImpl {
         footprint.setFootPrint_galleryId(footPrint_galleryId);
         footprint.setFootPrint_userId(footPrint_userId);
 
-        return sqlSession.selectOne(ns + "getFootPrintToGallery", footprint);
+        return sqlSession.selectOne(ns + "isFootPrintToGallery", footprint);
     }
 }
