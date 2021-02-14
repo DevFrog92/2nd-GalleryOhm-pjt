@@ -28,20 +28,20 @@ public class MessageController {
     @ApiOperation(value = "사용자가 다른 사용자에게 메세지를 보낸다", response = NumberResult.class,
             notes = "sendMessage(String message_senderId, String message_receiverId, String message_title, String message_content)")
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
-    private ResponseEntity<NumberResult> sendMessage(@RequestBody MessageDto message){
+    private ResponseEntity<NumberResult> sendMessage(@RequestBody MessageDto message) {
         HttpStatus status = null;
         NumberResult ns = new NumberResult();
 
         try {
             messageService.sendMessage(message);
 
-            ns.setValue("메세지가 정상적으로 발송되었습니다.",1,"succ");
+            ns.setValue("메세지가 정상적으로 발송되었습니다.", 1, "succ");
 
             status = HttpStatus.OK;
         } catch (Exception e) {
-            logger.info(e+"");
+            logger.info(e + "");
 
-            ns.setValue("메세지 발송에 실패했습니다.",0,"fail");
+            ns.setValue("메세지 발송에 실패했습니다.", 0, "fail");
 
             status = HttpStatus.BAD_REQUEST;
         }
@@ -51,16 +51,16 @@ public class MessageController {
 
     @ApiOperation(value = "사용자가 받은 메세지 목록을 반환한다", response = List.class, notes = "getAllMyMessage(String user_id)")
     @RequestMapping(value = "/getAllMyReceiveMessage", method = RequestMethod.POST)
-    private ResponseEntity<List<MessageDto>> getAllMyReceiveMessage(@RequestBody String user_id){
+    private ResponseEntity<List<MessageDto>> getAllMyReceiveMessage(@RequestBody String user_id) {
         List<MessageDto> messages = null;
         HttpStatus status = null;
 
         try {
             messages = messageService.getAllMyReceiveMessage(user_id);
 
-            if(messages != null){
+            if (messages != null) {
                 status = HttpStatus.OK;
-            }else{
+            } else {
                 status = HttpStatus.ACCEPTED;
             }
         } catch (Exception e) {
@@ -72,16 +72,16 @@ public class MessageController {
 
     @ApiOperation(value = "사용자가 보낸 메세지 목록을 반환한다", response = List.class, notes = "getAllMyMessage(String user_id)")
     @RequestMapping(value = "/getAllMySendMessage", method = RequestMethod.POST)
-    private ResponseEntity<List<MessageDto>> getAllMySendMessage(@RequestBody String user_id){
+    private ResponseEntity<List<MessageDto>> getAllMySendMessage(@RequestBody String user_id) {
         List<MessageDto> messages = null;
         HttpStatus status = null;
 
         try {
             messages = messageService.getAllMySendMessage(user_id);
 
-            if(messages != null){
+            if (messages != null) {
                 status = HttpStatus.OK;
-            }else{
+            } else {
                 status = HttpStatus.ACCEPTED;
             }
 
@@ -94,14 +94,14 @@ public class MessageController {
 
     @ApiOperation(value = "메세지의 세부 내용을 가져온다", response = MessageDto.class, notes = "getMyMessage(int message_id)")
     @RequestMapping(value = "/getMyMessage", method = RequestMethod.POST)
-    private ResponseEntity<MessageDto> getMyMessage(@RequestBody int message_id){
+    private ResponseEntity<MessageDto> getMyMessage(@RequestBody int message_id) {
         MessageDto message = null;
         HttpStatus status = null;
 
         try {
             message = messageService.getMyMessage(message_id);
 
-            if (message != null){
+            if (message != null) {
                 status = HttpStatus.OK;
             }
 
@@ -114,16 +114,14 @@ public class MessageController {
         return new ResponseEntity<MessageDto>(message, status);
     }
 
-    @ApiOperation(value = "메세지 읽음 처리", response = NumberResult.class, notes = "checkMessage(List<int message_id>)")
+    @ApiOperation(value = "메세지 읽음 처리", response = NumberResult.class, notes = "checkMessage(int message_id)")
     @RequestMapping(value = "/checkMessage", method = RequestMethod.POST)
-    private ResponseEntity<NumberResult> checkMessage(@RequestBody List<Integer> message_ids){
+    private ResponseEntity<NumberResult> checkMessage(@RequestBody int message_id) {
         HttpStatus status = null;
         NumberResult ns = new NumberResult();
 
         try {
-            for (int message_id: message_ids) {
-                messageService.checkMessage(message_id);
-            }
+            messageService.checkMessage(message_id);
 
             ns.setValue("메세지를 읽음처리하였습니다", 1, "succ");
 
@@ -141,24 +139,24 @@ public class MessageController {
     @ApiOperation(value = "받아온 message_id를 이용해 메세지를 삭제한다.", response = NumberResult.class,
             notes = "deleteMessage(List<int message_id>")
     @RequestMapping(value = "/deleteMessage", method = RequestMethod.POST)
-    private ResponseEntity<NumberResult> deleteMessage(@RequestBody List<Integer> message_ids){
+    private ResponseEntity<NumberResult> deleteMessage(@RequestBody List<Integer> message_ids) {
         NumberResult ns = new NumberResult();
         HttpStatus status = null;
 
-        try{
-            for (int message_id: message_ids) {
+        try {
+            for (int message_id : message_ids) {
                 messageService.deleteMessage(message_id);
             }
 
-            ns.setValue("메세지를 삭제했습니다.",1,"succ");
+            ns.setValue("메세지를 삭제했습니다.", 1, "succ");
 
             status = HttpStatus.OK;
-        }catch (Exception e){
-            ns.setValue("메세지 삭제에 실패했습니다.",0,"fail");
+        } catch (Exception e) {
+            ns.setValue("메세지 삭제에 실패했습니다.", 0, "fail");
 
             status = HttpStatus.BAD_REQUEST;
         }
 
-        return new ResponseEntity<NumberResult>(ns,status);
+        return new ResponseEntity<NumberResult>(ns, status);
     }
 }
