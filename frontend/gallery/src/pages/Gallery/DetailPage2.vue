@@ -38,11 +38,14 @@
             <!-- 작품 이름 -->
             <div class="first">{{ work.work_title }}</div>
             <!-- 작가 이름-->
-            <div class="name">By {{ work.work_artistId }}</div>
+            <div class="name" @click="moveToArtistPage">
+              By {{ work.work_artistId }}
+            </div>
             <!-- 작품 설명 -->
             <div class="desc">
               {{ work.work_desc }}
             </div>
+            <!-- 작품 그린 툴 -->
             <div class="desc" v-if="work.work_tool != null">
               Drawing By {{ work.work_tool }}
             </div>
@@ -76,6 +79,7 @@ export default {
       artistState: false,
       costState: false,
       scrapState: false,
+      costCnt: 0,
     };
   },
   props: ["work_id"],
@@ -103,6 +107,7 @@ export default {
           var work = response.data;
           work.work_piece = "data:image/jpeg;base64," + work.work_piece;
           this.work = work;
+          this.costCnt = this.work.work_cost;
         },
         (error) => {
           console.log(error);
@@ -166,6 +171,16 @@ export default {
             console.log(error);
           }
         );
+    },
+    moveToArtistPage() {
+      if (this.work.work_artistId === localStorage.getItem("user_id")) {
+        this.$router.push("/mypage");
+      } else {
+        this.$router.push({
+          name: "UserProfile",
+          params: { props_id: this.work.work_artistId },
+        });
+      }
     },
   },
 };
@@ -269,10 +284,11 @@ export default {
 .detail .info_box .info .name {
   margin-top: 2vh;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .detail .info_box .info .desc {
-  margin-top: 1vh;
+  margin-top: 1.5vh;
   font-size: 15px;
 }
 

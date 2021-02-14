@@ -190,7 +190,7 @@ export default {
       const welcome = document.querySelector(".welcome");
 
       welcome.remove();
-    }, 5000);
+    }, 4500);
 
     setTimeout(() => {
       const list = document.querySelector(".list");
@@ -308,7 +308,7 @@ export default {
         eyeLeftPupil.style.transform = `translate(${posX}px, ${posY}px)`;
         eyeRightPupil.style.transform = `translate(${posX}px, ${posY}px)`;
       }
-    }, 5500);
+    }, 4600);
   },
   methods: {
     changePage(i) {
