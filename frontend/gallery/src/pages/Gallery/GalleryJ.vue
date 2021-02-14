@@ -1,27 +1,38 @@
 <template>
-<div>
-  <div class="subgallery" v-if="imgList.length != 0">
-    <p class="galleryType">레드 갤러리</p>
-    <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
-    <div v-for="(img, i) in imgList" :key="i">
-      <div class="image" @mouseover="changePage(i + 1)">
-        <router-link class="router-link" to="/test/GalleryJ/DetailPage">
-          <img class="img" :src="img.work_piece" :alt="img.work_title" />
-          <div class="content">
-            <h1 class="text">{{ img.work_title }}</h1>
-          </div>
-        </router-link>
-        <p class="info" style="padding-top: 5%">
-          By {{ img.work_artistId }}, {{ img.work_uploadDate }}
-        </p>
+  <div>
+    <div class="intro">
+      <!-- 입장 animation -->
+      <div class="enter" @click="clickEnter"></div>
+      <div class="door">
+        <div class="left"></div>
+        <!-- <div class="line"></div> -->
+        <div class="right"></div>
+      </div>
+    </div>
+
+    <div class="subgallery" v-if="imgList.length != 0">
+      <p class="galleryType">레드 갤러리</p>
+      <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
+      <div v-for="(img, i) in imgList" :key="i">
+        <div class="image" @mouseover="changePage(i + 1)">
+          <router-link class="router-link" to="/test/GalleryJ/DetailPage">
+            <img class="img" :src="img.work_piece" :alt="img.work_title" />
+            <div class="content">
+              <h1 class="text">{{ img.work_title }}</h1>
+            </div>
+          </router-link>
+          <p class="info" style="padding-top: 5%">
+            By {{ img.work_artistId }}, {{ img.work_uploadDate }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import http from "../../api/http.js";
+import gasp from "gsap";
 
 export default {
   data() {
@@ -52,6 +63,33 @@ export default {
     changePage(i) {
       this.nowPage = i;
     },
+    clickEnter() {
+      this.unlock();
+    },
+    unlock() {
+      const enter = document.querySelector(".enter");
+      gasp.to(enter, 0.5, {
+        transform: "rotate(90deg)",
+        onComplete: this.open(),
+      });
+    },
+    open() {
+      const left = document.querySelector(".door .left");
+      const right = document.querySelector(".door .right");
+      const button = document.querySelector(".enter");
+      const intro = document.querySelector(".intro");
+
+      gasp.to(left, 1.5, { width: 0 });
+      gasp.to(right, 1.5, { width: 0 });
+      gasp.to(button, 1.5, {
+        "margin-left": "-60px",
+        onComplete: function() {
+          left.parentElement.remove();
+          button.remove();
+          intro.remove();
+        },
+      });
+    },
   },
 };
 </script>
@@ -62,8 +100,8 @@ export default {
 .subgallery {
   height: 100vh;
   overflow-x: hidden;
-  background-color: #c20a0a;
-  
+  /* background-color: #c20a0a; */
+  background-image: url("../../assets/images/red.png");
 }
 .image {
   position: relative;
@@ -151,14 +189,97 @@ export default {
   transform: scale(3.3);
   transition: all 1.2s;
 }
+
 .info {
   padding-top: 3%;
   color: black;
   transform: scale(1.2);
   font-family: "Hanna", sans-serif;
 }
+
 .router-link {
   text-decoration: none;
 }
 
+.intro {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ff1919;
+}
+
+.door {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  /* transform: scale(1.3); */
+}
+
+.door .left,
+.door .right {
+  position: relative;
+  font-size: 10pt;
+  display: inline-block;
+  width: calc(50% - 2.5px);
+  height: 100%;
+  background-image: url("../../assets/images/grey.png");
+  z-index: 3;
+  /* transform: scale(1.3); */
+}
+
+/* .door .line{
+  width: 3px;
+  height: 100%;
+  position: absolute;
+  left: calc(50% - 1.25px);
+  background-color: #f90000;
+  border-left: solid 1px #f90000;
+  border-right: solid 1px #f90000;
+  box-shadow: 40px 0 150px #ff1919, inset 40px 0 150px #ff1919;
+  z-index: 4;
+} */
+
+.door .left {
+  float: left;
+  /* border-right: solid 2.5px #111; */
+  /* border-right: 10px solid #f90000; */
+  /* box-shadow:inset -100px 0px 250px #ff1919 */
+}
+
+.door .right {
+  float: right;
+  /* border-left: solid 2.5px #111; */
+  /* border-left: 10px solid #f90000; */
+  /* box-shadow: -5px 0 0 #f90000; */
+  /* box-shadow: inset 100px 0px 250px #ff1919 */
+}
+
+.enter {
+  cursor: pointer;
+  display: block;
+  background: #222;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 5px;
+  z-index: 6;
+  position: absolute;
+  padding: 5px 10px;
+  margin: auto;
+  color: #ccc;
+  border: solid 3px black;
+}
 </style>

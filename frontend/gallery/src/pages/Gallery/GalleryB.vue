@@ -1,28 +1,53 @@
 <template>
   <div class="subgallery" v-if="imgList.length != 0">
-    <p class="galleryType">서브갤러리</p>
-    <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
-    <div v-for="(img, i) in imgList" :key="i">
-      <div class="image" @mouseover="changePage(i + 1)">
-        <router-link
-          class="router-link"
-          active-class="active"
-          to="/test/GalleryJ/DetailPage2"
-        >
-          <img class="img" :src="img.work_piece" :alt="img.work_title" />
-          <div class="content">
-            <!-- 작품명 -->
-            <h1 class="text">{{ img.work_title }}</h1>
+    <div class="eyes">
+      <button @click="show" v-scroll-to="'.content'">버튼</button>
+
+      <section id="dude">
+        <img src="https://i.imgur.com/rOFqbbs.png" alt="" id="gentleman" />
+        <div id="eyes"></div>
+        <canvas class="draw-map" style="width: 500px; height: 684px"></canvas>
+      </section>
+
+      <section id="copy">
+        <h3 class="title"></h3>
+        <a href="" id="reset"></a>
+      </section>
+    </div>
+    <div class="content hidden">
+      <div class="side">
+        <p class="galleryType">서브갤러리</p>
+        <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
+      </div>
+      <div class="list">
+        <div v-for="(img, i) in imgList" :key="i">
+          <div class="image slide-in-bck-bottom" @mouseover="changePage(i + 1)">
+            <router-link
+              class="router-link"
+              active-class="active"
+              to="/test/GalleryJ/DetailPage2"
+            >
+              <img class="img" :src="img.work_piece" :alt="img.work_title" />
+              <div class="content">
+                <!-- 작품명 -->
+                <h1 class="text">{{ img.work_title }}</h1>
+              </div>
+              <p class="info">
+                {{ img.work_artistId }}, {{ img.work_uploadDate }}
+              </p>
+            </router-link>
           </div>
-          <p class="info">{{ img.work_artistId }}, {{ img.work_uploadDate }}</p>
-        </router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import http from "../../api/http.js";
+import VueScrollTo from "vue-scrollto";
+Vue.use(VueScrollTo);
 
 export default {
   data() {
@@ -48,10 +73,19 @@ export default {
 
     this.nowPage = 1;
   },
+  mounted() {},
   destroyed() {},
   methods: {
     changePage(i) {
       this.nowPage = i;
+    },
+    show() {
+      const side = document.querySelector(".content");
+      const eyes = document.querySelector(".eyes");
+
+      side.classList.remove("hidden");
+      // side.classList.add("slide-in-bck-bottom");
+      eyes.classList.add("hidden");
     },
   },
 };
@@ -65,6 +99,15 @@ export default {
 }
 
 .subgallery::-webkit-scrollbar {
+  display: none;
+}
+
+.eyes {
+  height: 100vh;
+  width: auto;
+}
+
+.hidden {
   display: none;
 }
 
@@ -155,5 +198,135 @@ export default {
 
 .router-link {
   text-decoration: none;
+}
+
+.slide-in-bck-bottom {
+  -webkit-animation: slide-in-bck-bottom 0.3s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bck-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-in-bck-bottom {
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+    transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bck-bottom {
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+    transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+// VARIABLES
+$red: #fe0000;
+
+// MIXINS / EXTENDS
+%no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// IMPORTS
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+// STYLE
+.subgallery {
+  > section {
+    margin: 0 auto;
+    width: 500px;
+    position: relative;
+  }
+}
+
+.title {
+  text-align: center;
+  font-family: "Pacifico";
+  font-size: 2rem;
+}
+
+section#dude {
+  @extend %no-select;
+  #gentleman {
+    position: relative;
+    z-index: 1;
+    @extend %no-select;
+  }
+  #draw-map {
+    @extend %no-select;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+}
+
+#reset {
+  display: block;
+  background: #333;
+  margin-top: 1rem;
+  padding: 1rem initial;
+  border-radius: 5px;
+  font-family: sans-serif;
+  color: #fff;
+  text-align: center;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-decoration: none;
+  &:hover {
+    background: darken(#333, 1%);
+  }
+  &:active {
+    background: darken(#333, 5%);
+  }
+}
+
+.thickness-options {
+  list-style: none;
+  padding-left: 0;
+  li {
+    display: inline-block;
+    width: percentage(1/4);
+    text-align: center;
+    &.list-title {
+      font-weight: 600;
+    }
+    a {
+      display: block;
+      color: #aaa;
+      // border: 2px solid #eee;
+      text-decoration: none;
+      &.active {
+        color: #000;
+        // border-color: #000;
+      }
+    }
+  }
 }
 </style>

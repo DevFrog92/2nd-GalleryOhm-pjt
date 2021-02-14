@@ -112,4 +112,9 @@ public class AdminServiceImpl implements AdminService {
     public void addHashTagFromTotal(List<String> hashTagList) {
         adminDao.addHashTagFromTotal(hashTagList);
     }
+
+    @Override
+    public void renewArtistExp() {
+        adminDao.renewArtistExp();
+    }
 }

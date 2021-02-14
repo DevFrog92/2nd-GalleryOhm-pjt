@@ -6,9 +6,6 @@
         <div class="profile_border">
           <h2 class="profile_card_user_name">{{userInfo.user_id}}</h2>
           <div class="profile_icons">
-            <i class="profile_icon icon-instagram-1" aria-hidden="true"></i>
-            <i class="profile_icon icon-facebook-1" aria-hidden="true"></i>
-            <i class="profile_icon icon-bookmark" aria-hidden="true"></i>
             <span class="profile_icon_span"><i class="profile_icon icon-chat" aria-hidden="true"></i></span>
           </div>
         </div>
@@ -21,23 +18,23 @@
         <span @click="follow" v-else ><i class="icon-user-add"></i></span>
         </div>
         <div class="follow">
-          <span>Post : {{posts}}</span>
-          <span>Following : {{followings.length}}</span>
-          <span>Follower : {{followers.length}}</span>
+          <span>작품 수 : {{posts}}</span>
+          <span>팔로잉 : {{followings.length}}</span>
+          <span>팔로워 : {{followers.length}}</span>
           </div>
         <p class="artist_about">{{this.user_about}}</p>
       </div>
         <div class="profile_menu_footer">
           <div class="profile_menu">
-            <div class="profile_label">More info</div>
+            <div class="profile_label">더보기</div>
             <div class="profile_spacer"></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="1">Twitter</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="2">Behance</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="3">MixCloud</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value="3">서신</span></div>
           </div>
         </div>
     </div>
-    <div class="move_to_top">TOP</div>
+    <div class="move_to_top">위로가기</div>
 
     <div class="second__section">
 
@@ -85,20 +82,7 @@
 
     </div>
     <div class="forth__section">
-      <h1>DM</h1>
-      <div id="DM">
-        <input type="text" v-model="dm_title" placeholder="DM title">
-        <textarea name="DM" v-model="dm_content" placeholder="DM content"></textarea>
-      </div>
-      <button @click="DM">DM 날리기</button>
-
-      <div class="dmlist">
-        <ul>
-          <li v-for="(item,index) of dm_list" :key="index">
-            {{item}}
-          </li>
-        </ul>
-      </div>
+     
     </div>
 
     <Modal v-if="showModal&&Aboutmodal" @close="showModal = false">
