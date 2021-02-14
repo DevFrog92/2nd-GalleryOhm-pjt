@@ -10,6 +10,11 @@
         where user_type in (1, 2)
     </select>
 
+    <select id="getAllArtist" resultType="artist">
+        select *
+        from artist
+    </select>
+
     <select id="getAllHashTag" resultType="hashTag">
         select *
         from hashtag

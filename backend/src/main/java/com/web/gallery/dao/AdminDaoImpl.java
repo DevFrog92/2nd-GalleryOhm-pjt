@@ -110,4 +110,7 @@ public class AdminDaoImpl {
         sqlSession.update(ns + "updateArtistExpDown", artist_id);
     }
 
+    public List<ArtistDto> getAllArtist() {
+        return sqlSession.selectList(ns + "getAllArtist");
+    }
 }

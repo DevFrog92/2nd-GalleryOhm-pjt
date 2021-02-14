@@ -128,5 +128,10 @@ public class AdminServiceImpl implements AdminService {
         adminDao.updateArtistExpDown(artist_id);
     }
 
+    @Override
+    public List<ArtistDto> getAllArtist() {
+        return adminDao.getAllArtist();
+    }
+
 
 }

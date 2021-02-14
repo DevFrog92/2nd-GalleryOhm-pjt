@@ -48,6 +48,22 @@ public class AdminController {
         return new ResponseEntity<List<UserDto>>(userList, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "작가 목록을 반환한다.", response = List.class)
+    @RequestMapping(value = "/getAllArtist", method = RequestMethod.GET)
+    public ResponseEntity<List<ArtistDto>> getAllArtist() {
+        NumberResult ns = new NumberResult();
+        List<ArtistDto> artistList = null;
+        try {
+            artistList = adminService.getAllArtist();
+            ns.setValue("getAllArtist", artistList.size(), "succ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ns.setValue("getAllArtist", 0, "fail");
+            return new ResponseEntity<List<ArtistDto>>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<ArtistDto>>(artistList, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "작품 전체를 반환한다.", response = List.class, notes = "getAllWork()")
     @RequestMapping(value = "/getAllWork", method = RequestMethod.GET)
     public ResponseEntity<List<WorkDto>> getAllWork() {

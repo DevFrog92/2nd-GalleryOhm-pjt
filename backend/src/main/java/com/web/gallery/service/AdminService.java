@@ -67,4 +67,5 @@ public interface AdminService {
 
     void updateArtistExpDown(String artist_id);
 
+    List<ArtistDto> getAllArtist();
 }
