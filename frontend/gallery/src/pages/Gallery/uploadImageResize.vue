@@ -143,6 +143,7 @@ export default {
           this.hashtag_list += item.innerText + ",";
         }
       }
+      // this.hashtag_list
       console.log(this.hashtag_list);
     },
     Back() {

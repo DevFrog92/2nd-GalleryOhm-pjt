@@ -76,4 +76,7 @@ public interface GalleryService {
 
     // 모든 갤러리 목록 반환
     List<GalleryDto> getAllGallery() throws Exception;
+
+    // 모든 갤러리 목로 반환(성인용)
+    List<GalleryDto> getAllAdultGallery() throws Exception;
 }

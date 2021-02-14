@@ -161,5 +161,15 @@
     <select id="getAllGallery" resultType="gallery">
         select *
         from gallery
+        where gallery_id in (select distinct galleryDetail_galleryId
+                             from gallerydetail
+                             where galleryDetail_workId in (select work_id
+                                                            from work
+                                                            where work_rating &lt; 19))
+    </select>
+
+    <select id="getAllAdultGallery" resultType="gallery">
+        select *
+        from gallery
     </select>
 </mapper>

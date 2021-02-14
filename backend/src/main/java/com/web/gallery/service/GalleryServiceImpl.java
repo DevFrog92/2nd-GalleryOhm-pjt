@@ -147,4 +147,9 @@ public class GalleryServiceImpl implements GalleryService {
     public List<GalleryDto> getAllGallery() throws Exception {
         return galleryDao.getALlGallery();
     }
+
+    @Override
+    public List<GalleryDto> getAllAdultGallery() throws Exception {
+        return galleryDao.getAllAdultGallery();
+    }
 }
