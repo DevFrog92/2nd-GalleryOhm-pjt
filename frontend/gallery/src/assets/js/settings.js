@@ -1,120 +1,43 @@
 import store from '../../store/store'
-const design = () => {
-  const modMainBtn = document.querySelector(".modmain");
-  // const modMainIcon = modMainBtn.firstChild;
-  const modUser = document.querySelector(".moduser");
-  const modMypage = document.querySelector(".modpage");
-  const unscribe = document.querySelector(".unscribe");
-  // const modUserIcon = modUser.firstChild;
-  // const modMypageIcon = modMypage.firstChild;
-  // const unscribeIcon = unscribe.firstChild;
-  const line = document.querySelector("#line");
-  const first = document.querySelector("#first");
-  const second = document.querySelector("#second");
-  const third = document.querySelector("#third");
-  const fourth = document.querySelector("#fourth");
+const design = () =>{ 
+  const divs = document.querySelectorAll('.setting_menu div');
+const lis = document.querySelectorAll('.setting_con li');
+
+divs.forEach(target => {
+  target.addEventListener('click',function(e){
+    checkDivIndex(divs,e.target.dataset.value);
+    checkLiIndex(lis,e.target.dataset.value);
+  })
+})
 
 
+const checkDivIndex = (divs,index) =>{
+  for(let item of divs ){
+    if(item.classList.contains('active')){
+        item.classList.remove('active');
+        divs[index-1].classList.add('active');
+    }
+  }
+}
 
+const checkLiIndex = (lis,index) =>{
+  for(let item of lis ){
+    if(item.classList.contains('active')){
+        item.classList.remove('active');
+        lis[index-1].classList.add('active');
+    }
+  }
+}
 
-  modMainBtn.addEventListener("click", () => {
-    modMainBtn.classList.add("active");
-    // modMainIcon.classList.add("active");
-    modUser.classList.remove("active");
-    modMypage.classList.remove("active");
-    unscribe.classList.remove("active");
-    // modUserIcon.classList.remove("active");
-    // modMypageIcon.classList.remove("active");
-    // unscribeIcon.classList.remove("active");
-    line.classList.add("one");
-    line.classList.remove("two");
-    line.classList.remove("three");
-    line.classList.remove("four");
-  });
-
-  modUser.addEventListener("click", () => {
-    modUser.classList.add("active");
-    // modUserIcon.classList.add("active");
-    modMainBtn.classList.remove("active");
-    modMypage.classList.remove("active");
-    unscribe.classList.remove("active");
-    // modMainIcon.classList.remove("active");
-    // modMypageIcon.classList.remove("active");
-    // unscribeIcon.classList.remove("active");
-    line.classList.add("two");
-    line.classList.remove("one");
-    line.classList.remove("three");
-    line.classList.remove("four");
-  });
-
-  modMypage.addEventListener("click", () => {
-    modMypage.classList.add("active");
-    // modMypageIcon.classList.add("active");
-    modMainBtn.classList.remove("active");
-    modUser.classList.remove("active");
-    unscribe.classList.remove("active");
-    // modMainIcon.classList.remove("active");
-    // modUserIcon.classList.remove("active");
-    // unscribeIcon.classList.remove("active");
-    line.classList.add("three");
-    line.classList.remove("two");
-    line.classList.remove("one");
-    line.classList.remove("four");
-  });
-
-  unscribe.addEventListener("click", () => {
-    unscribe.classList.add("active");
-    // unscribeIcon.classList.add("active");
-    modMainBtn.classList.remove("active");
-    modMypage.classList.remove("active");
-    modUser.classList.remove("active");
-    // modMainIcon.classList.remove("active");
-    // modMypageIcon.classList.remove("active");
-    // modUserIcon.classList.remove("active");
-    line.classList.add("four");
-    line.classList.remove("one");
-    line.classList.remove("three");
-    line.classList.remove("two");
-  });
-
-  modMainBtn.addEventListener("click", () => {
-    first.classList.add("active");
-    second.classList.remove("active");
-    third.classList.remove("active");
-    fourth.classList.remove("active");
-  });
-
-  modUser.addEventListener("click", () => {
-    first.classList.remove("active");
-    second.classList.add("active");
-    third.classList.remove("active");
-    fourth.classList.remove("active");
-  });
-
-  modMypage.addEventListener("click", () => {
-    first.classList.remove("active");
-    second.classList.remove("active");
-    third.classList.add("active");
-    fourth.classList.remove("active");
-  });
-
-  unscribe.addEventListener("click", () => {
-    first.classList.remove("active");
-    second.classList.remove("active");
-    third.classList.remove("active");
-    fourth.classList.add("active");
-  });
-  
-
-  const unsubBtn = document.querySelector('.unscribe_button');
-  unsubBtn.addEventListener('click', e => {
-    e.target.classList.add('delete')
-    setTimeout(() => 
-      e.target.classList.remove('delete')
-      // leaveUser(localStorage.getItem('user_id'))
-      , 3200);
-  e.preventDefault();
-  });
+  // const unsubBtn = document.querySelector('.unscribe_button');
+  // unsubBtn.addEventListener('click', e => {
+  //   e.target.classList.add('delete')
+  //   setTimeout(() => 
+  //     e.target.classList.remove('delete')
+  //     // leaveUser(localStorage.getItem('user_id'))
+  //     , 3200);
+  // e.preventDefault();
+  // });
 
 
   ////
@@ -193,6 +116,16 @@ const design = () => {
   }
   ///
 
+  function onClick() {
+    document.querySelector('.rank_modal_wrap').style.display ='block';
+}   
+function offClick() {
+    document.querySelector('.rank_modal_wrap').style.display ='none';
+}
+
+document.getElementById('rank_modal_btn').addEventListener('click', onClick);
+document.querySelector('.rank_modal_close').addEventListener('click', offClick);
+
 }
 
 const modifyUser = (userInfo) => {
@@ -226,7 +159,6 @@ export default {design,modifyUser,checkPassword,makeUserNickName,leaveUser};
 //   }
 //   e.preventDefault();
 // }));
-
 
 
 
