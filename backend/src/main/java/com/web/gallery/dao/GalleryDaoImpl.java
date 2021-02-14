@@ -135,4 +135,20 @@ public class GalleryDaoImpl {
 
         return sqlSession.selectOne(ns + "isFootPrintToGallery", footprint);
     }
+
+    public void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
+        FootPrintDto footprint = new FootPrintDto();
+        footprint.setFootPrint_galleryId(footPrint_galleryId);
+        footprint.setFootPrint_userId(footPrint_userId);
+
+        sqlSession.delete(ns + "cleanFootPrintToGallery", footprint);
+    }
+
+    public void updateFootPrintToGalleryUp(int footPrint_galleryId) {
+        sqlSession.update(ns + "updateFootPrintToGalleryUp", footPrint_galleryId);
+    }
+
+    public void updateFootPrintToGalleryDown(int footPrint_galleryId) {
+        sqlSession.update(ns + "updateFootPrintToGalleryDown", footPrint_galleryId);
+    }
 }

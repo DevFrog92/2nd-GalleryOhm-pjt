@@ -162,4 +162,19 @@ public class GalleryServiceImpl implements GalleryService {
     public int isFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
         return galleryDao.isFootPrintToGallery(footPrint_galleryId, footPrint_userId);
     }
+
+    @Override
+    public void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
+        galleryDao.cleanFootPrintToGallery(footPrint_galleryId, footPrint_userId);
+    }
+
+    @Override
+    public void updateFootPrintToGalleryUp(int footPrint_galleryId) {
+        galleryDao.updateFootPrintToGalleryUp(footPrint_galleryId);
+    }
+
+    @Override
+    public void updateFootPrintToGalleryDown(int footPrint_galleryId) {
+        galleryDao.updateFootPrintToGalleryDown(footPrint_galleryId);
+    }
 }

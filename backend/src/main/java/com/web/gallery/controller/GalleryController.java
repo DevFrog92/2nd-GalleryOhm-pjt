@@ -216,7 +216,18 @@ public class GalleryController {
     public ResponseEntity<NumberResult> giveFootPrintToGallery(@PathVariable int footPrint_galleryId, @RequestBody String footPrint_userId) throws Exception {
         NumberResult nr = new NumberResult();
         galleryService.giveFootPrintToGallery(footPrint_galleryId, footPrint_userId);
+        galleryService.updateFootPrintToGalleryUp(footPrint_galleryId);
         nr.setValue("giveFootPrintToGallery", 1, "succ");
+        return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "전시관 발자국(좋아요)을 취소한다.", response = NumberResult.class, notes = "cleanFootPrintToGallery(footprint_galleryId, footprint_userId)")
+    @RequestMapping(value = "/cleanFootPrintToGallery/{footPrint_galleryId}", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> cleanFootPrintToGallery(@PathVariable int footPrint_galleryId, @RequestBody String footPrint_userId) throws Exception {
+        NumberResult nr = new NumberResult();
+        galleryService.cleanFootPrintToGallery(footPrint_galleryId, footPrint_userId);
+        galleryService.updateFootPrintToGalleryDown(footPrint_galleryId);
+        nr.setValue("cleanFootPrintToGallery", 1, "succ");
         return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
     }
 
