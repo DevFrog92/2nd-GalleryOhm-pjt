@@ -1,22 +1,17 @@
 const init = ()=>{
 
-  var nav = document.getElementById('nav');
-  var navlinks = nav.getElementsByTagName('router-link');
+  const menuBtn = document.querySelector('.nav__items');
   
-  function toggleNav() {
-      (nav.classList.contains('active')) ? nav.classList.remove('active') : nav.classList.add('active');
+  menuBtn.addEventListener('click',function(){
+    const radioBtn = document.querySelector('.nav__cb')
+    if(radioBtn.checked){
+    radioBtn.checked = false;
+      
+    }else{
+    radioBtn.checked = true;
+      
     }
-  
-  document.getElementById('nav-icon').addEventListener('click', function(e) {
-      e.preventDefault();
-      toggleNav();
-  });
-  
-  for(var i = 0; i < navlinks.length; i++) {
-      navlinks[i].addEventListener('click', function() {
-        toggleNav();
-    });
-  }
+  })
   }
   
   export default {init};

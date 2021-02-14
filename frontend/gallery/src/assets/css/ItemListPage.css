@@ -1,6 +1,6 @@
 
 .item-list-container {
-	padding: 0 3rem;
+	padding: 0 5rem;
 	background:#f4f5f9;
 
 }
@@ -233,7 +233,8 @@
 	top: 0;
 	transform: translateX(-1px);
 	width: 4px;
-	background: rgb(44, 49, 57);
+	/* background: rgb(44, 49, 57); */
+	background: #ff6060;
 	bottom: 88px;
 	border-radius: 50px;
 	opacity: 1;
@@ -255,9 +256,9 @@
 	vertical-align: middle;
 	text-align: center;
 	font-size: 2.5rem;
-	font-weight: 600;
+	font-weight: 900;
 	letter-spacing: 2px;
-	color: rgb(44, 49, 57);
+	color: #ff6060;
 	pointer-events: none;
 	user-select: none;
 	transition: all 400ms ease-in-out;
@@ -286,7 +287,7 @@
 	height: 5rem;
 }
 .search__bar .search__p {
-	color: rgb(44, 49, 57);
+	color: #b64b49;
 	pointer-events: none;
 	white-space: nowrap;
 }
