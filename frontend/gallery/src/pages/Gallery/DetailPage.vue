@@ -1,147 +1,397 @@
 <template>
   <div>
-    <div class="promo" style="--overlay-color: hotpink">
-    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
-    <h2 class="title" data-cta="Get out there →">Nightlife</h2>
-</div>
-<div class="promo" style="--overlay-color: yellow">
-    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
-    <h2 class="title" data-cta="Find yours →">Quiet Time</h2>
-</div>
-<div class="promo" style="--overlay-color: dodgerblue">
-    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
-    <h2 class="title" data-cta="Grab a board →">Surf's Up!</h2>
-</div>
-<div class="promo" style="--overlay-color: darkgreen">
-    <div class="image-wrapper"><img src="../../assets/images/t.jpeg" /></div>
-    <h2 class="title" data-cta="Take a walk →">Day Hikes</h2>
-</div>
+    <div class="detailPage">
+      <!-- ( 배경 : 어두운색) -->
+      <div class="preview">
+        <div class="container">
+          <div class="work_view">
+            <!-- 첫 div 정보 -->
+            <div class="title">
+              <!-- title -->
+              <h1 class="title_text">{{work_info.work_title}}</h1>
+              <!-- 액자 이미지 -->
+              <div class="title_img">
+                <img class="work" src="../../assets/images/t.jpeg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pullImg type-b"></div>
+      <div class="detail">
+        <div class="img_box">
+          <div class="img">
+            <img src="../../assets/images/t.jpeg" alt="" />
+          </div>
+        </div>
+        <div class="info_box">
+          <div class="info">
+            <!-- 작품 이름 -->
+            <div class="first">{{work_info.work_title}}</div>
+            <!-- 작가 이름-->
+            <div class="name">{{work_info.work_artistId}}</div>
+            <!-- 작품 설명 -->
+            <div class="desc">
+              {{work_info.work_desc}}
+            </div>
+            <!-- 작품 설명 -->
+            <div class="size">
+              {{work_info.work_tool}}
+            </div>
+            <!-- 작품 사이즈 -->
+            <div class="size">??????</div>
+            <div class="btn">
+              <div class="button-container-3">
+                <span class="mas">scrap</span>
+                <button type="button" name="Hover">scrap</button>
+              </div>
+              <div class="lbtn button-container-3bb">
+                <span class="mas">cost</span>
+                <button type="button" name="Hover">cost</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <footer>
+          <div class="foot">
+            <p class="t">wwater@google.com</p>
+            <p class="t">tel.010-4433-212</p>
+          </div>
+        </footer>
+      </div>
+    </div>
   </div>
 </template>
 
+<script>
+import http from '../../api/http'
+
+export default {
+  name: 'detailPage',
+  data() {
+    return {
+      work_info :{},
+      work_id_store:'',
+      imgSrc: "",
+    };
+  },
+   props:[
+    'work_id'
+  ],
+  created() {
+    console.log("===> props ===> "+this.work_id);
+    this.getWorkDetail(this.work_id);
+  },
+  mounted() {
+    this.imgSrc = "../../assets/images/t.jpeg";
+  },
+  methods: {
+    getWorkDetail(work_id){
+      http.get(`/work/getWork/${work_id}`)
+          .then(response=>{
+            this.work_info = response.data;
+            this.total_like = response.data.work_cost;
+            console.log(this.total_like)
+            this.work_info.work_piece = "data:image/jpeg;base64," + response.data.work_piece;
+            this.img_url = this.work_info.work_piece;
+            console.log('getinfo',this.work_info);
+          })
+    },
+  },
+};
+</script>
+
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap");
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-:root {
-  --src: url(https://images.unsplash.com/photo-1554620121-59e7f3f6e3a4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy);
-  --size: 60vmin;
-  --space: 8vmin;
-  --duration: 300ms;
-  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
-  --bounce-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+.preview {
+  background-color: #ffe8e8;
+  color: black;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  display: grid;
-  place-items: center;
-  grid-gap: var(--space);
+.container {
   margin: 0 auto;
-  padding: var(--space);
-  font-family: "Sura", sans-serif;
-  color: white;
-  background-color: rgb(29, 30, 34);
+  padding: 0;
+  width: 100%;
 }
 
-.promo {
-  position: relative;
-  cursor: pointer;
-  width: var(--size);
-  height: var(--size);
+.work_view {
+  padding-top: 28vh;
+  padding-bottom: 28vh;
 }
 
-.title {
-  --font-size: calc(var(--size) / 8);
-
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  font-size: var(--font-size);
-  font-weight: 700;
-  line-height: 1.2;
-  white-space: nowrap;
-  transform: translate(-10%, -50%);
-  transition: transform var(--duration) var(--ease-out);
-  pointer-events: none;
+.work_view .title .title_text {
+  font-size: 10rem;
+  font-family: "Hanna", sans-serif;
 }
 
-.title::after {
-  content: attr(data-cta);
-  display: inline-block;
-  margin-left: 1.5vmin;
-  font-size: calc(var(--font-size) / 3.25);
-  font-weight: 400;
-  letter-spacing: 0.125vmin;
-  opacity: 0;
-  transform: translateX(-25%);
-  transition: transform var(--duration) var(--ease-out),
-    opacity var(--duration) var(--ease-out);
-}
-
-.image-wrapper {
-  /* width: var(--size);
-  height: var(--size); */
-  width: 50vw;
+.work_view .title_img {
+  margin-top: 28vh;
+  width: 100%;
   height: auto;
+}
+
+.work_view .title_img img {
+  border: 10px white solid;
+}
+
+.pullImg {
+  height: 90vh;
+  width: 100%;
   overflow: hidden;
-  clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 0 50%, 0% 0%);
-  transition: transform var(--duration) var(--ease-out),
-    clip-path var(--duration) var(--ease-out);
+
+  background-image: url("../../assets/images/t.jpeg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
-.image-wrapper img {
+.detail {
+  height: 70vh;
+  background-color: #fcf1e7;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ffdcdc;
+}
+
+.detail .img_box {
+  order: flex;
+  width: 45%;
+  height: 100%;
+  top: 0%;
+}
+
+.detail .img_box .img {
+  display: inline-block;
+  padding: 0;
+}
+
+.detail .img_box .img img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 10px white solid;
+  height: 50vh;
+  margin-top: 14vh;
+}
+.detail .info_box {
+  order: flex;
+  width: 45%;
+  height: 100%;
   position: relative;
-  /* width: 120%;
-  height: 100%; */
-  object-fit: cover;
-  transform: translateX(-10%);
-  transition: transform var(--duration) var(--ease-out);
+  color: black;
 }
 
-.image-wrapper::after {
-  content: "";
+.detail .info_box .info {
   position: absolute;
-  top: 0;
-  left: 0;
-  /* width: 100%;
-  height: 100%; */
-  width: 50vw;
-  height: auto;
-  background-color: var(--overlay-color);
-  mix-blend-mode: multiply;
-  opacity: 0;
-  transform: translateZ(0);
-  transition: opacity var(--duration) var(--ease-out);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Hanna", sans-serif;
+  width: 80%;
 }
 
-.promo:hover img {
-  transform: translateX(0);
+.detail .info_box .info .first {
+  font-size: 40px;
 }
 
-.promo:hover .image-wrapper {
-  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-  transform: translateX(25%);
-  transition-timing-function: var(--bounce-out);
+.detail .info_box .info .name {
+  margin-top: 2vh;
+  font-size: 20px;
 }
 
-.promo:hover .title {
-  transform: translate(5%, -50%);
-  transition-timing-function: var(--bounce-out);
+.detail .info_box .info .desc {
+  margin-top: 1vh;
+  font-size: 15px;
 }
 
-.promo:hover .title::after {
-  opacity: 1;
-  transform: translateX(0);
-  transition-timing-function: var(--bounce-out);
+.detail .info_box .btn {
+  margin-top: 3vh;
 }
 
-.promo:hover .image-wrapper::after {
-  opacity: 1;
+.footer{
+  display: block;
+  background-color: #ffdcdc;
+  padding-top: 10vh;
 }
 
+footer {
+  height: 80px;
+}
+
+footer .foot {
+  padding-top: 1%;
+  /* margin-left: 10%; */
+  width: 100%;
+}
+
+footer .foot .t {
+  color: gray;
+  font-family: "Hanna", sans-serif;
+  margin: 0;
+}
+</style>
+
+<style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100");
+@import url("https://fonts.googleapis.com/earlyaccess/hanna.css");
+
+@mixin button($bcolor, $url, $x1, $y1, $bor, $col) {
+  background: $bcolor;
+  -webkit-mask: url($url);
+  mask: url($url);
+  -webkit-mask-size: $x1 $y1;
+  mask-size: $x1 $y1;
+  border: $bor;
+  color: $col;
+}
+
+.mas {
+  position: absolute;
+  color: #000;
+  text-align: center;
+  width: 101%;
+  font-family: "Hanna", sans-serif;
+  font-weight: 300;
+  position: absolute;
+  font-size: 22px;
+  margin-top: 8px;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+@-webkit-keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@-webkit-keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+.button-container-3 {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: 50%;
+  overflow: hidden;
+  border: 1px solid #000;
+  font-family: "Hanna", sans-serif;
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  border-radius: 8px;
+
+  button {
+    width: 101%;
+    height: 100%;
+    font-family: "Hanna", sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    @include button(
+      #000,
+      "https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png",
+      7100%,
+      100%,
+      none,
+      #fff
+    );
+    cursor: pointer;
+    -webkit-animation: ani2 0.7s steps(70) forwards;
+    animation: ani2 0.7s steps(70) forwards;
+
+    &:hover {
+      -webkit-animation: ani 0.7s steps(70) forwards;
+      animation: ani 0.7s steps(70) forwards;
+    }
+  }
+}
+
+.button-container-3bb {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: 25%;
+  overflow: hidden;
+  border: 1px solid #000;
+  font-family: "Hanna", sans-serif;
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  border-radius: 8px;
+
+  button {
+    width: 101%;
+    height: 100%;
+    font-family: "Hanna", sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    @include button(
+      #000,
+      "https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png",
+      7100%,
+      100%,
+      none,
+      #fff
+    );
+    cursor: pointer;
+    -webkit-animation: ani2 0.7s steps(70) forwards;
+    animation: ani2 0.7s steps(70) forwards;
+
+    &:hover {
+      -webkit-animation: ani 0.7s steps(70) forwards;
+      animation: ani 0.7s steps(70) forwards;
+    }
+  }
+}
 </style>

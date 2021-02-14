@@ -1,29 +1,30 @@
 <template>
-  <div>
-    <div class="intro">
-      <!-- 입장 animation -->
-      <div class="enter" @click="clickEnter"></div>
-      <div class="door">
-        <div class="left"></div>
-        <!-- <div class="line"></div> -->
-        <div class="right"></div>
+  <div class="subgallery" v-if="imgList.length != 0">
+    <div class="welcome">
+      <div class="dark">
+        <div class="door-open"></div>
+        <div class="door"></div>
       </div>
     </div>
-
-    <div class="subgallery" v-if="imgList.length != 0">
-      <p class="galleryType">레드 갤러리</p>
-      <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
-      <div v-for="(img, i) in imgList" :key="i">
-        <div class="image" @mouseover="changePage(i + 1)">
-          <router-link class="router-link" to="/test/GalleryJ/DetailPage">
-            <img class="img" :src="img.work_piece" :alt="img.work_title" />
-            <div class="content">
-              <h1 class="text">{{ img.work_title }}</h1>
-            </div>
-          </router-link>
-          <p class="info" style="padding-top: 5%">
-            By {{ img.work_artistId }}, {{ img.work_uploadDate }}
-          </p>
+    <div class="content">
+      <div class="side">
+        <p class="galleryType">레드 갤러리</p>
+        <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
+      </div>
+      <div class="list">
+        <div v-for="(img, i) in imgList" :key="i">
+          <div class="image slide-in-bck-bottom" @mouseover="changePage(i + 1)" >
+            <!-- <router-link class="router-link" to="/test/GalleryJ/DetailPage"> -->
+            <!-- <detailPage :work_id="work_id"></detailPage> -->
+              <img class="img" :src="img.work_piece" :alt="img.work_title" :data-value="img.work_id"/>
+              <div class="content">
+                <h1 class="text">{{ img.work_title }}</h1>
+              </div>
+            <!-- </router-link> -->
+            <p class="info" style="padding-top: 3%">
+              By {{ img.work_artistId }}, {{ img.work_uploadDate }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -31,17 +32,24 @@
 </template>
 
 <script>
+import Vue from "vue";
 import http from "../../api/http.js";
-import gasp from "gsap";
+import router from '../../router'
+// import detailPage from "../Gallery/DetailPage"
+import VueScrollTo from "vue-scrollto";
+Vue.use(VueScrollTo);
 
 export default {
   data() {
     return {
       imgList: [],
       nowPage: 1,
+      work_id:"",
     };
   },
-  components: {},
+  components: {
+    // detailPage,
+  },
   created() {
     http.get(`/gallery/getAdultGallery`).then(
       // http.get(`/gallery/getAllSubGallery`).then(
@@ -59,36 +67,35 @@ export default {
 
     this.nowPage = 1;
   },
+  mounted() {
+    const itemList = document.querySelector('.image');
+
+    itemList.addEventListener('click', this.clickHandler);
+
+    setTimeout(() => {
+      const welcome = document.querySelector(".welcome");
+
+      welcome.remove();
+    }, 4000);
+  },
   methods: {
+    clickHandler(e) {
+      console.log(e.target)
+       if(e.target.classList.contains('.img')){
+      console.log(e.target.dataset.value);
+      router.push({name:'DetailPage',params:{work_id:e.target.dataset.value}});
+    }
+    },
     changePage(i) {
       this.nowPage = i;
     },
-    clickEnter() {
-      this.unlock();
-    },
-    unlock() {
-      const enter = document.querySelector(".enter");
-      gasp.to(enter, 0.5, {
-        transform: "rotate(90deg)",
-        onComplete: this.open(),
-      });
-    },
-    open() {
-      const left = document.querySelector(".door .left");
-      const right = document.querySelector(".door .right");
-      const button = document.querySelector(".enter");
-      const intro = document.querySelector(".intro");
+    show() {
+      const side = document.querySelector(".content");
+      const open = document.querySelector(".open");
 
-      gasp.to(left, 1.5, { width: 0 });
-      gasp.to(right, 1.5, { width: 0 });
-      gasp.to(button, 1.5, {
-        "margin-left": "-60px",
-        onComplete: function() {
-          left.parentElement.remove();
-          button.remove();
-          intro.remove();
-        },
-      });
+      side.classList.remove("hidden");
+      // side.classList.add("slide-in-bck-bottom");
+      open.classList.add("hidden");
     },
   },
 };
@@ -102,6 +109,18 @@ export default {
   overflow-x: hidden;
   /* background-color: #c20a0a; */
   background-image: url("../../assets/images/red.png");
+}
+.subgallery::-webkit-scrollbar {
+  display: none;
+}
+
+.open {
+  height: 100vh;
+  width: auto;
+}
+
+.hidden {
+  display: none;
 }
 .image {
   position: relative;
@@ -201,85 +220,115 @@ export default {
   text-decoration: none;
 }
 
-.intro {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-color: #ff1919;
+/* ==== */
+.slide-in-bck-bottom {
+  -webkit-animation: slide-in-bck-bottom 0.6s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bck-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.door {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 5;
-  /* transform: scale(1.3); */
+@-webkit-keyframes slide-in-bck-bottom {
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+    transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
 }
-
-.door .left,
-.door .right {
-  position: relative;
-  font-size: 10pt;
-  display: inline-block;
-  width: calc(50% - 2.5px);
-  height: 100%;
-  background-image: url("../../assets/images/grey.png");
-  z-index: 3;
-  /* transform: scale(1.3); */
+@keyframes slide-in-bck-bottom {
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+    transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
 }
+</style>
 
-/* .door .line{
-  width: 3px;
-  height: 100%;
-  position: absolute;
-  left: calc(50% - 1.25px);
-  background-color: #f90000;
-  border-left: solid 1px #f90000;
-  border-right: solid 1px #f90000;
-  box-shadow: 40px 0 150px #ff1919, inset 40px 0 150px #ff1919;
-  z-index: 4;
-} */
 
-.door .left {
-  float: left;
-  /* border-right: solid 2.5px #111; */
-  /* border-right: 10px solid #f90000; */
-  /* box-shadow:inset -100px 0px 250px #ff1919 */
-}
 
-.door .right {
-  float: right;
-  /* border-left: solid 2.5px #111; */
-  /* border-left: 10px solid #f90000; */
-  /* box-shadow: -5px 0 0 #f90000; */
-  /* box-shadow: inset 100px 0px 250px #ff1919 */
-}
+<style lang="sass" scoped>
+$door-time: 2.5s
+$zoom-time: 3s
+$fadeout-time: 2s
 
-.enter {
-  cursor: pointer;
-  display: block;
-  background: #222;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  line-height: 30px;
-  border-radius: 5px;
-  z-index: 6;
-  position: absolute;
-  padding: 5px 10px;
-  margin: auto;
-  color: #ccc;
-  border: solid 3px black;
-}
+.welcome
+   position: absolute
+   width: 100%
+   height: 100vh
+   top: 0
+   left: 0
+   z-index: 2
+   opacity: 1
+   overflow: hidden
+   animation: 0s remove linear 5s
+   animation-fill-mode: forwards
+   .dark
+      position: absolute
+      width: 100%
+      height: 100%
+      z-index: 4
+      background: #000
+      animation: $fadeout-time fadeout ease $zoom-time
+      animation-fill-mode: forwards
+      .door-open
+         position: absolute
+         background: red
+         height: 500px
+         width: 300px
+         top: calc(50% - 250px)
+         left: calc(50% - 150px)
+         z-index: 5
+         box-shadow: 10px 0px 50px red
+         animation: $zoom-time growfade ease-in $door-time
+         animation-fill-mode: forwards
+      .door
+         position: absolute
+         background: #000
+         height: 600px
+         width: 300px
+         top: calc(50% - 250px)
+         left: calc(50% - 150px)
+         z-index: 6
+         transform-origin: 0 0
+         animation: $door-time open-door ease-in-out, 0s fadeout linear $door-time
+         animation-fill-mode: forwards
+
+@-webkit-keyframes growfade
+   0%
+      opacity: 1
+      outline: 0px solid red
+   33%
+      opacity: 1
+      outline: 50vw solid red
+   66%
+      opacity: 1
+      outline: 50vw solid red
+   100%
+      opacity: 0
+      outline: 50vw solid red
+
+@-webkit-keyframes open-door
+   0%
+      transform: rotateX(-20deg) rotateY(0deg)
+   100%
+      transform: rotateX(-20deg) rotateY(-100deg)
+
+@-webkit-keyframes fadeout
+   0%
+      opacity: 1
+   100%
+      opacity: 0
+
+@-webkit-keyframes remove
+   0%, 100%
+      top: -1000000pxF
 </style>
