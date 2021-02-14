@@ -1,6 +1,6 @@
 <template>
   <div class="My_profile_artist_container">
-    <div class="profile_wrapper">
+    <div class="artist_profile_wrapper">
 
 
 
@@ -180,7 +180,7 @@
       <div slot="header">
         <h3>
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing()]"></i>
+        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
       </div>
 
       <div slot="body">
@@ -227,7 +227,7 @@
       </div>
 
       <div slot="footer">
-        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing()]">나가기</button>
+        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
       </div>
     </Modal>
 
