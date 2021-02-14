@@ -117,4 +117,21 @@ public class AdminServiceImpl implements AdminService {
     public void renewArtistExp() {
         adminDao.renewArtistExp();
     }
+
+    @Override
+    public void updateArtistExpUp(String artist_id) {
+        adminDao.updateArtistExpUp(artist_id);
+    }
+
+    @Override
+    public void updateArtistExpDown(String artist_id) {
+        adminDao.updateArtistExpDown(artist_id);
+    }
+
+    @Override
+    public List<ArtistDto> getAllArtist() {
+        return adminDao.getAllArtist();
+    }
+
+
 }
