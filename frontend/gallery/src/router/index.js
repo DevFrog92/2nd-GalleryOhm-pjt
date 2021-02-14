@@ -10,6 +10,7 @@ import ItemListPage from '../pages/ItemLisetPage'
 import ItemDetailPage from '../pages/ItemDetailPage'
 import MyPage from '../pages/MyPage'
 import UserProfile from '../pages/MyPageForArtist'
+import GuestProfile from '../pages/MyPageForGuest'
 import GalleryRenderPage from '../pages/GalleryRenderPage'
 import LoginSignup from '../pages/User/LoginSignup'
 import Settings from '../pages/Settings'
@@ -187,6 +188,12 @@ const routes = [
     path:'/about',
     name:'About',
     component:About,
+  },
+  {
+    path:'/guestpage',
+    name:'GuestProfile',
+    component:GuestProfile,
+    props:true,
   }
 ]
 

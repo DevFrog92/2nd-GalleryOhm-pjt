@@ -4,28 +4,8 @@ const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
-  console.log('top Btn',topBtn);
-  const gallery1 = document.querySelector(".poster_card1");
-  const gallery2 = document.querySelector(".poster_card2");
-
-  const options = document.querySelector('.options')
-  let activeOption = document.querySelector('.active')
-  if(activeOption === null){
-    activeOption = document.querySelectorAll('.option')[0]
-    activeOption.classList.add('active')
-    
-  }
   
 
-  options.addEventListener('click',function(e){
-      if(e.target.classList.contains('option')){
-      if(e.target.dataset.value !== activeOption.dataset.value ){
-        activeOption.classList.remove('active');
-        e.target.classList.add('active');
-        activeOption = e.target;
-      }
-      }
-    })
 
 
   // const scrap = document.querySelector('.scroll-wrapper')
@@ -36,39 +16,23 @@ const init = () => {
   //   }
   // })
 
-  
-  
 
-  gallery1.addEventListener('click',function(e){
-    console.log('click event',e.target.dataset.value);
-    if(e.target.dataset.value){
-    router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
-    }
-  })
-
-
-  gallery2.addEventListener('click',function(e){
-    console.log('click event',e.target.dataset.value);
-    if(e.target.dataset.value){
-      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
-    }
-  })
-  const pintModal = document.querySelector('.third__section')
+  // const pintModal = document.querySelector('.third__section')
   // const seasonModal = document.querySelector('.pinter__side .photo-count')
-  const exitSide = document.querySelector('.exit_side')
+  // const exitSide = document.querySelector('.exit_side')
   // const exitSeason = document.querySelector('.exit_season')
-  pintModal.addEventListener('click',function(e){
-    if(e.target.classList.contains('show__my__pint')){
-      gotoDetail()
-      const pintSide = document.querySelector('.pinter__side');
-      pintSide.classList.add('active_side');
-    }
-    })
-  exitSide.addEventListener('click',function(){
-    console.log('click')
-      const pintSide = document.querySelector('.pinter__side');
-      pintSide.classList.remove('active_side');
-    })
+  // pintModal.addEventListener('click',function(e){
+  //   if(e.target.classList.contains('show__my__pint')){
+  //     gotoDetail()
+  //     const pintSide = document.querySelector('.pinter__side');
+  //     pintSide.classList.add('active_side');
+  //   }
+  //   })
+  // exitSide.addEventListener('click',function(){
+  //   console.log('click')
+  //     const pintSide = document.querySelector('.pinter__side');
+  //     pintSide.classList.remove('active_side');
+  //   })
   // exitSeason.addEventListener('click',function(){
   //   const season = document.querySelector('.show_season_works')
   //   season.classList.remove('active_season');
@@ -78,19 +42,18 @@ const init = () => {
   //   const season = document.querySelector('.show_season_works')
   //   season.classList.add('active_season');
   // })
-function gotoDetail(){
-  console.log('실행한다.')
-  const imgList = document.querySelector('.pinter_item-lists')
-  imgList.addEventListener('click',function(e){
-    if(e.target.classList.contains('pinter_grid__body')){
-      const work_id = e.target.dataset.value
-      console.log(work_id)
-      router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-      
-    }
-  })
+// function gotoDetail(){
+//   console.log('실행한다.')
+//   const imgList = document.querySelector('.pinter_item-lists')
+//   imgList.addEventListener('click',function(e){
+//     if(e.target.classList.contains('pinter_grid__body')){
+//       const work_id = e.target.dataset.value
+//       console.log(work_id)
+//       router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+//     }
+//   })
 
-}
+// }
 
 function manuclickHandler(e){
   const targetItem = e.target;
@@ -119,7 +82,7 @@ function scrollIt(ele){
 }
 
 function topclickHandler(){
-  const first = document.querySelector(".artist_profile_wrapper");
+  const first = document.querySelector(".guest_profile_wrapper");
   scrollIt(first);
 }
 
@@ -142,6 +105,8 @@ window.addEventListener('scroll',function(){
     }
   }
 })
+
+
 
 function moveToArtistPage(artist_id){
   if(artist_id === localStorage.getItem('user_id')){
@@ -175,7 +140,6 @@ function moveToArtistPage(artist_id){
 
 
 const getUserInfo = ()=>{
-  console.log('user_info_request',localStorage.getItem('props_id'));
   http.get('/user/getUserInfo', {
     params: {
       user_id: localStorage.getItem('props_id')
@@ -184,7 +148,6 @@ const getUserInfo = ()=>{
   .then(response=>{
     localStorage.setItem('props_type',response.data.user_type)
     console.log('저장한다. props_type값',localStorage.getItem('props_type'));
-
   })
 }
 
@@ -250,10 +213,9 @@ const follow_modal = ()=>{
   */
   var archiveOrDelete = function( clickBtn, notificationCard ){
     if( clickBtn.classList.contains( 'archive' ) ){
-      console.log('이동');
+      console.log('이동',localStorage.getItem('props_type'));
       notificationCard.classList.add( 'archive' );
       moveToArtistPage(localStorage.getItem('props_type'));
-
     } else if( clickBtn.classList.contains( 'delete' ) ){
       // tounfollow();
       notificationCard.classList.add( 'delete' );
@@ -283,7 +245,6 @@ const moveToArtistPage = (user_type)=>{
     router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
   }
 }
-
 
 // const message_read = (message_id)=>{
 //   const formData = new FormData()
