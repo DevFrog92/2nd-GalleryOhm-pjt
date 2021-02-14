@@ -1,34 +1,67 @@
 <template>
-  <div class="Main_container">
-    <div class="main_title_wrapper">
-      <div class="title_text-animation">
-        <pre class="text-animation">
-          SSAATCHI
-          GALLERY!
-        </pre>
+  <div
+    v-if="mainGalleryList.length && mainWorkList.length==mainGalleryList.length && mainWorkList.length==artistsInfo.length"
+    class="Main_container"
+  >
+    <!-- FADE UP -->
+    <div class="main_top_wrapper">
+      <div class="banner">
+      <div class="main_logo"></div>
+      </div>
+      <div class="DescriptionText">
+        <!-- <vue-typed-js
+          :strings="[
+            '',
+            'SSAATCH 전시관에 오신것을 환영합니다!',
+            '저희는 도슨트 오져쓰입니다.',
+            'SSAATCH 전시관의 멋진 작품들을 감상하세요!',
+          ]"
+        >
+          <h1><span class="typing"></span></h1>
+        </vue-typed-js> -->
+      </div>
+      <div class="downArrow" @click="downMain">
+        <a href=".main_center_wrapper"></a>
       </div>
     </div>
-    <div class="main_hooper_wrapper">
+    <!-- 메인 화면 -->
+    <div class="main_center_wrapper">
       <hooper
-        class="hooper1"
+        class="hooper"
         :settings="hooperSettings"
-        v-if="workList_odd.length != 0"
       >
-        <slide v-for="(work, i) in workList_odd" :key="i" :index="i">
-          <div class="img">
-            <p class="number" v-if="i <= 10">0{{ i + 1 }}</p>
-            <div class="content">
-              <h1>귀여운 미켈란젤로</h1>
-            </div>
-            <img
-              class="images"
-              :src="work.work_piece"
-              :alt="work.work_title"
-              @click="detailImage(work.work_id, work.work_piece)"
-            />
-            <p class="name">갤러리이름, 2020.01.03</p>
+        <slide v-for="(work, i) in mainWorkList" :key="i" :index="i">
+          <!-- <router-link to="/test/GalleryJ/DetailPage"> -->
+          <div class="main_img">
+             <p class="number" v-if="i < 9">0{{ i + 1 }}</p>
+            <p class="number" v-else-if="i >= 9">{{ i + 1 }}</p>
+            <div class="main_poster_nickname">{{artistsInfo[i].artist_nickName}}</div>
+          <div
+          class="main_gallery__poster"
+          @mouseover="hoverPoster(i)"
+          @mouseleave="cancelhoverPoster(i)"
+        >
+          <div class="poster__header">
+            {{ mainGalleryList[i].gallery_name }}
           </div>
+          <div class="poster__writer">
+            {{ mainGalleryList[i].gallery_artistId }}
+          </div>
+          <div class="poster__date">
+            {{ mainGalleryList[i].gallery_writeTime }} ~
+          </div>
+          <div v-if="mainWorkList.length>0"
+            class="main_poster__section"
+            :style="{
+              backgroundImage: 'url(' + mainWorkList[i].work_piece + ')',
+            }"
+          ></div>
+          </div>
+        </div>
+
+          <!-- </router-link> -->
         </slide>
+        <hooper-navigation slot="hooper-addons"></hooper-navigation>
       </hooper>
     </div>
   </div>
@@ -36,176 +69,306 @@
 
 <script>
 import http from "../../api/http";
-import "../../assets/css/MainPage/MainPage.css";
+// npm install --save vue-typed-js
+// import Vue from "vue";
+// import VueTypedJs from "vue-typed-js";
+// Vue.use(VueTypedJs);
+
 export default {
   data() {
     return {
       hooperSettings: {
         infiniteScroll: true,
         breakpoints: {
-          2400: {
+          2900: {
+            itemsToShow: 9,
+          },
+          2600: {
             itemsToShow: 7,
           },
           1800: {
-            itemsToShow: 5,
+            itemsToShow: 3,
           },
           1700: {
-            itemsToShow: 4.5,
+            itemsToShow: 4,
           },
           1600: {
             itemsToShow: 4,
           },
           1500: {
-            itemsToShow: 2.8,
+            itemsToShow: 3,
           },
           1400: {
-            itemsToShow: 2.7,
+            itemsToShow: 3,
           },
           1100: {
-            itemsToShow: 2.5,
+            itemsToShow: 3,
+          },
+          900: {
+            itemsToShow: 2,
+          },
+          500: {
+            itemsToShow: 2,
           },
           0: {
-            itemsToShow: 2.5,
+            itemsToShow: 1,
           },
         },
       },
-      workList_odd: [],
-      workList_even: [],
+      mainGalleryList: {},
+      mainWorkList: [],
+      mainWorkImages: [],
+      errored: false,
+      errored2: false,
+      artistsInfo: [],
     };
   },
-  components: {
-    Hooper: window.Hooper.Hooper,
+  components: {Hooper: window.Hooper.Hooper,
     Slide: window.Hooper.Slide,
-  },
+    HooperNavigation: window.Hooper.Navigation,},
   created() {
-    this.getOddList();
-    this.getEvenList();
+    this.getAllMainGallery();
   },
-  updated() {
-    (function () {
-      var wrapper = document.getElementsByClassName("text-animation")[0];
-
-      wrapper.innerHTML = wrapper.textContent.replace(/./g, "<span>$&</span>");
-
-      var spans = wrapper.getElementsByTagName("span");
-
-      for (var i = 0; i < spans.length; i++) {
-        spans[i].style.animationDelay = i * 80 + "ms";
-      }
-    })();
-
-    setTimeout(function () {
+  mounted() {},
+  updated() {},
+  methods: {
+    downMain() {
       window.scrollTo({
         behavior: "smooth",
         left: 0,
-        top: document.querySelector(".main_hooper_wrapper").offsetTop,
+        top: document.querySelector(".main_center_wrapper").offsetTop,
       });
-    }, 4100);
-  },
-  methods: {
-    detailImage(work_id, work_piece) {
-      // var width = document.getElementById("img").width;
-      // var height = document.getElementById("img").height;
-      console.log("[id:" + work_id + "] " + work_piece.length);
     },
-    getOddList() {
-      http;
-      http.get(`/gallery/getAllSubGallery_odd`).then(
-        (response) => {
-          var workList = response.data;
-
-          for (var i = 0; i < workList.length; i++) {
-            workList[i].work_piece =
-              "data:image/jpeg;base64," + workList[i].work_piece;
+    getAllMainGallery() {
+      // 메인 갤러리 조회
+      http
+        .get("/gallery/getAllMainGallery")
+        .then((response) => {
+          var galleryDatas = response.data;
+          for (var i = 0; i < galleryDatas.length; i++) {
+            var workId = galleryDatas[i].gallery_mainWorkId;
+            var artistId = galleryDatas[i].gallery_artistId;
+            // 메인 갤러리의 메인 작품 조회
+            this.getWork(workId);
+            // 메인 갤러리의 작가 조회
+            this.getArtistInfo(artistId);
+            var yyyyMMdd = String(galleryDatas[i].gallery_writeTime);
+            var year = yyyyMMdd.substring(0, 4);
+            var month = yyyyMMdd.substring(5, 7);
+            var day = yyyyMMdd.substring(8, 10);
+            galleryDatas[i].gallery_writeTime =
+              year + ". " + month + ". " + day + ".";
           }
-
-          this.workList_odd = workList;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+          this.mainGalleryList = galleryDatas;
+        })
+        .catch(() => {
+          this.errored = true;
+        });
     },
-    getEvenList() {
-      http.get(`/gallery/getAdultGallery_even/`).then(
-        (response) => {
-          var workList = response.data;
-
-          for (var i = 0; i < workList.length; i++) {
-            workList[i].work_piece =
-              "data:image/jpeg;base64," + workList[i].work_piece;
-          }
-
-          this.workList_even = workList;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    /* 작품 정보 */
+    getWork(workId) {
+      http
+        .get("/work/getWork/" + workId)
+        .then((response) => {
+          var workData = response.data;
+          workData.work_piece = "data:image/jpeg;base64," + workData.work_piece;
+          this.mainWorkImages.push(workData.work_piece);
+          this.mainWorkList.push(response.data);
+        })
+        .catch(() => {
+          this.errored2 = true;
+        });
     },
+    /* 작가 정보 */
+    getArtistInfo(artistId) {
+      http
+        .get(`/artist/getArtistInfo?artist_id=${artistId}`)
+        .then((response) => {
+          var artistData = response.data;
+          this.artistsInfo.push(artistData);
+        });
+    },
+    hoverPoster(rank){
+      var nicknameDiv = document.getElementsByClassName("main_poster_nickname")[rank];
+      console.log(rank);
+      console.log(nicknameDiv);
+      nicknameDiv.style.opacity="1";
+    },
+    cancelhoverPoster(rank){
+      var nicknameDiv = document.getElementsByClassName("main_poster_nickname")[rank];
+      console.log(rank);
+      console.log(nicknameDiv);
+      nicknameDiv.style.opacity="0";
+    }
   },
 };
 </script>
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
-
-.main_hooper_wrapper .number {
-  font-size: 3rem;
-  padding-left: 25%;
-  text-align: left;
-  margin: 0;
-  -webkit-text-stroke: 2px black;
-  -webkit-text-fill-color: transparent;
+@import url(//fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&display=swap);
+.Main_container {
+  background-color:#f4f5f9;
+  width: 100%;
+  height: 100%;
+  font-family: "Hanna", sans-serif;
 }
-.main_hooper_wrapper .images {
-  height: 30em;
-  width: 23em;
-  padding: 0.1vw 0.1vw;
-  margin-left: 20%;
-  margin-bottom: 2%;
+/*************** 첫 화면 *****************/
+.main_top_wrapper {
+  width: 100%;
+  height: 95vh;
   background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-image: url("../../assets/images/frame4.png") 1 fill / 1px / 0.8rem
-    round space;
-  border-image-repeat: round;
+  padding: 1%;
+  background-color: #f4f5f9;
 }
-.main_hooper_wrapper .img {
+
+.main_top_wrapper .banner {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 50%;
+  margin:5vh auto;
+}
+.main_top_wrapper .main_logo{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-image: url('../../assets/images/Main/gallery_logo.png');
+  background-size: 100%;
+}
+.main_top_wrapper .DescriptionText h1 {
+  clear: left;
+  margin: auto;
+  height: 10%;
+  width: 80%;
+  text-align: center;
+  font-size: 1.5em;
+  color: #52575d;
+  /* color: 		#8f1010; */
+  /* font-family: "Jua", sans-serif; */
+  font-family: "Hanna", sans-serif;
+}
+.main_top_wrapper .downArrow {
+  position: absolute;
+  height: 4rem;
+  width: 4rem;
+  bottom: 10vh;
+  left: 48.5%;
+  font-size: 4em;
+  color: white;
+  animation: toggle;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  cursor: pointer;
+  background-image: url("../../assets/images/Main/down1.png");
+}
+
+.main_top_wrapper .downArrow:hover {
+  color: rgba(0, 0, 255, 0.9);
+}
+/****************  Main 두번째 화면 ***************/
+.main_center_wrapper {
+  width: 100%;
+  height: 100vh;
+  padding-top:5%;
+  margin-right: 3%;
+  text-align: center;
+  position: relative;
+  color: black;
+  font-family: "Hanna", sans-serif; 
+}
+.main_center_wrapper .hooper {
+  height: 78vh;
+  width: 100vw;
+}
+.main_center_wrapper .main_img {
   position: relative;
   height: 40em;
   background-size: cover;
+  
+}
+.main_center_wrapper .main_poster_nickname{
+  width:100%;
+  opacity: 0;
+  -webkit-text-stroke: 3px #494949;
+  -webkit-text-fill-color: #494949;
+  font-size:6vw;
+  font-family: "Hanna", sans-serif;
+  transform:  rotate(14deg);
+  z-index: 2;
+  position: absolute;
+  overflow: hidden;
+  margin-top: 20vh;
+  
 }
 
-.main_hooper_wrapper .img .content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.main_gallery__poster:hover .main_poster_nickname{
+  opacity: 1;
+  transform: scale(2.3);
+  transition: all 1.2s;
+}
+
+/****** 갤러리 POSTER ******/
+.main_center_wrapper .main_gallery__poster {
+  position: relative;
+  font-size: 3rem;
+  margin-top: 5%;
+  margin-left: 12%;
+  z-index: 1;
+  background-image: url("../../assets/images/Main/poster.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 16px 25px 2px #353535,
+    0px 22px 35px -30px rgba(155, 155, 155, 0.14), 0px 39px 35px 12px #ffffff;
+  overflow: hidden;
+  border: 2px solid #444;
+  border-width: 0.1rem;
+  width: 25vw;
+  height: 66vh;
+  padding: 4rem 6.5rem 2rem 1rem;
+  text-align: center;
+}
+
+.main_center_wrapper .poster__header {
   width: 100%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  text-align: center;
+  position: absolute;
+  top: 0.9rem;
+  text-align: left;
+  font-size: 2rem;
+  z-index: 100;
+  left: 1.5rem;
+  font-weight: bold;
 }
-.main_hooper_wrapper .img .content h1 {
-  -webkit-text-stroke: 3px rgb(59, 91, 150);
-  -webkit-text-fill-color: transparent;
-  font-size: 4.5rem;
-  font-family: "Hanna", sans-serif;
-  transform: rotate(14deg);
-  color: rgb(46, 211, 31);
+
+.main_center_wrapper .poster__writer {
+  position: absolute;
+  z-index: 100;
+  transform: rotate(90deg);
+  top: 6.4rem;
+  left: 1rem;
+  font-size: 0.9rem;
+  /*  font-weight: bold*/
 }
-.main_hooper_wrapper .hooper1 {
-  height: 80vh;
-  width: 110vw;
-  padding: 0 0vw;
-  left: -3.5rem;
-  margin-top: 1.5vh;
-  transform: rotate(-7deg);
-  /* transform: scale(1.2); */
+.main_center_wrapper .poster__date {
+  position: absolute;
+  z-index: 100;
+  transform: rotate(90deg);
+  top: 7.5rem;
+  left: -3rem;
+  font-size: 1.2rem;
+  letter-spacing: 1.2px;
 }
-.main_hooper_wrapper .name {
-  text-align: center;
-  font-size: 1rem;
-  font-family: "Hanna", sans-serif;
+
+.main_center_wrapper .main_poster__section {
+  width: 100%;
+  height: 100%;
+  margin-left: 3vw;
+  background-position: 50% 50%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transition: all 1s;
 }
+
 </style>
