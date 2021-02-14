@@ -101,4 +101,13 @@ public class AdminDaoImpl {
     public void renewArtistExp() {
         sqlSession.update(ns + "renewArtistExp");
     }
+
+    public void updateArtistExpUp(String artist_id) {
+        sqlSession.update(ns + "updateArtistExpUp", artist_id);
+    }
+
+    public void updateArtistExpDown(String artist_id) {
+        sqlSession.update(ns + "updateArtistExpDown", artist_id);
+    }
+
 }

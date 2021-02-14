@@ -187,4 +187,13 @@
             and
                 artist.artist_exp = 1;
     </update>
+
+    <update id="updateArtistExpUp" parameterType="string">
+        UPDATE artist SET artist_exp = (artist_exp + 1) WHERE artist_id = #{artist_id};
+    </update>
+
+    <update id="updateArtistExpDown" parameterType="string">
+        UPDATE artist SET artist_exp = (artist_exp - 1) WHERE artist_id = #{artist_id};
+    </update>
+
 </mapper>

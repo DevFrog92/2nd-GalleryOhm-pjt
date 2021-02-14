@@ -62,4 +62,9 @@ public interface AdminService {
     void addHashTagFromTotal(List<String> hashTagList);
 
     void renewArtistExp();
+
+    void updateArtistExpUp(String artist_id);
+
+    void updateArtistExpDown(String artist_id);
+
 }
