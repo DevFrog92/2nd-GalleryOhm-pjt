@@ -33,6 +33,22 @@
       <ul class="nav__items" v-else>
          <li class="nav__item">
           <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
       <router-link class="nav-item" to="/loginsignup">로그인</router-link>
           </span>
         </li>
