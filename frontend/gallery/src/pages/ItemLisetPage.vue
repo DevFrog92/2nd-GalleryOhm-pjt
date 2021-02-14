@@ -88,9 +88,7 @@
     },
     methods: {
       delete__hash__word(index) {
-        console.log('this image reset 한다',this.render_image)
         this.resetarray = [];
-        console.log('this image render reset 완료',this.resetarray)
         delete this.hashTagsObject[this.filter__hashs[index]];
         this.filter__hashs.splice(index, 1);
         console.log('reset render image',this.render_image)
@@ -103,13 +101,14 @@
             }
           }
         }
+        this.render_image = this.resetarray
         if(!this.resetarray.length){
+          console.log('안에 그림이 없어')
           this.no_works = true
         }else{
+          console.log('안에 그림이 있어')
           this.no_works = false
         }
-        console.log('this render image', this.render_image);
-        console.log('render_image', this.render_image);
       },
       change_date_works() {
         this.render_image = this.imgList;
