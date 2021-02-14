@@ -1,5 +1,5 @@
 <template>
-  <div class="My_profile_container">
+  <div class="My_profile_artist_container">
     <div class="profile_wrapper">
 
 
