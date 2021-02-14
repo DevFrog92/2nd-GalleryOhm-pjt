@@ -6,9 +6,46 @@
         <div class="side"></div>
       </div>
     </div>
+
+    <div class="bgm">
+      <audio autoplay controls id="sound" loop src="../../assets/images/bgm.mp3" style="display:none;">
+        <!-- <source src="../../assets/images/bgm.mp3" type="audio/mp3" /> -->
+      </audio>
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {};
+  },
+  created() {
+
+  },
+  mounted() {
+    const body = document.querySelector(".wrap");
+
+    body.addEventListener("click", this.play);
+  },
+  methods: {
+    play() {
+      const sound = document.querySelector("#sound");
+      const body = document.querySelector(".wrap");
+
+      var isIn = sound instanceof HTMLAudioElement;
+
+      if (!isIn) return;
+      if (sound.paused) {
+        sound.play();
+      } else {
+        body.removeEventListener("click", this.play);
+      }
+      console.log(sound.paused);
+    },
+  },
+};
+</script>
 
 <style scoped>
 * {
@@ -74,5 +111,8 @@ h3 {
 
 .content {
   padding: 20px;
+}
+.bgm {
+  margin-top: 40vw;
 }
 </style>

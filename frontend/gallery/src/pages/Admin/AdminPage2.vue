@@ -160,7 +160,7 @@
               variant="outline-primary"
               class="btn"
               @click="artistExpUp()"
-              >작가 Exp Up</b-button
+              >작가 Exp Up</b-button 
             >
           </div>
         </b-tab>

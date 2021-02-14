@@ -1,8 +1,8 @@
 <template>
   <!-- post 빈 -->
   <div class="container">
-    <div>
-      <b-tabs content-class="mt-3">
+    <div class="admin">
+      <b-tabs class="admin_tabs">
         <b-tab title="메인 갤러리 키워드 관리" active>
           <!-- 메인 갤러리 키워드 추가/삭제 -->
           <!-- addMainGalleryHashTag -->
@@ -25,17 +25,16 @@
               @click="saveKeyword()"
               >저장</b-button
             >
-            <p class="mt-2">Keyword: {{ keywordList }}</p>
           </div>
         </b-tab>
-        <b-tab title="작품 해시태그 관리">
+        <b-tab title="해시태그 관리">
           <!-- 작품/전체 해시태그 삭제 -->
           <!-- deleteHashTagFromWork -->
           <!-- deleteHashTagFromTotal -->
           <div class="mt">
             <label for="tags-pills">전체 해시태그</label><br />
             <label for="tags-pills">해시태그 목록</label>
-            <!-- <b-form-tags
+            <b-form-tags
               input-id="tags-pills"
               v-model="hashtagList"
               tag-variant="primary"
@@ -44,9 +43,9 @@
               separator=" "
               placeholder="삭제만"
             >
-            </b-form-tags> -->
+            </b-form-tags>
 
-            <b-list-group horizontal>
+            <!-- <b-list-group horizontal>
               <b-container class="bv-example-row">
                 <b-row>
                   <b-list-group-item
@@ -61,7 +60,7 @@
                   </b-list-group-item>
                 </b-row>
               </b-container>
-            </b-list-group>
+            </b-list-group> -->
 
             <!-- <b-button
               variant="outline-primary"
@@ -109,12 +108,12 @@
                   <!-- <p>Title : {{ img.work_title }}</p>
                   <p>By : {{ img.work_artistId }}</p> -->
                   <div v-if="img.work_rating === 0">
-                    <b-button @click="giveRating(img.work_id)"
+                    <b-button class="btn19" @click="giveRating(img.work_id)"
                       >연령 제한</b-button
                     >
                   </div>
                   <div v-else-if="img.work_rating === 19">
-                    <b-button @click="clearRating(img.work_id)"
+                    <b-button class="btn19" @click="clearRating(img.work_id)"
                       >연령 제한 해제</b-button
                     >
                   </div>
@@ -124,7 +123,132 @@
           </div>
         </b-tab>
         <b-tab title="회원 관리">
-          <b-table :items="userList" ref="table"></b-table>
+          <div class="mt">
+            <b-table :items="userList" ref="table"></b-table>
+          </div>
+        </b-tab>
+        <b-tab title="작가 관리">
+          <div class="mt">
+            <b-table :items="artistList" ref="table"></b-table>
+          </div>
+        </b-tab>
+        <b-tab title="메인 갤러리 갱신">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="updateMainGallery()"
+              >갱신</b-button
+            >
+          </div>
+          <div class="mt">
+            <div class="gallery-page-content" v-if="updateMain">갱신완료</div>
+          </div>
+        </b-tab>
+        <!-- <b-tab title="서브 갤러리 갱신">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="updateSubGallery()"
+              >갱신</b-button
+            >
+          </div>
+          <div class="mt">
+            <div class="gallery-page-content" v-if="subGallery.length != 0">
+              <div
+                class="gallery-card"
+                v-for="(items, i) in subGallery"
+                :key="i"
+                :style="{
+                  backgroundImage:
+                    'url(data:image/jpeg;base64,' + items.work_piece + ')',
+                }"
+              >
+                <div class="gallery-content">
+                  <h2 class="gallery-title">{{ items.work_id }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-tab> -->
+        <b-tab title="메인갤러리 반환">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="getAllMainAdultGallery()"
+              >성인용 메인 갤러리 반환</b-button
+            >
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="getAllMainGallery()"
+              >미성년자용 메인 갤러리 반환</b-button
+            >
+          </div>
+          <div class="mt">
+            <div
+              class="gallery-page-content"
+              v-if="mainAdultGallery.length != 0"
+            >
+              <div
+                class="gallery-card"
+                v-for="(items, i) in mainAdultGallery"
+                :key="i"
+              >
+                <div class="gallery-content">
+                  <h2 class="gallery-title">{{ items.gallery_id }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+           <div class="mt">
+            <div class="gallery-page-content" v-if="mainGallery.length != 0">
+              <div
+                class="gallery-card"
+                v-for="(items, i) in mainGallery"
+                :key="i"
+              >
+                <div class="gallery-content">
+                  <h2 class="gallery-title">{{ items.gallery_id }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-tab>
+        <!-- <b-tab title="미성년자용 메인 갤러리 반환">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="getAllMainGallery()"
+              >반환</b-button
+            >
+          </div>
+          <div class="mt">
+            <div class="gallery-page-content" v-if="mainGallery.length != 0">
+              <div
+                class="gallery-card"
+                v-for="(items, i) in mainGallery"
+                :key="i"
+              >
+                <div class="gallery-content">
+                  <h2 class="gallery-title">{{ items.gallery_id }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-tab> -->
+        <b-tab title="신인작가 Exp 갱신">
+          <div class="mt">
+            <b-button
+              variant="outline-primary"
+              class="btn"
+              @click="artistExpUp()"
+              >작가 Exp Up</b-button
+            >
+          </div>
         </b-tab>
       </b-tabs>
     </div>
@@ -143,6 +267,13 @@ export default {
       items: [],
       workHashtag: [],
       userList: [],
+      artistList:[],
+      subGallery: [],
+      mainAdultGallery: [],
+      mainAdultGalleryThum: [],
+      mainGallery: [],
+      mainGalleryThum: [],
+      updateMain: false,
     };
   },
   created() {
@@ -151,9 +282,86 @@ export default {
     this.getAllWork();
     this.getWorkHashtag();
     this.getAllUser();
+    this.getAllArtist();
   },
   mounted() {},
   methods: {
+    
+    getAllArtist() {
+  http.get(`/admin/getAllArtist`).then(
+        (response) => {
+          const data = response.data;
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].artist_exp != 0) {
+              let a = {
+                id: data[i].artist_id,
+                bank: data[i].artist_bank,
+                account: data[i].artist_account,
+                nickName: data[i].artist_nickName,
+                exp: data[i].artist_exp,
+              };
+              this.artistList.push(a);
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getAllMainAdultGallery() {
+      http.get(`/admin/getAllMainAdultGallery`).then(
+        (response) => {
+          this.mainAdultGallery = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getAllMainGallery() {
+      http.get(`/admin/getAllMainGallery`).then(
+        (response) => {
+          this.mainGallery = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getAllSubGallery() {
+      http.get(`/gallery/getAllSubGallery`).then((response) => {
+        this.subGallery = response.data;
+      });
+    },
+    updateMainGallery() {
+      http.get(`/admin/renewMainGallery`).then(
+        (response) => {
+          console.log(response);
+
+          if (response.status == 200) {
+            // this.getAllMainAdultGallery();
+            this.updateMain = true;
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    updateSubGallery() {
+      http.get(`/admin/renewSubGallery`).then(
+        (response) => {
+          //   console.log(response.data);
+          if (response.status == 200) {
+            this.getAllSubGallery();
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
     getAllUser() {
       http.get(`/admin/getAllUser`).then(
         (response) => {
@@ -211,7 +419,7 @@ export default {
     },
     getAllHashtag() {
       this.hashtagList = [];
-      
+
       http.get(`/admin/getAllHashTag/`).then(
         (response) => {
           const data = response.data;
@@ -297,11 +505,24 @@ export default {
 </script>
 
 <style scoped>
+.container {
+ margin: 0 auto;
+}
+.admin {
+ margin: 0 auto;
+}
+.admin_tabs {
+ margin: 0 auto;
+}
 .mt {
-  margin-top: 5%;
+  margin-top: 10%;
+  padding-top: 10%;
 }
 .btn {
   margin-top: 2%;
   margin-left: 50%;
+}
+.btn19 {
+  margin: 0 auto;
 }
 </style>
