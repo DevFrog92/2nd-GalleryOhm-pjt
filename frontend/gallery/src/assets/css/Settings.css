@@ -76,8 +76,8 @@ position: relative;
     padding: 0.7rem 0 0.7rem 4.7rem; 
     /* margin-bottom: 10px; */
     margin-left: 10%;
-    width: 80%;
-    color: black;
+    width: 67%;
+    color: #494949;
     cursor: pointer;
     position: relative;
     vertical-align: middle;
@@ -97,7 +97,7 @@ position: relative;
     position: absolute;
     top: 1.1rem;
     left: 3rem;
-    background-color: black;
+    background-color: #494949;
     border-radius: 100%;
 /*    transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);*/
   pointer-events: none;
@@ -118,8 +118,8 @@ position: relative;
 }
 
 .setting .setting_menu div.active {
-    color: #FBC02D;
-    font-size: 1.2rem;
+    color: gray;
+    font-size: 1.3rem;
     /* left: -0.2rem; */
     /* padding: 15px 20px 15px 20px; */
 }
@@ -190,7 +190,8 @@ position: relative;
   align-items: center;
   border-radius:3px;
   text-align: center;
-  padding-left: 8%;
+  padding-left: 7%;
+  padding-bottom: 5%;
   
   }
 
@@ -232,8 +233,8 @@ z-index: 10;
 /* transform: translate(-50%,-50%); */
   /* background-color: transparent; */
 border-radius:3px;
-margin-right: 17%;
-  padding: 5% 0% 5% 0 ;
+margin-right: 20%;
+  padding: 5% 0% 10% 0 ;
   display: flex;
   flex-direction: column;
 justify-content: center;
@@ -243,7 +244,7 @@ align-items: center;
 
 .UserContainer2{
 position:relative;
-margin-bottom:3%;
+margin-bottom:3.2%;
 width: 65%;
 }
 
@@ -272,9 +273,7 @@ width: 65%;
   .UserContainer2 input:focus { 
   border:none;	
   outline:none;
-  border-bottom:2px solid #6A16CD;	
-  border-image: linear-gradient(to right,#6A16CD, #5411A4, #be29ec,	#c616cd);
-  border-image-slice: 1;
+  border-bottom:2px solid #676d74;	
   
   }
   
@@ -283,7 +282,7 @@ width: 65%;
   .UserContainer2 input:valid ~ label{
   top:-12px;
   font-size:14px;
-  color: #6A16CD;
+  color: #676d74;
   font-weight: bold;
   
   }
@@ -301,12 +300,12 @@ float: left;
   font-weight: bold;
   border: 0;
   background-color:transparent;
-  color: grey;
+  color: lightgrey;
  
 }
 
 .mod_nickname .random_btn:hover {
-  color: red;
+  color: #676d74;
 }
 
 .mod_nickname .selfmod_btn {
@@ -317,10 +316,10 @@ font-size: 17px;
 font-weight: bold;
 margin: 0 0 1px 4px;
 border:0;
-color: grey;
+color: lightgray;
 }
 .mod_nickname .selfmod_btn:hover{
-  color: red;
+  color: #676d74;
 }
 
 
@@ -385,7 +384,7 @@ text-align: center;
 .uploadImg {
   width: 153px;
   height: 40px;
-  color: grey;
+  color: lightgray;
   border: 0;
   background-color: transparent;
   margin-top: 0.5rem;
@@ -394,7 +393,7 @@ text-align: center;
 }
 
 .uploadImg:hover {
-  color: red;
+  color: #676d74;
 }
 
 
@@ -405,25 +404,50 @@ text-align: center;
   width: 200px;
   height: 100px;
   /* padding: 50% 30% 0 0; */
-  top: 81%;
-  left: 32%;
+  top: 77%;
+  left: 31.7%;
   z-index: 200;
 }
 
 
 
-
-.saveBtns{
-  font-size: 24px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  /* text-align: center; */
-  line-height: 1em;
-  white-space: nowrap;
-  width: 100%;
-  -webkit-transform: translate3D(0, 0, 0);
-          transform: translate3D(0, 0, 0);
+.mod_info_button {
+  width: 110px;
+  height: 50px;
+  background: white;
+  position: relative;
+  background: white;
+  margin-bottom: 25px;
+  border-radius: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
 }
+
+.mod_info_button span {
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: semibold;
+}
+
+.mod_info_button:nth-child(1) {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  color: grey;
+}
+
+.mod_info_button:nth-child(1):hover {
+  opacity: 0.3;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mod_info_button:nth-child(1):active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #41444b;
+}
+
+
 .register_save_btn_container{
   position: absolute;
   max-width: 300px;
@@ -432,94 +456,13 @@ text-align: center;
   /* margin: 6.3rem 0 0 17rem; */
 }
 
-.registerSaveBtns {
-  font-size: 21px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  line-height: 1em;
-  white-space: nowrap;
-  width: 100%;
-  -webkit-transform: translate3D(0, 0, 0);
-          transform: translate3D(0, 0, 0);
-}
-.saveBtn,  .registerSaveBtn {
+
+.unscribe_btn_container{
   position: absolute;
-  line-height: 0.9em;
-  border-top: 0.05em solid transparent;
-/*  transition: all 0.5s ease-in-out;*/
+  max-width: 300px;
+  width: 200px;
+  left: 36%;
 }
-
-
-.registerSaveBtn:hover {
-  border-top: 0.05em solid #E74C3C;
-  cursor: pointer;
-  width: 65%;
-}
-
-.saveBtn:after, .saveBtn:before, 
-.registerSaveBtn:after, .registerSaveBtn:before {
-  content: attr(data-display);
-  position: absolute;
-  top: 0em;
-  left: 1em;
-  width: auto;
-  height: 1em;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  transition: all 0.25s ease-in-out;
-  overflow: hidden;
-  color: transparent;
-}
-
-
-.saveBtn:hover {
-  border-top: 0.05em solid red;
-  cursor: pointer;
-  width: 72%;
-}
-.saveBtn:before{
-  text-shadow: 0px 0.5em #cdcdcd;
-  top: -0.45em;
-}
-
-.saveBtn:after{
-  top: 0.5em;
-  text-shadow: 0px -0.5em #cdcdcd;
-}
-
-.saveBtn:hover:before{
-  text-shadow: 0px 0.5em #E74C3C;
-  left: 1.25em;
-}
-
-.saveBtn:hover:after {
-  text-shadow: 0px -0.5em #E74C3C;
-  left: 0.75em;
-}
-
-.registerSaveBtn:before {
-  text-shadow: 0px 0.5em #cdcdcd;
-  top: -0.45em;
-}
-
-.registerSaveBtn:after {
-  top: 0.5em;
-  text-shadow: 0px -0.5em #cdcdcd;
-}
-
-.registerSaveBtn:hover:before {
-  text-shadow: 0px 0.5em #E74C3C;
-  left: 1.25em;
-}
-
-.registerSaveBtn:hover:after {
-  text-shadow: 0px -0.5em #E74C3C;
-  left: 0.7;
-}
-
-
-
-
 .registerArtist {
   width: 100%;
   height: 100%;
@@ -576,7 +519,7 @@ left:14.5%;
   .register_artist input:valid ~ label{
   top:-12px;
   font-size:14px;
-  color: #6A16CD;
+  color: #676d74;
   font-weight: bold;
   }
 
@@ -617,16 +560,14 @@ left:14.5%;
 .register_artist input:focus { 
   border:none;	
   outline:none;
-  border-bottom:2px solid #6A16CD;	
-  border-image: linear-gradient(to right,#6A16CD, #5411A4, #be29ec,	#c616cd);
-  border-image-slice: 1;
+  border-bottom:2px solid #676d74;	
   
   }
 
 .mod_nickname input ~ label{
   top:-12px;
   font-size:14px;
-  color: #6A16CD;
+  color: #676d74;
   font-weight: bold;
 }
 
@@ -640,10 +581,10 @@ right: -8%;
   border: 0;
   background-color: transparent;
   font-size: 32px;
-  color: grey;
+  color: lightgray;
 }
 #rank_modal_btn:hover {
-  color: red;
+  color: #676d74;
 }
 .rank_modal_wrap{
   display: none;
@@ -692,7 +633,7 @@ right: -8%;
 
 .unscribe_container2{
   position: absolute;
-  margin: 0 20% 10% 0;
+  margin: 0 30% 13% 0;
 }
 .unscribe_title {
   font-size: 30px;

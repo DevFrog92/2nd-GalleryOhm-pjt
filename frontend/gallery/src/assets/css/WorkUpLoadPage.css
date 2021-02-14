@@ -30,11 +30,11 @@ position: relative;
   left: 42%;
   font-size: 22px;
   font-weight: bold;
-  color: #888;
+  color: grey;
   cursor: pointer;
 }
 .upload_caption:hover{
-  color: red;
+  color: #52575d;
 }
 .previewPicture {
   position: relative;
@@ -111,13 +111,13 @@ position: relative;
 
 .info_input input:focus {
   outline: none;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #52575d;
 
 }
 
 .info_input textarea:focus {
   outline: none;
-  border: 2px solid red;
+  border: 2px solid #52575d;
 }
 
 .picture_Age input {
@@ -143,9 +143,6 @@ position: relative;
   font-weight: bold;
 }
 
-.pictureInfo button:hover {
-  color: #FF4B2B;
-}
 
 
 
@@ -154,8 +151,8 @@ position: relative;
   width: 200px;
   height: 100px;
   /* padding: 50% 30% 0 0; */
- bottom: -20%;
-  left: 50%;
+ bottom: -17%;
+  left: 54%;
   z-index: 200;
 }
 .upload_btn_container2{
@@ -163,97 +160,46 @@ position: relative;
   width: 200px;
   height: 100px;
   /* padding: 50% 30% 0 0; */
-  bottom: -20%;
-  left: 72%;
+  bottom: -17%;
+  left: 74%;
   z-index: 200;
 }
 
 
-.uploadBtns1, .uploadBtns2{
-  font-size: 24px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  /* text-align: center; */
-  line-height: 1em;
-  white-space: nowrap;
-  width: 100%;
-  -webkit-transform: translate3D(0, 0, 0);
-          transform: translate3D(0, 0, 0);
-}
-
-.uploadBtn1, .uploadBtn2 {
-  position: absolute;
-  line-height: 0.9em;
-  border-top: 0.05em solid transparent;
-/*  transition: all 0.5s ease-in-out;*/
-}
-
-
-
-
-.uploadBtn1:after, .uploadBtn1:before, 
-.uploadBtn2:after, .uploadBtn2:before{
-  content: attr(data-display);
-  position: absolute;
-  top: 0em;
-  left: 1em;
-  width: auto;
-  height: 1em;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  transition: all 0.25s ease-in-out;
-  overflow: hidden;
-  color: transparent;
-}
-
-
-.uploadBtn1:hover {
-  border-top: 0.05em solid red;
+.upload_art_button {
+  width: 110px;
+  height: 50px;
+  background: white;
+  position: relative;
+  background: white;
+  margin-bottom: 25px;
+  border-radius: 32px;
+  text-align: center;
   cursor: pointer;
-  width: 72%;
-}
-.uploadBtn1:before{
-  text-shadow: 0px 0.5em #cdcdcd;
-  top: -0.45em;
+  transition: all 0.1s ease-in-out;
 }
 
-.uploadBtn1:after{
-  top: 0.5em;
-  text-shadow: 0px -0.5em #cdcdcd;
+.upload_art_button span {
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: semibold;
 }
 
-.uploadBtn1:hover:before{
-  text-shadow: 0px 0.5em #E74C3C;
-  left: 1.25em;
+.upload_art_button:nth-child(1) {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  color: grey;
 }
 
-.uploadBtn1:hover:after {
-  text-shadow: 0px -0.5em #E74C3C;
-  left: 0.75em;
-}
-.uploadBtn2:hover {
-  border-top: 0.05em solid red;
-  cursor: pointer;
-  width: 72%;
-}
-.uploadBtn2:before{
-  text-shadow: 0px 0.5em #cdcdcd;
-  top: -0.45em;
+.upload_art_button:nth-child(1):hover {
+  opacity: 0.3;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.uploadBtn2:after{
-  top: 0.5em;
-  text-shadow: 0px -0.5em #cdcdcd;
-}
-
-.uploadBtn2:hover:before{
-  text-shadow: 0px 0.5em #E74C3C;
-  left: 1.25em;
-}
-
-.uploadBtn2:hover:after {
-  text-shadow: 0px -0.5em #E74C3C;
-  left: 0.75em;
+.upload_art_button:nth-child(1):active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #41444b;
 }
 
 
@@ -324,7 +270,7 @@ position: relative;
 }
 
 .tags-input:focus {
-  border-color: red;
+  border-color: #52575d;
   outline: none;
 }
 
@@ -339,11 +285,11 @@ position: relative;
 }
 
 .tags-input:focus + h1 {
-  color: red;
+  color: #52575d;
 }
 
 .tags-input:focus + h1 span {
-  border-color: red;
+  border-color: #52575d;
 }
 
 @keyframes blink {
@@ -363,3 +309,9 @@ position: relative;
     opacity: 0;
   }
 }
+
+
+
+
+
+

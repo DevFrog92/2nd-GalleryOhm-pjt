@@ -92,9 +92,7 @@
               </div>
 
               <div class="save_btn_container">
-                <div class="saveBtns">
-                  <div class="saveBtn" @click="modifyUser" data-display="수정완료"></div>
-                </div>
+                 <div class="mod_info_button" @click="modifyUser"><span>수정완료</span></div>
               </div>
 
             </div>
@@ -135,11 +133,9 @@
                   <p class="registerinfo">* 등급은 작가등록 후 gallery의 등급기준에 따라 자동으로 부여됩니다.</p>
                 </div>
                 <div class="register_save_btn_container">
-                  <div class="registerSaveBtns">
-                    <div class="registerSaveBtn" v-if="user__type === '1'" data-display="작가 등록"
-                      @click="register_artist"></div>
-                    <div class="registerSaveBtn" v-else data-display="작가 해지" @click="withdraw_artist"></div>
-                  </div>
+                 <div class="mod_info_button"  v-if="user__type === '1'"  @click="register_artist"><span>작가등록</span></div>
+                 <div class="mod_info_button"   v-else  @click="withdraw_artist"><span>작가 해지</span></div>
+                  
                 </div>
               </div>
             </div>
@@ -169,7 +165,11 @@
                       </label>
                     </form>
                   </div>
-                  <button @click="askWhy">탈퇴하기</button>
+                  <div class="unscribe_btn_container">
+
+                   <div class="mod_info_button" @click="askWhy"><span>탈퇴하기</span></div>
+                  </div>
+                  <!-- <button @click="askWhy">탈퇴하기</button> -->
                 </div>
               </div>
               <div class="delete__check1">
@@ -209,14 +209,14 @@
 
       <div slot="body" v-if="artist_resister === 'changeArtist'">
         <h3>{{userInfo.user_nickName}}작가님! 환영합니다.</h3>
-        <p>저희 SSAATCHI Gallery는 작가님의 다양한 작품 활동을 지원하기 위해서 최선을
+        <p>저희 '갤러리 Ω,'는 작가님의 다양한 작품 활동을 지원하기 위해서 최선을
           다하고 있습니다. 문의가 있다면 언제나 저희에게 연락을 주십시오. 다시 한번 환영합니다!!
         </p>
       </div>
       <div slot="body" v-else>
         <h3>{{userInfo.user_nickName}}작가님!</h3>
-        <p>저희 SSAATCHI Gallery에서의 작가활동은 어떠셨나요? 다신 한번 만나뵙기를 기원하겠습니다. 작가님의 앞으로의
-          작가활동을 저희 저희 SSAATCHI Gallery가 응원하겠습니다!
+        <p>저희 '갤러리 Ω,'에서의 작가활동은 어떠셨나요? 다신 한번 만나뵙기를 기원하겠습니다. 작가님의 앞으로의
+          작가활동을 저희 저희 '갤러리 Ω,'이 응원하겠습니다!
         </p>
       </div>
 

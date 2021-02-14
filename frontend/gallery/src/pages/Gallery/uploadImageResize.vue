@@ -62,14 +62,17 @@
 
         <div class="upload_btn_container1">
           <div class="uploadBtns1">
-            <div class="uploadBtn1" v-if="mode" @click="addWork" data-display="작품수정"></div>
-            <div class="uploadBtn1" v-else @click="addWork" data-display="작품등록"></div>
+            <!-- <div class="uploadBtn1" v-if="mode" @click="addWork" data-display="작품수정"></div> -->
+            <div class="upload_art_button"  v-if="mode" @click="addWork"><span>작품수정</span></div>
+            <div class="upload_art_button"  v-else @click="addWork"><span>작품등록</span></div>
+            <!-- <div class="uploadBtn1" v-else @click="addWork" data-display="작품등록"></div> -->
           </div>
         </div>
         <div class="upload_btn_container2">
-          <div class="uploadBtns2">
+           <div class="upload_art_button" @click="Back"><span>뒤로가기</span></div>
+          <!-- <div class="uploadBtns2">
             <div class="uploadBtn2" @click="Back" data-display="뒤로가기"></div>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="upload_btn_container3">
           <div class="uploadBtns3">
