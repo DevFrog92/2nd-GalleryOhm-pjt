@@ -1,41 +1,36 @@
 <template>
   <div class="subgallery" v-if="imgList.length != 0">
-    <div class="eyes">
-      <button @click="show" v-scroll-to="'.content'">버튼</button>
-
-      <section id="dude">
-        <img src="https://i.imgur.com/rOFqbbs.png" alt="" id="gentleman" />
-        <div id="eyes"></div>
-        <canvas class="draw-map" style="width: 500px; height: 684px"></canvas>
-      </section>
-
-      <section id="copy">
-        <h3 class="title"></h3>
-        <a href="" id="reset"></a>
-      </section>
+    <div class="welcome">
+      <div class="dark">
+        <div class="door-open"></div>
+        <div class="door"></div>
+      </div>
     </div>
-    <div class="content hidden">
+    <div class="content">
       <div class="side">
-        <p class="galleryType">서브갤러리</p>
+        <p class="galleryType">레드 갤러리</p>
         <div class="page">{{ nowPage }} / {{ imgList.length }}</div>
       </div>
       <div class="list">
         <div v-for="(img, i) in imgList" :key="i">
           <div class="image slide-in-bck-bottom" @mouseover="changePage(i + 1)">
-            <router-link
-              class="router-link"
-              active-class="active"
-              to="/test/GalleryJ/DetailPage2"
-            >
-              <img class="img" :src="img.work_piece" :alt="img.work_title" />
-              <div class="content">
-                <!-- 작품명 -->
-                <h1 class="text">{{ img.work_title }}</h1>
-              </div>
-              <p class="info">
-                {{ img.work_artistId }}, {{ img.work_uploadDate }}
-              </p>
-            </router-link>
+            <!-- <transition name="fade"> -->
+            <!-- <router-link class="router-link" to="/test/GalleryJ/DetailPage2"> -->
+            <img
+              class="img"
+              :src="img.work_piece"
+              :alt="img.work_title"
+              :data-value="img.work_id"
+            />
+            <div class="content">
+              <h1 class="text">{{ img.work_title }}</h1>
+            </div>
+            <!-- </router-link> -->
+            <!-- </transition> -->
+
+            <p class="info" style="padding-top: 3%">
+              By {{ img.work_artistId }}, {{ img.work_uploadDate }}
+            </p>
           </div>
         </div>
       </div>
@@ -46,8 +41,11 @@
 <script>
 import Vue from "vue";
 import http from "../../api/http.js";
+import router from "../../router";
 import VueScrollTo from "vue-scrollto";
+// import VuePageTransition from "vue-page-transition";
 Vue.use(VueScrollTo);
+// Vue.use(VuePageTransition);
 
 export default {
   data() {
@@ -58,7 +56,8 @@ export default {
   },
   components: {},
   created() {
-    http.get(`/gallery/getAllSubGallery`).then(
+    http.get(`/gallery/getAdultGallery`).then(
+      // http.get(`/gallery/getAllSubGallery`).then(
       (response) => {
         var data = response.data;
         for (var i = 0; i < data.length; i++) {
@@ -73,36 +72,61 @@ export default {
 
     this.nowPage = 1;
   },
-  mounted() {},
-  destroyed() {},
+  mounted() {
+    setTimeout(() => {
+      const welcome = document.querySelector(".welcome");
+
+      welcome.remove();
+    }, 5000);
+
+    setTimeout(() => {
+      const list = document.querySelector(".list");
+      list.addEventListener("click", this.clickHandler);
+    }, 5500);
+  },
   methods: {
     changePage(i) {
       this.nowPage = i;
     },
     show() {
       const side = document.querySelector(".content");
-      const eyes = document.querySelector(".eyes");
+      const open = document.querySelector(".open");
 
       side.classList.remove("hidden");
       // side.classList.add("slide-in-bck-bottom");
-      eyes.classList.add("hidden");
+      open.classList.add("hidden");
+    },
+    clickHandler(e) {
+      console.log("e.target 출력");
+      console.log(e.target);
+      if (e.target.classList.contains("img")) {
+        console.log("e.target.dataset.value 출력");
+        console.log(e.target.dataset.value);
+        router.push({
+          name: "DetailPage2",
+          params: { work_id: e.target.dataset.value },
+        });
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
 .subgallery {
-  /* height: 100vh; */
+  height: 100vh;
   overflow-x: hidden;
-  background-color: #fcf1e7;
+  /* background-color: #c20a0a; */
+  background-image: url("../../assets/images/red.png");
 }
 
 .subgallery::-webkit-scrollbar {
   display: none;
 }
 
-.eyes {
+.open {
   height: 100vh;
   width: auto;
 }
@@ -110,7 +134,6 @@ export default {
 .hidden {
   display: none;
 }
-
 .image {
   position: relative;
   width: auto;
@@ -148,6 +171,8 @@ export default {
 }
 
 .image .content .text {
+  /* -webkit-text-stroke: 3px rgb(46, 211, 31);
+  -webkit-text-fill-color: transparent; */
   color: black;
   font-family: "Hanna", sans-serif;
   transform: scale(3);
@@ -155,7 +180,7 @@ export default {
 }
 
 .info {
-  padding-top: 4%;
+  /* padding-top: 6%; */
   color: black;
   transform: scale(1.2);
   font-family: "Hanna", sans-serif;
@@ -196,14 +221,22 @@ export default {
   transition: all 1.2s;
 }
 
+.info {
+  padding-top: 3%;
+  color: black;
+  transform: scale(1.2);
+  font-family: "Hanna", sans-serif;
+}
+
 .router-link {
   text-decoration: none;
 }
 
+/* ==== */
 .slide-in-bck-bottom {
-  -webkit-animation: slide-in-bck-bottom 0.3s
+  -webkit-animation: slide-in-bck-bottom 0.6s
     cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-bck-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bck-bottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @-webkit-keyframes slide-in-bck-bottom {
@@ -218,6 +251,7 @@ export default {
     opacity: 1;
   }
 }
+
 @keyframes slide-in-bck-bottom {
   0% {
     -webkit-transform: translateZ(700px) translateY(300px);
@@ -230,103 +264,116 @@ export default {
     opacity: 1;
   }
 }
+
+.kenburns-top {
+  -webkit-animation: kenburns-top 20s ease-out alternate-reverse infinite both;
+  animation: kenburns-top 20s ease-out alternate-reverse infinite both;
+}
+
+@-webkit-keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+  }
+}
+@keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+  }
+}
 </style>
 
-<style lang="scss" scoped>
-// VARIABLES
-$red: #fe0000;
+<style lang="sass" scoped>
+$door-time: 2.5s
+$zoom-time: 3s
+$fadeout-time: 2s
 
-// MIXINS / EXTENDS
-%no-select {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+.welcome
+	position: absolute
+	width: 100%
+	height: 100vh
+	top: 0
+	left: 0
+	z-index: 2
+	opacity: 1
+	overflow: hidden
+	animation: 0s remove linear 5s
+	animation-fill-mode: forwards
+	.dark
+		position: absolute
+		width: 100%
+		height: 100%
+		z-index: 4
+		background: #000
+		animation: $fadeout-time fadeout ease $zoom-time
+		animation-fill-mode: forwards
+		.door-open
+			position: absolute
+			background: red
+			height: 500px
+			width: 300px
+			top: calc(50% - 250px)
+			left: calc(50% - 150px)
+			z-index: 5
+			box-shadow: 10px 0px 50px red
+			animation: $zoom-time growfade ease-in $door-time
+			animation-fill-mode: forwards
+		.door
+			position: absolute
+			background: #000
+			height: 600px
+			width: 300px
+			top: calc(50% - 250px)
+			left: calc(50% - 150px)
+			z-index: 6
+			transform-origin: 0 0
+			animation: $door-time open-door ease-in-out, 0s fadeout linear $door-time
+			animation-fill-mode: forwards
 
-// IMPORTS
-@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@-webkit-keyframes growfade
+	0%
+		opacity: 1
+		outline: 0px solid red
+	33%
+		opacity: 1
+		outline: 50vw solid red
+	66%
+		opacity: 1
+		outline: 50vw solid red
+	100%
+		opacity: 0
+		outline: 50vw solid red
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
+@-webkit-keyframes open-door
+	0%
+		transform: rotateX(-20deg) rotateY(0deg)
+	100%
+		transform: rotateX(-20deg) rotateY(-100deg)
 
-// STYLE
-.subgallery {
-  > section {
-    margin: 0 auto;
-    width: 500px;
-    position: relative;
-  }
-}
+@-webkit-keyframes fadeout
+	0%
+		opacity: 1
+	100%
+		opacity: 0
 
-.title {
-  text-align: center;
-  font-family: "Pacifico";
-  font-size: 2rem;
-}
-
-section#dude {
-  @extend %no-select;
-  #gentleman {
-    position: relative;
-    z-index: 1;
-    @extend %no-select;
-  }
-  #draw-map {
-    @extend %no-select;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-  }
-}
-
-#reset {
-  display: block;
-  background: #333;
-  margin-top: 1rem;
-  padding: 1rem initial;
-  border-radius: 5px;
-  font-family: sans-serif;
-  color: #fff;
-  text-align: center;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-decoration: none;
-  &:hover {
-    background: darken(#333, 1%);
-  }
-  &:active {
-    background: darken(#333, 5%);
-  }
-}
-
-.thickness-options {
-  list-style: none;
-  padding-left: 0;
-  li {
-    display: inline-block;
-    width: percentage(1/4);
-    text-align: center;
-    &.list-title {
-      font-weight: 600;
-    }
-    a {
-      display: block;
-      color: #aaa;
-      // border: 2px solid #eee;
-      text-decoration: none;
-      &.active {
-        color: #000;
-        // border-color: #000;
-      }
-    }
-  }
-}
+@-webkit-keyframes remove
+	0%, 100%
+		top: -1000000pxF
 </style>

@@ -68,15 +68,26 @@
 </template>
 
 <script>
+import http from "../../api/http";
+
 export default {
   data() {
     return {
       imgSrc: "",
+      prop_workId: "",
+      work: [],
     };
+  },
+  props: ["work_id"],
+  created() {
+    this.prop_workId = this.$route.params.work_id;
+
+    this.getWorkInfo();
   },
   mounted() {
     this.imgSrc = "../../assets/images/t.jpeg";
   },
+  methods: {},
 };
 </script>
 
@@ -188,7 +199,7 @@ export default {
   margin-top: 3vh;
 }
 
-.footer{
+.footer {
   display: block;
   background-color: #ffdcdc;
   padding-top: 10vh;
@@ -208,6 +219,40 @@ footer .foot .t {
   color: gray;
   font-family: "Hanna", sans-serif;
   margin: 0;
+}
+
+.kenburns-top {
+  -webkit-animation: kenburns-top 20s ease-out alternate-reverse infinite both;
+  animation: kenburns-top 20s ease-out alternate-reverse infinite both;
+}
+
+@-webkit-keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+  }
+}
+@keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+  }
 }
 </style>
 
