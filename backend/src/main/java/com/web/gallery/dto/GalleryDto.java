@@ -9,6 +9,8 @@ public class GalleryDto {
     private int gallery_mainWorkId;     // 메인작품 아이디
     private int gallery_footPrint;      // 전시관 발자국 수
 
+    private byte[] gallery_mainWork;    // 메인작품
+
     public GalleryDto() {
     }
 
@@ -76,6 +78,14 @@ public class GalleryDto {
 
     public void setGallery_footPrint(int gallery_footPrint) {
         this.gallery_footPrint = gallery_footPrint;
+    }
+
+    public byte[] getGallery_mainWork() {
+        return gallery_mainWork;
+    }
+
+    public void setGallery_mainWork(byte[] gallery_mainWork) {
+        this.gallery_mainWork = gallery_mainWork;
     }
 
     @Override
