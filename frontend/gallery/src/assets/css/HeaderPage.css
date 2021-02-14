@@ -32,7 +32,7 @@
   pointer-events: none;
   list-style: none;
   width: 2.2rem;
-  transform: rotate(180deg);
+  /* transform: rotate(180deg); */
 
   z-index: 999;
 }
@@ -42,7 +42,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   padding: 0.75em 0;
-  /* writing-mode: vertical-rl; */
+  writing-mode: vertical-rl;
   font-size: 1rem;
   mix-blend-mode: difference;
   z-index: inherit;
@@ -71,6 +71,7 @@
   width: 35px;
   border: 0;
   outline: 0;
+  z-index: 100;
 }
 
 .nav-icon span {
@@ -103,7 +104,7 @@
 }
 
 .active .nav-icon span {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .router {

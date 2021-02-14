@@ -27,13 +27,13 @@ const init = () => {
     })
 
 
-  const scrap = document.querySelector('.scroll-wrapper')
-  scrap.addEventListener('click',function(e){
-    if(e.target.classList.contains("scrap__image")){
-      const work_id = e.target.dataset.value;
-      router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-    }
-  })
+  // const scrap = document.querySelector('.scroll-wrapper')
+  // scrap.addEventListener('click',function(e){
+  //   if(e.target.classList.contains("scrap__image")){
+  //     const work_id = e.target.dataset.value;
+  //     router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+  //   }
+  // })
 
   
   
@@ -141,27 +141,36 @@ window.addEventListener('scroll',function(){
   }
 })
 
-  // const followers = document.querySelectorAll('.followers');
-  // const followings = document.querySelectorAll('.followings');
+function moveToArtistPage(artist_id){
+  if(artist_id === localStorage.getItem('user_id')){
+      router.push('/mypage');
+  }else{
+    router.push({name:'UserProfile',params:{props_id:artist_id}});
+  }
+  }
 
-  // followers.forEach(follower =>{
-  //   follower.addEventListener('click',function(e){
-  //     moveToArtistPage(e.target.innerText)
-  //   })
-  // })
-  // followings.forEach(following =>{
-  //   following.addEventListener('click',function(e){
-  //     moveToArtistPage(e.target.innerText)
+  const followers = document.querySelectorAll('.followers');
+  const followings = document.querySelectorAll('.followings');
+
+  followers.forEach(follower =>{
+    follower.addEventListener('click',function(e){
+      moveToArtistPage(e.target.innerText)
+    })
+  })
+  followings.forEach(following =>{
+    following.addEventListener('click',function(e){
+      moveToArtistPage(e.target.innerText)
       
-  //   })
-  // })
+    })
+  })
   
-  const scrollWrapper = document.querySelector('.scroll-wrapper');
-  const scrollWrapper_items = document.querySelectorAll('.scroll-wrapper img');
-  scrollWrapper.style.width = scrollWrapper_items.length*(30*16+72)+'px'
+  // const scrollWrapper = document.querySelector('.scroll-wrapper');
+  // const scrollWrapper_items = document.querySelectorAll('.scroll-wrapper img');
+  // scrollWrapper.style.width = scrollWrapper_items.length*(30*16+72)+'px'
 
 
 }
+
 
 const getUserInfo = ()=>{
   http.get('/user/getUserInfo', {
@@ -174,12 +183,12 @@ const getUserInfo = ()=>{
   })
 }
 
+
 const follow_modal = ()=>{
   console.log('실행되었다.')
   /*
   * Get all the buttons actions
   */
-
   const optionBtns = document.querySelectorAll( '.js-option' );
   console.log(optionBtns);
   for(var i = 0; i < optionBtns.length; i++ ) {
@@ -191,7 +200,6 @@ const follow_modal = ()=>{
       console.log('click here',e.target.dataset.name);
       localStorage.setItem('props_id',e.target.dataset.name)
       getUserInfo();
-
       // notification item
       var notificationCard = this.parentNode.parentNode;
       var clickBtn = this;
@@ -257,66 +265,19 @@ const moveToArtistPage = ()=>{
   }
 }
 
-const message_read = (message_id)=>{
-  const formData = new FormData()
-  formData.append('message_ids',Array(message_id))
-  http.post('/message/checkMessage/',formData)
-  .then(response => {
-    console.log('read message',response.data);
-  })
-}
+// const message_read = (message_id)=>{
+//   const formData = new FormData()
+//   formData.append('message_ids',Array(message_id))
+//   http.post('/message/checkMessage/',formData)
+//   .then(response => {
+//     console.log('read message',response.data);
+//   })
+// }
 
 
-const DMModal =() =>{
-  const DMList = document.querySelector('.dm__list');
-
-  const dmOption = document.querySelectorAll('.dm-option')
-
-  dmOption.forEach(btn => {
-    btn.addEventListener('click',function(e){
-      console.log('click to delete',e.target)
-      const DMLIST = document.querySelectorAll('.DM__item')
-      for(let item of DMLIST){
-        if(e.target.dataset.value === item.dataset.name){
-          item.classList.add('delete');
-          // const formData = {
-          //   message_ids: Array(e.target.dataset.value)
-          // }
-          // http.post('/message/deleteMessage',formData)
-          // .then(response => {
-          //  console.log('remove message',response.data);    
-          // })
-        }
-      }
-    })
-  })
-
-  console.log('DM__list',DMList);
-  DMList.addEventListener('click',function(e){
-    if(e.target.classList.contains('DM__item'))
-    {
-      console.log('읽음 처리 합니다.')
-      console.log(JSON.parse(e.target.dataset.value));
-      const response_data = JSON.parse(e.target.dataset.value);
-      
-      message_read(response_data.message_id);
-      e.target.classList.add('DM__item__read')
-      const sender_name = document.querySelector('.sender_name');
-      const sender_title = document.querySelector('.sender_title');
-      const sender_content = document.querySelector('.sender_content');
-      const sendersender_time_name = document.querySelector('.sender_time');
-      const sendersender_date_name = document.querySelector('.sender_date');
-      sender_name.innerText = response_data.message_senderId;
-      sender_title.innerText ="Title. " + response_data.message_title;
-      sender_content.innerText = response_data.message_content;
-      sendersender_time_name.innerText = response_data.message_sendDate.slice(11);
-      sendersender_date_name.innerText = response_data.message_sendDate.slice(0,11);
-      // 
-      const showDmContent = document.querySelector('.showDmContent')
-      showDmContent.classList.add('showDmContentActive');
-    }
-  })
-}
+// const DMModal =() =>{
+//   const DMList = document.querySelector('.dm__list_props');
+// }
 
 
 // const tounfollow=()=>{
@@ -329,4 +290,4 @@ const DMModal =() =>{
 //     console.log(response.data,'unfollow');
 //   })
 // }
-export default {init,follow_modal,DMModal};
+export default {init,follow_modal};
