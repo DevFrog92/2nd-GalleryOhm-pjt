@@ -16,7 +16,7 @@
         </li>
         <li class="nav__item">
           <span class="nav__item-text">
-            <router-link  class="router" to="/mypage">Mypage</router-link>
+            <a class="router" @click="moveToMypage">Mypage</a>
           </span>
         </li>
         <li class="nav__item">
@@ -50,7 +50,9 @@
   export default {
     name: 'HeaderPage',
     data() {
-      return {}
+      return {
+        user_type:localStorage.getItem('user_type'),
+      }
     },
     computed: {
       loginState() {
@@ -60,7 +62,9 @@
     mounted() {
       init.init();
     },
-    created() {},
+    created() {
+      console.log('user_type',this.user_type);
+    },
     methods: {
       logout() {
         const logout_check = confirm('로그아웃하시겠습니까?');
@@ -75,6 +79,15 @@
           }
         }
       },
+      moveToMypage(){
+        console.log('누른다 ')
+        this.user_type = localStorage.getItem('user_type');
+        if(this.user_type === '1'){
+          this.$router.push('/guestpage');
+        }else if(this.user_type === '2'){
+          this.$router.push('/mypage')
+        }
+      }
     }
   }
 </script>
