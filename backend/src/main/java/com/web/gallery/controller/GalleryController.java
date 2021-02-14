@@ -220,6 +220,23 @@ public class GalleryController {
         return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "전시관 발자국(좋아요)을 반환한다.", response = NumberResult.class, notes = "getFootPrintToGallery()")
+    @RequestMapping(value = "/getFootPrintToGallery/{footPrint_galleryId}", method = RequestMethod.GET)
+    public ResponseEntity<NumberResult> getFootPrintToGallery(@PathVariable int footPrint_galleryId) throws Exception {
+        NumberResult nr = new NumberResult();
+        int count = galleryService.getFootPrintToGallery(footPrint_galleryId);
+        nr.setValue("getFootPrintToGallery", count, "succ");
+        return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "사용자의 전시관 발자국(좋아요) 여부를 받아온다.", response = NumberResult.class, notes = "giveFootPrintToGallery(footprint_galleryId, footprint_userId)")
+    @RequestMapping(value = "/isFootPrintToGallery/{footPrint_galleryId}", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> isFootPrintToGallery(@PathVariable int footPrint_galleryId, @RequestBody String footPrint_userId) throws Exception {
+        NumberResult nr = new NumberResult();
+        int isCheck = galleryService.isFootPrintToGallery(footPrint_galleryId, footPrint_userId);
+        nr.setValue("isFootPrintToGallery", isCheck, "succ");
+        return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
+    }
 
     /*** 성인 갤러리 목록 반환 ***/
     @ApiOperation(value = "성인 갤러리 작품 목록 반환.", response = List.class, notes = "getAdultGallery \n return List<WorkDto>")

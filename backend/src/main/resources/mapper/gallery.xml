@@ -172,4 +172,12 @@
         select *
         from gallery
     </select>
+
+    <select id="getFootPrintToGallery" parameterType="int" resultType="int">
+        select count(footprint_userId) from footprint where footPrint_galleryId = #{footPrint_galleryId}
+    </select>
+
+    <select id="getFootPrintToGallery" parameterType="footPrint" resultType="int">
+        select count(*) from footprint where footPrint_galleryId = #{footPrint_galleryId} and footPrint_userId =#{footPrint_userId}
+    </select>
 </mapper>
