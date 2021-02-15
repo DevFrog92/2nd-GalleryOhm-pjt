@@ -94,7 +94,7 @@ const init = (gallery_works,num) => {
       }
     }
 
-    slider.style.transform = "translate3d(" + ((index * -width) * 1.08 + (width / 2) + window.innerWidth / 2) + "px, 0, 0)";
+    slider.style.transform = "translate3d(" + ((index * -width) * 1.01 + (width / 2) + window.innerWidth / 2) + "px, 0, 0)";
   }
 
 
