@@ -139,14 +139,14 @@ public class MessageController {
     @ApiOperation(value = "받아온 message_id를 이용해 메세지를 삭제한다.", response = NumberResult.class,
             notes = "deleteMessage(List<int message_id>")
     @RequestMapping(value = "/deleteMessage", method = RequestMethod.POST)
-    private ResponseEntity<NumberResult> deleteMessage(@RequestBody List<Integer> message_ids) {
+    private ResponseEntity<NumberResult> deleteMessage(@RequestBody int message_id) {
         NumberResult ns = new NumberResult();
         HttpStatus status = null;
 
         try {
-            for (int message_id : message_ids) {
-                messageService.deleteMessage(message_id);
-            }
+
+            messageService.deleteMessage(message_id);
+
 
             ns.setValue("메세지를 삭제했습니다.", 1, "succ");
 

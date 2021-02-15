@@ -1,5 +1,6 @@
 package com.web.gallery.dao;
 
+import com.web.gallery.dto.FootPrintDto;
 import com.web.gallery.dto.GalleryDto;
 import com.web.gallery.dto.WorkDto;
 import org.apache.ibatis.session.SqlSession;
@@ -121,5 +122,33 @@ public class GalleryDaoImpl {
 
     public List<GalleryDto> getAllAdultGallery() {
         return sqlSession.selectList(ns + "getAllAdultGallery");
+    }
+
+    public int getFootPrintToGallery(int footPrint_galleryId) {
+        return sqlSession.selectOne(ns + "getFootPrintToGallery", footPrint_galleryId);
+    }
+
+    public int isFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
+        FootPrintDto footprint = new FootPrintDto();
+        footprint.setFootPrint_galleryId(footPrint_galleryId);
+        footprint.setFootPrint_userId(footPrint_userId);
+
+        return sqlSession.selectOne(ns + "isFootPrintToGallery", footprint);
+    }
+
+    public void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
+        FootPrintDto footprint = new FootPrintDto();
+        footprint.setFootPrint_galleryId(footPrint_galleryId);
+        footprint.setFootPrint_userId(footPrint_userId);
+
+        sqlSession.delete(ns + "cleanFootPrintToGallery", footprint);
+    }
+
+    public void updateFootPrintToGalleryUp(int footPrint_galleryId) {
+        sqlSession.update(ns + "updateFootPrintToGalleryUp", footPrint_galleryId);
+    }
+
+    public void updateFootPrintToGalleryDown(int footPrint_galleryId) {
+        sqlSession.update(ns + "updateFootPrintToGalleryDown", footPrint_galleryId);
     }
 }
