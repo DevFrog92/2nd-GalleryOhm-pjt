@@ -28,7 +28,7 @@ public class ArtistController {
 
     @ApiOperation(value = "작가의 아이디로 작가의 정보를 반환한다.", response = ArtistDto.class, notes = "getArtistInfo(artist_id) \n \t return ArtistDto")
     @RequestMapping(value = "/getArtistInfo", method = RequestMethod.GET)
-    public ResponseEntity<ArtistDto> getArtistInfo(@PathVariable String artist_id) throws Exception{
+    public ResponseEntity<ArtistDto> getArtistInfo(@RequestParam(value = "artist_id") String artist_id) throws Exception{
         ArtistDto artist = null;
         artist = artistService.getArtistInfo(artist_id);
         if(artist == null){
@@ -36,7 +36,7 @@ public class ArtistController {
         }
         return new ResponseEntity<ArtistDto>(artist, HttpStatus.OK);
     }
-
+    // 작가 등록
     @ApiOperation(value = "일반 사용자에서 작가로 등록한다.", response = NumberResult.class, notes = "changeArtist(artist_id, artist_bank, artist_account, artist_name, artist_nickName, artist_exp)")
     @RequestMapping(value = "/changeArtist", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> changeArtist(@RequestBody ArtistDto artistDto) throws Exception{

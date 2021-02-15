@@ -1,6 +1,6 @@
 <template>
-  <div class="My_profile_container">
-    <div class="profile_wrapper">
+  <div class="My_profile_artist_container">
+    <div class="artist_profile_wrapper">
 
 
 
@@ -18,8 +18,8 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span><span
-            @click="showDm=true">Bell</span></h2>
+       <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">고수</span><span class="Artist__bell"
+            @click="showDm=true"><img src="../assets/images/bell.png" alt=""><span class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -52,28 +52,28 @@
       </div>
 
 
-      <div class="dm__list_props">
-        <div @click="DMsideclose">exit</div>
-        <div class="showDmContent_props">
-          <div class="message__name__cover">
+      <div class="dm__list_Artist">
+        <div class="exit__artist__dm" @click="DMsideclose">exit</div>
+        <div class="showDmContent_props_Artist">
+          <div class="message__name__cover__artist">
             <div class="sender_name">{{artist_name}}</div>
           </div>
-          <div class="message__title__cover">
+          <div class="message__title__cover__artist">
             <div class="sender_title"> 안녕하세요. {{artist_name}}입니다.</div>
           </div>
 
-          <div class="message__content__cover">
-            <div class="sender_content">안녕하세요. 저에게 어떤 문의가 있다면 서신을 날려주세요.</div>
+          <div class="message__content__cover__artist">
+            <div class="sender_content">안녕하세요. 저에게 문의가 있다면 서신을 날려주세요.</div>
           </div>
-          <div class="message__reply">
+          <div class="message__reply__artist">
             <div class="message__reply__titie">
               <label for="response_message_title" class="response_title">제목 : </label>
-              <input type="text" id="response_message_title" v-model="dm_title">
+              <input type="text" id="response_message_title__artist" v-model="dm_title">
             </div>
 
-            <textarea name="response_message" id="response_message" v-model="dm_content"></textarea>
+            <textarea name="response_message" id="response_message__artist" v-model="dm_content"></textarea>
           </div>
-          <div class="send_btn" @click="DM_recived">답장 보내기</div>
+          <div class="send_btn__artist" @click="DM_recived__artist">답장 보내기</div>
         </div>
       </div>
 
@@ -121,7 +121,7 @@
         <div class="options">
           <div class="options_wrapper">
             <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_first" :key="index"
-              style="--optionBackground:url(https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg);">
+             >
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -138,7 +138,7 @@
           <div class="options_wrapper">
 
             <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_second" :key="index"
-              style="--optionBackground:url(https://66.media.tumblr.com/8b69cdde47aa952e4176b4200052abf4/tumblr_o51p7mFFF21qho82wo1_1280.jpg);">
+             >
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -180,7 +180,7 @@
       <div slot="header">
         <h3>
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing()]"></i>
+        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
       </div>
 
       <div slot="body">
@@ -227,7 +227,7 @@
       </div>
 
       <div slot="footer">
-        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing()]">나가기</button>
+        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
       </div>
     </Modal>
 
@@ -321,6 +321,7 @@
         showDm: false,
         showDMSide: false,
         pinter_image:[],
+        Unread_count:0,
 
       }
     },
@@ -339,12 +340,12 @@
 
       },
       DMsideopen() {
-        const DMList = document.querySelector('.dm__list_props');
+        const DMList = document.querySelector('.dm__list_Artist');
         DMList.classList.add('show_dm_side');
         // init.DMModal();
       },
       DMsideclose() {
-        const DMList = document.querySelector('.dm__list_props');
+        const DMList = document.querySelector('.dm__list_Artist');
         DMList.classList.remove('show_dm_side');
       },
       DmRead(message_id) {
@@ -423,9 +424,10 @@
             this.modifyabout = !this.modifyabout;
           })
       },
-      DM_recived() {
+      DM_recived__artist() {
         // const reply_id = document.querySelector('.sender_name')
         // console.log(reply_id.innerText);
+        if(this.dm_content.trim() !== "" && this.dm_title.trim() !==""){
 
         const test = {
           "message_content": this.dm_content,
@@ -443,16 +445,22 @@
             this.dm_title = "";
             this.dm_content = "";
           })
+        }else{
+          alert('내용을 입력해 주세요!')
+        }
+
       },
       DMpull() {
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('props_id'))
           .then(response => {
             console.log('Get all my dm list', response.data);
             this.dm_list = response.data;
-            // for (let item of this.dm_list) {
-            //   let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-            //   dmItem.innerHTML = "Sender user : " + item.message_senderId + " Content : " + dmContent;
-            // }
+          for (let item of this.dm_list) {
+                if(item.message_isCheck === '1'){
+                  this.Unread_count+=1
+                }
+            }
+            console.log(this.Unread_count,'dmcount')
           })
       },
       galleryRender() {
@@ -574,6 +582,7 @@
         .then(response => {
           console.log('Get props info data',response.data);
           this.userInfo = response.data;
+          this.artist_name = this.userInfo.user_id
           const userAbout = document.querySelector('.artist_about');
           userAbout.innerHTML = this.userInfo.user_about;
           this.img_url = 'data:/image/jpeg;base64,'+this.userInfo.user_profile;

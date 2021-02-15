@@ -41,6 +41,10 @@
         <source src="" ref="source" />
       </audio>
     </div>
+    <div class="foot_print" @click="giveFootprint">
+      <img src="../assets/images/foot1.png" v-if="!footprint" />
+      <img src="../assets/images/foot2.png" v-else />
+    </div>
     <div class="main__carousel">
       <div class="carousel__body">
         <div class="move__button">
@@ -53,7 +57,7 @@
             v-for="(item, index) of work_list"
             :key="index"
           >
-            <img :src="item.work_piece" alt="" class="gallery__image" />
+            <img class="gallery__image" :src="item.work_piece" :alt="item.work_title" :data-value="item.work_id" />
             <div class="item__title">
               <h1>{{ item.work_title }}</h1>
             </div>
@@ -69,12 +73,14 @@ import "../assets/css/GalleryRenderPage.css";
 import init from "../assets/js/GalleryRenderPage.js";
 import "../assets/fontello/css/fontello.css";
 import http from "../api/http";
+import router from "../router";
 export default {
   data() {
     return {
       work_list: [],
       gallery_desc: "",
       qurating: false,
+      footprint: false,
       gallery_id: "",
       gallery_info: {},
     };
@@ -83,6 +89,8 @@ export default {
   mounted() {
     setTimeout(() => {
       init.init();
+      const slider = document.querySelector(".carousel__slider");
+      slider.addEventListener("click", this.clickHandler);
     }, 1000),
       setTimeout(() => {
         this.tts();
@@ -92,8 +100,58 @@ export default {
     console.log("gallery render page");
     this.getArtistGallery();
     this.getGAllery();
+    this.getFootPrint();
   },
   methods: {
+    clickHandler(e) {
+      if (e.target.classList.contains("gallery__image")) {
+        console.log("===> "+e.target.dataset.value);
+        router.push({
+          name: "DetailPage2",
+          params: { work_id: e.target.dataset.value },
+        });
+      }
+    },
+    getFootPrint() {
+      http
+        .post(`/gallery/isFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .then((response) => {
+          const flag = response.data.count;
+          if(flag == 0) {
+            this.footprint = false;
+          } else {
+            this.footprint = true;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    giveFootprint() {
+      if(!this.footprint) {
+        // 발자국 X
+         http
+        .post(`/gallery/giveFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .then((response) => {
+          console.log("====> "+response.data.state)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        this.footprint = !this.footprint;
+      } else {
+        // 발자국 O
+         http
+        .post(`/gallery/cleanFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .then((response) => {
+          console.log("====> "+response.data.state)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        this.footprint = !this.footprint;
+      }
+    },
     getArtistGallery() {
       http
         .get(`/gallery/getArtistGallery/${this.props_id}`)

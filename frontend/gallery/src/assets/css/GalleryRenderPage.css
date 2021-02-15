@@ -155,6 +155,7 @@ background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
   z-index: 10;
+  font-family: "S-CoreDream-8Heavy";
 }
 .gallery__desc__front_hidden {
   visibility: hidden;
@@ -409,7 +410,7 @@ background-repeat: no-repeat;
 
   /* height: auto; */
   width: 20vw;
-  max-height: 40vh fit-content;
+  max-height: 35vh fit-content;
 
   position: relative;
   /* width: 100%;
@@ -493,13 +494,16 @@ background-repeat: no-repeat;
   text-align: center;
   color: #333;
   margin-top: 4em;
-  font-size: 0.7rem;
+  font-size: 2rem;
+  font-family: "S-CoreDream-8Heavy";
   transition: opacity 0.5s ease-in-out;
   transform-style: preserve-3d;
   opacity: 0;
 }
 
 .carousel__slider__item:hover .item__title {
+  margin-top: 4em;
+  font-family: "S-CoreDream-8Heavy";
   opacity: 1;
 }
 
@@ -515,6 +519,25 @@ background-repeat: no-repeat;
   color: #333;
   font-size: 1.7rem;
   cursor: pointer;
+}
+
+.foot_print {
+  width: 25%;
+    height: auto;
+  position: absolute;
+  z-index: 70;
+  left: -10.43%;
+  top: 10%;
+  color: #333;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.foot_print img {
+  width: 8%;
+    height: auto;
+  position: absolute;
+  top: 0.3rem;
 }
 
 .close__btn {
@@ -539,4 +562,13 @@ background-repeat: no-repeat;
   margin: 0;
   padding: 0;
   transform: scale3d(0.7, 0.7, 0.7);
+}
+
+
+@font-face {
+  font-family: "S-CoreDream-8Heavy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }

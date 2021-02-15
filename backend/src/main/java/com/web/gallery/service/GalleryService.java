@@ -79,4 +79,14 @@ public interface GalleryService {
 
     // 모든 갤러리 목로 반환(성인용)
     List<GalleryDto> getAllAdultGallery() throws Exception;
+
+    int getFootPrintToGallery(int footPrint_galleryId);
+
+    int isFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
+
+    void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
+
+    void updateFootPrintToGalleryUp(int footPrint_galleryId);
+
+    void updateFootPrintToGalleryDown(int footPrint_galleryId);
 }

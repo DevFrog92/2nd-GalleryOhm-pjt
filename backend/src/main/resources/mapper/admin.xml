@@ -10,6 +10,11 @@
         where user_type in (1, 2)
     </select>
 
+    <select id="getAllArtist" resultType="artist">
+        select *
+        from artist
+    </select>
+
     <select id="getAllHashTag" resultType="hashTag">
         select *
         from hashtag
@@ -187,4 +192,13 @@
             and
                 artist.artist_exp = 1;
     </update>
+
+    <update id="updateArtistExpUp" parameterType="string">
+        UPDATE artist SET artist_exp = (artist_exp + 1) WHERE artist_id = #{artist_id};
+    </update>
+
+    <update id="updateArtistExpDown" parameterType="string">
+        UPDATE artist SET artist_exp = (artist_exp - 1) WHERE artist_id = #{artist_id};
+    </update>
+
 </mapper>

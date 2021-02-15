@@ -20,6 +20,13 @@
 </script>
 
 <style>
+@font-face {
+  font-family: 'S-CoreDream-8Heavy';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -35,10 +42,10 @@
 
   #nav a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #42329f;
   }
 
   #nav a.router-link-exact-active {
-    color: #42b983;
+    color: #42329f;
   }
 </style>

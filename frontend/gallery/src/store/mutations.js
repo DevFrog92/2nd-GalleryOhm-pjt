@@ -20,13 +20,13 @@ const leaveUser = (state) =>{
   // console.log('user info clear');
 }
 
-// const FINDPW =(state,payload) => {
-  // console.log(state,payload,'mutations');
-// }
+const findpw =(state,payload) => {
+  console.log(state,payload,'mutations');
+}
 
-// const FINDID =(state,payload) => {
-//  console.log(state,payload,'mutations');
-// }
+const findid =(state,payload) => {
+ console.log(state,payload,'mutations');
+}
 
 const changeInfo = (state,payload) => {
   state.state.user_type = payload['user_type'];
@@ -60,5 +60,5 @@ const checkPassword = (state) => {
   localStorage.setItem('checkPassword_state',true);
   // console.log(state.state.checkPasswordState);
 }
-export default {login,modifyUser,leaveUser,clearInfo,makeUserNickName,checkPassword};
+export default {login,findid,findpw,modifyUser,leaveUser,clearInfo,makeUserNickName,checkPassword};
 //join,FINDPW,FINDID 다시 정의 필요

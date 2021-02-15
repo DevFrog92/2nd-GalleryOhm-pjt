@@ -1,6 +1,6 @@
 <template>
   <header id='headerpage-header'>
-      <nav class="nav">
+      <nav class="nav" >
     <input type="checkbox" class="nav__cb" id="menu-cb" />
     <div class="nav__content">
       <ul class="nav__items"  v-if="loginState">
@@ -16,7 +16,7 @@
         </li>
         <li class="nav__item">
           <span class="nav__item-text">
-            <router-link  class="router" to="/mypage">Mypage</router-link>
+            <a class="router" @click="moveToMypage">Mypage</a>
           </span>
         </li>
         <li class="nav__item">
@@ -31,6 +31,22 @@
         </li>
       </ul>
       <ul class="nav__items" v-else>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
+         <li class="nav__item">
+          <span class="nav__item-text">
+          </span>
+        </li>
          <li class="nav__item">
           <span class="nav__item-text">
       <router-link class="nav-item" to="/loginsignup">로그인</router-link>
@@ -50,7 +66,10 @@
   export default {
     name: 'HeaderPage',
     data() {
-      return {}
+      return {
+        user_type:localStorage.getItem('user_type'),
+        user_id:localStorage.getItem('user_id'),
+      }
     },
     computed: {
       loginState() {
@@ -60,12 +79,16 @@
     mounted() {
       init.init();
     },
-    created() {},
+    created() {
+      console.log('user_type',this.user_type);
+    },
     methods: {
       logout() {
         const logout_check = confirm('로그아웃하시겠습니까?');
         if (logout_check) {
           localStorage.clear();
+          this.user_id = '';
+          this.user_type = '',
           this.$store.dispatch('logout');
           // console.log(this.$router.currentRoute);
           if (this.$router.currentRoute.name === 'MainPage') {
@@ -75,6 +98,19 @@
           }
         }
       },
+      moveToMypage(){
+        this.user_type = localStorage.getItem('user_type');
+        this.user_id = localStorage.getItem('user_id');
+        console.log('누른다 ',typeof this.user_type)
+        if(this.user_type === '1'){
+          console.log('Guest')
+          localStorage.setItem('props_id',this.user_id)
+          this.$router.push('/guestpage');
+        }else if(this.user_type === '2'){
+          console.log('Artist')
+          this.$router.push('/mypage')
+        }
+      }
     }
   }
 </script>

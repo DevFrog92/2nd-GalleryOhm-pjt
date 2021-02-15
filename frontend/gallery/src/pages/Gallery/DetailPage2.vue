@@ -1,65 +1,109 @@
 <template>
   <div>
     <div class="detailPage">
-      <!-- ( 배경 : 어두운색) -->
       <div class="preview">
         <div class="container">
           <div class="work_view">
             <!-- 첫 div 정보 -->
             <div class="title">
               <!-- title -->
-              <h1 class="title_text">그 여름 버스에서</h1>
+              <h1 class="title_text">{{ work.work_title }}</h1>
               <!-- 액자 이미지 -->
               <div class="title_img">
-                <img class="work" src="../../assets/images/t.jpeg" />
+                <img class="work" :src="work.work_piece" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="pullImg type-b"></div>
+      <div
+        class="pullImg type-b"
+        :style="'background-image: url(' + work.work_piece + ')'"
+      ></div>
       <div class="detail">
         <div class="img_box">
+          <div class="modify" v-if="artistState">
+            <!-- 작가 본인이라면 수정, 삭제 -->
+          </div>
           <div class="img">
-            <img src="../../assets/images/t.jpeg" alt="" />
+            <img :src="work.work_piece" alt="" class="detail_img" />
+          </div>
+          <div class="actions">
+            <!-- 좋아요, 북마크 -->
+            <div class="scrap scrap_active" v-if="scrapState">
+              <!-- 북마크 되어있는 상태 -->
+              <img
+                src="../../assets/images/bookmark_active.png"
+                alt=""
+                @click="deleteBookmark()"
+              />
+            </div>
+            <div class="scrap scrap_no" v-else>
+              <img
+                src="../../assets/images/bookmark.png"
+                alt=""
+                @click="addBookmark()"
+              />
+              <!-- 북마크 안되어있는 상태 -->
+            </div>
+            <div class="cost cost_active" v-if="costState">
+              <!-- 좋아요 되어있는 상태 -->
+              <div class="cost_info">
+                <img
+                  src="../../assets/images/coin_active.png"
+                  alt="코스트"
+                  @click="deleteCost()"
+                />
+                <p>{{ costCnt }}</p>
+              </div>
+            </div>
+            <div class="cost cost_no" v-else>
+              <!-- 좋아요 안되어있는 상태 -->
+              <div class="cost_info">
+                <img
+                  src="../../assets/images/coin.png"
+                  alt="코스트"
+                  @click="addCost()"
+                />
+                <p>{{ costCnt }}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="info_box">
           <div class="info">
             <!-- 작품 이름 -->
-            <div class="first">그 여름 버스에서</div>
+            <div class="first">{{ work.work_title }}</div>
             <!-- 작가 이름-->
-            <div class="name">By 신모래</div>
+            <div class="name" @click="moveToArtistPage()">
+              <!-- 작가 페이지 이동 함수 넣기 -->
+              By {{ work.work_artistId }}
+            </div>
             <!-- 작품 설명 -->
             <div class="desc">
-              Giclée fine art print on premium archival smooth paper,
+              {{ work.work_desc }}
             </div>
-            <div class="desc">
-              290 gsm, 21.5 mil. Print includes a white border.
-            </div>
-            <div class="desc">
-              Solid-wood framing options available View more information
+            <!-- 작품 그린 툴 -->
+            <div class="desc" v-if="work.work_tool != null">
+              Drawing By {{ work.work_tool }}
             </div>
             <!-- 작품 사이즈 -->
-            <div class="size">1024 x 1024</div>
-            <div class="btn">
-              <div class="button-container-3">
-                <span class="mas">scrap</span>
-                <button type="button" name="Hover">scrap</button>
-              </div>
-              <div class="lbtn button-container-3bb">
-                <span class="mas">cost</span>
-                <button type="button" name="Hover">cost</button>
-              </div>
-            </div>
+            <div class="size">size : {{ size }}</div>
+            <!-- 작품 해시태그 -->
+            <div class="hashtags"></div>
           </div>
         </div>
       </div>
       <div class="footer">
         <footer>
           <div class="foot">
-            <p class="t">wwater@google.com</p>
-            <p class="t">tel.010-4433-212</p>
+            <p class="deco_p">
+              <strong
+                ><em
+                  >ⓒ 2021. {{ work.work_artistId }} all rights reserved</em
+                ></strong
+              >
+            </p>
           </div>
         </footer>
       </div>
@@ -68,23 +112,232 @@
 </template>
 
 <script>
+import http from "../../api/http";
+import router from "../../router";
+
 export default {
   data() {
     return {
       imgSrc: "",
+      prop_workId: "",
+      work: [],
+      size: "",
+      artistState: false,
+      costState: false,
+      scrapState: false,
+      costCnt: 0,
     };
   },
+  props: ["work_id"],
+  created() {
+    this.prop_workId = this.$route.params.work_id;
+
+    if (this.prop_workId == null) {
+      alert("잘못된 접근방식입니다.");
+      history.go(-1);
+    } else {
+      this.getWorkInfo();
+      setTimeout(() => {
+        this.getSize();
+        this.matchArtist();
+        this.getCostState();
+        this.getScrapState();
+      }, 500);
+    }
+  },
   mounted() {
-    this.imgSrc = "../../assets/images/t.jpeg";
+    window.scrollTo(0, 0);
+  },
+  methods: {
+    getWorkInfo() {
+      http.get("/work/getWork/" + this.prop_workId).then(
+        (response) => {
+          var work = response.data;
+          work.work_piece = "data:image/jpeg;base64," + work.work_piece;
+          this.work = work;
+          this.costCnt = this.work.work_cost;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getSize() {
+      const img = document.querySelector(".work");
+      const pull = document.querySelector(".pullImg");
+
+      let width = img.clientWidth;
+      let height = img.clientHeight;
+
+      this.size = width + " x " + height;
+
+      let rate = window.innerWidth / width;
+      let changeHeight = height * rate;
+
+      pull.style.width = "100%";
+      pull.style.height = changeHeight + "px";
+
+      const actions = document.querySelector(".actions");
+      const detailImg = document.querySelector(".detail_img");
+
+      actions.style.width = detailImg.width + "px";
+    },
+    matchArtist() {
+      if (localStorage.getItem("user_id") == this.work.work_artistId) {
+        this.artistState = true;
+      }
+    },
+    getCostState() {
+      http
+        .get("/work/isCheckCost", {
+          params: {
+            cost_userId: localStorage.getItem("user_id"),
+            cost_workId: this.work.work_id,
+          },
+        })
+        .then(
+          (response) => {
+            if (response.data == 1) {
+              this.costState = true;
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    getScrapState() {
+      http
+        .get("/work/isCheckScrap", {
+          params: {
+            scrap_userId: localStorage.getItem("user_id"),
+            scrap_workId: this.work.work_id,
+          },
+        })
+        .then(
+          (response) => {
+            if (response.data == 1) {
+              this.scrapState = true;
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    moveToArtistPage() {
+      console.log(this.work.work_artistId);
+      if (this.work.work_artistId === localStorage.getItem("user_id")) {
+        router.push("/mypage");
+      } else {
+        localStorage.setItem("props_id", this.work.work_artistId);
+
+        router.push({
+          name: "UserProfile",
+          params: { props_id: this.work.work_artistId },
+        });
+      }
+    },
+    addBookmark() {
+      http
+        .get("/work/scrapWork", {
+          params: {
+            scrap_userId: localStorage.getItem("user_id"),
+            scrap_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("즐겨찾기 했습니다.");
+            this.scrapState = true;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    deleteBookmark() {
+      http
+        .get("/work/clearToWorkScrap", {
+          params: {
+            scrap_userId: localStorage.getItem("user_id"),
+            scrap_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("즐겨찾기를 취소했습니다.");
+            this.scrapState = false;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    addCost() {
+      http
+        .get("/work/giveCostToWork", {
+          params: {
+            cost_userId: localStorage.getItem("user_id"),
+            cost_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("작품 좋아요");
+            this.costState = true;
+            this.costCnt += 1;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    deleteCost() {
+      http
+        .get("/work/clearToWorkCost", {
+          params: {
+            cost_userId: localStorage.getItem("user_id"),
+            cost_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("작품 좋아요 취소");
+            this.costState = false;
+            this.costCnt -= 1;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    deleteWork() {
+      this.$store.dispatch("deleteWork", this.work.work_id);
+    },
+    modifyWork() {
+      this.$router.push({
+        name: "WorkUpLoad",
+        params: { work_info: this.work, mode: "modify" },
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@font-face {
+  font-family: "S-CoreDream-8Heavy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .preview {
-  background-color: #ffe8e8;
+  /* background-color: #ffe8e8; */
+  background-color: #f4f5f9;
   color: black;
 }
 
@@ -101,7 +354,8 @@ export default {
 
 .work_view .title .title_text {
   font-size: 10rem;
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .work_view .title_img {
@@ -112,14 +366,15 @@ export default {
 
 .work_view .title_img img {
   border: 10px white solid;
+  width: 100%;
+  height: auto;
 }
 
 .pullImg {
-  height: 90vh;
-  width: 100%;
+  /* height: auto;
+  width: 100%; */
   overflow: hidden;
 
-  background-image: url("../../assets/images/t.jpeg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -127,10 +382,9 @@ export default {
 
 .detail {
   height: 70vh;
-  background-color: #fcf1e7;
   display: flex;
   justify-content: space-around;
-  background-color: #ffdcdc;
+  background-color: #f4f5f9;
 }
 
 .detail .img_box {
@@ -166,7 +420,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
   width: 80%;
 }
 
@@ -177,10 +432,11 @@ export default {
 .detail .info_box .info .name {
   margin-top: 2vh;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .detail .info_box .info .desc {
-  margin-top: 1vh;
+  margin-top: 1.5vh;
   font-size: 15px;
 }
 
@@ -188,9 +444,9 @@ export default {
   margin-top: 3vh;
 }
 
-.footer{
+.footer {
   display: block;
-  background-color: #ffdcdc;
+  background-color: #f4f5f9;
   padding-top: 10vh;
 }
 
@@ -209,166 +465,83 @@ footer .foot .t {
   font-family: "Hanna", sans-serif;
   margin: 0;
 }
-</style>
 
-<style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400");
-@import url("https://fonts.googleapis.com/css?family=Roboto:100");
-@import url("https://fonts.googleapis.com/earlyaccess/hanna.css");
-
-@mixin button($bcolor, $url, $x1, $y1, $bor, $col) {
-  background: $bcolor;
-  -webkit-mask: url($url);
-  mask: url($url);
-  -webkit-mask-size: $x1 $y1;
-  mask-size: $x1 $y1;
-  border: $bor;
-  color: $col;
+.kenburns-top {
+  -webkit-animation: kenburns-top 20s ease-out alternate-reverse infinite both;
+  animation: kenburns-top 20s ease-out alternate-reverse infinite both;
 }
 
-.mas {
-  position: absolute;
-  color: #000;
-  text-align: center;
-  width: 101%;
-  font-family: "Hanna", sans-serif;
-  font-weight: 300;
-  position: absolute;
-  font-size: 22px;
-  margin-top: 8px;
-  overflow: hidden;
-  font-weight: bold;
-}
-
-@-webkit-keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
+@-webkit-keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
   }
-
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+  }
+}
+@keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
   }
 }
 
-@keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
+.actions {
+  padding-top: 2vh;
+  margin: 0 auto;
 }
 
-@-webkit-keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
+.scrap {
+  display: inline;
+  width: 2vw;
+  height: 3.8vh;
 }
 
-@keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
+.scrap img {
+  display: inline;
+  width: 2vw;
+  height: 3.8vh;
+  cursor: pointer;
 }
 
-.button-container-3 {
-  position: absolute;
-  width: 100px;
-  height: 50px;
-  margin-right: auto;
-  margin-left: 50%;
-  overflow: hidden;
-  border: 1px solid #000;
-  font-family: "Hanna", sans-serif;
-  font-weight: 300;
-  transition: 0.5s;
-  letter-spacing: 1px;
-  border-radius: 8px;
-
-  button {
-    width: 101%;
-    height: 100%;
-    font-family: "Hanna", sans-serif;
-    font-weight: 300;
-    font-size: 22px;
-    letter-spacing: 1px;
-    font-weight: bold;
-
-    @include button(
-      #000,
-      "https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png",
-      7100%,
-      100%,
-      none,
-      #fff
-    );
-    cursor: pointer;
-    -webkit-animation: ani2 0.7s steps(70) forwards;
-    animation: ani2 0.7s steps(70) forwards;
-
-    &:hover {
-      -webkit-animation: ani 0.7s steps(70) forwards;
-      animation: ani 0.7s steps(70) forwards;
-    }
-  }
+.scrap img:hover {
+  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 red);
+  filter: opacity(0.3) drop-shadow(0 0 0 red);
 }
 
-.button-container-3bb {
-  position: absolute;
-  width: 100px;
-  height: 50px;
-  margin-right: auto;
-  margin-left: 25%;
-  overflow: hidden;
-  border: 1px solid #000;
-  font-family: "Hanna", sans-serif;
-  font-weight: 300;
-  transition: 0.5s;
-  letter-spacing: 1px;
-  border-radius: 8px;
+.cost {
+  display: inline;
+  width: 5vw;
+  height: 5vh;
+  padding-left: 1vw;
+}
 
-  button {
-    width: 101%;
-    height: 100%;
-    font-family: "Hanna", sans-serif;
-    font-weight: 300;
-    font-size: 22px;
-    letter-spacing: 1px;
-    font-weight: bold;
+.cost .cost_info {
+  display: inline;
+}
 
-    @include button(
-      #000,
-      "https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png",
-      7100%,
-      100%,
-      none,
-      #fff
-    );
-    cursor: pointer;
-    -webkit-animation: ani2 0.7s steps(70) forwards;
-    animation: ani2 0.7s steps(70) forwards;
+.cost .cost_info img {
+  width: 2vw;
+  height: 3.8vh;
+  cursor: pointer;
+}
 
-    &:hover {
-      -webkit-animation: ani 0.7s steps(70) forwards;
-      animation: ani 0.7s steps(70) forwards;
-    }
-  }
+.cost .cost_info img:hover {
+  -webkit-filter: opacity(0.5) drop-shadow(0 0 0 yellow);
+  filter: opacity(0.5) drop-shadow(0 0 0 yellow);
 }
 </style>

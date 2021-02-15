@@ -1,29 +1,25 @@
 <template>
   <div class="item-list-container">
-    <div class="works__plus" @click="moveAddWrok">
-      PLUS
-    </div>
-    <div class="works__like" @click="change_like_works">
-      Like
-    </div>
-    <div class="works__follow" @click="change_followes_works">
-      follow
-    </div>
-    <div class="change_date_works" @click="change_date_works">
-      date
-    </div>
+    <div class="segment__works">
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="refreshAll"><img src="../assets/images/refresh.png" alt=""
+              class='all__works__refresh'></button>
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="footPrintAll"><img src="../assets/images/footprints.png" alt=""
+              class='all__works__footprints'></button>
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="followAll"><img src="../assets/images/followers.png" alt=""
+              class='all__works__refresh'></button>
+        </div>
     <div class="search-bar">
       <div class="search__bar">
         <svg xmlns="http://www.w3.org/2000/svg" width="355.5" height="87.99">
-          <path class="right" fill="none" stroke="#ff6060" stroke-width="7" stroke-miterlimit="10"
+          <path class="right" fill="none" stroke="#42329f" stroke-width="7" stroke-miterlimit="10"
             d="M177.75 85.99h133.5c23.334 0 42.25-18.916 42.25-42.25C352.944 20.528 333.967 2 310.748 2H177.75" />
-          <path class="left" fill="none" stroke="#ff6060" stroke-width="7" stroke-miterlimit="10"
+          <path class="left" fill="none" stroke="#42329f" stroke-width="7" stroke-miterlimit="10"
             d="M177.75 85.99H44.25C20.916 85.99 2 67.074 2 43.74 2.556 20.528 21.533 2 44.752 2H177.75" />
         </svg>
 
         <p class="search__p"></p>
         <input type="text" class="search__input" v-model="searchHashtag" @keypress.enter="searchTag" />
-        <span>Search</span>
+        <span>검색</span>
       </div>
 
     </div>

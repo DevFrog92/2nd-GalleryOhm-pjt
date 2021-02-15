@@ -4,6 +4,7 @@ const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
+  console.log('top Btn',topBtn);
   const gallery1 = document.querySelector(".poster_card1");
   const gallery2 = document.querySelector(".poster_card2");
 
@@ -85,6 +86,7 @@ function gotoDetail(){
       const work_id = e.target.dataset.value
       console.log(work_id)
       router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+      
     }
   })
 
@@ -117,7 +119,7 @@ function scrollIt(ele){
 }
 
 function topclickHandler(){
-  const first = document.querySelector(".profile_wrapper");
+  const first = document.querySelector(".artist_profile_wrapper");
   scrollIt(first);
 }
 
@@ -173,6 +175,7 @@ function moveToArtistPage(artist_id){
 
 
 const getUserInfo = ()=>{
+  console.log('user_info_request',localStorage.getItem('props_id'));
   http.get('/user/getUserInfo', {
     params: {
       user_id: localStorage.getItem('props_id')
@@ -180,6 +183,8 @@ const getUserInfo = ()=>{
   })
   .then(response=>{
     localStorage.setItem('props_type',response.data.user_type)
+    console.log('저장한다. props_type값',localStorage.getItem('props_type'));
+
   })
 }
 
@@ -200,38 +205,42 @@ const follow_modal = ()=>{
       console.log('click here',e.target.dataset.name);
       localStorage.setItem('props_id',e.target.dataset.name)
       getUserInfo();
-      // notification item
-      var notificationCard = this.parentNode.parentNode;
-      var clickBtn = this;
-      /*
-      * Execute the delete or Archive animation
-      */
-      requestAnimationFrame( function(){ 
-
-        archiveOrDelete( clickBtn, notificationCard );
-
+      setTimeout(()=>{
+        console.log(' 시작 텀을 준다.')
+        // notification item
+        var notificationCard = this.parentNode.parentNode;
+        var clickBtn = this;
         /*
-        * Add transition
-        * That smoothly remove the blank space
-        * Leaves by the deleted notification card
+        * Execute the delete or Archive animation
         */
-        window.setTimeout( function( ){
-          requestAnimationFrame( function() {
-            notificationCard.style.transition = 'all .4s ease';
-            notificationCard.style.height = 0;
-            notificationCard.style.margin = 0;
-            notificationCard.style.padding = 0;
-          });
-
-        //   /*
-        //   * Delete definitely the animation card
-        //   */
+        requestAnimationFrame( function(){ 
+  
+          archiveOrDelete( clickBtn, notificationCard );
+  
+          /*
+          * Add transition
+          * That smoothly remove the blank space
+          * Leaves by the deleted notification card
+          */
           window.setTimeout( function( ){
-            notificationCard.parentNode.removeChild( notificationCard );
+            requestAnimationFrame( function() {
+              notificationCard.style.transition = 'all .4s ease';
+              notificationCard.style.height = 0;
+              notificationCard.style.margin = 0;
+              notificationCard.style.padding = 0;
+            });
+  
+          //   /*
+          //   * Delete definitely the animation card
+          //   */
+            window.setTimeout( function( ){
+              notificationCard.parentNode.removeChild( notificationCard );
+            }, 1500 );
           }, 1500 );
-        }, 1500 );
+        });
+      },500)
+
       });
-    })
   }
 
   /*
@@ -243,7 +252,8 @@ const follow_modal = ()=>{
     if( clickBtn.classList.contains( 'archive' ) ){
       console.log('이동');
       notificationCard.classList.add( 'archive' );
-      moveToArtistPage();
+      moveToArtistPage(localStorage.getItem('props_type'));
+
     } else if( clickBtn.classList.contains( 'delete' ) ){
       // tounfollow();
       notificationCard.classList.add( 'delete' );
@@ -252,18 +262,28 @@ const follow_modal = ()=>{
 
 }
 
-
-const moveToArtistPage = ()=>{
+const moveToArtistPage = (user_type)=>{
+  console.log('현재 user type이야',user_type);
   if(localStorage.getItem('props_id') === localStorage.getItem('user_id')){
+    if(localStorage.getItem('user_type') == 1){
+      console.log('guest 이동합니다.');
+      router.push('/guestpage');
+    }else{
       router.push('/mypage');
-  }else if(localStorage.getItem('props_type')==='2'){
-    console.log('이동할게 아티스트로')
-    router.push({name:'UserProfile',params:{props_id:localStorage.getItem('props_id')}})
-  }else{
-    console.log('이동할게 이제',localStorage.getItem('props_id'));
-    router.push({name:'UserProfile',params:{props_id: localStorage.getItem('props_id')}});
+    }
+  }else if(user_type=='2'){
+    console.log('이동할게 아티스트로',router.history.current.name);
+    if(router.history.current.name ==='UserProfile'){
+      router.go();
+    }else{
+      router.push({name:'UserProfile',params:{props_id:localStorage.getItem('props_id')}})
+    }
+  }else if(user_type=='1'){
+    console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
+    router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
   }
 }
+
 
 // const message_read = (message_id)=>{
 //   const formData = new FormData()

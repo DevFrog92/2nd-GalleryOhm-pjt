@@ -14,7 +14,7 @@
   .picture_detail > blockquote,
   .subject_explain,
   .like-cnt,
-  .backBtns,
+  .detail_back_button,
   .picture_detail > button{
     margin-left: 50vw;
     margin-right: 0vw;
@@ -29,14 +29,14 @@
 .picture_detail:after {
   content: '';
   height: 6px;
-  background-color: rgba(142,68,173,0.25);
+  background-color: rgba(36, 29, 39, 0.25);
   position: fixed;
   top: 0;
   left: 0;
   width: calc((var(--content)) * 1%);
 }
 .picture_title {
-  color: #8e44ad;
+  color: #41444b;
   font-size: calc((1.25 + (((1.25 * 1.25) - 1.25)) - ((((1.25 * 1.25) - 1.25)) * (var(--scroll) / 90))) * 1rem);
   top: 50vh;
   padding-bottom: 9px;
@@ -45,12 +45,12 @@
 
 }
 .picture_subtitle {
-  color: #b278ca;
+  color: #52575d;
   font-size: calc((1 + (((1 * 1.1) - 1)) - ((((1 * 1.1) - 1)) * (var(--scroll) / 90))) * 1rem);
   top: calc(50vh + calc((1.25 + (((1.25 * 1.25) - 1.25)) - ((((1.25 * 1.25) - 1.25)) * (var(--scroll) / 90))) * 1rem));;
 }
 .picture_date {
-  color: #b781ce;
+  color: #828890;
   font-size: calc((0.65 + (((0.65 * 1.1) - 0.65)) - ((((0.65 * 1.1) - 0.65)) * (var(--scroll) / 90))) * 1rem);
   padding-top: 5px;
   top: calc(50vh + calc((1.25 + (((1.25 * 1.25) - 1.25)) - ((((1.25 * 1.25) - 1.25)) * (var(--scroll) / 90))) * 1rem) + calc((1 + (((1 * 1.1) - 1)) - ((((1 * 1.1) - 1)) * (var(--scroll) / 90))) * 1rem));
@@ -104,7 +104,7 @@ blockquote:before {
   left: 0;
   bottom: 0;
   width: 4px;
-  background: #c295d5;
+  background: #a6abb0;
 }
 .pre_1{
   
@@ -259,7 +259,7 @@ blockquote + pre_1 + pre_2 {
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 }
   .subject_explain {
-  color: #b278ca;
+  color: #828890;
   font-weight: bolder;
   margin-top: 1.3rem;
     margin-bottom: 1px;
@@ -458,71 +458,59 @@ blockquote + pre_1 + pre_2 {
 
 
 .back_btn_container {
-  max-width: 300px;
+  /* max-width: 300px; */
   width: 200px;
   margin-left: 32%;
   margin-top: 3%;
 }
-
-.backBtns {
-  font-size: 24px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1em;
-  white-space: nowrap;
-  width: 100%;
-  -webkit-transform: translate3D(0, 0, 0);
-          transform: translate3D(0, 0, 0);
+.mod_pic_btn_container{
+  /* max-width: 300px; */
+  width: 200px;
+  margin-left: 15%;
+  margin-top: 2%;
+}
+.dele_pic_btn_container{
+  /* max-width: 300px; */
+  width: 200px;
+  margin-left: 4%;
+  margin-top: 3%;
 }
 
-.backBtn {
+.detail_back_button {
+  width: 110px;
+  height: 50px;
+  background: white;
   position: relative;
-  height: 2em;
-  line-height: 0.9em;
-  width: 0%;
-  border-top: 0.05em solid transparent;
-/*  transition: all 0.5s ease-in-out;*/
-}
-
-.backBtn:hover {
-  border-top: 0.05em solid red;
+  background: white;
+  margin-bottom: 25px;
+  border-radius: 32px;
+  text-align: center;
   cursor: pointer;
-  width: 54%;
+  transition: all 0.1s ease-in-out;
 }
 
-.backBtn:after, .backBtn:before {
-  content: attr(data-display);
-  position: absolute;
-  top: 0em;
-  left: 1em;
-  width: auto;
-  height: 1em;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  transition: all 0.25s ease-in-out;
-  overflow: hidden;
-  color: transparent;
+.detail_back_button span {
+  line-height: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: semibold;
 }
 
-.backBtn:before {
-  text-shadow: 0px 0.5em #cdcdcd;
-  top: -0.45em;
+.detail_back_button:nth-child(1) {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  color: grey;
 }
 
-.backBtn:after {
-  top: 0.5em;
-  text-shadow: 0px -0.5em #cdcdcd;
+.detail_back_button:nth-child(1):hover {
+  opacity: 0.3;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.backBtn:hover:before {
-  text-shadow: 0px 0.5em red;
-  left: 1.25em;
-}
-
-.backBtn:hover:after {
-  text-shadow: 0px -0.5em red;
-  left: 0.75em;
+.detail_back_button:nth-child(1):active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #41444b;
 }
 
 .deco_p ul li {
