@@ -177,7 +177,28 @@
         select count(footprint_userId) from footprint where footPrint_galleryId = #{footPrint_galleryId}
     </select>
 
-    <select id="getFootPrintToGallery" parameterType="footPrint" resultType="int">
+    <select id="isFootPrintToGallery" parameterType="footPrint" resultType="int">
         select count(*) from footprint where footPrint_galleryId = #{footPrint_galleryId} and footPrint_userId =#{footPrint_userId}
     </select>
+
+    <delete id="cleanFootPrintToGallery" parameterType="footPrint">
+        DELETE
+        FROM footprint
+        WHERE
+                footPrint_galleryId = #{footPrint_galleryId}
+            and
+                footPrint_userId = #{footPrint_userId}
+    </delete>
+
+    <update id="updateFootPrintToGalleryUp" parameterType="int">
+        UPDATE gallery
+        SET gallery_footPrint = (gallery_footPrint + 1)
+        WHERE gallery_id = #{gallery_id}
+    </update>
+
+    <update id="updateFootPrintToGalleryDown" parameterType="int">
+        UPDATE gallery
+        SET gallery_footPrint = (gallery_footPrint - 1)
+        WHERE gallery_id = #{gallery_id}
+    </update>
 </mapper>

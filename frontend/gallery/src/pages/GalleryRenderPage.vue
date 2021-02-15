@@ -41,6 +41,10 @@
         <source src="" ref="source" />
       </audio>
     </div>
+    <div class="foot_print" @click="giveFootprint">
+      <img src="../assets/images/foot1.png" v-if="!footprint" />
+      <img src="../assets/images/foot2.png" v-else />
+    </div>
     <div class="main__carousel">
       <div class="carousel__body">
         <div class="move__button">
@@ -75,6 +79,7 @@ export default {
       work_list: [],
       gallery_desc: "",
       qurating: false,
+      footprint: false,
       gallery_id: "",
       gallery_info: {},
     };
@@ -92,8 +97,49 @@ export default {
     console.log("gallery render page");
     this.getArtistGallery();
     this.getGAllery();
+    this.getFootPrint();
   },
   methods: {
+    getFootPrint() {
+      http
+        .post(`/gallery/isFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .then((response) => {
+          const flag = response.data.count;
+          if(flag == 0) {
+            this.footprint = false;
+          } else {
+            this.footprint = true;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    giveFootprint() {
+      if(!this.footprint) {
+        // 발자국 X
+         http
+        .post(`/gallery/giveFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .then((response) => {
+          console.log("====> "+response.data.state)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        this.footprint = !this.footprint;
+      } else {
+        // 발자국 O
+         http
+        .post(`/gallery/cleanFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .then((response) => {
+          console.log("====> "+response.data.state)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        this.footprint = !this.footprint;
+      }
+    },
     getArtistGallery() {
       http
         .get(`/gallery/getArtistGallery/${this.props_id}`)

@@ -83,4 +83,10 @@ public interface GalleryService {
     int getFootPrintToGallery(int footPrint_galleryId);
 
     int isFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
+
+    void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
+
+    void updateFootPrintToGalleryUp(int footPrint_galleryId);
+
+    void updateFootPrintToGalleryDown(int footPrint_galleryId);
 }
