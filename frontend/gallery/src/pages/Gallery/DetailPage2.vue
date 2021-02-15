@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="detailPage">
-      <!-- ( 배경 : 어두운색) -->
       <div class="preview">
         <div class="container">
           <div class="work_view">
@@ -27,10 +26,48 @@
             <!-- 작가 본인이라면 수정, 삭제 -->
           </div>
           <div class="img">
-            <img :src="work.work_piece" alt="" />
+            <img :src="work.work_piece" alt="" class="detail_img" />
           </div>
           <div class="actions">
             <!-- 좋아요, 북마크 -->
+            <div class="scrap scrap_active" v-if="scrapState">
+              <!-- 북마크 되어있는 상태 -->
+              <img
+                src="../../assets/images/bookmark_active.png"
+                alt=""
+                @click="deleteBookmark()"
+              />
+            </div>
+            <div class="scrap scrap_no" v-else>
+              <img
+                src="../../assets/images/bookmark.png"
+                alt=""
+                @click="addBookmark()"
+              />
+              <!-- 북마크 안되어있는 상태 -->
+            </div>
+            <div class="cost cost_active" v-if="costState">
+              <!-- 좋아요 되어있는 상태 -->
+              <div class="cost_info">
+                <img
+                  src="../../assets/images/coin_active.png"
+                  alt="코스트"
+                  @click="deleteCost()"
+                />
+                <p>{{ costCnt }}</p>
+              </div>
+            </div>
+            <div class="cost cost_no" v-else>
+              <!-- 좋아요 안되어있는 상태 -->
+              <div class="cost_info">
+                <img
+                  src="../../assets/images/coin.png"
+                  alt="코스트"
+                  @click="addCost()"
+                />
+                <p>{{ costCnt }}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="info_box">
@@ -38,7 +75,8 @@
             <!-- 작품 이름 -->
             <div class="first">{{ work.work_title }}</div>
             <!-- 작가 이름-->
-            <div class="name" @click="moveToArtistPage">
+            <div class="name" @click="moveToArtistPage()">
+              <!-- 작가 페이지 이동 함수 넣기 -->
               By {{ work.work_artistId }}
             </div>
             <!-- 작품 설명 -->
@@ -51,14 +89,21 @@
             </div>
             <!-- 작품 사이즈 -->
             <div class="size">size : {{ size }}</div>
+            <!-- 작품 해시태그 -->
+            <div class="hashtags"></div>
           </div>
         </div>
       </div>
       <div class="footer">
         <footer>
           <div class="foot">
-            <p class="t">wwater@google.com</p>
-            <p class="t">tel.010-4433-212</p>
+            <p class="deco_p">
+              <strong
+                ><em
+                  >ⓒ 2021. {{ work.work_artistId }} all rights reserved</em
+                ></strong
+              >
+            </p>
           </div>
         </footer>
       </div>
@@ -68,6 +113,7 @@
 
 <script>
 import http from "../../api/http";
+import router from "../../router";
 
 export default {
   data() {
@@ -99,7 +145,9 @@ export default {
       }, 500);
     }
   },
-  mounted() {},
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   methods: {
     getWorkInfo() {
       http.get("/work/getWork/" + this.prop_workId).then(
@@ -128,6 +176,11 @@ export default {
 
       pull.style.width = "100%";
       pull.style.height = changeHeight + "px";
+
+      const actions = document.querySelector(".actions");
+      const detailImg = document.querySelector(".detail_img");
+
+      actions.style.width = detailImg.width + "px";
     },
     matchArtist() {
       if (localStorage.getItem("user_id") == this.work.work_artistId) {
@@ -144,7 +197,7 @@ export default {
         })
         .then(
           (response) => {
-            if (response.data == 0) {
+            if (response.data == 1) {
               this.costState = true;
             }
           },
@@ -163,8 +216,8 @@ export default {
         })
         .then(
           (response) => {
-            if (response.data == 0) {
-              this.scrap_userId = true;
+            if (response.data == 1) {
+              this.scrapState = true;
             }
           },
           (error) => {
@@ -173,14 +226,100 @@ export default {
         );
     },
     moveToArtistPage() {
+      console.log(this.work.work_artistId);
       if (this.work.work_artistId === localStorage.getItem("user_id")) {
-        this.$router.push("/mypage");
+        router.push("/mypage");
       } else {
-        this.$router.push({
+        localStorage.setItem("props_id", this.work.work_artistId);
+
+        router.push({
           name: "UserProfile",
           params: { props_id: this.work.work_artistId },
         });
       }
+    },
+    addBookmark() {
+      http
+        .get("/work/scrapWork", {
+          params: {
+            scrap_userId: localStorage.getItem("user_id"),
+            scrap_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("즐겨찾기 했습니다.");
+            this.scrapState = true;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    deleteBookmark() {
+      http
+        .get("/work/clearToWorkScrap", {
+          params: {
+            scrap_userId: localStorage.getItem("user_id"),
+            scrap_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("즐겨찾기를 취소했습니다.");
+            this.scrapState = false;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    addCost() {
+      http
+        .get("/work/giveCostToWork", {
+          params: {
+            cost_userId: localStorage.getItem("user_id"),
+            cost_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("작품 좋아요");
+            this.costState = true;
+            this.costCnt += 1;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    deleteCost() {
+      http
+        .get("/work/clearToWorkCost", {
+          params: {
+            cost_userId: localStorage.getItem("user_id"),
+            cost_workId: this.work.work_id,
+          },
+        })
+        .then(
+          () => {
+            alert("작품 좋아요 취소");
+            this.costState = false;
+            this.costCnt -= 1;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    deleteWork() {
+      this.$store.dispatch("deleteWork", this.work.work_id);
+    },
+    modifyWork() {
+      this.$router.push({
+        name: "WorkUpLoad",
+        params: { work_info: this.work, mode: "modify" },
+      });
     },
   },
 };
@@ -188,6 +327,13 @@ export default {
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@font-face {
+  font-family: "S-CoreDream-8Heavy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .preview {
   /* background-color: #ffe8e8; */
@@ -208,7 +354,8 @@ export default {
 
 .work_view .title .title_text {
   font-size: 10rem;
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .work_view .title_img {
@@ -273,7 +420,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
   width: 80%;
 }
 
@@ -350,5 +498,50 @@ footer .foot .t {
     -webkit-transform-origin: top;
     transform-origin: top;
   }
+}
+
+.actions {
+  padding-top: 2vh;
+  margin: 0 auto;
+}
+
+.scrap {
+  display: inline;
+  width: 2vw;
+  height: 3.8vh;
+}
+
+.scrap img {
+  display: inline;
+  width: 2vw;
+  height: 3.8vh;
+  cursor: pointer;
+}
+
+.scrap img:hover {
+  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 red);
+  filter: opacity(0.3) drop-shadow(0 0 0 red);
+}
+
+.cost {
+  display: inline;
+  width: 5vw;
+  height: 5vh;
+  padding-left: 1vw;
+}
+
+.cost .cost_info {
+  display: inline;
+}
+
+.cost .cost_info img {
+  width: 2vw;
+  height: 3.8vh;
+  cursor: pointer;
+}
+
+.cost .cost_info img:hover {
+  -webkit-filter: opacity(0.5) drop-shadow(0 0 0 yellow);
+  filter: opacity(0.5) drop-shadow(0 0 0 yellow);
 }
 </style>

@@ -16,7 +16,7 @@
 
           <li class="active">
             <div class="aboutgallery">
-              <img src="../assets/images/로고최종.png" alt="">
+              <img src="../assets/images/logo3.png" alt="">
               <p class="aboutgallery_info1_1">
                 '갤러리 Ω,'는 Ω(옴)과 ,(쉼표)이 합쳐진 이름으로<br> 갤러리에 오신 분들이 그림과 함께 쉬어갈 수 있는 공간이라는 의미를 가지고 있습니다. 
               </p>
@@ -29,7 +29,7 @@
                 비대면 온라인 미술 작품 전시관
                 <br>'갤러리 Ω,' </p>
               <div class="gallery_about_img">
-                <img src="../assets/images/about_new.png" alt="">
+                <img src="../assets/images/about.png" alt="">
               </div>
             </div>
           </li>

@@ -9,6 +9,8 @@
   /* margin: 5rem 0; */
   padding: 0;
   /*  overflow: hidden;*/
+  font-family:  'Noto Sans KR', sans-serif;
+  letter-spacing: 1px;
 }
 
 
@@ -34,7 +36,7 @@ position: relative;
   cursor: pointer;
 }
 .upload_caption:hover{
-  color: #52575d;
+  color: #42329f;
 }
 .previewPicture {
   position: relative;
@@ -111,13 +113,13 @@ position: relative;
 
 .info_input input:focus {
   outline: none;
-  border-bottom: 2px solid #52575d;
+  border-bottom: 2px solid #42329f;
 
 }
 
 .info_input textarea:focus {
   outline: none;
-  border: 2px solid #52575d;
+  border: 2px solid #42329f;
 }
 
 .picture_Age input {
@@ -131,6 +133,7 @@ position: relative;
 .info_input label {
   font-weight: bold;
   font-size: 16px;
+  color: #42329f;
 }
 
 
@@ -199,7 +202,7 @@ position: relative;
 .upload_art_button:nth-child(1):active {
   opacity: 1;
   box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
-  color: #41444b;
+  color: #42329f;
 }
 
 
@@ -213,7 +216,7 @@ position: relative;
   display: flex;
   flex-direction: column-reverse;
   /*    justify-content: center;*/
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  /* font-family: 'Open Sans', Helvetica, Arial, sans-serif; */
 }
 
 .hashtag p {
@@ -270,7 +273,7 @@ position: relative;
 }
 
 .tags-input:focus {
-  border-color: #52575d;
+  border-color: #42329f;
   outline: none;
 }
 

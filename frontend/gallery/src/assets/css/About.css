@@ -1,5 +1,30 @@
-@import url("https://fonts.googleapis.com/css?family=Oswald");
-
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@font-face {
+  font-family: 'BMHANNAAir';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GmarketSansBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'S-CoreDream-8Heavy';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 .about {
     width:100%;
   height: 100%;
@@ -32,11 +57,12 @@ display: flex;
 } */
 
 .about_left_size {
-  padding-top: 7rem;
+  padding-top: 4rem;
   /* position: relative; */
     width: 20%;
     height: 100vh;
     display: block;
+    font-family: 'S-CoreDream-8Heavy';
 }
 
 .about_right_size {
@@ -49,8 +75,8 @@ display: flex;
 
 
 .about .menu div {
-  padding: 0.7rem 0 0.7rem 4.7rem; 
-  margin-left: 10%;
+  padding: 0.7rem 0 0.7rem 4.8rem; 
+  margin-left: 30%;
     /* margin-bottom: 10px; */
     color: #494949;
     width: 70%;
@@ -58,9 +84,9 @@ display: flex;
     cursor: pointer;
     position: relative;
     vertical-align: middle;
-    font-weight: 700;
+    font-weight: 600;
     transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
-  font-size: 120%;
+  font-size: 21px;
   text-align: left;
 }
 
@@ -72,8 +98,8 @@ display: flex;
     height: 0.6rem;
     width: 0.6rem;
     position: absolute;
-    top: 1.1rem;
-    left: 3rem;
+    top: 1.5rem;
+    left: 3.2rem;
     background-color: #494949;
     border-radius: 100%;
 /*    transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);*/
@@ -100,8 +126,8 @@ display: flex;
 }
 
 .about .menu div.active {
-    color: grey;
-    font-size: 1.3rem;
+    color: #42329f;
+    font-size: 23px;
     /* padding: 15px 20px 15px 20px; */
 }
 
@@ -143,10 +169,11 @@ display: flex;
 .aboutgallery {
   position: absolute;
   width: 82%;
+  font-family:  'Noto Sans KR', sans-serif;
 }
 
 .aboutgallery > img{
-  width: 15%;
+  width: 18%;
   margin-top: 2%;
   margin-right: 1%;
 }
@@ -177,6 +204,7 @@ letter-spacing: 1px;
   margin-top: 30px;
   font-weight: bold;
   font-style: italic;
+
 }
 .aboutgallery_info3_1{
   font-size:22px;
@@ -185,11 +213,13 @@ letter-spacing: 1px;
   font-weight: bold;
 /*  font-style: italic;*/
   margin-bottom: 2px;
+
 }
 
 .aboutteam {
   position: absolute;
   width: 82%;
+  font-family:  'Noto Sans KR', sans-serif;
 }
 .aboutteam_name img{
   width: 20%;
@@ -198,7 +228,7 @@ letter-spacing: 1px;
 .aboutteam_info1{
   margin-top: 3%;
   margin-bottom: 30px;
-    font-size:17px;
+    font-size:18px;
   letter-spacing: 1px;
   line-height: 26px;
   font-weight: bold;
@@ -221,17 +251,19 @@ letter-spacing: 1px;
 .aboutteam_info2{
   display: inline-block;
   width: 50%;
-  margin: 9% 0 0 12%;
+  margin: 8.5% 0 0 12%;
   text-align: left;
 }
 
 .aboutteam_info2 .info2_1{
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 1px;
   font-weight: bold;
+  font-family: 'S-CoreDream-8Heavy';
+  
 }
 .aboutteam_info2 .info2_2{
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: 1px;
 }
 
@@ -253,13 +285,15 @@ letter-spacing: 1px;
   letter-spacing: 0.8px;
   line-height: 28px;
   text-align: center;
+  font-family:  'Noto Sans KR', sans-serif;
 }
 
 .support_info_1{
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: black;
   margin: 2% 0 1% 0;
+  font-family: 'S-CoreDream-8Heavy';
 }
 .support_info_1 img {
   width: 13%;
@@ -270,18 +304,19 @@ letter-spacing: 1px;
 }
 .support_info_2{
   font-size: 20px;
+  
 }
 .support_info_3{
-  font-size: 18px;
+  font-size: 19px;
   margin-bottom: 1%;
   font-weight: bold;
 }
 .support_info_4{
-  font-size:15px;
+  font-size:17px;
 }
 .support_info_5{
   margin-top: 14px;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: bold;
   color: red;
 }
@@ -297,6 +332,8 @@ letter-spacing: 1px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-family:  'Noto Sans KR', sans-serif;
+
 }
 .contactUs {
    width: 620px;
@@ -305,6 +342,7 @@ letter-spacing: 1px;
   background: #e3e3e3;
   border-radius: 15px;
   margin: 3% 0 4% 0;
+  font-family: 'S-CoreDream-8Heavy';
 }
 
 .contactUs:after {
@@ -374,10 +412,11 @@ letter-spacing: 1px;
   position: relative;
   color: #52575d;
   font-size: 26px;
-    font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   letter-spacing: 1.4px;
   margin-bottom: 74px;
+  font-family: 'S-CoreDream-8Heavy';
+
 }
 
 .contact_title:after {
@@ -401,6 +440,7 @@ letter-spacing: 1px;
 
 .contact_form_group {
   margin-bottom: 10px;
+  
 }
 
 .contact_form_group.aboutmessage textarea{
@@ -415,6 +455,9 @@ letter-spacing: 1px;
   outline: 0;
   font-size: 16px;
   padding: 3%;
+  
+  font-family:  'Noto Sans KR', sans-serif;
+
 }
 .contact_form_group.aboutmessage textarea:hover,
 .contact_form_group.aboutmessage textarea:focus{
@@ -424,7 +467,7 @@ letter-spacing: 1px;
 .aboutmessage label{
   font-size: 14px;
   text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
+  font-family:  'Noto Sans KR', sans-serif;
   font-weight: 700;
   letter-spacing: 1.4px;
   position: absolute;
@@ -449,13 +492,13 @@ letter-spacing: 1px;
   text-transform: uppercase;
   outline: none;
   transition: border-color .2s;
-    font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   letter-spacing: 1.4px;
 }
 
 .contact_form_control::placeholder {
   color: #666;
+  font-family:  'Noto Sans KR', sans-serif;
 }
 
 .contact_form_control:focus,
@@ -470,12 +513,13 @@ letter-spacing: 1px;
   font-size: 16px;
   cursor: pointer;
   outline: none;
-    font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   letter-spacing: 1.4px;
   position: absolute;
 right: 10%;
 bottom: 4%;
+
+font-family:  'Noto Sans KR', sans-serif;
 }
 
 .contact_form_button:hover {

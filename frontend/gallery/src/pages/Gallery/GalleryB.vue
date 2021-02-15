@@ -1,12 +1,12 @@
 <template>
   <div class="subgallery" v-if="imgList.length != 0">
     <!-- 문열림 -->
-    <div class="welcome">
+    <!-- <div class="welcome">
       <div class="dark">
         <div class="door-open"></div>
         <div class="door"></div>
       </div>
-    </div>
+    </div> -->
     <!-- 눈동자 -->
     <div class="eyes_container">
       <div id="illustration">
@@ -16,17 +16,7 @@
           viewBox="0 0 456.5 167.5"
         >
           <g id="frame">
-            <!-- <rect class="cls-1" x="0.25" y="0.25" width="456" height="167" /> -->
             <rect class="cls-2" x="30.25" y="30.25" width="396" height="107" />
-            <!-- <rect
-              class="cls-3"
-              x="30.25"
-              y="30.25"
-              width="14.56"
-              height="107"
-            /> -->
-            <!-- <rect class="cls-4" x="30.25" y="30.25" width="396" height="107" /> -->
-            <!-- <line class="cls-4" x1="44.81" y1="137.25" x2="44.81" y2="30.25" /> -->
           </g>
           <g class="Eyes">
             <defs>
@@ -105,8 +95,12 @@
           </g>
         </svg>
       </div>
+      <div class="open_button" @click="moveToImage()">
+        버튼자리
+      </div>
     </div>
-    <div class="content">
+    <div class="blank_page hidden"></div>
+    <div class="content hidden">
       <div class="button">
         <div class="nav_slide nav--magool">
           <button
@@ -187,42 +181,8 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      const welcome = document.querySelector(".welcome");
-
-      welcome.remove();
-    }, 4500);
-
-    setTimeout(() => {
-      const list = document.querySelector(".list");
-      list.addEventListener("click", this.clickHandler);
-
-      const first = document.querySelector("#Item0");
-      first.classList.add("nav__item--current");
-
-      [].slice
-        .call(document.querySelectorAll(".nav_slide"))
-        .forEach(function(nav) {
-          var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
-            setCurrent = function(item) {
-              // return if already current
-              if (item.classList.contains("nav__item--current")) {
-                return false;
-              }
-              // remove current
-              var currentItem = nav.querySelector(".nav__item--current");
-              currentItem.classList.remove("nav__item--current");
-
-              // set current
-              item.classList.add("nav__item--current");
-            };
-
-          navItems.forEach(function(item) {
-            item.addEventListener("click", function() {
-              setCurrent(item);
-            });
-          });
-        });
-
+      // const welcome = document.querySelector(".welcome");
+      // welcome.remove();
       const squintSpeed = 0.5;
       const easeType = Power1.in;
       const squintEyes = gsap.timeline({ paused: true });
@@ -308,7 +268,41 @@ export default {
         eyeLeftPupil.style.transform = `translate(${posX}px, ${posY}px)`;
         eyeRightPupil.style.transform = `translate(${posX}px, ${posY}px)`;
       }
-    }, 4600);
+    }, 1000);
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+
+      const list = document.querySelector(".list");
+      list.addEventListener("click", this.clickHandler);
+
+      // const first = document.querySelector("#Item0");
+      // first.classList.add("nav__item--current");
+
+      // [].slice
+      //   .call(document.querySelectorAll(".nav_slide"))
+      //   .forEach(function(nav) {
+      //     var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
+      //       setCurrent = function(item) {
+      //         // return if already current
+      //         if (item.classList.contains("nav__item--current")) {
+      //           return false;
+      //         }
+      //         // remove current
+      //         var currentItem = nav.querySelector(".nav__item--current");
+      //         currentItem.classList.remove("nav__item--current");
+
+      //         // set current
+      //         item.classList.add("nav__item--current");
+      //       };
+
+      //     navItems.forEach(function(item) {
+      //       item.addEventListener("click", function() {
+      //         setCurrent(item);
+      //       });
+      //     });
+      //   });
+    }, 1100);
   },
   methods: {
     changePage(i) {
@@ -323,11 +317,7 @@ export default {
       open.classList.add("hidden");
     },
     clickHandler(e) {
-      console.log("e.target 출력");
-      console.log(e.target);
       if (e.target.classList.contains("img")) {
-        console.log("e.target.dataset.value 출력");
-        console.log(e.target.dataset.value);
         router.push({
           name: "DetailPage2",
           params: { work_id: e.target.dataset.value },
@@ -337,12 +327,36 @@ export default {
     page_move(i) {
       document.querySelector("#image" + i).scrollIntoView();
     },
+    moveToImage() {
+      const blank = document.querySelector(".blank_page");
+      const image = document.querySelector(".content");
+
+      blank.classList.remove("hidden");
+      image.classList.remove("hidden");
+
+      setTimeout(()=>{
+        const blank = document.querySelector(".blank_page");
+        const eye = document.querySelector(".eyes_container");
+
+        blank.classList.add("hidden");
+        eye.classList.add("hidden");
+
+        window.scrollTo(0,0);
+      },1100);
+    },
   },
 };
 </script>
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@font-face {
+  font-family: "S-CoreDream-8Heavy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .subgallery {
   height: 100vh;
@@ -403,7 +417,8 @@ export default {
   /* -webkit-text-stroke: 3px rgb(46, 211, 31);
   -webkit-text-fill-color: transparent; */
   color: black;
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
   transform: scale(3);
   opacity: 0;
 }
@@ -412,7 +427,8 @@ export default {
   /* padding-top: 6%; */
   color: black;
   transform: scale(1.2);
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .galleryType {
@@ -432,7 +448,8 @@ export default {
 .galleryType,
 .page {
   color: #175711;
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .image img:hover {
@@ -454,7 +471,8 @@ export default {
   padding-top: 3%;
   color: black;
   transform: scale(1.2);
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .router-link {
@@ -592,36 +610,26 @@ export default {
   transform: scale3d(2, 1, 1);
 }
 
-svg {
-  width: 560px;
+.eyes_container {
+  height: 100vh;
 }
 
-.cls-1 {
-  fill: #fecdce;
+svg {
+  width: 40vw;
 }
-.cls-1,
+
 .cls-4 {
-  stroke: #373737;
-}
-.cls-1,
-.cls-4,
-.cls-5 {
   stroke-miterlimit: 10;
   stroke-width: 0.5px;
 }
 .cls-2 {
   fill: #c20a0a;
 }
-.cls-3 {
-  fill: #fd9596;
-}
-.cls-4,
-.cls-5 {
+
+.cls-4 {
   fill: none;
 }
-.cls-5 {
-  stroke: #fecdce;
-}
+
 .eye-left-inner,
 .eye-right-inner,
 .eye-left-pupil-glare,
@@ -630,11 +638,25 @@ svg {
 }
 .eye-left-pupil-color,
 .eye-right-pupil-color {
-  fill: #38b77e;
+  /* fill: #38b77e; */
+  fill: red;
+  /* fill: whitesmoke; */
 }
 .eye-left-pupil-dark,
 .eye-right-pupil-dark {
-  fill: #15422e;
+  /* fill: #15422e; */
+  fill: black;
+  /* fill: black; */
+}
+
+.open_button {
+  -webkit-animation: scaleUpCenter 0.4s ease-out both;
+  animation: scaleUpCenter 0.4s ease-out both;
+}
+
+.blank_page {
+  height: 100vh;
+  background-image: url("../../assets/images/red.png");
 }
 </style>
 
