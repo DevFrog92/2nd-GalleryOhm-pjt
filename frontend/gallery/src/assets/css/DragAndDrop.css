@@ -3,7 +3,7 @@
   width: 100vw;
   height: 100vh;
   /* background: rgb(44, 49, 57); */
-  background-color:blanchedalmond;
+  background-color:#dfd8c8;
   overflow: hidden;
   padding:1px;
   box-sizing: border-box;
@@ -27,7 +27,7 @@
   /* border: 3px solid black; */
   overflow: hidden;
   /* background:  rgb(44, 49, 57); */
-  background-color:blanchedalmond;
+  background-color:#dfd8c8;
 }
 
 /* gallery*/
@@ -47,9 +47,9 @@
 }
 
 .sub_main__carousel {
-/*  top: 10%;*/
+ top: 5%;
   /* background:  rgb(44, 49, 57); */
-  background-color:blanchedalmond;
+  background-color:#dfd8c8;
   position: relative;
   display: block;
   padding: .3% .6%;
