@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family:  'Noto Sans KR', sans-serif;
+
 }
 
 .My_profile_guest_container {
@@ -9,13 +11,18 @@
   height: 200vh;
   overflow: hidden;
   text-align: left;
-  background-color: #f4f5f9;
+  background-color: #EBECF0;
+  font-family:  'Noto Sans KR', sans-serif;
+
   /* background-color: rgb(44, 49, 57); */
 }
 
-.guest_profile_wrapper,.second__section,.third__section,.forth__section{
+.guest_profile_wrapper,.forth__section__guest{
+
   width: 100%;
   min-height: 100vh;
+  position: relative;
+
 }
 
 
@@ -46,6 +53,7 @@
 
 
 .profile_card {
+  font-family:  'Noto Sans KR', sans-serif;
   height: 610px;
   width: 400px;
   background-image: url('../images/rookie.png') ;
@@ -122,7 +130,37 @@
 
 }
 
-.dm__list_props {
+
+
+.Guest__bell{
+  position: relative;
+  top: -5px;
+  margin-left: 1.4rem;
+}
+.notification__num{
+  font-size: 0.5rem;
+  font-weight: 700;
+  position: absolute;
+  top:0.6rem;
+  left: 1.2rem;
+  border: 1px solid red;
+  padding: 0.1rem;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  transform: scale(1);
+  animation: notifiani 1.3s infinite alternate;
+}
+
+@keyframes notifiani {
+  to{
+    transform: scale(1.15);
+    box-shadow: 0px 0px 16px -2px #FF0000;
+  }
+}
+
+.dm__list_Guest {
+  font-family:  'Noto Sans KR', sans-serif;
   opacity: 0;
   position: absolute;
   z-index: -999;
@@ -130,51 +168,71 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: yellow;
+  background-color: #EBECF0;
   overflow-y: scroll;
   padding:8rem ;
   transition: all 500ms;
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateX(1500px);
+  transition: all 1s ease;
+}
+
+.exit__guest__dm{
+  position: absolute;
+  font-size: 1.5rem;
+  top:0%;
+  right: 28.5%;
+  z-index: 10;
+  font-weight: 600;
+  transition: all 1.5s;
 }
 
 .show_dm_side{
   opacity: 1;
   z-index: 999;
+  transform: translateX(0px);
+
 }
 
-.showDmContent_props{
+.show_dm_side .exit__guest__dm{
+  top: 11%;
+}
+
+
+.showDmContent_Guest{
   position: relative;
   opacity: 1;
-  width:100%;
-  height: 100%;
-  background-color: #3dc98c;
+  width:50%;
+  height: 90%;
+  background-color: #EBECF0;
   transition: all 600ms;
+  border: 15px solid #1D2127;
+  border-radius: 15px;
 }
 
-.showDmContentActive{
-  width: 60%;
-  opacity: 1;
-}
-.message__name__cover{
+.message__name__cover__guest{
   width:100%;
   height: 5rem;
-  background-color: #56056c;
+  background-color: #EBECF0;
+  border-bottom: 3px solid white;
+  font-family: 'S-CoreDream-8Heavy';
   text-align: center;
-  color: white;
+  /* color: white; */
   font-size: 2.5rem;
   line-height: 5rem;
 }
-.message__title__cover{
+.message__title__cover__guest{
   width: 100%;
   height: 5rem;
-  background-color: turquoise;
+  background-color: #EBECF0;
   padding: 1rem;
   line-height: 3rem;
-  font-size: 2rem;
+  font-size: 1.4rem;
   display: flex;
   justify-content: space-between;
+
 }
 .message__date__tiem{
   display: flex;
@@ -183,40 +241,52 @@
 .sender_date{
   margin-right: 10px;
 }
-.message__reply{
+.message__reply__guest{
   position: absolute;
   width: 100%;
-  height: 10rem;
-  border: 2px solid black;
-  padding: 0 1rem;
-  bottom: 3rem;
+  height: 12rem;
+  border-top: 3px solid white;
+  padding: 1rem 1rem;
+  bottom: 6rem;
 }
-.message__content__cover{
+.message__content__cover__guest{
+  font-family:  'Noto Sans KR', sans-serif;
   width: 100%;
-  padding:2rem 3rem;
-  font-size: 1.3rem;
-  background-color: violet;
+  padding:2rem;
+  font-size: 1.2rem;
+  background-color: #EBECF0;
   height: 20rem;
   word-break:break-all;
   overflow-y: scroll;
 }
-#response_message{
-  padding: 0.4rem;
+#response_message__guest{
+  padding: 1rem;
   resize: none;
+  border: none;
   width: 100%;
-  height: 75%;
+  height: 80%;
+  /* margin-left: 2rem; */
   outline: 0;
   font-size: 16px;
 }
-.send_btn{
+.send_btn__guest{
   position: absolute;
-  right: 1rem;
-  bottom: 1.3rem;
+  right: 0.1rem;
+  bottom: -1.2rem;
+  
   font-size: 1rem;
+  
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
 }
-#response_message_title {
-  width: 88%;
-  margin-left: 4%;
+#response_message_title__guest {
+  resize: none;
+  border: none;
+  padding: 10px 10px;
+  margin-bottom: 15px;
+  width: 89.3%;
+  margin-left: 2rem;
+  outline: none;
 }
 
 .response_title{
@@ -331,6 +401,7 @@
 }
 
 .profile_user_name{
+  font-family: 'S-CoreDream-8Heavy';
   margin-bottom:.9rem;
   font-size: 2.5rem;
   font-weight: 700;
@@ -380,28 +451,31 @@
   pointer-events: all;
 }
 .profile_label {
+  color:#2c3e50;
   display: inline-block;
   cursor: pointer;
   pointer-events: all;
 }
 .profile_spacer {
+  color:#2c3e50;
+
   display: inline-block;
-  width: 2rem;
+  width: 0.5rem;
   margin-left: 0.7rem;
   margin-right: 0.9rem;
   vertical-align: middle;
   cursor: pointer;
   position: relative;
 }
-.profile_spacer:before {
+/* .profile_spacer:before {
   content: "";
   position: absolute;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #2c3e50;
   height: 1px;
   width: 0%;
   transition: width 0.25s ease;
   transition-delay: 0.7s;
-}
+} */
 
 @media (max-width:1024px){
   .profile_menu {
@@ -416,9 +490,11 @@
   position: relative;
   display: inline-block;
   margin-right: 1.5rem;
-  top: 10px;
+  color:#2c3e50;
+
+  top: 8px;
   opacity: 0;
-  transition: opacity 0.5s ease, top 0.5s ease;
+  transition: opacity 0.2s ease, top 0.3s ease;
   transition-delay: 0;
 }
 .profile_menu_item {
@@ -532,7 +608,7 @@
 
 
 
-.move_to_top{
+/* .move_to_top{
   position: absolute;
   font-size: 1rem;
   padding: 0.4rem;
@@ -547,7 +623,7 @@
   cursor: pointer;
   background: #222 ;
   transform: translateX(50%);
-}
+} */
 .move_to_top_show {
   opacity: 1;
   z-index: 999;
@@ -623,7 +699,8 @@
 	 font-size: 0.9rem;
 }
 .third__section {
-  background-color: #f4f5f9;
+	background-color: #EBECF0;
+  
   width: 100vw;
   min-height: 100vh;
   margin: 0;
@@ -971,7 +1048,7 @@
 
 }
 
-.outer-wrapper {
+.outer-wrapper-guest {
   padding: 3rem;
   position: relative;
   width:100vh;
@@ -980,12 +1057,22 @@
   transform-origin:top left;
   overflow-y: scroll;
 /*  overflow-x:hidden;*/
-  position: absolute;
   scrollbar-width:none;
   -ms-overflow-style:none;
-  background-color: #f4f5f9;
+  background-color: #EBECF0;
+  
 
 } 
+.forth__section__guest .outer__wrapper__title{
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  font-family: 'S-CoreDream-8Heavy';
+  margin: 0;
+  transform: translate(-50%,-50%);
+
+  text-align: center;
+}
 
 ::-webkit-scrollbar {
   width: 0;
@@ -1064,7 +1151,7 @@
   transition: all .2s;
 }
 
-.notifications__item__option.archive { background-color: #3dc98c; }
+
 
 .notifications__item__option.delete { background-color: #c93d4d; }
 
@@ -1094,11 +1181,6 @@
   color: #f3f3f3;
 }
 
-.notifications__item.archive {
-  background-color: #3dc98c;
-  animation: archiveAnimation 1.5s cubic-bezier(0, 0, 0, 1.12) forwards;
-  animation-delay: .6s;
-}
 
 .notifications__item.delete {
   background-color: #c93d4d;
@@ -1711,4 +1793,82 @@
 .pinter_item-lists .pinter_grid__body:hover .pinter_grid__body__delete {
 	opacity: 1;
 	transform: scale(1);
+}
+
+
+.follow span{
+  cursor: pointer;
+}
+
+.follow span::after {
+  content: "";
+  width: 40px;
+
+  border-bottom: 1px solid #333;
+}
+
+
+.segment__guest {
+  padding: 32px 0;
+/*    text-align: center;*/
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.unit__btn__guest {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 0.7rem;
+  background-color: #EBECF0;
+  text-shadow: 1px 1px 0 #FFF;
+}
+
+.unit__btn__guest {
+  color: #61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.Guest__dm{
+width: 100%;
+height: 100%;
+}
+
+.unit__btn__guest:hover {
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+
+.unit__btn__guest:active {
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+.unit__btn__guest.unit__guest {
+  border-radius: 8px;
+  line-height: 0;
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+  font-size: 19.2px;
+}
+
+
+.unit__btn__guest.add__btn img {
+  width: 120%;
+  height: 120%;
+}
+
+.no__scrap{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'S-CoreDream-8Heavy';
+
 }

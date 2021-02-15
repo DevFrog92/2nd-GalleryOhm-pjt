@@ -4,20 +4,22 @@ const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
-  const gallery1 = document.querySelector(".poster_card1");
-  const gallery2 = document.querySelector(".poster_card2");
+  const gallery1 = document.querySelector(".Mypage__gallery__entrance_1");
+  const gallery2 = document.querySelector(".Mypage__gallery__entrance_2");
 
-  const options = document.querySelector('.options')
+  const options = document.querySelector('.Mypage__options')
+  
   let activeOption = document.querySelector('.active')
   if(activeOption === null){
-    activeOption = document.querySelectorAll('.option')[0]
+    activeOption = document.querySelectorAll('.Mypage__option')[0]
     activeOption.classList.add('active')
     
   }
   
 
   options.addEventListener('click',function(e){
-      if(e.target.classList.contains('option')){
+      if(e.target.classList.contains('Mypage__option')){
+        console.log('click')
       if(e.target.dataset.value !== activeOption.dataset.value ){
         activeOption.classList.remove('active');
         e.target.classList.add('active');
@@ -39,17 +41,17 @@ const init = () => {
   
 
   gallery1.addEventListener('click',function(e){
-    console.log('click event',e.target.dataset.value);
-    if(e.target.dataset.value){
-    router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
+    console.log('click event',e.target.parentNode.dataset.value);
+    if(e.target.parentNode.dataset.value){
+    router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
     }
   })
 
 
   gallery2.addEventListener('click',function(e){
-    console.log('click event',e.target.dataset.value);
-    if(e.target.dataset.value){
-      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
+    console.log('click event',e.target.parentNode.dataset.value);
+    if(e.target.parentNode.dataset.value){
+      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
     }
   })
   const pintModal = document.querySelector('.third__section')
@@ -117,8 +119,10 @@ function scrollIt(ele){
 }
 
 function topclickHandler(){
-  const first = document.querySelector(".profile_wrapper");
+  console.log('click move to top')
+  const first = document.querySelector("#headerpage-header");
   scrollIt(first);
+  // window.scrollTo(0,0);
 }
 
 profileItem.addEventListener('click',manuclickHandler)
@@ -134,8 +138,7 @@ window.addEventListener('scroll',function(){
     if(position_2 <= 0 ){
       topBtn.classList.add('move_to_top_show');
     }
-    if(position_2 === window.innerHeight){
-  
+    if(position_2 >= window.innerHeight){
       topBtn.classList.remove('move_to_top_show');
     }
   }
@@ -270,35 +273,30 @@ const moveToArtistPage = (user_type,user_id)=>{
   }
 }
 
-const message_read = (message_id)=>{
-  const formData = new FormData()
-  formData.append('message_ids',Array(message_id))
-  http.post('/message/checkMessage/',formData)
-  .then(response => {
-    console.log('read message',response.data);
-  })
-}
+
 
 
 const DMModal =() =>{
-  const DMList = document.querySelector('.dm__list');
+  const DMList = document.querySelector('.Mypage__dm__list');
 
-  const dmOption = document.querySelectorAll('.dm-option')
+  const dmOption = document.querySelectorAll('.Mypage__dm-option')
 
   dmOption.forEach(btn => {
     btn.addEventListener('click',function(e){
       console.log('click to delete',e.target)
-      const DMLIST = document.querySelectorAll('.DM__item')
+      const DMLIST = document.querySelectorAll('.Mypage__DM__item')
       for(let item of DMLIST){
         if(e.target.dataset.value === item.dataset.name){
           item.classList.add('delete');
-          // const formData = {
-          //   message_ids: Array(e.target.dataset.value)
-          // }
-          // http.post('/message/deleteMessage',formData)
-          // .then(response => {
-          //  console.log('remove message',response.data);    
-          // })
+          const formData = new FormData();
+          const id = new Array();
+          id.push(e.target.dataset.value)  
+          formData.append('message_ids',id)
+          
+          http.post('/message/deleteMessage',{ 'message_id' : e.target.dataset.value })
+          .then(response => {
+           console.log('remove message',response.data);    
+          })
         }
       }
     })
@@ -306,32 +304,49 @@ const DMModal =() =>{
 
   console.log('DM__list',DMList);
   DMList.addEventListener('click',function(e){
-    if(e.target.classList.contains('DM__item'))
+    if(e.target.classList.contains('Mypage__DM__item'))
     {
       console.log('읽음 처리 합니다.')
       console.log(JSON.parse(e.target.dataset.value));
       const response_data = JSON.parse(e.target.dataset.value);
+      const messages = document.querySelectorAll('.Mypage__DM__item')
+      for(let item of messages){
+        if(item.classList.contains('message__selected')){
+          item.classList.remove('message__selected')
+        }
+      }
+      e.target.classList.add('message__selected');
+
+
+
       
       message_read(response_data.message_id);
-      e.target.classList.add('DM__item__read')
+      // e.target.classList.add('Mypage__DM__item__read')
       const sender_name = document.querySelector('.sender_name');
       const sender_title = document.querySelector('.sender_title');
       const sender_content = document.querySelector('.sender_content');
       const sendersender_time_name = document.querySelector('.sender_time');
       const sendersender_date_name = document.querySelector('.sender_date');
       sender_name.innerText = response_data.message_senderId;
-      sender_title.innerText ="Title. " + response_data.message_title;
+      sender_title.innerText ="제목. " + response_data.message_title;
       sender_content.innerText = response_data.message_content;
       sendersender_time_name.innerText = response_data.message_sendDate.slice(11);
       sendersender_date_name.innerText = response_data.message_sendDate.slice(0,11);
       // 
-      const showDmContent = document.querySelector('.showDmContent')
-      showDmContent.classList.add('showDmContentActive');
+      // const showDmContent = document.querySelector('.Mypage__showDmContent')
+      // showDmContent.classList.add('MypageshowDmContentActive');
     }
   })
 }
 
-
+const message_read = (message_id)=>{
+  const formData = new FormData()
+  formData.append('message_id',message_id)
+  http.post('/message/checkMessage',{ 'message_id' : message_id })
+  .then(response => {
+    console.log('read message',response.data);
+  })
+}
 // const tounfollow=()=>{
 //   const formData = {
 //     follow_artistId: localStorage.getItem('props_id'),

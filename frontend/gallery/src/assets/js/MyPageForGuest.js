@@ -65,7 +65,8 @@ function manuclickHandler(e){
     }else if(targetItem.dataset.value === "2"){
       goToElem = document.querySelector('.third__section');
     }else if(targetItem.dataset.value === "3"){
-      goToElem = document.querySelector('.forth__section');
+      goToElem = document.querySelector('.forth__section__guest');
+      console.log(goToElem)
     }
     scrollIt(goToElem)
   }
@@ -241,8 +242,12 @@ const moveToArtistPage = (user_type)=>{
       router.push({name:'UserProfile',params:{props_id:localStorage.getItem('props_id')}})
     }
   }else if(user_type=='1'){
-    console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
-    router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
+    if(router.history.current.name === 'GuestProfile'){
+      router.go();
+    }else{
+      console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
+      router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
+    }
   }
 }
 

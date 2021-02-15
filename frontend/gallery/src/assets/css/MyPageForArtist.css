@@ -9,7 +9,8 @@
   height: 300vh;
   overflow: hidden;
   text-align: left;
-  background-color: #f4f5f9;
+	background-color: #EBECF0;
+  
   /* background-color: rgb(44, 49, 57); */
 }
 
@@ -122,7 +123,52 @@
 
 }
 
-.dm__list_props {
+
+.Artist__bell{
+  position: relative;
+  top: -5px;
+  margin-left: 1.4rem;
+}
+.notification__num{
+  font-size: 0.5rem;
+  font-weight: 700;
+  position: absolute;
+  top:0.6rem;
+  left: 1.2rem;
+  border: 1px solid red;
+  padding: 0.1rem;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  transform: scale(1);
+  animation: notifiani 1.3s infinite alternate;
+}
+
+@keyframes notifiani {
+  to{
+    transform: scale(1.15);
+    box-shadow: 0px 0px 16px -2px #FF0000;
+  }
+}
+
+
+
+.profile_user_name .Artist__profile_batch {
+  font-size : 0.58rem;
+  font-weight: 780;
+  position: relative;
+  top:-1.3rem;
+  left:0.3rem;
+  padding: 0.1rem;
+  color: white;
+  background-color: tomato;
+  border: 2px solid tomato;
+  border-radius: 0.4rem;
+  mix-blend-mode: difference;
+}
+
+
+.dm__list_Artist {
   opacity: 0;
   position: absolute;
   z-index: -999;
@@ -130,49 +176,67 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: yellow;
+  background-color: #f4f5f9;
   overflow-y: scroll;
   padding:8rem ;
   transition: all 500ms;
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateX(1500px);
+  transition: all 1s ease;
+}
+
+.exit__artist__dm{
+  position: absolute;
+  font-size: 1.5rem;
+  top: 0%;
+  right: 28.5%;
+  z-index: 10;
+  font-weight: 600;
+  transition: all 1.5s;
 }
 
 .show_dm_side{
   opacity: 1;
   z-index: 999;
+  transform: translateX(0px);
 }
 
-.showDmContent_props{
+.show_dm_side .exit__artist__dm{
+  top: 11%;
+}
+
+.showDmContent_props_Artist{
   position: relative;
   opacity: 1;
-  width:100%;
-  height: 100%;
-  background-color: #3dc98c;
+  width:50%;
+  height: 80%;
+  background-color: #F2F5F8;
   transition: all 600ms;
+  border: 15px solid #1D2127;
+  border-radius: 15px;
+
+  
 }
 
-.showDmContentActive{
-  width: 60%;
-  opacity: 1;
-}
-.message__name__cover{
+.message__name__cover__artist{
   width:100%;
   height: 5rem;
-  background-color: #56056c;
+  background-color: #F2F5F8;
+  border-bottom: 3px solid white;
   text-align: center;
-  color: white;
+  /* color: white; */
   font-size: 2.5rem;
   line-height: 5rem;
 }
-.message__title__cover{
+.message__title__cover__artist{
   width: 100%;
   height: 5rem;
-  background-color: turquoise;
+  background-color: #F2F5F8;
   padding: 1rem;
   line-height: 3rem;
-  font-size: 2rem;
+  font-size: 1.4rem;
   display: flex;
   justify-content: space-between;
 }
@@ -183,40 +247,51 @@
 .sender_date{
   margin-right: 10px;
 }
-.message__reply{
+.message__reply__artist{
   position: absolute;
   width: 100%;
   height: 10rem;
-  border: 2px solid black;
-  padding: 0 1rem;
-  bottom: 3rem;
+  border-top: 3px solid white;
+  padding: 1rem 1rem;
+  bottom: 5rem;
 }
-.message__content__cover{
+.message__content__cover__artist{
   width: 100%;
-  padding:2rem 3rem;
-  font-size: 1.3rem;
-  background-color: violet;
+  padding:2rem;
+  font-size: 1.2rem;
+  background-color: #F2F5F8;
   height: 20rem;
   word-break:break-all;
   overflow-y: scroll;
 }
-#response_message{
-  padding: 0.4rem;
+#response_message__artist{
+  padding: 1rem;
   resize: none;
+  border: none;
   width: 100%;
-  height: 75%;
+  height: 80%;
+  /* margin-left: 2rem; */
   outline: 0;
   font-size: 16px;
 }
-.send_btn{
+.send_btn__artist{
   position: absolute;
-  right: 1rem;
-  bottom: 1.3rem;
+  right: 0.5rem;
+  bottom: 0.6rem;
+  right: 2.1rem;
   font-size: 1rem;
+  border: 1px solid black;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
 }
-#response_message_title {
-  width: 88%;
-  margin-left: 4%;
+#response_message_title__artist {
+  resize: none;
+  border: none;
+  padding: 10px 10px;
+  margin-bottom: 15px;
+  width: 89.3%;
+  margin-left: 2rem;
+  outline: none;
 }
 
 .response_title{
@@ -531,7 +606,7 @@
 
 
 
-
+/* 
 .move_to_top{
   position: absolute;
   font-size: 1rem;
@@ -547,7 +622,7 @@
   cursor: pointer;
   background: #222 ;
   transform: translateX(50%);
-}
+} */
 .move_to_top_show {
   opacity: 1;
   z-index: 999;
@@ -623,7 +698,8 @@
 	 font-size: 0.9rem;
 }
 .third__section {
-  background-color: #f4f5f9;
+	background-color: #EBECF0;
+  
   width: 100vw;
   min-height: 100vh;
   margin: 0;
@@ -983,7 +1059,8 @@
   position: absolute;
   scrollbar-width:none;
   -ms-overflow-style:none;
-  background-color: #f4f5f9;
+	background-color: #EBECF0;
+  
 
 } 
 
@@ -1094,11 +1171,6 @@
   color: #f3f3f3;
 }
 
-.notifications__item.archive {
-  background-color: #3dc98c;
-  animation: archiveAnimation 1.5s cubic-bezier(0, 0, 0, 1.12) forwards;
-  animation-delay: .6s;
-}
 
 .notifications__item.delete {
   background-color: #c93d4d;

@@ -18,8 +18,8 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_id}} <span class="profile_batch">PRO</span><span
-            @click="showDm=true">Bell</span></h2>
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Guest__bell" @click="showDm=true"><img
+              src="../assets/images/bell.png" alt=""><span class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -31,19 +31,27 @@
           <div v-if="modifyabout" class="modal_modify_about">
             <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
               v-model="user_about"></textarea>
-            <div class="modify_btn" @click='registerUserAbout'>Edit</div>
+            <div class="modify_btn" @click='registerUserAbout'><div class="segment__guest">
+              <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
+                  class='Guest__dm'></button>
+            </div></div>
           </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-          <i class="icon-pencil-alt">자기소개 수정</i></span>
+           <div class="segment__guest">
+              <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
+                  class='Guest__dm'></button>
+            </div></span>
 
 
 
         <div class="profile_menu_footer">
           <div class="profile_menu">
-            <div class="profile_label">더보기</div>
+            <div class="profile_label"><div class="segment__guest">
+              <button class="unit__guest unit__btn__guest add__btn" type="button"><img src="../assets/images/add.png" alt=""
+                  class='Guest__dm'></button>
+            </div></div>
             <div class="profile_spacer"></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
             <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
@@ -51,28 +59,33 @@
       </div>
 
 
-      <div class="dm__list_props">
-        <div @click="DMsideclose">exit</div>
-        <div class="showDmContent_props">
-          <div class="message__name__cover">
+      <div class="dm__list_Guest">
+        <div class="exit__guest__dm" @click="DMsideclose">exit</div>
+        <div class="showDmContent_Guest">
+          <div class="message__name__cover__guest">
             <div class="sender_name">{{guest_name}}</div>
           </div>
-          <div class="message__title__cover">
+          <div class="message__title__cover__guest">
             <div class="sender_title"> 안녕하세요. {{guest_name}}입니다.</div>
           </div>
 
-          <div class="message__content__cover">
-            <div class="sender_content">안녕하세요. 저에게 어떤 문의가 있다면 서신을 날려주세요.</div>
+          <div class="message__content__cover__guest">
+            <div class="sender_content">저에게 문의 혹은 궁금하신 점이 있다면 서신을 날려주세요.</div>
           </div>
-          <div class="message__reply">
+          <div class="message__reply__guest">
             <div class="message__reply__titie">
               <label for="response_message_title" class="response_title">제목 : </label>
-              <input type="text" id="response_message_title" v-model="dm_title">
+              <input type="text" id="response_message_title__guest" v-model="dm_title">
             </div>
 
-            <textarea name="response_message" id="response_message" v-model="dm_content"></textarea>
+            <textarea name="response_message" id="response_message__guest" v-model="dm_content"></textarea>
           </div>
-          <div class="send_btn" @click="DM_recived">답장 보내기</div>
+          <div class="send_btn__guest" @click="DM_recived">
+            <div class="segment__guest">
+              <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/paper.png" alt=""
+                  class='Guest__dm'></button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -85,31 +98,26 @@
     </div>
     <div class="move_to_top">위로가기</div>
 
-    <div class="forth__section" v-if="who_state">
- <h1>{{guest_name}}의 즐겨찾기</h1>
-      <div class="outer-wrapper">
+    <div class="forth__section__guest" v-if="who_state">
+      <h1 class="outer__wrapper__title">{{guest_name}}의 즐겨찾기</h1>
+      <div class="outer-wrapper-guest" v-if="!scrap_state">
         <div class="scroll-wrapper">
           <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
-            <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece" alt="">
+            <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece"
+              alt="">
           </div>
         </div>
       </div>
-
+      <div v-else>
+        <h1 class="no__scrap"> 스크랩한 작품이 없습니다.</h1>
+      </div>
     </div>
-
-
-    <div class="third__section">
-      
-    </div>
-
-
-
-
     <Modal v-if="showModal" @close="showModal = false">
       <div slot="header">
         <h3>
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
+        <i class="fas fa-times closeModalBtn"
+          @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
       </div>
 
       <div slot="body">
@@ -156,7 +164,8 @@
       </div>
 
       <div slot="footer">
-        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
+        <button class="closeRegisterGalleryBtn"
+          @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
       </div>
     </Modal>
 
@@ -175,7 +184,7 @@
       return {
         showModal: false,
         modify_state: false,
-        artist_name:this.props_id,
+        artist_name: this.props_id,
         img_url: localStorage.getItem('user_profile'),
         userInfo: {},
         test_url: '../assets/images/1.png',
@@ -221,9 +230,11 @@
         showPinterSide: false,
         showDm: false,
         showDMSide: false,
-        pinter_image:[],
-        guest_name:localStorage.getItem('props_id'),
-        who_state:true,
+        pinter_image: [],
+        guest_name: localStorage.getItem('props_id'),
+        who_state: true,
+        Unread_count: 0,
+        scrap_state:false,
       }
     },
     components: {
@@ -231,22 +242,14 @@
     },
     props: ["props_id"],
     methods: {
-      show_pint_woks(index,season){
-        if(season == 1){
-          this.pinter_image = this.all_my_works_month_first[index]
-        }else{
-          this.pinter_image = this.all_my_works_month_second[index]
-        }
-        console.log(this.pinter_image,'show')
-
-      },
+      
       DMsideopen() {
-        const DMList = document.querySelector('.dm__list_props');
+        const DMList = document.querySelector('.dm__list_Guest');
         DMList.classList.add('show_dm_side');
         // init.DMModal();
       },
       DMsideclose() {
-        const DMList = document.querySelector('.dm__list_props');
+        const DMList = document.querySelector('.dm__list_Guest');
         DMList.classList.remove('show_dm_side');
       },
       DmRead(message_id) {
@@ -269,27 +272,6 @@
       refresh() {
         this.$router.go();
       },
-      CreateGallery() {
-        this.$router.push('/creategallery');
-      },
-      deleteGallery(gallery_id) {
-        console.log('지운다')
-        http.post('/gallery/deleteArtistGallery/' + gallery_id)
-          .then(response => {
-            this.getMyGallery();
-            console.log('response.data', response.data);
-            this.delete_gallery_state = true;
-
-          })
-      },
-      modifyGallery(gallery_id) {
-        this.$router.push({
-          name: 'DragAndDrop',
-          params: {
-            props_id: gallery_id
-          }
-        });
-      },
       following_view() {
         console.log('Show me following')
         this.modal_following = true;
@@ -300,7 +282,7 @@
 
       },
       follower_view() {
-        console.log('Show me follower',this.followers)
+        console.log('Show me follower', this.followers)
         setTimeout(() => {
           init.follow_modal();
         }, 200);
@@ -328,37 +310,40 @@
       DM_recived() {
         // const reply_id = document.querySelector('.sender_name')
         // console.log(reply_id.innerText);
+        if (this.dm_title !== "" && this.dm_content !== "") {
 
-        const test = {
-          "message_content": this.dm_content,
-          "message_id": 0,
-          "message_isCheck": 1,
-          "message_receiverId": localStorage.getItem('props_id'),
-          "message_sendDate": "string",
-          "message_senderId": localStorage.getItem('user_id'),
-          "message_title": this.dm_title,
+          const test = {
+            "message_content": this.dm_content,
+            "message_id": 0,
+            "message_isCheck": 1,
+            "message_receiverId": localStorage.getItem('props_id'),
+            "message_sendDate": "string",
+            "message_senderId": localStorage.getItem('user_id'),
+            "message_title": this.dm_title,
+          }
+          console.log('test', test)
+          http.post('/message/sendMessage', test)
+            .then(response => {
+              console.log('Send DM', response.data)
+              this.dm_title = "";
+              this.dm_content = "";
+            })
+        } else {
+          alert('내용을 입력해주세요.')
         }
-        console.log('test',test)
-        http.post('/message/sendMessage', test)
-          .then(response => {
-            console.log('Send DM', response.data)
-            this.dm_title = "";
-            this.dm_content = "";
-          })
       },
       DMpull() {
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('props_id'))
           .then(response => {
             console.log('Get all my dm list', response.data);
             this.dm_list = response.data;
-            // for (let item of this.dm_list) {
-            //   let dmContent = item.message_content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-            //   dmItem.innerHTML = "Sender user : " + item.message_senderId + " Content : " + dmContent;
-            // }
+            for (let item of this.dm_list) {
+              if (item.message_isCheck === '1') {
+                this.Unread_count += 1
+              }
+            }
+            console.log(this.Unread_count, 'dmcount')
           })
-      },
-      galleryRender() {
-        this.$router.push('/galleryrender');
       },
       moveSettings() {
         this.$router.push('/settings');
@@ -393,94 +378,36 @@
             this.posts = response.data;
           })
       },
-      getMyGallery() {
-        http.get('/gallery/getMyGallery/' + localStorage.getItem('props_id'))
-          .then(response => {
-            console.log('Get my gallery', response.data);
-            if (response.data.length !== 2) {
-              if (response.data.length === 1) {
-                this.my_gallery_list = response.data;
-                this.my_gallery_1 = this.my_gallery_list[0];
-                this.getMyGalleryDetail(this.my_gallery_1.gallery_id);
-                this.my_gallery_2 = {
-                  "gallery_id": '',
-                  "gallery_name": "",
-                  "gallery_desc": "",
-                  "gallery_artistId": "",
-                  "gallery_writeTime": "",
-                  "gallery_mainWorkId": '',
-                  "gallery_footPrint": ''
-                }
-              } else {
-                this.my_gallery_list = response.data;
-                this.my_gallery_1 = {
-                  "gallery_id": '',
-                  "gallery_name": "",
-                  "gallery_desc": "",
-                  "gallery_artistId": "",
-                  "gallery_writeTime": "",
-                  "gallery_mainWorkId": '',
-                  "gallery_footPrint": ''
-                }
-                this.my_gallery_2 = {
-                  "gallery_id": '',
-                  "gallery_name": "",
-                  "gallery_desc": "",
-                  "gallery_artistId": "",
-                  "gallery_writeTime": "",
-                  "gallery_mainWorkId": '',
-                  "gallery_footPrint": ''
-                }
-              }
-            } else {
-              this.my_gallery_list = response.data;
-              this.my_gallery_1 = this.my_gallery_list[0];
-              this.getMyGalleryDetail(this.my_gallery_1.gallery_id);
-              this.my_gallery_2 = this.my_gallery_list[1];
-              this.getMyGalleryDetail(this.my_gallery_2.gallery_id);
-            }
-          })
-      },
+  
       getAllScrapWork() {
         http.get('/work/getAllScrapWork/' + localStorage.getItem('props_id'))
           .then(response => {
             console.log('Get all scrap', response.data);
             this.scrap_list = response.data;
-          })
-      },
-      getMyWorks() {
-        http.get('/work/getMyWorks/' + localStorage.getItem('props_id'))
-          .then(response => {
-
-            console.log('Create year category', this.all_my_works_year);
-            for (let item of response.data) {
-              let itemMonth = item.work_uploadDate.slice(5, 7)
-              if(Object.keys(this.all_my_works_month_first).includes(itemMonth)){
-                console.log('itemMonth', itemMonth)
-              this.all_my_works_month_first[itemMonth].push(item);
-              }else{
-                this.all_my_works_month_second[itemMonth].push(item);
-              }
+            if(!this.scrap_list.length){
+              this.scrap_state = true;
+              console.log('스트랩한 작품이 없습니다.')
             }
-            console.log(this.all_my_works_month_first,this.all_my_works_month_second)
           })
       },
-      getMyGalleryDetail(gallery_id) {
-        http.get('http://localhost:7080/artGallery/api/gallery/getArtistGallery/' + gallery_id)
-          .then(response => {
-            this.my_gallery_poster.push(response.data[0].work_piece);
-          })
-      },
+     
+     
       getUserInfo() {
-         http.get('/user/getUserInfo', {params:{user_id: localStorage.getItem('props_id')}})
-        .then(response => {
-          console.log('Get props info data',response.data);
-          this.userInfo = response.data;
-          const userAbout = document.querySelector('.artist_about');
-          userAbout.innerHTML = this.userInfo.user_about;
-          this.img_url = 'data:/image/jpeg;base64,'+this.userInfo.user_profile;
-          this.user_about = this.userInfo.user_about;
-        })
+        http.get('/user/getUserInfo', {
+            params: {
+              user_id: localStorage.getItem('props_id')
+            }
+          })
+          .then(response => {
+            console.log('Get props info data', response.data);
+            this.userInfo = response.data;
+            this.guest_name = this.userInfo.user_nickName;
+
+            const userAbout = document.querySelector('.artist_about');
+            userAbout.innerHTML = this.userInfo.user_about;
+            this.img_url = 'data:/image/jpeg;base64,' + this.userInfo.user_profile;
+            this.user_about = this.userInfo.user_about;
+          })
       }
     },
     mounted() {
@@ -489,12 +416,9 @@
       }, 1000)
     },
     created() {
-      console.log('this.propsId',this.props_id)
-      this.guest_name = localStorage.getItem("user_id")
-      if(this.props_id && localStorage.getItem('user_id') !== localStorage.getItem('props_id')){
+      console.log('this.propsId', this.props_id)
+      if (this.props_id && localStorage.getItem('user_id') !== localStorage.getItem('props_id')) {
         this.who_state = false;
-      }else if(!this.props_id && localStorage.getItem('user_id') !== localStorage.getItem('props_id')) {
-        localStorage.setItem('props_id',this.guest_name);
       }
       this.getUserInfo();
       // following 목록

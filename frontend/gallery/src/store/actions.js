@@ -40,12 +40,14 @@ const leaveUser = (context,user_id) =>{
 
 const findPw = (context,userInfo) => {
   // console.log(context,userInfo,'actions');
-  context.commit('FINDPW',userInfo,);
+  context.commit('findpw',userInfo,);
+  
 }
 
 const findId = (context,userInfo) => {
   // console.log(context,userInfo,'actions');
-  context.commit('FINDID',userInfo);
+  context.commit('findid',userInfo);
+ 
 
 }
 
