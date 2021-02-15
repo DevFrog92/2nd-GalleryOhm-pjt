@@ -57,7 +57,7 @@
             v-for="(item, index) of work_list"
             :key="index"
           >
-            <img :src="item.work_piece" alt="" class="gallery__image" />
+            <img class="gallery__image" :src="item.work_piece" :alt="item.work_title" :data-value="item.work_id" />
             <div class="item__title">
               <h1>{{ item.work_title }}</h1>
             </div>
@@ -73,6 +73,7 @@ import "../assets/css/GalleryRenderPage.css";
 import init from "../assets/js/GalleryRenderPage.js";
 import "../assets/fontello/css/fontello.css";
 import http from "../api/http";
+import router from "../router";
 export default {
   data() {
     return {
@@ -88,6 +89,8 @@ export default {
   mounted() {
     setTimeout(() => {
       init.init();
+      const slider = document.querySelector(".carousel__slider");
+      slider.addEventListener("click", this.clickHandler);
     }, 1000),
       setTimeout(() => {
         this.tts();
@@ -100,6 +103,15 @@ export default {
     this.getFootPrint();
   },
   methods: {
+    clickHandler(e) {
+      if (e.target.classList.contains("gallery__image")) {
+        console.log("===> "+e.target.dataset.value);
+        router.push({
+          name: "DetailPage2",
+          params: { work_id: e.target.dataset.value },
+        });
+      }
+    },
     getFootPrint() {
       http
         .post(`/gallery/isFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
