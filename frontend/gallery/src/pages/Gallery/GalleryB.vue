@@ -8,104 +8,6 @@
       </div>
     </div>
     <!-- 눈동자 -->
-    <div class="eyes_container">
-      <div id="illustration">
-        <svg
-          id="eyes-illustration"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 456.5 167.5"
-        >
-          <g id="frame">
-            <!-- <rect class="cls-1" x="0.25" y="0.25" width="456" height="167" /> -->
-            <rect class="cls-2" x="30.25" y="30.25" width="396" height="107" />
-            <!-- <rect
-              class="cls-3"
-              x="30.25"
-              y="30.25"
-              width="14.56"
-              height="107"
-            /> -->
-            <!-- <rect class="cls-4" x="30.25" y="30.25" width="396" height="107" /> -->
-            <!-- <line class="cls-4" x1="44.81" y1="137.25" x2="44.81" y2="30.25" /> -->
-          </g>
-          <g class="Eyes">
-            <defs>
-              <clipPath id="eyeLeftClip">
-                <path
-                  id="left-clip"
-                  d="M209.72,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S209.72,83.75,209.72,83.75Z"
-                />
-              </clipPath>
-              <clipPath id="eyeRightClip">
-                <path
-                  id="right-clip"
-                  d="M363.23,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S363.23,83.75,363.23,83.75Z"
-                />
-              </clipPath>
-            </defs>
-            <g class="eye-left">
-              <path
-                class="eye-left-inner"
-                d="M209.72,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S209.72,83.75,209.72,83.75Z"
-              />
-              <g clip-path="url(#eyeLeftClip)">
-                <g class="eye-left-pupil">
-                  <circle
-                    class="eye-left-pupil-color"
-                    cx="158.78"
-                    cy="83"
-                    r="19.75"
-                  />
-                  <circle
-                    class="eye-left-pupil-dark"
-                    cx="158.78"
-                    cy="83"
-                    r="13.37"
-                  />
-                  <circle
-                    class="eye-left-pupil-glare"
-                    cx="149.37"
-                    cy="71.95"
-                    r="8.7"
-                  />
-                </g>
-              </g>
-            </g>
-            <g class="eye-right">
-              <path
-                class="eye-right-inner"
-                d="M363.23,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S363.23,83.75,363.23,83.75Z"
-              />
-              <g clip-path="url(#eyeRightClip)">
-                <g class="eye-right-pupil">
-                  <circle
-                    class="eye-right-pupil-color"
-                    data-name="eye-left-pupil-color"
-                    cx="312.29"
-                    cy="83"
-                    r="19.75"
-                  />
-                  <circle
-                    class="eye-right-pupil-dark"
-                    data-name="eye-left-pupil-dark"
-                    cx="312.29"
-                    cy="83"
-                    r="13.37"
-                  />
-                  <circle
-                    class="eye-right-pupil-glare"
-                    data-name="eye-left-pupil-glare"
-                    cx="302.88"
-                    cy="71.95"
-                    r="8.7"
-                  />
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
-      </div>
-    </div>
     <div class="content">
       <div class="button">
         <div class="nav_slide nav--magool">
@@ -155,7 +57,7 @@ import Vue from "vue";
 import http from "../../api/http.js";
 import router from "../../router";
 import VueScrollTo from "vue-scrollto";
-import { gsap, Power1 } from "gsap";
+// import { gsap, Power1 } from "gsap";
 // import VuePageTransition from "vue-page-transition";
 Vue.use(VueScrollTo);
 // Vue.use(VuePageTransition);
@@ -193,121 +95,37 @@ export default {
     }, 4500);
 
     setTimeout(() => {
+      window.scrollTo(0, 0);
+
       const list = document.querySelector(".list");
       list.addEventListener("click", this.clickHandler);
 
-      const first = document.querySelector("#Item0");
-      first.classList.add("nav__item--current");
+      // const first = document.querySelector("#Item0");
+      // first.classList.add("nav__item--current");
 
-      [].slice
-        .call(document.querySelectorAll(".nav_slide"))
-        .forEach(function(nav) {
-          var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
-            setCurrent = function(item) {
-              // return if already current
-              if (item.classList.contains("nav__item--current")) {
-                return false;
-              }
-              // remove current
-              var currentItem = nav.querySelector(".nav__item--current");
-              currentItem.classList.remove("nav__item--current");
+      // [].slice
+      //   .call(document.querySelectorAll(".nav_slide"))
+      //   .forEach(function(nav) {
+      //     var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
+      //       setCurrent = function(item) {
+      //         // return if already current
+      //         if (item.classList.contains("nav__item--current")) {
+      //           return false;
+      //         }
+      //         // remove current
+      //         var currentItem = nav.querySelector(".nav__item--current");
+      //         currentItem.classList.remove("nav__item--current");
 
-              // set current
-              item.classList.add("nav__item--current");
-            };
+      //         // set current
+      //         item.classList.add("nav__item--current");
+      //       };
 
-          navItems.forEach(function(item) {
-            item.addEventListener("click", function() {
-              setCurrent(item);
-            });
-          });
-        });
-
-      const squintSpeed = 0.5;
-      const easeType = Power1.in;
-      const squintEyes = gsap.timeline({ paused: true });
-      squintEyes.to(
-        ".eye-left-inner",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-      squintEyes.to(
-        "#left-clip",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-      squintEyes.to(
-        ".eye-right-inner",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-      squintEyes.to(
-        "#right-clip",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-
-      // -----------
-      // Event trackers
-      // -----------
-
-      const blink = document.querySelector("#eyes-illustration");
-
-      blink.addEventListener("mouseenter", enterButton);
-      blink.addEventListener("mouseleave", leaveButton);
-
-      function enterButton() {
-        squintEyes.play();
-      }
-      function leaveButton() {
-        squintEyes.reverse();
-      }
-
-      // -----------
-      // Eye tracking
-      // -----------
-
-      const eyeRightPupil = document.querySelector(".eye-right-pupil");
-      const eyeLeftPupil = document.querySelector(".eye-left-pupil");
-      const eyeLeftInner = document.querySelector(".eye-left-inner");
-      const innerEyeWidth = eyeLeftInner.getBoundingClientRect().width;
-      const innerEyeHeight = eyeLeftInner.getBoundingClientRect().height;
-      const pupilWidth = eyeLeftPupil.getBoundingClientRect().width;
-      const pupilHeight = eyeLeftPupil.getBoundingClientRect().height;
-      const xMovement = (innerEyeWidth - pupilWidth - 10) / 2;
-      const yMovement = (innerEyeHeight - pupilHeight + 5) / 2;
-
-      window.addEventListener("mousemove", updateEyePosition);
-
-      function updateEyePosition(event) {
-        const posX =
-          ((event.clientX / document.body.clientWidth) * 2 - 1) * xMovement;
-        const posY =
-          ((event.clientY / document.body.clientHeight) * 2 - 1) * yMovement;
-
-        eyeLeftPupil.style.transform = `translate(${posX}px, ${posY}px)`;
-        eyeRightPupil.style.transform = `translate(${posX}px, ${posY}px)`;
-      }
+      //     navItems.forEach(function(item) {
+      //       item.addEventListener("click", function() {
+      //         setCurrent(item);
+      //       });
+      //     });
+      //   });
     }, 4600);
   },
   methods: {
@@ -323,11 +141,7 @@ export default {
       open.classList.add("hidden");
     },
     clickHandler(e) {
-      console.log("e.target 출력");
-      console.log(e.target);
       if (e.target.classList.contains("img")) {
-        console.log("e.target.dataset.value 출력");
-        console.log(e.target.dataset.value);
         router.push({
           name: "DetailPage2",
           params: { work_id: e.target.dataset.value },
@@ -343,6 +157,13 @@ export default {
 
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@font-face {
+  font-family: "S-CoreDream-8Heavy";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .subgallery {
   height: 100vh;
@@ -403,7 +224,8 @@ export default {
   /* -webkit-text-stroke: 3px rgb(46, 211, 31);
   -webkit-text-fill-color: transparent; */
   color: black;
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
   transform: scale(3);
   opacity: 0;
 }
@@ -412,7 +234,8 @@ export default {
   /* padding-top: 6%; */
   color: black;
   transform: scale(1.2);
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .galleryType {
@@ -432,7 +255,8 @@ export default {
 .galleryType,
 .page {
   color: #175711;
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .image img:hover {
@@ -454,7 +278,8 @@ export default {
   padding-top: 3%;
   color: black;
   transform: scale(1.2);
-  font-family: "Hanna", sans-serif;
+  /* font-family: "Hanna", sans-serif; */
+  font-family: "S-CoreDream-8Heavy";
 }
 
 .router-link {
