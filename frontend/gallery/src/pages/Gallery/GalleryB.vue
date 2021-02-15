@@ -1,14 +1,106 @@
 <template>
   <div class="subgallery" v-if="imgList.length != 0">
     <!-- 문열림 -->
-    <div class="welcome">
+    <!-- <div class="welcome">
       <div class="dark">
         <div class="door-open"></div>
         <div class="door"></div>
       </div>
-    </div>
+    </div> -->
     <!-- 눈동자 -->
-    <div class="content">
+    <div class="eyes_container">
+      <div id="illustration">
+        <svg
+          id="eyes-illustration"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 456.5 167.5"
+        >
+          <g id="frame">
+            <rect class="cls-2" x="30.25" y="30.25" width="396" height="107" />
+          </g>
+          <g class="Eyes">
+            <defs>
+              <clipPath id="eyeLeftClip">
+                <path
+                  id="left-clip"
+                  d="M209.72,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S209.72,83.75,209.72,83.75Z"
+                />
+              </clipPath>
+              <clipPath id="eyeRightClip">
+                <path
+                  id="right-clip"
+                  d="M363.23,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S363.23,83.75,363.23,83.75Z"
+                />
+              </clipPath>
+            </defs>
+            <g class="eye-left">
+              <path
+                class="eye-left-inner"
+                d="M209.72,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S209.72,83.75,209.72,83.75Z"
+              />
+              <g clip-path="url(#eyeLeftClip)">
+                <g class="eye-left-pupil">
+                  <circle
+                    class="eye-left-pupil-color"
+                    cx="158.78"
+                    cy="83"
+                    r="19.75"
+                  />
+                  <circle
+                    class="eye-left-pupil-dark"
+                    cx="158.78"
+                    cy="83"
+                    r="13.37"
+                  />
+                  <circle
+                    class="eye-left-pupil-glare"
+                    cx="149.37"
+                    cy="71.95"
+                    r="8.7"
+                  />
+                </g>
+              </g>
+            </g>
+            <g class="eye-right">
+              <path
+                class="eye-right-inner"
+                d="M363.23,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S363.23,83.75,363.23,83.75Z"
+              />
+              <g clip-path="url(#eyeRightClip)">
+                <g class="eye-right-pupil">
+                  <circle
+                    class="eye-right-pupil-color"
+                    data-name="eye-left-pupil-color"
+                    cx="312.29"
+                    cy="83"
+                    r="19.75"
+                  />
+                  <circle
+                    class="eye-right-pupil-dark"
+                    data-name="eye-left-pupil-dark"
+                    cx="312.29"
+                    cy="83"
+                    r="13.37"
+                  />
+                  <circle
+                    class="eye-right-pupil-glare"
+                    data-name="eye-left-pupil-glare"
+                    cx="302.88"
+                    cy="71.95"
+                    r="8.7"
+                  />
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="open_button" @click="moveToImage()">
+        버튼자리
+      </div>
+    </div>
+    <div class="blank_page hidden"></div>
+    <div class="content hidden">
       <div class="button">
         <div class="nav_slide nav--magool">
           <button
@@ -57,7 +149,7 @@ import Vue from "vue";
 import http from "../../api/http.js";
 import router from "../../router";
 import VueScrollTo from "vue-scrollto";
-// import { gsap, Power1 } from "gsap";
+import { gsap, Power1 } from "gsap";
 // import VuePageTransition from "vue-page-transition";
 Vue.use(VueScrollTo);
 // Vue.use(VuePageTransition);
@@ -89,10 +181,94 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      const welcome = document.querySelector(".welcome");
+      // const welcome = document.querySelector(".welcome");
+      // welcome.remove();
+      const squintSpeed = 0.5;
+      const easeType = Power1.in;
+      const squintEyes = gsap.timeline({ paused: true });
+      squintEyes.to(
+        ".eye-left-inner",
+        {
+          duration: squintSpeed,
+          ease: easeType,
+          scaleY: 0.5,
+          transformOrigin: "0% 50%",
+        },
+        0
+      );
+      squintEyes.to(
+        "#left-clip",
+        {
+          duration: squintSpeed,
+          ease: easeType,
+          scaleY: 0.5,
+          transformOrigin: "0% 50%",
+        },
+        0
+      );
+      squintEyes.to(
+        ".eye-right-inner",
+        {
+          duration: squintSpeed,
+          ease: easeType,
+          scaleY: 0.5,
+          transformOrigin: "0% 50%",
+        },
+        0
+      );
+      squintEyes.to(
+        "#right-clip",
+        {
+          duration: squintSpeed,
+          ease: easeType,
+          scaleY: 0.5,
+          transformOrigin: "0% 50%",
+        },
+        0
+      );
 
-      welcome.remove();
-    }, 4500);
+      // -----------
+      // Event trackers
+      // -----------
+
+      const blink = document.querySelector("#eyes-illustration");
+
+      blink.addEventListener("mouseenter", enterButton);
+      blink.addEventListener("mouseleave", leaveButton);
+
+      function enterButton() {
+        squintEyes.play();
+      }
+      function leaveButton() {
+        squintEyes.reverse();
+      }
+
+      // -----------
+      // Eye tracking
+      // -----------
+
+      const eyeRightPupil = document.querySelector(".eye-right-pupil");
+      const eyeLeftPupil = document.querySelector(".eye-left-pupil");
+      const eyeLeftInner = document.querySelector(".eye-left-inner");
+      const innerEyeWidth = eyeLeftInner.getBoundingClientRect().width;
+      const innerEyeHeight = eyeLeftInner.getBoundingClientRect().height;
+      const pupilWidth = eyeLeftPupil.getBoundingClientRect().width;
+      const pupilHeight = eyeLeftPupil.getBoundingClientRect().height;
+      const xMovement = (innerEyeWidth - pupilWidth - 10) / 2;
+      const yMovement = (innerEyeHeight - pupilHeight + 5) / 2;
+
+      window.addEventListener("mousemove", updateEyePosition);
+
+      function updateEyePosition(event) {
+        const posX =
+          ((event.clientX / document.body.clientWidth) * 2 - 1) * xMovement;
+        const posY =
+          ((event.clientY / document.body.clientHeight) * 2 - 1) * yMovement;
+
+        eyeLeftPupil.style.transform = `translate(${posX}px, ${posY}px)`;
+        eyeRightPupil.style.transform = `translate(${posX}px, ${posY}px)`;
+      }
+    }, 1000);
 
     setTimeout(() => {
       window.scrollTo(0, 0);
@@ -126,7 +302,7 @@ export default {
       //       });
       //     });
       //   });
-    }, 4600);
+    }, 1100);
   },
   methods: {
     changePage(i) {
@@ -150,6 +326,23 @@ export default {
     },
     page_move(i) {
       document.querySelector("#image" + i).scrollIntoView();
+    },
+    moveToImage() {
+      const blank = document.querySelector(".blank_page");
+      const image = document.querySelector(".content");
+
+      blank.classList.remove("hidden");
+      image.classList.remove("hidden");
+
+      setTimeout(()=>{
+        const blank = document.querySelector(".blank_page");
+        const eye = document.querySelector(".eyes_container");
+
+        blank.classList.add("hidden");
+        eye.classList.add("hidden");
+
+        window.scrollTo(0,0);
+      },1100);
     },
   },
 };
@@ -417,36 +610,26 @@ export default {
   transform: scale3d(2, 1, 1);
 }
 
-svg {
-  width: 560px;
+.eyes_container {
+  height: 100vh;
 }
 
-.cls-1 {
-  fill: #fecdce;
+svg {
+  width: 40vw;
 }
-.cls-1,
+
 .cls-4 {
-  stroke: #373737;
-}
-.cls-1,
-.cls-4,
-.cls-5 {
   stroke-miterlimit: 10;
   stroke-width: 0.5px;
 }
 .cls-2 {
   fill: #c20a0a;
 }
-.cls-3 {
-  fill: #fd9596;
-}
-.cls-4,
-.cls-5 {
+
+.cls-4 {
   fill: none;
 }
-.cls-5 {
-  stroke: #fecdce;
-}
+
 .eye-left-inner,
 .eye-right-inner,
 .eye-left-pupil-glare,
@@ -455,11 +638,25 @@ svg {
 }
 .eye-left-pupil-color,
 .eye-right-pupil-color {
-  fill: #38b77e;
+  /* fill: #38b77e; */
+  fill: red;
+  /* fill: whitesmoke; */
 }
 .eye-left-pupil-dark,
 .eye-right-pupil-dark {
-  fill: #15422e;
+  /* fill: #15422e; */
+  fill: black;
+  /* fill: black; */
+}
+
+.open_button {
+  -webkit-animation: scaleUpCenter 0.4s ease-out both;
+  animation: scaleUpCenter 0.4s ease-out both;
+}
+
+.blank_page {
+  height: 100vh;
+  background-image: url("../../assets/images/red.png");
 }
 </style>
 
