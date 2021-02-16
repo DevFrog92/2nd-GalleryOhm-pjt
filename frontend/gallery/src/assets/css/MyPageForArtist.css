@@ -229,6 +229,7 @@
   /* color: white; */
   font-size: 2.5rem;
   line-height: 5rem;
+  font-family: 'S-CoreDream-8Heavy';
 }
 .message__title__cover__artist{
   width: 100%;
@@ -239,6 +240,7 @@
   font-size: 1.4rem;
   display: flex;
   justify-content: space-between;
+  font-family: 'S-CoreDream-8Heavy';
 }
 .message__date__tiem{
   display: flex;
@@ -263,6 +265,8 @@
   height: 20rem;
   word-break:break-all;
   overflow-y: scroll;
+  font-family:  'Noto Sans KR', sans-serif;
+  
 }
 #response_message__artist{
   padding: 1rem;
@@ -357,8 +361,6 @@
 
 
 
-
-
 .profile_card1:hover {
   background-image:inherit;
   background-position: right center;
@@ -376,7 +378,8 @@
 
 .profile_card_user_name {
   text-align: end;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'S-CoreDream-8Heavy';
+  
   color:white;
   mix-blend-mode: difference;
   margin: 1.2rem;
@@ -699,15 +702,15 @@
 }
 .third__section {
 	background-color: #EBECF0;
+  font-family: 'S-CoreDream-8Heavy';
   
   width: 100vw;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Droid Sans', sans-serif;
   overflow: hidden;
   display: flex;
   /* align-items: center; */
-  justify-content: space-around;
+  /* justify-content: space-around; */
   position: relative;
 }
 .third__section h1{
@@ -717,18 +720,21 @@
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
+  font-family: 'S-CoreDream-8Heavy';
+  
+
 }
 .third__section__wrapper {
-  position: relative;
+  /* position: relative; */
   /* padding: 10rem; */
   height: 100%;
-  width: 100%;
-  display: flex;
+  width: 90%;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   /* display: grid; */
   /* grid-gap:1rem; */
-  padding:10rem 20rem 0;
+  /* padding:10rem 20rem 0; */
 }
 /* @media (min-width: 600px) { */
   /* .third__section__wrapper { */
@@ -841,6 +847,8 @@
   top: 15%;
   font-size: 3rem;
   font-weight: 600;
+  font-family: 'S-CoreDream-8Heavy';
+
 }
 
 .my_works  {
@@ -850,6 +858,7 @@
   justify-content: center;
   align-items: center;
   perspective: 900px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .poster_card1 {
@@ -857,12 +866,13 @@
   margin:0 6rem;
   background-image: url('../images/poster.png');
   background-position: 50% 50%;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   position: relative;
   transform-style: preserve-3d;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   width: 33rem;
-  height: 44rem;
+  height: 47rem;
 /*  background: linear-gradient(rgb(225,150,58),rgb(227,144,91));*/
   transition:.6s;
   transform: rotatex(55deg) translatey(-500px) translatez(-500px) perspective(1200px) rotateZ(3deg) scale(1.1);
@@ -918,11 +928,13 @@
   position: relative;
   transform-style: preserve-3d;
   width: 33rem;
-  height: 44rem;
+  height: 47rem;
   background-image: url('../images/poster.png');
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-position: 50% 50%;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
+
   animation: animate 1s linear infinite;
   transition:.6s;
   
@@ -1060,6 +1072,7 @@
   scrollbar-width:none;
   -ms-overflow-style:none;
 	background-color: #EBECF0;
+  
   
 
 } 
@@ -1259,7 +1272,7 @@
 .pinter__side, .show_season_works {
   display: flex;
   flex-wrap: wrap;
-  padding: 5rem;
+  padding: 10rem;
   position: absolute;
   opacity: 0;
   top:0;
@@ -1267,9 +1280,13 @@
   width: 100%;
   height: 100%;
   transition: all 500ms;
-  background: turquoise;
+  background: #EBECF0;
   z-index:-12;
   overflow-y: scroll;
+  border: 10px solid #444;
+  font-family: 'S-CoreDream-8Heavy';
+
+
 }
 
 .active_side {
@@ -1428,6 +1445,8 @@
 .options{
   width: 100%;
   height: 100%;
+  font-family: 'S-CoreDream-8Heavy';
+  color: #2c3e50;
 }
 
 .options_wrapper{
@@ -1437,7 +1456,7 @@
   height: 100%;
   width: calc(100%-100px);
 /*    width:100%;*/
-  height: 400px;
+  height: 300px;
 }
 
 
@@ -1491,29 +1510,6 @@
     transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
 }
 
-  .options .option:nth-child(1) {
-    --defaultBackground:#ED5565;
-}
-
-  .options .option:nth-child(2) {
-    --defaultBackground:#FC6E51;
-}
-
-  .options .option:nth-child(3) {
-    --defaultBackground:#FFCE54;
-}
-
-  .options .option:nth-child(4) {
-    --defaultBackground:#2ECC71;
-}
-
-  .options .option:nth-child(5) {
-    --defaultBackground:#5D9CEC;
-}
-
-  .options .option:nth-child(6) {
-    --defaultBackground:#AC92EC;
-}
 
   .options .option.active {
     flex-grow: 4;
@@ -1539,6 +1535,8 @@
   .options .option.active .label .info > div {
     left: 0px;
     opacity: 1;
+    color: #2c3e50;
+
 }
 
   .options .option:not(.active) {
@@ -1638,8 +1636,15 @@
 .exit_side{
   position: absolute;
   top: 0;
-  right: 0;
+  right: 15%;
+
   z-index: 999;
+  font-size: 1.5rem;
+
+  font-family: 'S-CoreDream-8Heavy';
+  cursor: pointer;
+
+
 }
 
 
@@ -1785,4 +1790,13 @@
 .pinter_item-lists .pinter_grid__body:hover .pinter_grid__body__delete {
 	opacity: 1;
 	transform: scale(1);
+}
+
+
+.no__scrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'S-CoreDream-8Heavy';
 }

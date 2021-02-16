@@ -18,8 +18,7 @@
 
 
       <div class="profile_about">
-       <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">고수</span><span class="Artist__bell"
-            @click="showDm=true"><img src="../assets/images/bell.png" alt=""><span class="notification__num">{{Unread_count}}</span></span></h2>
+       <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">고수</span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -34,9 +33,7 @@
             <div class="modify_btn" @click='registerUserAbout'>Edit</div>
           </div>
         </div>
-        <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-          <i class="icon-pencil-alt">자기소개 수정</i></span>
-
+  
 
 
         <div class="profile_menu_footer">
@@ -45,7 +42,6 @@
             <div class="profile_spacer"></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
             <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
@@ -73,7 +69,12 @@
 
             <textarea name="response_message" id="response_message__artist" v-model="dm_content"></textarea>
           </div>
-          <div class="send_btn__artist" @click="DM_recived__artist">답장 보내기</div>
+          <!-- <div class="send_btn__artist" @click="DM_recived__artist">답장 보내기</div> -->
+         <div class="segment__mypage">
+              <button class="unit__mypage unit__btn__mypage mypage__dm__send" type="button" @click="DM_recived__artist"><img
+                  src="../assets/images/paper.png" alt="" class='Mypage__dm'></button>
+            </div>
+          
         </div>
       </div>
 
@@ -84,7 +85,10 @@
 
 
     </div>
-    <div class="move_to_top">위로가기</div>
+    <div class="segment__mypage">
+      <div class="unit__mypage unit__btn__mypage move_to_top" type="button"><img src="../assets/images/up-arrow.png"
+          alt=""></div>
+    </div>
 
     <div class="second__section">
       <h1>{{userInfo.user_nickName}}의 전시관</h1>
@@ -92,7 +96,6 @@
         <div class="poster_card1" :data-value="my_gallery_1.gallery_id">
          
           <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
-          <img v-else src="../assets/images/1.png" alt="">
 
           <h3>{{my_gallery_1.gallery_name}}</h3>
           <p v-if="my_gallery_1.gallery_id">Created By {{my_gallery_1.gallery_artistId}}
@@ -102,7 +105,6 @@
         <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
           
           <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
-          <img v-else src="../assets/images/1.png" alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>
           <p v-if="my_gallery_2.gallery_id">Created By {{my_gallery_2.gallery_artistId}}
             {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</p>
@@ -130,7 +132,6 @@
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index,1)">그림보러 가기</div>
                   <div class="main">{{index}}</div>
-                  <div class="sub">Omuke trughte a otufta</div>
                 </div>
               </div>
             </div>
@@ -147,7 +148,6 @@
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index,2)">그림보러 가기</div>
                   <div class="main">{{index}}</div>
-                  <div class="sub">Omuke trughte a otufta</div>
                 </div>
               </div>
             </div>

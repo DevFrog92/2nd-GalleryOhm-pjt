@@ -99,6 +99,10 @@
         }
       },
       moveToMypage(){
+        if(this.$router.history.current.name ==='MyPage' || this.$router.history.current.name ==='GuestProfile'){
+          this.$router.go();
+          return
+        }
         this.user_type = localStorage.getItem('user_type');
         this.user_id = localStorage.getItem('user_id');
         console.log('누른다 ',typeof this.user_type)

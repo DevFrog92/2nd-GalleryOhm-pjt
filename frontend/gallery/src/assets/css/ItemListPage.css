@@ -122,6 +122,9 @@
   transition: all .3s ease-in-out;
   pointer-events: visible;
 	word-break: break-all;
+	font-family: 'S-CoreDream-8Heavy';
+
+
 }
  
 .item-lists .grid__body h1,
@@ -282,6 +285,7 @@
 	vertical-align: middle;
 	text-align: center;
 	font-size: 40px;
+	font-family: 'S-CoreDream-8Heavy';
 }
 .search__bar .search__input {
 	color: transparent;
@@ -367,7 +371,7 @@
 
 .spinner{
 	height: 100vh;
-	background:#f4f5f9;
+	background:#EBECF0;
 	transform: translateY(20%);
 
 }
@@ -458,6 +462,7 @@
 	transform: translateY(20%);
 	font-size: 3rem;
 	font-weight: 600;
+	font-family:  'Noto Sans KR', sans-serif;
 }
 
 
@@ -578,15 +583,30 @@
  
 
 .hash__word{
-	border:2px solid darkblue;
-	margin-left: 0.5rem;
+	background-color: lightgray;
+	margin-left: 0.3rem;
 	margin-right: 0.5rem;
 	font-size: 1rem;
 	padding: 0.4rem;
-	border-radius: 0.4rem;
+	border-radius: 20px;
+	font-family:  'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
 
 }
+.delete__hash__word{
+	cursor: pointer;
+	color: white;
+}
 
+.search_clear_btn{
+	outline: 0;
+	border: 0;
+	color: red;
+	font-weight: bold;
+	font-family:  'Noto Sans KR', sans-serif;
+	font-size: 0.9rem;
+}
 .segment__works {
 	position: absolute;
 	left: 6rem;
@@ -605,6 +625,7 @@ align-items: center;
 	padding: 0.7rem;
 	background-color: #EBECF0;
 	text-shadow: 1px 1px 0 #FFF;
+	z-index: 99;
 }
 
 .unit__btn__works {

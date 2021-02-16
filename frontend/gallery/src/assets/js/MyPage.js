@@ -17,43 +17,47 @@ const init = () => {
   }
   
 
+ 
   options.addEventListener('click',function(e){
-      if(e.target.classList.contains('Mypage__option')){
-        console.log('click')
-      if(e.target.dataset.value !== activeOption.dataset.value ){
-        activeOption.classList.remove('active');
-        e.target.classList.add('active');
-        activeOption = e.target;
-      }
-      }
-    })
+    if(e.target.classList.contains('Mypage__option')){
+    if(e.target.dataset.value !== activeOption.dataset.value ){
+      activeOption.classList.remove('active');
+      e.target.classList.add('active');
+      activeOption = e.target;
+    }
+    }
+  })
 
 
   const scrap = document.querySelector('.scroll-wrapper')
-  scrap.addEventListener('click',function(e){
-    if(e.target.classList.contains("scrap__image")){
-      const work_id = e.target.dataset.value;
-      router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-    }
-  })
-
+  if(scrap){
+    scrap.addEventListener('click',function(e){
+      if(e.target.classList.contains("scrap__image")){
+        const work_id = e.target.dataset.value;
+        router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+      }
+    }) 
+  }
   
   
+  if(gallery1){
+    gallery1.addEventListener('click',function(e){
+      console.log('click event',e.target.parentNode.dataset.value);
+      if(e.target.parentNode.dataset.value){
+      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
+      }
+    })
+  }
 
-  gallery1.addEventListener('click',function(e){
-    console.log('click event',e.target.parentNode.dataset.value);
-    if(e.target.parentNode.dataset.value){
-    router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
-    }
-  })
-
-
+  if(gallery2){
   gallery2.addEventListener('click',function(e){
     console.log('click event',e.target.parentNode.dataset.value);
     if(e.target.parentNode.dataset.value){
       router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
     }
   })
+}
+
   const pintModal = document.querySelector('.third__section')
   // const seasonModal = document.querySelector('.pinter__side .photo-count')
   const exitSide = document.querySelector('.exit_side')
@@ -161,7 +165,9 @@ window.addEventListener('scroll',function(){
   
   const scrollWrapper = document.querySelector('.scroll-wrapper');
   const scrollWrapper_items = document.querySelectorAll('.scroll-wrapper img');
-  scrollWrapper.style.width = scrollWrapper_items.length*(30*16+72)+'px'
+  if(scrollWrapper){
+    scrollWrapper.style.width = scrollWrapper_items.length*(30*16+72)+'px'
+  }
 
 
 }
