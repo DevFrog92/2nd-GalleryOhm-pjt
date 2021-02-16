@@ -19,7 +19,7 @@
 
       <div class="profile_about">
         <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Guest__bell" @click="showDm=true"><img
-              src="../assets/images/bell.png" alt=""><span class="notification__num">{{Unread_count}}</span></span></h2>
+              src="../assets/images/bell.png" alt=""><span v-if="!bell__state" class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-           <div class="segment__guest">
+           <div class="segment__guest" v-if="who_state">
               <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
                   class='Guest__dm'></button>
             </div></span>
@@ -47,10 +47,7 @@
 
         <div class="profile_menu_footer">
           <div class="profile_menu">
-            <div class="profile_label"><div class="segment__guest">
-              <button class="unit__guest unit__btn__guest add__btn" type="button"><img src="../assets/images/add.png" alt=""
-                  class='Guest__dm'></button>
-            </div></div>
+            <div class="profile_label">더보기</div>
             <div class="profile_spacer"></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
             <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
@@ -59,7 +56,7 @@
       </div>
 
 
-      <div class="dm__list_Guest">
+      <div class="dm__list_Guest" v-if="who_state">
         <div class="exit__guest__dm" @click="DMsideclose">exit</div>
         <div class="showDmContent_Guest">
           <div class="message__name__cover__guest">
@@ -89,6 +86,60 @@
         </div>
       </div>
 
+      <div class="Guest__dm__list" v-else>
+        <div class="exit__Guest__dm" @click="DMsideclose">나가기</div>
+        <div class="contact_to_me">
+          <!-- <div class="GuestUnRead__message">읽지않은서신</div> -->
+          <!-- <div class="GuestAll__message">전체서신</div> -->
+          <ul class="Guest__DMList">
+            <div :class="!dm.message_isCheck ? 'Guest__DM__item Guest__DM__item__read ' : 'Guest__DM__item' "
+              v-for="(dm,index) of dm_list" :key="index" :data-name='dm.message_id' :data-value="JSON.stringify(dm)">
+              <div class="Guest__DM__item__avatar">
+                <img src="../assets/images/user.png" />
+              </div>
+              <div class="Guest__DM__item__content">
+                <span class="Guest__DM__item__title">{{dm.message_senderId}}</span>
+                <span class="Guest__DM__item__message">{{dm.message_title}}<br>{{dm.message_sendDate}}</span>
+              </div>
+              <div class="Guest__DM__item__option delete Guest__dm-option" :data-value="dm.message_id"
+                @click="DmDelete(dm.message_id)">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="Guest__showDmContent">
+          <div class="Guest__message__name__cover">
+            <div class="sender_name"></div>
+          </div>
+          <div class="Guest__message__title__cover">
+            <div class="sender_title"></div>
+            <div class="Guest__message__date__tiem">
+              <div class="sender_date"></div>
+              <div class="sender_time"></div>
+            </div>
+          </div>
+
+          <div class="Guest__message__content__cover">
+            <div class="sender_content"></div>
+          </div>
+          <div class="Guest__message__reply">
+            <div class="Guest__message__reply__titie">
+              <label for="response_message_title" class="Guest__response_title">제목 : </label>
+              <input type="text" id="Guest__response_message_title" v-model="dm_title">
+            </div>
+
+            <textarea name="response_message" id="Guest__response_message" v-model="dm_content"></textarea>
+          </div>
+          <div class="Guest__message__footer">
+            <div class="segment__mypage">
+              <button class="unit__mypage unit__btn__mypage mypage__dm__send" type="button" @click="DM"><img
+                  src="../assets/images/paper.png" alt="" class='Guest__dm'></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="DmSendModal">
 
       </div>
@@ -96,7 +147,10 @@
 
 
     </div>
-    <div class="move_to_top">위로가기</div>
+     <div class="segment__mypage">
+      <div class="unit__mypage unit__btn__mypage move_to_top" type="button"><img src="../assets/images/up-arrow.png"
+          alt=""></div>
+    </div>
 
     <div class="forth__section__guest" v-if="who_state">
       <h1 class="outer__wrapper__title">{{guest_name}}의 즐겨찾기</h1>
@@ -111,6 +165,9 @@
       <div v-else>
         <h1 class="no__scrap"> 스크랩한 작품이 없습니다.</h1>
       </div>
+    </div>
+    <div v-else>
+      타인의 즐겨찾기는 감상하실 수 없습니다.
     </div>
     <Modal v-if="showModal" @close="showModal = false">
       <div slot="header">
@@ -235,6 +292,7 @@
         who_state: true,
         Unread_count: 0,
         scrap_state:false,
+        bell__state:false,
       }
     },
     components: {
@@ -244,9 +302,17 @@
     methods: {
       
       DMsideopen() {
-        const DMList = document.querySelector('.dm__list_Guest');
-        DMList.classList.add('show_dm_side');
-        // init.DMModal();
+        if(this.who_state){
+          const DMList = document.querySelector('.dm__list_Guest');
+          console.log(DMList)
+          DMList.classList.add('show_dm_side');
+        }else{
+          const DMList = document.querySelector('.Guest__dm__list');
+          console.log(DMList)
+
+          DMList.classList.add('show_dm_side');
+        }
+        init.DMModal();
       },
       DMsideclose() {
         const DMList = document.querySelector('.dm__list_Guest');
@@ -408,6 +474,26 @@
             this.img_url = 'data:/image/jpeg;base64,' + this.userInfo.user_profile;
             this.user_about = this.userInfo.user_about;
           })
+      },
+      DM() {
+        const reply_id = document.querySelector('.sender_name')
+        console.log(reply_id.innerText);
+
+        const test = {
+          "message_content": this.dm_content,
+          "message_id": 0,
+          "message_isCheck": 1,
+          "message_receiverId": reply_id.innerText,
+          "message_sendDate": "string",
+          "message_senderId": localStorage.getItem('user_id'),
+          "message_title": this.dm_title,
+        }
+        http.post('/message/sendMessage', test)
+          .then(response => {
+            console.log('Send DM', response.data)
+            this.dm_title = "";
+            this.dm_content = "";
+          })
       }
     },
     mounted() {
@@ -419,6 +505,9 @@
       console.log('this.propsId', this.props_id)
       if (this.props_id && localStorage.getItem('user_id') !== localStorage.getItem('props_id')) {
         this.who_state = false;
+        this.bell__state = true;
+      }else {
+        this.who_state = true
       }
       this.getUserInfo();
       // following 목록
