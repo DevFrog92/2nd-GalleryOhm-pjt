@@ -289,13 +289,13 @@
 }
 
 .save_btn_container {
-  position: absolute;
-  /* position: relative; */
+  /* position: absolute; */
+  position: relative;
   width: 150px;
   height: 80px;
   /* padding: 50% 30% 0 0; */
-  top: 90%;
-  left: 50%;
+  top:5%;
+  left: 10%;
   transform: translateX(-50%);
   z-index: 200;
   /* margin-top: 1%; */
