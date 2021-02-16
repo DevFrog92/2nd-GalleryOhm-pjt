@@ -38,7 +38,10 @@
     </div>
     
 
-    <button class="gallery_list_btn" @click="clickEventHandler">전시관 등록</button>
+<div class="save_btn_container">
+                 <div class="gallery_list_btn" @click="clickEventHandler"><span>전시관 등록</span></div>
+              </div>
+    <!-- <button class="gallery_list_btn" @click="clickEventHandler">전시관 등록</button> -->
 
     <Modal v-if="showModal_register" @close="showModal_register = false">
       <!--
@@ -47,9 +50,6 @@
     -->
 
       <div slot="header">
-        <!-- <div class="save_btn_container">
-                 <div class="mod_info_button" @click="modifyUser"><span>수정완료</span></div>
-              </div> -->
         <h3>
           전시관 등록
         </h3>
