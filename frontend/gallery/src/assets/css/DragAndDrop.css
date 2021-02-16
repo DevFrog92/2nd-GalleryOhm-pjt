@@ -3,8 +3,8 @@
   width: 100vw;
   height: 100vh;
   /* background: rgb(44, 49, 57); */
-  background-color:#dfd8c8;
-  overflow: hidden;
+  background-color:#f5f7fa;
+  overflow: scroll;
   padding:1px;
   box-sizing: border-box;
 }
@@ -27,7 +27,7 @@
   /* border: 3px solid black; */
   overflow: hidden;
   /* background:  rgb(44, 49, 57); */
-  background-color:#dfd8c8;
+  background-color:#f5f7fa;
 }
 
 /* gallery*/
@@ -49,7 +49,7 @@
 .sub_main__carousel {
  top: 5%;
   /* background:  rgb(44, 49, 57); */
-  background-color:#dfd8c8;
+  background-color:#f5f7fa;
   position: relative;
   display: block;
   padding: .3% .6%;
@@ -71,7 +71,7 @@
 .sub_carousel__prev i,
 .sub_carousel__next i {
   font-size: 2rem;
-  color: rgba(255, 255, 255, 0.73);
+  color: gray;
   cursor: pointer;
 }
 
@@ -288,7 +288,7 @@
 }
 
 .save_btn_container {
-  position: absolute;
+  /* position: relative; */
   width: 200px;
   height: 100px;
   /* padding: 50% 30% 0 0; */
@@ -300,16 +300,15 @@
 
 .gallery_list_btn {
   margin-top: 2rem;
-  color:white;
+  color:#f5f7fa;;
   font-size: 1rem;
   padding:0.2rem;
   font-family:"S-CoreDream-8Heavy";
 
   width: auto;
   height: 50px;
-  background: white;
+  background: #f5f7fa;;
   position: relative;
-  background: white;
   border-radius: 32px;
   text-align: center;
   cursor: pointer;
