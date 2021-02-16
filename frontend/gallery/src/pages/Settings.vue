@@ -65,7 +65,7 @@
                   <label for="nickname">닉네임</label>
                 </div>
                 <div class="UserContainer2">
-                  <input type="password" id="password1" required="" />
+                  <input type="password" id="password1" required="" v-model="userInfo.user_password" />
                   <label for="password1">비밀번호</label>
                 </div>
                 <div class="UserContainer2">
@@ -350,7 +350,11 @@
           })
       },
       getArtistInfo() {
-        http.get('/artist/getArtistInfo/' + localStorage.getItem('user_id'))
+        http.get('/artist/getArtistInfo/', {
+          params: {
+            artist_id: localStorage.getItem('user_id')
+          }
+        })
           .then(response => {
             console.log('get artist info', response.data)
             this.artist_info = response.data;

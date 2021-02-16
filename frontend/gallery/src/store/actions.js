@@ -117,7 +117,7 @@ const modifyUser = (context,modifyUserInfo) => {
   // console.log('modify',modifyUserInfo);
 
   let formData = new FormData();
-
+  console.log(modifyUserInfo);
   formData.append('user_birth', modifyUserInfo.user_birth);
   formData.append('user_email',modifyUserInfo.user_email);
   formData.append('user_id',modifyUserInfo.user_id);

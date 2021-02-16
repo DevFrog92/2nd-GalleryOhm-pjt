@@ -129,7 +129,8 @@ document.querySelector('.rank_modal_close').addEventListener('click', offClick);
 }
 
 const modifyUser = (userInfo) => {
-  userInfo.user_password = 'qwer1234';
+  // userInfo.user_password = 'qwer1234';
+  // console.log('user_info',userInfo)
   store.dispatch("modifyUser",userInfo);
 }
 

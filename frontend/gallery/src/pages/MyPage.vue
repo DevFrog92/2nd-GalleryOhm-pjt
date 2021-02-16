@@ -63,8 +63,7 @@
       <div class="Mypage__dm__list">
         <div class="exit__Mypage__dm" @click="DMsideclose">나가기</div>
         <div class="contact_to_me">
-          <div class="MypageUnRead__message">읽지않은서신</div>
-          <div class="MypageAll__message">전체서신</div>
+          <div class="MypageUnRead__message">서신이 없습니다.</div>
           <ul class="Mypage__DMList">
             <div :class="!dm.message_isCheck ? 'Mypage__DM__item Mypage__DM__item__read ' : 'Mypage__DM__item' "
               v-for="(dm,index) of dm_list" :key="index" :data-name='dm.message_id' :data-value="JSON.stringify(dm)">

@@ -34,13 +34,13 @@
 
 
 
+<div class="save_btn_container">
+                 <div class="gallery_list_btn" @click="clickEventHandler"><span>전시관 등록</span></div>
+              </div>
 
     </div>
     
 
-<div class="save_btn_container">
-                 <div class="gallery_list_btn" @click="clickEventHandler"><span>전시관 등록</span></div>
-              </div>
     <!-- <button class="gallery_list_btn" @click="clickEventHandler">전시관 등록</button> -->
 
     <Modal v-if="showModal_register" @close="showModal_register = false">
