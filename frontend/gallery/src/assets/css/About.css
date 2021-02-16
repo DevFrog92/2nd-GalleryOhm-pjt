@@ -547,14 +547,14 @@ font-family:  'Noto Sans KR', sans-serif;
 }
 .contact_kakao img {
   position: absolute;
-  width: 17%;
-  margin: 0 0 0 33%;
+  width: 13%;
+  margin: 3.5% 0 0 35%;
 }
 
 .mail img {
   position: absolute;
-  width: 10%;
-  margin: 3% 0 0 55%;
+  width: 8%;
+  margin: 6% 0 0 56%;
 }
 @media screen and (max-width: 520px) {
   .contactUs_body {
