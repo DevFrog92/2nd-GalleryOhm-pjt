@@ -3,7 +3,7 @@
     <div class="segment__works">
           <button class="unit__work unit__btn__works" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
               class='all__works__refresh'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/footprints.png" alt=""
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/won.png" alt=""
               class='all__works__footprints'></button>
           <button class="unit__work unit__btn__works" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
@@ -58,6 +58,7 @@
   import "../../assets/css/ItemListPage.css";
   import http from "../../api/http.js";
   import init from '../../assets/js/Works'
+  import prevent from '../../assets/js/common/prevent'
   export default {
     data: () => {
       return {
@@ -80,8 +81,9 @@
       window.addEventListener('load',function(){
         init.init();
       })
-      // setTimeout(() => {
-      // }, 1000)
+      setTimeout(() => {
+        prevent.init();
+      }, 1000)
       window.addEventListener('scroll',function(){
         console.log('scroll',window.scrollY);
       })

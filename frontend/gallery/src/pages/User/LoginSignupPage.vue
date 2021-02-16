@@ -5,11 +5,11 @@
       <!-- 회원가입-->
       <div class="form-container sign-up-container">
         <form>
-          <h1 class="signup_title">CREATE ACCOUNT</h1>
+          <h1 class="signup_title">회원가입</h1>
           <div class="focus_container">
             <div id="id_uniqe_check">
               <div class="id_unique">
-                <input id="unique_user_id" type="text" autocomplete="off" placeholder="ID" required
+                <input id="unique_user_id" type="text" autocomplete="off" placeholder="아이디" required
                   v-model="userInfo.user_id" @blur="checkId" />
                 <span class="focus-border"></span>
               </div>
@@ -29,11 +29,11 @@
           <div class="nickname_p">* 닉네임은 마이페이지에서 직접 수정 가능합니다.</div>
           <div class="focus_container">
 
-            <input type="password" placeholder="Password" required="required" v-model="userInfo.user_password" />
+            <input type="password" placeholder="비밀번호" required="required" v-model="userInfo.user_password" />
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input type="password" placeholder="Password confirm" required="required"
+            <input type="password" placeholder="비밀번호 확인" required="required"
               v-model="userInfo.user_passwordConfirm" />
             <span class="focus-border"></span>
           </div>
@@ -42,12 +42,12 @@
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input type="email" placeholder="Email" autocomplete="off" required="required"
+            <input type="email" placeholder="이메일" autocomplete="off" required="required"
               v-model="userInfo.user_email" />
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input type="tel" placeholder="Phone" autocomplete="off" required="required" v-model="userInfo.user_tel" />
+            <input type="tel" placeholder="전화번호" autocomplete="off" required="required" v-model="userInfo.user_tel" />
             <span class="focus-border"></span>
           </div>
           <form>
@@ -62,7 +62,7 @@
 
 
 
-          <button class="signup_btn loginFormBtn" @click.prevent="join">Sign Up</button>
+          <button class="signup_btn loginFormBtn" @click.prevent="join">회원가입</button>
         </form>
 
       </div>
@@ -70,7 +70,7 @@
       <!--로그인-->
       <div class="form-container sign-in-container">
         <form>
-          <h1 class="signin_title">SIGN IN</h1>
+          <h1 class="signin_title">로그인</h1>
           <!--
             <div class="social-container">
               <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -79,35 +79,35 @@
             </div>
             <span>or use your account</span>-->
           <div class="focus_container">
-            <input class="login_id" type="text" placeholder="ID" v-model="userInfo.user_id" />
+            <input class="login_id" type="text" placeholder="아이디" v-model="userInfo.user_id" />
             <span class="focus-border"></span>
           </div>
           <div class="focus_container">
-            <input class="login_password" type="password" placeholder="Password" @keypress.enter.prevent="login"
+            <input class="login_password" type="password" placeholder="비밀번호" @keypress.enter.prevent="login"
               v-model="userInfo.user_password" />
             <span class="focus-border"></span>
           </div>
-          <button class="trigger" @click.prevent="toggleModalId">Forgot your ID?</button>
+          <button class="trigger" @click.prevent="toggleModalId">아이디를 잊어버리셨나요?</button>
           <!--         아이디찾기 모달창-->
           <div class="find_modal">
             <div class="modal_content">
               <div class="close_button" @click="toggleModalId"><i class="fas fa-times"></i></div>
-              <h2 class="modaltitle">FIND ID</h2>
+              <h2 class="modaltitle">아이디 찾기</h2>
               <div class="find__id__content" v-if="!findIdState">
               <div class="modal_focus_container">
-                <input type="text" placeholder="Name" v-model="userInfo.user_name">
+                <input type="text" placeholder="이름" v-model="userInfo.user_name">
                 <span class="focus-border"></span>
               </div>
               <div class="modal_focus_container">
-                <input type="email" placeholder="Email" v-model="userInfo.user_email">
+                <input type="email" placeholder="이메일" v-model="userInfo.user_email">
                 <span class="focus-border"></span>
               </div>
-              <button class="findid_btn" @click.prevent="findId">Find ID</button>
-              <button class="find_cancel" @click.prevent="toggleModalId">Cancel</button>
+              <button class="findid_btn" @click.prevent="findId">아이디 찾기</button>
+              <button class="find_cancel" @click.prevent="toggleModalId">취소</button>
               </div>
               <div class="find__id__state" v-else>
                 <h5>귀하의 아이디는 {{userInfo.user_id}}입니다.</h5>
-              <button class="find_cancel" @click.prevent="toggleModalId">Cancel</button>
+              <button class="find_cancel" @click.prevent="toggleModalId">취소</button>
               </div>
 
             </div>
@@ -115,30 +115,30 @@
 
 
 
-          <button class="trigger_pw" @click.prevent='toggleModalPw'>Forgot your Password?</button>
+          <button class="trigger_pw" @click.prevent='toggleModalPw'>비밀번호를 잊어버리셨나요?</button>
           <!--       비번찾기 모달창-->
           <div class="find_modal_pw">
             <div class="modal_content_pw">
               <div class="close_button_pw" @click='toggleModalPw'><i class="fas fa-times"></i></div>
-              <h2 class="modaltitle">FIND PW</h2>
+              <h2 class="modaltitle">비밀번호 찾기</h2>
               <div class="modal_focus_container">
-                <input type="text" placeholder="ID" v-model="userInfo.user_id">
+                <input type="text" placeholder="아이디" v-model="userInfo.user_id">
                 <span class="focus-border"></span>
               </div>
               <div class="modal_focus_container">
-                <input type="email" placeholder="Email" v-model="userInfo.user_email">
+                <input type="email" placeholder="이메일" v-model="userInfo.user_email">
                 <span class="focus-border"></span>
               </div>
               <div class="modal_focus_container">
-                <input type="tel" placeholder="Phone" v-model="userInfo.user_tel">
+                <input type="tel" placeholder="전화번호" v-model="userInfo.user_tel">
                 <span class="focus-border"></span>
               </div>
-              <button class="findpw_btn" @click.prevent="findPassword">Find PW</button>
-              <button class="cancel_pw" @click.prevent='toggleModalPw'>Cancel</button>
+              <button class="findpw_btn" @click.prevent="findPassword">비밀번호 찾기</button>
+              <button class="cancel_pw" @click.prevent='toggleModalPw'>취소</button>
 
             </div>
           </div>
-          <button class="signin_btn loginFormBtn" @click.prevent="login">Sign In</button>
+          <button class="signin_btn loginFormBtn" @click.prevent="login">로그인</button>
 
         </form>
       </div>
@@ -147,14 +147,14 @@
       <div class="overlay-container">
         <div class="overlay">
           <div class="overlay-panel overlay-left">
-            <h1>Let's join with us!</h1>
-            <p>SSAATCHI GALLERY is space for both artists and guests.</p>
-            <button class="ghost loginFormBtn" id="signIn" @click="activeBtn">Sign In</button>
+            <h1>반갑습니다! 옴 갤러리와 함께 하세요.</h1>
+            <p>옴 갤러리는 작가와 게스트 모두를 위한 기회의 공간입니다.</p>
+            <button class="ghost loginFormBtn" id="signIn" @click="activeBtn">로그인</button>
           </div>
           <div class="overlay-panel overlay-right">
-            <h1>Welcome, SSAATCHI GALLERY</h1>
-            <p>Enter your personal details and enjoy our gallery</p>
-            <button class="ghost loginFormBtn" id="signUp" @click="activeBtn">Sign Up</button>
+            <h1>옴 갤러리에 오신 것을 환영합니다.</h1>
+            <p>오늘도 저희 옴 갤러리와 함께 새로운 경험을 해보세요. </p>
+            <button class="ghost loginFormBtn" id="signUp" @click="activeBtn">회원가입</button>
           </div>
         </div>
       </div>
@@ -219,9 +219,14 @@
     },
     methods: {
       join() {
-        init.join(this.userInfo);
+        const check = document.querySelector('.terms_checkbox')
+        if(check.checked){
+          init.join(this.userInfo);
+        }else{
+          alert('약관 동의를 체크해주세요.')
+        }
         this.userInfo.user_password = '';
-        // common.objectCelar(this.userInfo);
+        common.objectCelar(this.userInfo);
       },
       activeBtn() {
         init.activeBtn(this.userInfo);
@@ -236,7 +241,7 @@
         common.objectCelar(this.userInfo);
       },
       login() {
-        init.login(this.userInfo);
+          init.login(this.userInfo);
       },
       findPassword() {
         init.findPassword(this.userInfo);

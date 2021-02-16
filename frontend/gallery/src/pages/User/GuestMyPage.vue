@@ -18,8 +18,9 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Guest__bell" @click="showDm=true"><img
-              src="../../assets/images/bell.png" alt=""><span v-if="!bell__state" class="notification__num">{{Unread_count}}</span></span></h2>
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Guest__bell" @click="DMsideopen"><img
+              src="../../assets/images/bell.png" alt=""><span v-if="!bell__state"
+              class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -31,17 +32,20 @@
           <div v-if="modifyabout" class="modal_modify_about">
             <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
               v-model="user_about"></textarea>
-            <div class="modify_btn" @click='registerUserAbout'><div class="segment__guest">
-              <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
-                  class='Guest__dm'></button>
-            </div></div>
+            <div class="modify_btn" @click='registerUserAbout'>
+              <div class="segment__guest">
+                <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png"
+                    alt="" class='Guest__dm'></button>
+              </div>
+            </div>
           </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-           <div class="segment__guest" v-if="who_state">
-              <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
-                  class='Guest__dm'></button>
-            </div></span>
+          <div class="segment__guest" v-if="who_state">
+            <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
+                class='Guest__dm'></button>
+          </div>
+        </span>
 
 
 
@@ -50,7 +54,7 @@
             <div class="profile_label">더보기</div>
             <div class="profile_spacer"></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
+            <div v-if="who_state" class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
       </div>
@@ -147,28 +151,21 @@
 
 
     </div>
-     <div class="segment__mypage">
+    <div class="segment__mypage">
       <div class="unit__mypage unit__btn__mypage move_to_top" type="button"><img src="../../assets/images/up-arrow.png"
           alt=""></div>
     </div>
-
-    <div class="forth__section__guest" v-if="who_state">
-      <h1 class="outer__wrapper__title">{{guest_name}}의 즐겨찾기</h1>
-      <div class="outer-wrapper-guest" v-if="!scrap_state">
-        <div class="scroll-wrapper">
-          <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
-            <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece"
-              alt="">
-          </div>
+    <div class="forth__section__guest">
+    <h1 class="outer__wrapper__title">{{guest_name}}의 즐겨찾기</h1>
+    <div class="outer-wrapper-guest" v-if="!scrap_state">
+      <div class="scroll-wrapper">
+        <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
+          <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece" alt="">
         </div>
       </div>
-      <div v-else>
-        <h1 class="no__scrap"> 스크랩한 작품이 없습니다.</h1>
-      </div>
     </div>
-    <div v-else>
-      타인의 즐겨찾기는 감상하실 수 없습니다.
     </div>
+    
     <Modal v-if="showModal" @close="showModal = false">
       <div slot="header">
         <h3>
@@ -291,8 +288,8 @@
         guest_name: localStorage.getItem('props_id'),
         who_state: true,
         Unread_count: 0,
-        scrap_state:false,
-        bell__state:false,
+        scrap_state: false,
+        bell__state: false,
       }
     },
     components: {
@@ -300,13 +297,12 @@
     },
     props: ["props_id"],
     methods: {
-      
       DMsideopen() {
-        if(this.who_state){
+        if (this.who_state) {
           const DMList = document.querySelector('.dm__list_Guest');
           console.log(DMList)
           DMList.classList.add('show_dm_side');
-        }else{
+        } else {
           const DMList = document.querySelector('.Guest__dm__list');
           console.log(DMList)
 
@@ -315,8 +311,17 @@
         init.DMModal();
       },
       DMsideclose() {
-        const DMList = document.querySelector('.dm__list_Guest');
-        DMList.classList.remove('show_dm_side');
+        if (this.who_state) {
+          const DMList = document.querySelector('.dm__list_Guest');
+          console.log(DMList)
+          DMList.classList.remove('show_dm_side');
+        } else {
+          const DMList = document.querySelector('.Guest__dm__list');
+          console.log(DMList)
+
+          DMList.classList.remove('show_dm_side');
+        }
+        this.DMpull()
       },
       DmRead(message_id) {
         console.log('Dm Read', message_id);
@@ -325,7 +330,7 @@
         // const DMList = document.querySelector('.DMList')
         setTimeout(() => {
           console.log('DM Delete', id);
-          const DMLIST = document.querySelectorAll('.DM__item')
+          const DMLIST = document.querySelectorAll('.Guest__DM__item')
           for (let item of DMLIST) {
             if (item.dataset.name == id) {
               console.log('지운다.')
@@ -403,8 +408,10 @@
           .then(response => {
             console.log('Get all my dm list', response.data);
             this.dm_list = response.data;
+            this.Unread_count = 0;
             for (let item of this.dm_list) {
-              if (item.message_isCheck === '1') {
+              console.log(item.message_isCheck)
+              if (item.message_isCheck == '1') {
                 this.Unread_count += 1
               }
             }
@@ -444,20 +451,20 @@
             this.posts = response.data;
           })
       },
-  
+
       getAllScrapWork() {
         http.get('/work/getAllScrapWork/' + localStorage.getItem('props_id'))
           .then(response => {
             console.log('Get all scrap', response.data);
             this.scrap_list = response.data;
-            if(!this.scrap_list.length){
+            if (!this.scrap_list.length) {
               this.scrap_state = true;
               console.log('스트랩한 작품이 없습니다.')
             }
           })
       },
-     
-     
+
+
       getUserInfo() {
         http.get('/user/getUserInfo', {
             params: {
@@ -506,8 +513,10 @@
       if (this.props_id && localStorage.getItem('user_id') !== localStorage.getItem('props_id')) {
         this.who_state = false;
         this.bell__state = true;
-      }else {
-        this.who_state = true
+      } else if (!this.props_id && localStorage.getItem('user_id') === localStorage.getItem('props_id')) {
+        this.who_state = false;
+      } else {
+        this.who_state = true;
       }
       this.getUserInfo();
       // following 목록

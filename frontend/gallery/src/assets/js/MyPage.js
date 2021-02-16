@@ -297,13 +297,8 @@ const DMModal =() =>{
       const DMLIST = document.querySelectorAll('.Mypage__DM__item')
       for(let item of DMLIST){
         if(e.target.dataset.value === item.dataset.name){
-          item.classList.add('delete');
-          const formData = new FormData();
-          const id = new Array();
-          id.push(e.target.dataset.value)  
-          formData.append('message_ids',id)
-          
-          http.post('/message/deleteMessage',{ 'message_id' : e.target.dataset.value })
+          item.classList.add('delete');       
+          http.post('/message/deleteMessage',Number(e.target.dataset.value))
           .then(response => {
            console.log('remove message',response.data);    
           })
@@ -330,7 +325,7 @@ const DMModal =() =>{
 
 
       
-      message_read(response_data.message_id);
+      message_read(response_data.message_id,e.target);
       // e.target.classList.add('Mypage__DM__item__read')
       const sender_name = document.querySelector('.sender_name');
       const sender_title = document.querySelector('.sender_title');
@@ -349,12 +344,12 @@ const DMModal =() =>{
   })
 }
 
-const message_read = (message_id)=>{
-  const formData = new FormData()
-  formData.append('message_id',message_id)
-  http.post('/message/checkMessage',{ 'message_id' : message_id })
+const message_read = (message_id,target)=>{
+  http.post('/message/checkMessage',Number(message_id))
   .then(response => {
     console.log('read message',response.data);
+    target.classList.add('Guest__DM__item__read');
+
   })
 }
 // const tounfollow=()=>{

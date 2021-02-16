@@ -22,13 +22,16 @@ const init = ()=>{
   window.addEventListener('scroll',function(){
     console.log('scoll',window.scrollY);
     const img = document.querySelector('.artist__work__detail');
-    if(window.scrollY >= 800){
-      img.style.zIndex = 100;
-      console.log('붙혔다')
-    }else{
-      img.style.zIndex = 1;
+    if(img){
+
+      if( window.scrollY >= 800){
+        img.style.zIndex = 100;
+        console.log('붙혔다')
+      }else{
+        img.style.zIndex = 1;
+      }
     }
-  })
+    })
    const imgSacleUp = document.querySelector('.artist__work__detail');
    imgSacleUp.addEventListener('click',function(){
      const scaleUpModal = document.querySelector('.imgSacleUp')

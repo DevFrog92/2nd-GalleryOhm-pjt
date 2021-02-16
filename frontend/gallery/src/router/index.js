@@ -174,7 +174,8 @@ const routes = [
   {
     path:'/test/uploadImageResize',
     name:"uploadImageResize",
-    component:uploadImageResize
+    component:uploadImageResize,
+    props:true,
   },
   {
     path:'/exhibition',
