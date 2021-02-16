@@ -3,18 +3,17 @@
   <h1 class="picture_title" @click="moveToBottom">{{work_info.work_title}}</h1>
     <p class="picture_date deco_p"><strong><em>ⓒ 2021. {{work_info.work_artistId}} all rights reserved</em></strong></p>
   <h2 class="picture_subtitle">June 11th, 2018 by painting picasso</h2>
-  <p class="picture deco_p"><img :src="img_url" alt=""></p>
-  <p class="picture_artist deco_p">Dancing Picaso</p>
+  <p class="picture deco_p" ><img :src="img_url" alt=""  ></p>
+  <p class="picture_artist deco_p" @click="moveToArtistPage">춤추는 피카소</p>
   
   <blockquote>
-    <pre class="pre_1 highlight_badge">PRO(배지이름) <span @click="moveToArtistPage"> Artist</span></pre>
     <pre class="pre_2">저는 아이패드를 통해 동양화를 그리는 취미가 있습니다. 저에 대한 더 많은 정보를 얻고 싶으신 분은 제 마이페이지를 방문해주세요. </pre>
   </blockquote>
 
-  <h3 class="subject_explain">About Picture</h3>
-  <p class="deco_p explain_size">{{work_info.work_desc}}</p>
+  <h3 class="subject_explain">작품 소개</h3>
+  <p class="deco_p explain_size"></p>
 
-  <h3 class="subject_explain">Using Tool</h3>
+  <h3 class="subject_explain">사용한 도구</h3>
 
   <!--  p태그 쓸지 pre태그 쓸지 확인!!!!!!!!!!-->
   <!-- <pre class="deco_p explain_size">사용 도구 : Ipad Air
@@ -23,23 +22,32 @@
     </pre> -->
     <p class="deco_p explain_size">{{work_info.work_tool}}</p>
   <div class="like-container">
-    <div class="like-cnt unchecked" id="like-cnt" @click="likeWork">
-      <i v-if="like_state" class="fas fa-dollar-sign like-btn-active"></i>
-      <i v-else class="fas fa-dollar-sign like-btn-deactive"></i>
+    <div class="like-cnt" @click="likeWork">
+      <img v-if="!like_state" class="like_image" src="../assets/images/won (1).png" alt="">
+      <!-- <i v-if="like_state" class="fas fa-dollar-sign like-btn-active"></i> -->
+      <img v-else class="like_image" src="../assets/images/won.png" alt="">
+      <!-- <i v-else class="fas fa-dollar-sign like-btn-deactive"></i>  -->
+      <span class="like_count">{{total_like*100}}</span>
       </div>
-      <p class="deco_p">{{total_like}}</p>
+      <!-- <p class="total_like">{{total_like}}</p> -->
   </div>
   <p class="deco_p"> <ul><li v-for="(tag,index) of hashTagList" :key="index">#{{tag}}</li></ul></p>
   
-    <p class="deco_p" v-if="bookmark_state" @click="UnBookMark">Un-BookMark</p>
-    <p class="deco_p" v-else @click="BookMark">BookMark</p>
-    <p class="deco_p" @click="modifyWork">Modify</p>
-    <p class="deco_p" @click="showModal = true">Delete</p>
-  <div class="back_btn_container ">
-  <div class="backBtns last_p">
-    <div class="backBtn" data-display="BACK" @click="Back"></div>
-  </div>
+    <p class="deco_p scrap_cancel" v-if="bookmark_state" @click="UnBookMark">작품저장취소</p>
+    <p class="deco_p scrap" v-else @click="BookMark">작품저장</p>
+    <div class="detail_btn_all last_p">
+
+  <div class="mod_pic_btn_container ">
+    <div class="detail_back_button" @click="modifyWork"><span>수정</span></div>
 </div>
+  <div class="dele_pic_btn_container ">
+    <div class="detail_back_button" @click="showModal = true"><span>삭제</span></div>
+</div>
+  <div class="back_btn_container last_p">
+    <div class="detail_back_button" @click="Back"><span>뒤로가기</span></div>
+</div>
+    </div>
+
 
  <Modal v-if="showModal" @close="showModal = false">
       <!--
@@ -172,10 +180,13 @@ export default {
             this.work_info.work_piece = "data:image/jpeg;base64," + response.data.work_piece;
             this.img_url = this.work_info.work_piece;
             console.log('getinfo',this.work_info);
+            const my_desc = document.querySelector('.deco_p.explain_size');
+            console.log('my_desc',my_desc);
+            my_desc.innerHTML = this.work_info.work_desc;
           })
     },
     isCheckCost(){
-      http.get(`/work/isCheckCost`,{params:{cost_userId:localStorage.getItem('user_id'),cost_workId:this.work_id_store}})
+      http.get(`/work/isCheckCost`,{params:{cost_userId:localStorage.getItem('user_id'),cost_workId:localStorage.getItem('work_id')}})
     .then(response=>{
       console.log('checkCost  ',response.data);
       this.like_state = response.data;
@@ -191,7 +202,7 @@ export default {
     })
     },
     isCheckScrap(){
-      http.get('/work/isCheckScrap',{params:{scrap_userId:localStorage.getItem('user_id'),scrap_workId:this.work_id_store}})
+      http.get('/work/isCheckScrap',{params:{scrap_userId:localStorage.getItem('user_id'),scrap_workId:localStorage.getItem('work_id')}})
     .then(response =>{
       this.bookmark_state = response.data;
       console.log('bookmark',this.bookmark_state)
