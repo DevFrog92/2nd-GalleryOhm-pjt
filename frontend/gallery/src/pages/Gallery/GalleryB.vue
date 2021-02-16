@@ -1,106 +1,13 @@
 <template>
   <div class="subgallery" v-if="imgList.length != 0">
     <!-- 문열림 -->
-    <!-- <div class="welcome">
+    <div class="welcome">
       <div class="dark">
         <div class="door-open"></div>
         <div class="door"></div>
       </div>
-    </div> -->
-    <!-- 눈동자 -->
-    <div class="eyes_container">
-      <div id="illustration">
-        <svg
-          id="eyes-illustration"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 456.5 167.5"
-        >
-          <g id="frame">
-            <rect class="cls-2" x="30.25" y="30.25" width="396" height="107" />
-          </g>
-          <g class="Eyes">
-            <defs>
-              <clipPath id="eyeLeftClip">
-                <path
-                  id="left-clip"
-                  d="M209.72,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S209.72,83.75,209.72,83.75Z"
-                />
-              </clipPath>
-              <clipPath id="eyeRightClip">
-                <path
-                  id="right-clip"
-                  d="M363.23,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S363.23,83.75,363.23,83.75Z"
-                />
-              </clipPath>
-            </defs>
-            <g class="eye-left">
-              <path
-                class="eye-left-inner"
-                d="M209.72,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S209.72,83.75,209.72,83.75Z"
-              />
-              <g clip-path="url(#eyeLeftClip)">
-                <g class="eye-left-pupil">
-                  <circle
-                    class="eye-left-pupil-color"
-                    cx="158.78"
-                    cy="83"
-                    r="19.75"
-                  />
-                  <circle
-                    class="eye-left-pupil-dark"
-                    cx="158.78"
-                    cy="83"
-                    r="13.37"
-                  />
-                  <circle
-                    class="eye-left-pupil-glare"
-                    cx="149.37"
-                    cy="71.95"
-                    r="8.7"
-                  />
-                </g>
-              </g>
-            </g>
-            <g class="eye-right">
-              <path
-                class="eye-right-inner"
-                d="M363.23,83.75s-22.81,27.93-50.95,27.93-50.95-27.93-50.95-27.93,22.81-27.93,50.95-27.93S363.23,83.75,363.23,83.75Z"
-              />
-              <g clip-path="url(#eyeRightClip)">
-                <g class="eye-right-pupil">
-                  <circle
-                    class="eye-right-pupil-color"
-                    data-name="eye-left-pupil-color"
-                    cx="312.29"
-                    cy="83"
-                    r="19.75"
-                  />
-                  <circle
-                    class="eye-right-pupil-dark"
-                    data-name="eye-left-pupil-dark"
-                    cx="312.29"
-                    cy="83"
-                    r="13.37"
-                  />
-                  <circle
-                    class="eye-right-pupil-glare"
-                    data-name="eye-left-pupil-glare"
-                    cx="302.88"
-                    cy="71.95"
-                    r="8.7"
-                  />
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
-      </div>
-      <div class="open_button" @click="moveToImage()">
-        버튼자리
-      </div>
     </div>
-    <div class="blank_page hidden"></div>
-    <div class="content hidden">
+    <div class="content">
       <div class="button">
         <div class="nav_slide nav--magool">
           <button
@@ -120,8 +27,6 @@
       <div class="list">
         <div v-for="(img, i) in imgList" :key="i" :id="'image' + i">
           <div class="image slide-in-bck-bottom" @mouseover="changePage(i + 1)">
-            <!-- <transition name="fade"> -->
-            <!-- <router-link class="router-link" to="/test/GalleryJ/DetailPage2"> -->
             <img
               class="img"
               :src="img.work_piece"
@@ -131,8 +36,6 @@
             <div class="content">
               <h1 class="text">{{ img.work_title }}</h1>
             </div>
-            <!-- </router-link> -->
-            <!-- </transition> -->
 
             <p class="info" style="padding-top: 3%">
               By {{ img.work_artistId }}, {{ img.work_uploadDate }}
@@ -149,7 +52,6 @@ import Vue from "vue";
 import http from "../../api/http.js";
 import router from "../../router";
 import VueScrollTo from "vue-scrollto";
-import { gsap, Power1 } from "gsap";
 // import VuePageTransition from "vue-page-transition";
 Vue.use(VueScrollTo);
 // Vue.use(VuePageTransition);
@@ -181,94 +83,9 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      // const welcome = document.querySelector(".welcome");
-      // welcome.remove();
-      const squintSpeed = 0.5;
-      const easeType = Power1.in;
-      const squintEyes = gsap.timeline({ paused: true });
-      squintEyes.to(
-        ".eye-left-inner",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-      squintEyes.to(
-        "#left-clip",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-      squintEyes.to(
-        ".eye-right-inner",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-      squintEyes.to(
-        "#right-clip",
-        {
-          duration: squintSpeed,
-          ease: easeType,
-          scaleY: 0.5,
-          transformOrigin: "0% 50%",
-        },
-        0
-      );
-
-      // -----------
-      // Event trackers
-      // -----------
-
-      const blink = document.querySelector("#eyes-illustration");
-
-      blink.addEventListener("mouseenter", enterButton);
-      blink.addEventListener("mouseleave", leaveButton);
-
-      function enterButton() {
-        squintEyes.play();
-      }
-      function leaveButton() {
-        squintEyes.reverse();
-      }
-
-      // -----------
-      // Eye tracking
-      // -----------
-
-      const eyeRightPupil = document.querySelector(".eye-right-pupil");
-      const eyeLeftPupil = document.querySelector(".eye-left-pupil");
-      const eyeLeftInner = document.querySelector(".eye-left-inner");
-      const innerEyeWidth = eyeLeftInner.getBoundingClientRect().width;
-      const innerEyeHeight = eyeLeftInner.getBoundingClientRect().height;
-      const pupilWidth = eyeLeftPupil.getBoundingClientRect().width;
-      const pupilHeight = eyeLeftPupil.getBoundingClientRect().height;
-      const xMovement = (innerEyeWidth - pupilWidth - 10) / 2;
-      const yMovement = (innerEyeHeight - pupilHeight + 5) / 2;
-
-      window.addEventListener("mousemove", updateEyePosition);
-
-      function updateEyePosition(event) {
-        const posX =
-          ((event.clientX / document.body.clientWidth) * 2 - 1) * xMovement;
-        const posY =
-          ((event.clientY / document.body.clientHeight) * 2 - 1) * yMovement;
-
-        eyeLeftPupil.style.transform = `translate(${posX}px, ${posY}px)`;
-        eyeRightPupil.style.transform = `translate(${posX}px, ${posY}px)`;
-      }
-    }, 1000);
+      const welcome = document.querySelector(".welcome");
+      welcome.remove();
+    }, 4500);
 
     setTimeout(() => {
       window.scrollTo(0, 0);
@@ -276,33 +93,33 @@ export default {
       const list = document.querySelector(".list");
       list.addEventListener("click", this.clickHandler);
 
-      // const first = document.querySelector("#Item0");
-      // first.classList.add("nav__item--current");
+      const first = document.querySelector("#Item0");
+      first.classList.add("nav__item--current");
 
-      // [].slice
-      //   .call(document.querySelectorAll(".nav_slide"))
-      //   .forEach(function(nav) {
-      //     var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
-      //       setCurrent = function(item) {
-      //         // return if already current
-      //         if (item.classList.contains("nav__item--current")) {
-      //           return false;
-      //         }
-      //         // remove current
-      //         var currentItem = nav.querySelector(".nav__item--current");
-      //         currentItem.classList.remove("nav__item--current");
+      [].slice
+        .call(document.querySelectorAll(".nav_slide"))
+        .forEach(function(nav) {
+          var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
+            setCurrent = function(item) {
+              // return if already current
+              if (item.classList.contains("nav__item--current")) {
+                return false;
+              }
+              // remove current
+              var currentItem = nav.querySelector(".nav__item--current");
+              currentItem.classList.remove("nav__item--current");
 
-      //         // set current
-      //         item.classList.add("nav__item--current");
-      //       };
+              // set current
+              item.classList.add("nav__item--current");
+            };
 
-      //     navItems.forEach(function(item) {
-      //       item.addEventListener("click", function() {
-      //         setCurrent(item);
-      //       });
-      //     });
-      //   });
-    }, 1100);
+          navItems.forEach(function(item) {
+            item.addEventListener("click", function() {
+              setCurrent(item);
+            });
+          });
+        });
+    }, 4600);
   },
   methods: {
     changePage(i) {
@@ -334,15 +151,15 @@ export default {
       blank.classList.remove("hidden");
       image.classList.remove("hidden");
 
-      setTimeout(()=>{
+      setTimeout(() => {
         const blank = document.querySelector(".blank_page");
         const eye = document.querySelector(".eyes_container");
 
         blank.classList.add("hidden");
         eye.classList.add("hidden");
 
-        window.scrollTo(0,0);
-      },1100);
+        window.scrollTo(0, 0);
+      }, 1100);
     },
   },
 };
@@ -608,55 +425,6 @@ export default {
   background: #333;
   -webkit-transform: scale3d(2, 1, 1);
   transform: scale3d(2, 1, 1);
-}
-
-.eyes_container {
-  height: 100vh;
-}
-
-svg {
-  width: 40vw;
-}
-
-.cls-4 {
-  stroke-miterlimit: 10;
-  stroke-width: 0.5px;
-}
-.cls-2 {
-  fill: #c20a0a;
-}
-
-.cls-4 {
-  fill: none;
-}
-
-.eye-left-inner,
-.eye-right-inner,
-.eye-left-pupil-glare,
-.eye-right-pupil-glare {
-  fill: #fff;
-}
-.eye-left-pupil-color,
-.eye-right-pupil-color {
-  /* fill: #38b77e; */
-  fill: red;
-  /* fill: whitesmoke; */
-}
-.eye-left-pupil-dark,
-.eye-right-pupil-dark {
-  /* fill: #15422e; */
-  fill: black;
-  /* fill: black; */
-}
-
-.open_button {
-  -webkit-animation: scaleUpCenter 0.4s ease-out both;
-  animation: scaleUpCenter 0.4s ease-out both;
-}
-
-.blank_page {
-  height: 100vh;
-  background-image: url("../../assets/images/red.png");
 }
 </style>
 
