@@ -286,3 +286,52 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.save_btn_container {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  /* padding: 50% 30% 0 0; */
+  top: 77%;
+  left: 31.7%;
+  z-index: 200;
+}
+
+
+
+.mod_info_button {
+  width: 110px;
+  height: 50px;
+  background: white;
+  position: relative;
+  background: white;
+  margin-bottom: 25px;
+  border-radius: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  font-family:  'Noto Sans KR', sans-serif;
+}
+
+.mod_info_button span {
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: semibold;
+}
+
+.mod_info_button:nth-child(1) {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  color: grey;
+}
+
+.mod_info_button:nth-child(1):hover {
+  opacity: 0.3;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mod_info_button:nth-child(1):active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #42329f;
+}

@@ -45,7 +45,11 @@
       you can use custom content here to overwrite
       default content
     -->
+
       <div slot="header">
+        <!-- <div class="save_btn_container">
+                 <div class="mod_info_button" @click="modifyUser"><span>수정완료</span></div>
+              </div> -->
         <h3>
           전시관 등록
         </h3>

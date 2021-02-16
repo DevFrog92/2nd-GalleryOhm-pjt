@@ -32,11 +32,12 @@
       </div>
     </div>
     <div class="close__btn" @click="goBack">
-      <i class="icon-back"></i>
+      <!-- <i class="icon-back"></i> -->
+      <img class="icon-back" src="../assets/images/back.png" style="width: 1.5vw;"/>
     </div>
     <div class="qurating" @click="qurating = !qurating">
       <i class="icon-mic-1" v-if="!qurating"></i>
-      <i class="icon-mic-off" v-else></i>
+      <i class="icon-mic-1" v-else></i>
       <audio v-show="qurating" class="player" controls ref="player">
         <source src="" ref="source" />
       </audio>
