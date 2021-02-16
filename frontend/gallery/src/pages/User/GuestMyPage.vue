@@ -19,7 +19,7 @@
 
       <div class="profile_about">
         <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Guest__bell" @click="showDm=true"><img
-              src="../assets/images/bell.png" alt=""><span v-if="!bell__state" class="notification__num">{{Unread_count}}</span></span></h2>
+              src="../../assets/images/bell.png" alt=""><span v-if="!bell__state" class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -32,14 +32,14 @@
             <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
               v-model="user_about"></textarea>
             <div class="modify_btn" @click='registerUserAbout'><div class="segment__guest">
-              <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
+              <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
                   class='Guest__dm'></button>
             </div></div>
           </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
            <div class="segment__guest" v-if="who_state">
-              <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
+              <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
                   class='Guest__dm'></button>
             </div></span>
 
@@ -79,7 +79,7 @@
           </div>
           <div class="send_btn__guest" @click="DM_recived">
             <div class="segment__guest">
-              <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/paper.png" alt=""
+              <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/paper.png" alt=""
                   class='Guest__dm'></button>
             </div>
           </div>
@@ -95,7 +95,7 @@
             <div :class="!dm.message_isCheck ? 'Guest__DM__item Guest__DM__item__read ' : 'Guest__DM__item' "
               v-for="(dm,index) of dm_list" :key="index" :data-name='dm.message_id' :data-value="JSON.stringify(dm)">
               <div class="Guest__DM__item__avatar">
-                <img src="../assets/images/user.png" />
+                <img src="../../assets/images/user.png" />
               </div>
               <div class="Guest__DM__item__content">
                 <span class="Guest__DM__item__title">{{dm.message_senderId}}</span>
@@ -134,7 +134,7 @@
           <div class="Guest__message__footer">
             <div class="segment__mypage">
               <button class="unit__mypage unit__btn__mypage mypage__dm__send" type="button" @click="DM"><img
-                  src="../assets/images/paper.png" alt="" class='Guest__dm'></button>
+                  src="../../assets/images/paper.png" alt="" class='Guest__dm'></button>
             </div>
           </div>
         </div>
@@ -148,7 +148,7 @@
 
     </div>
      <div class="segment__mypage">
-      <div class="unit__mypage unit__btn__mypage move_to_top" type="button"><img src="../assets/images/up-arrow.png"
+      <div class="unit__mypage unit__btn__mypage move_to_top" type="button"><img src="../../assets/images/up-arrow.png"
           alt=""></div>
     </div>
 
@@ -182,7 +182,7 @@
           <div class="notifications" v-if="modal_following">
             <div class="notifications__item" v-for="(people,index) of followings" :key="index">
               <div class="notifications__item__avatar">
-                <img src="../assets/images/user.png" />
+                <img src="../../assets/images/user.png" />
               </div>
               <div class="notifications__item__content">
                 <span class="notifications__item__title">{{people}}</span>
@@ -201,7 +201,7 @@
           <div class="notifications" v-else>
             <div class="notifications__item" v-for="(people,index) of followers" :key="index">
               <div class="notifications__item__avatar">
-                <img src="../assets/images/user.png" />
+                <img src="../../assets/images/user.png" />
               </div>
               <div class="notifications__item__content">
                 <span class="notifications__item__title">{{people}}</span>
@@ -231,10 +231,10 @@
 </template>
 
 <script>
-  import '../assets/css/MyPageForGuest.css'
-  import init from '../assets/js/MyPageForGuest.js'
-  import Modal from '../pages/Modal'
-  import http from '../api/http'
+  import '../../assets/css/MyPageForGuest.css'
+  import init from '../../assets/js/MyPageForGuest.js'
+  import Modal from '../../pages/Modal'
+  import http from '../../api/http'
 
   export default {
     data() {
@@ -244,7 +244,7 @@
         artist_name: this.props_id,
         img_url: localStorage.getItem('user_profile'),
         userInfo: {},
-        test_url: '../assets/images/1.png',
+        test_url: '../../assets/images/1.png',
         user_about: '',
         DMmodal: true,
         Aboutmodal: !this.DMmodal,

@@ -229,13 +229,13 @@
 </template>
 
 <script>
-  import '../assets/css/Settings.css'
-  import mod from '../assets/js/settings.js'
-  import http from '../api/http'
+  import '../../assets/css/Settings.css'
+  import mod from '../../assets/js/settings.js'
+  import http from '../../api/http'
   import {
     mapState
   } from 'vuex'
-  import Modal from '../pages/Modal'
+  import Modal from '../../pages/Modal'
 
   export default {
     data() {

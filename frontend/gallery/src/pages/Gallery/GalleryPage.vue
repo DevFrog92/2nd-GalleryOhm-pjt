@@ -33,7 +33,7 @@
     </div>
     <div class="close__btn" @click="goBack">
       <!-- <i class="icon-back"></i> -->
-      <img class="icon-back" src="../assets/images/back.png" style="width: 1.5vw;"/>
+      <img class="icon-back" src="../../assets/images/back.png" style="width: 1.5vw;"/>
     </div>
     <div class="qurating" @click="qurating = !qurating">
       <i class="icon-mic-1" v-if="!qurating"></i>
@@ -43,8 +43,8 @@
       </audio>
     </div>
     <div class="foot_print" @click="giveFootprint">
-      <img src="../assets/images/foot1.png" v-if="!footprint" />
-      <img src="../assets/images/foot2.png" v-else />
+      <img src="../../assets/images/foot1.png" v-if="!footprint" />
+      <img src="../../assets/images/foot2.png" v-else />
     </div>
     <div class="main__carousel">
       <div class="carousel__body">
@@ -70,11 +70,11 @@
 </template>
 
 <script>
-import "../assets/css/GalleryRenderPage.css";
-import init from "../assets/js/GalleryRenderPage.js";
-import "../assets/fontello/css/fontello.css";
-import http from "../api/http";
-import router from "../router";
+import "../../assets/css/GalleryRenderPage.css";
+import init from "../../assets/js/GalleryRenderPage.js";
+import "../../assets/fontello/css/fontello.css";
+import http from "../../api/http";
+import router from "../../router";
 export default {
   data() {
     return {

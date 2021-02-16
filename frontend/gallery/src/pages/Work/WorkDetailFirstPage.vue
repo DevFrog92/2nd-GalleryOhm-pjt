@@ -23,9 +23,9 @@
     <p class="deco_p explain_size">{{work_info.work_tool}}</p>
   <div class="like-container">
     <div class="like-cnt" @click="likeWork">
-      <img v-if="!like_state" class="like_image" src="../assets/images/won (1).png" alt="">
+      <img v-if="!like_state" class="like_image" src="../../assets/images/won (1).png" alt="">
       <!-- <i v-if="like_state" class="fas fa-dollar-sign like-btn-active"></i> -->
-      <img v-else class="like_image" src="../assets/images/won.png" alt="">
+      <img v-else class="like_image" src="../../assets/images/won.png" alt="">
       <!-- <i v-else class="fas fa-dollar-sign like-btn-deactive"></i>  -->
       <span class="like_count">{{total_like*100}}</span>
       </div>
@@ -84,10 +84,10 @@
 </body>
 </template>
 <script>
-import '../assets/css/Detail.css'
-import http from '../api/http'
-import init from '../assets/js/Detail'
-  import Modal from '../pages/Modal'
+import '../../assets/css/Detail.css'
+import http from '../../api/http'
+import init from '../../assets/js/Detail'
+  import Modal from '../../pages/Modal'
 
 export default {
   data(){
