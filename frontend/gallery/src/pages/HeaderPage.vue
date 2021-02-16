@@ -6,27 +6,32 @@
       <ul class="nav__items"  v-if="loginState">
         <li class="nav__item">
           <span class="nav__item-text">
-           <router-link  class="router" to="/listitem">Works</router-link>
+           <router-link  class="router" to="/exhibition">전시회</router-link>
           </span>
         </li>
         <li class="nav__item">
           <span class="nav__item-text">
-            <router-link  class="router" to="/gallerycategory">Gallery</router-link>
+           <router-link  class="router" to="/work">작품전</router-link>
           </span>
         </li>
         <li class="nav__item">
           <span class="nav__item-text">
-            <a class="router" @click="moveToMypage">Mypage</a>
+            <router-link  class="router" to="/redgallery">레드관</router-link>
           </span>
         </li>
         <li class="nav__item">
           <span class="nav__item-text">
-            <router-link  class="router" to="/about">About</router-link>
+            <a class="router" @click="moveToMypage">내정보</a>
+          </span>
+        </li>
+        <li class="nav__item">
+          <span class="nav__item-text">
+            <router-link  class="router" to="/about">어바웃</router-link>
           </span>
         </li>
           <li class="nav__item">
           <span class="nav__item-text">
-            <a  href="#" @click="logout">Logout</a>
+            <a  href="#" @click="logout">로그아웃</a>
           </span>
         </li>
       </ul>
@@ -99,7 +104,7 @@
         }
       },
       moveToMypage(){
-        if(this.$router.history.current.name ==='MyPage' || this.$router.history.current.name ==='GuestProfile'){
+        if(this.$router.history.current.name ==='MyPage' || this.$router.history.current.name ==='GuestMyPage'){
           this.$router.go();
           return
         }
@@ -109,7 +114,7 @@
         if(this.user_type === '1'){
           console.log('Guest')
           localStorage.setItem('props_id',this.user_id)
-          this.$router.push('/guestpage');
+          this.$router.push('/guestmypage');
         }else if(this.user_type === '2'){
           console.log('Artist')
           this.$router.push('/mypage')

@@ -1,11 +1,11 @@
 <template>
   <div class="item-list-container">
     <div class="segment__works">
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="refreshAll"><img src="../assets/images/refresh.png" alt=""
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
               class='all__works__refresh'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="footPrintAll"><img src="../assets/images/footprints.png" alt=""
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/footprints.png" alt=""
               class='all__works__footprints'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="followAll"><img src="../assets/images/followers.png" alt=""
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
         </div>
     <div class="search-bar">
@@ -55,9 +55,9 @@
 </template>
 
 <script>
-  import "../assets/css/ItemListPage.css";
-  import http from "../api/http.js";
-  import init from '../assets/js/Works'
+  import "../../assets/css/ItemListPage.css";
+  import http from "../../api/http.js";
+  import init from '../../assets/js/Works'
   export default {
     data: () => {
       return {
@@ -79,8 +79,10 @@
     mounted() {
       setTimeout(() => {
         init.init();
-
-      }, 700)
+      }, 1000)
+      window.addEventListener('scroll',function(){
+        console.log('scroll',window.scrollY);
+      })
     },
     methods: {
       delete__hash__word(index) {

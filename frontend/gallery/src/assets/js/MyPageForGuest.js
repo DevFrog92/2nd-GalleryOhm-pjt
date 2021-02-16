@@ -230,23 +230,23 @@ const moveToArtistPage = (user_type)=>{
   if(localStorage.getItem('props_id') === localStorage.getItem('user_id')){
     if(localStorage.getItem('user_type') == 1){
       console.log('guest 이동합니다.');
-      router.push('/guestpage');
+      router.push('/guestmypage');
     }else{
       router.push('/mypage');
     }
   }else if(user_type=='2'){
     console.log('이동할게 아티스트로',router.history.current.name);
-    if(router.history.current.name ==='UserProfile'){
+    if(router.history.current.name ==='ArtistMyPage'){
       router.go();
     }else{
-      router.push({name:'UserProfile',params:{props_id:localStorage.getItem('props_id')}})
+      router.push({name:'ArtistMyPage',params:{props_id:localStorage.getItem('props_id')}})
     }
   }else if(user_type=='1'){
-    if(router.history.current.name === 'GuestProfile'){
+    if(router.history.current.name === 'GuestMyPage'){
       router.go();
     }else{
       console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
-      router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
+      router.push({name:'GuestMyPage',params:{props_id: localStorage.getItem('props_id')}});
     }
   }
 

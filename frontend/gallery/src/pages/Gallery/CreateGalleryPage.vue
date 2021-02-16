@@ -155,11 +155,11 @@
 </template>
 
 <script>
-import "../assets/css/DragAndDrop.css";
-import "../assets/fontello/css/fontello.css";
-import init from "../assets/js/DragAndDrop";
-import http from "../api/http";
-import Modal from "../pages/Modal";
+import "../../assets/css/DragAndDrop.css";
+import "../../assets/fontello/css/fontello.css";
+import init from "../../assets/js/DragAndDrop";
+import http from "../../api/http";
+import Modal from "../../pages/Modal";
 
 export default {
   data() {

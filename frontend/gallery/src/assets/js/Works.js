@@ -6,7 +6,7 @@ const init =()=>{
     console.log(e.target)
     if(e.target.classList.contains('grid__body')){
       console.log(e.target.dataset.value);
-      router.push({name:'ItemDetailPage',params:{work_id:e.target.dataset.value}});
+      router.push({name:'WorkDetailFirstPage',params:{work_id:e.target.dataset.value}});
     }
   }
 
