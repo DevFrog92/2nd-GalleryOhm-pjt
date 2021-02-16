@@ -18,7 +18,7 @@
       <div class="profile_about">
         <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Mypage__profile_batch">고수</span><span
             class="Mypage__bell" @click="showDm=true"><img src="../assets/images/bell.png" alt=""><span
-              class="notification__num">{{UnreadDm}}</span></span></h2>
+              class="notification__num" @click="DMsideopen">{{UnreadDm}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -30,11 +30,20 @@
           <div v-if="modifyabout" class="modal_modify_about">
             <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
               v-model="user_about"></textarea>
-            <div class="modify_btn" @click='registerUserAbout'>Edit</div>
+            <div class="modify_btn" @click='registerUserAbout'>
+              <div class="segment__guest">
+                <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
+                    class='Guest__dm'></button>
+              </div>
+            </div>
           </div>
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
-          <i class="icon-pencil-alt">자기소개 수정</i></span>
+          <div class="segment__guest">
+            <button class="unit__guest unit__btn__guest" type="button"><img src="../assets/images/pencil.png" alt=""
+                class='Guest__dm'></button>
+          </div>
+        </span>
 
 
 
@@ -97,7 +106,10 @@
             <textarea name="response_message" id="Mypage__response_message" v-model="dm_content"></textarea>
           </div>
           <div class="Mypage__message__footer">
-            <div class="MyPage__send_btn" @click="DM">답장 보내기</div>
+            <div class="segment__mypage">
+              <button class="unit__mypage unit__btn__mypage mypage__dm__send" type="button" @click="DM"><img
+                  src="../assets/images/paper.png" alt="" class='Mypage__dm'></button>
+            </div>
           </div>
         </div>
       </div>
@@ -119,30 +131,42 @@
       <h1>{{userInfo.user_nickName}}의 전시관</h1>
       <div class="Mypage__my_works">
         <div class="Mypage__poster__card1" :data-value="my_gallery_1.gallery_id">
-          <div class="Mypage__gallery__entrance_1">입장</div>
+          <div v-if="my_gallery_1.gallery_id" class="Mypage__gallery__entrance_1">입장</div>
           <div v-if="my_gallery_1.gallery_id" class="Mypage__gallery_modify"
             @click="modifyGallery(my_gallery_1.gallery_id)">수정
           </div>
           <div v-if="my_gallery_1.gallery_id" class="Mypage__gallery_delete"
             @click="[delete_gallery_id=my_gallery_1.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_1.gallery_name]">
             삭제</div>
-          <div v-else class="Mypage__plus_gallery" @click="CreateGallery">+</div>
+          <div v-else class="Mypage__plus_gallery" @click="CreateGallery">
+            <div class="segment__mypage__add">
+              전시관이 없습니다.
+              <button class="unit__mypage unit__btn__mypage mypage__add__btn" type="button"><img
+                  src="../assets/images/add.png" alt="" class='Mypage__add'></button>
+            </div>
+          </div>
           <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
 
           <h3>{{my_gallery_1.gallery_name}}</h3>
-          <p v-if="my_gallery_1.gallery_id">Created By {{my_gallery_1.gallery_artistId}}
+          <p v-if="my_gallery_1.gallery_id">작가 : {{my_gallery_1.gallery_artistId}}
             {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</p>
         </div>
 
         <div class="Mypage__poster_card2" :data-value="my_gallery_2.gallery_id">
-          <div class="Mypage__gallery__entrance_2">입장</div>
+          <div v-if="my_gallery_2.gallery_id" class="Mypage__gallery__entrance_2">입장</div>
           <div v-if="my_gallery_2.gallery_id" class="Mypage__gallery_modify"
             @click="modifyGallery(my_gallery_2.gallery_id)">수정
           </div>
           <div v-if="my_gallery_2.gallery_id" class="Mypage__gallery_delete"
             @click="[delete_gallery_id=my_gallery_2.gallery_id,delete_gallery=true,delete_gallery_name=my_gallery_2.gallery_name]">
             삭제</div>
-          <div v-else class="Mypage__plus_gallery" @click="CreateGallery">+</div>
+          <div v-else class="Mypage__plus_gallery" @click="CreateGallery">
+            <div class="segment__mypage__add">
+              전시관이 없습니다.
+              <button class="unit__mypage unit__btn__mypage mypage__add__btn" type="button"><img
+                  src="../assets/images/add.png" alt="" class='Mypage__add'></button>
+            </div>
+          </div>
           <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>
           <p v-if="my_gallery_2.gallery_id">Created By {{my_gallery_2.gallery_artistId}}
@@ -171,16 +195,15 @@
                 </div>
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index,1)">그림보러 가기</div>
-                  <div class="main">{{Number(index)}}</div>
-                  <div class="sub">Omuke trughte a otufta</div>
+                  <div class="main">{{Number(index)}}월</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="options_wrapper">
 
-            <div class="Mypage__option" :data-value="index" v-for="(item,index) of all_my_works_month_second"
-              :key="Number(index)+6">
+            <div class="Mypage__option num2" :data-value="Number(index)+6"
+              v-for="(item,index) of all_my_works_month_second" :key="Number(index)+6">
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -188,8 +211,7 @@
                 </div>
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index,2)">그림보러 가기</div>
-                  <div class="main">{{String(Number(index)+6)}}</div>
-                  <div class="sub">Omuke trughte a otufta</div>
+                  <div class="main">{{String(Number(index)+6)}}월</div>
                 </div>
               </div>
             </div>
@@ -211,7 +233,7 @@
                 <div class="pinter_grid__body__delete">삭제</div>
               </div>
             </div>
-            <div class="exit_side">X</div>
+            <div class="exit_side">나가기</div>
           </div>
         </div>
       </div>
@@ -230,7 +252,7 @@
         </div>
       </div>
       <div v-else>
-        <h1 class="no__scrap"> 스크랩한 작품이 없습니다.</h1>
+        <h2 class="no__scrap"> 스크랩한 작품이 없습니다.</h2>
       </div>
     </div>
 

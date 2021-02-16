@@ -29,7 +29,7 @@
         {{hash}}
         <span class="delete__hash__word" @click="delete__hash__word(index)">X</span>
       </span>
-      <button @click="resetAll">clear</button>
+      <button class="search_clear_btn" @click="resetAll">전체삭제</button>
     </div>
     <div class="no_works" v-if="no_works">
       검색한 태그와 관련한 작품이 없습니다.
@@ -47,7 +47,7 @@
         <img :src="img.work_piece" alt="DB이미지" />
         <div class="grid__body" :data-value="img.work_id">
           <h1 v-text="img.work_title"></h1>
-          <p>By : {{ img.work_artistId }}</p>
+          <p>작가 : {{ img.work_artistId }}</p>
         </div>
       </div>
     </div>

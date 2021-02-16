@@ -249,7 +249,89 @@ const moveToArtistPage = (user_type)=>{
       router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
     }
   }
+
+
+
+  
+
+
+
+
 }
+
+const DMModal =() =>{
+  const DMList = document.querySelector('.Guest__dm__list');
+
+  const dmOption = document.querySelectorAll('.Guest__DM__item__option')
+
+  dmOption.forEach(btn => {
+    btn.addEventListener('click',function(e){
+      console.log('click to delete',e.target)
+      const DMLIST = document.querySelectorAll('.Guest__DM__item')
+      for(let item of DMLIST){
+        if(e.target.dataset.value === item.dataset.name){
+          item.classList.add('delete');
+          const formData = new FormData();
+          const id = new Array();
+          id.push(e.target.dataset.value)  
+          formData.append('message_ids',id)
+          
+          http.post('/message/deleteMessage',{ 'message_id' : e.target.dataset.value })
+          .then(response => {
+           console.log('remove message',response.data);    
+          })
+        }
+      }
+    })
+  })
+
+  console.log('DM__list',DMList);
+  DMList.addEventListener('click',function(e){
+    if(e.target.classList.contains('Guest__DM__item'))
+    {
+      console.log('읽음 처리 합니다.')
+      console.log(JSON.parse(e.target.dataset.value));
+      const response_data = JSON.parse(e.target.dataset.value);
+      const messages = document.querySelectorAll('.Guest__DM__item')
+      for(let item of messages){
+        if(item.classList.contains('message__selected')){
+          item.classList.remove('message__selected')
+        }
+      }
+      e.target.classList.add('message__selected');
+
+
+
+      
+      message_read(response_data.message_id);
+      // e.target.classList.add('Mypage__DM__item__read')
+      const sender_name = document.querySelector('.sender_name');
+      const sender_title = document.querySelector('.sender_title');
+      const sender_content = document.querySelector('.sender_content');
+      const sendersender_time_name = document.querySelector('.sender_time');
+      const sendersender_date_name = document.querySelector('.sender_date');
+      sender_name.innerText = response_data.message_senderId;
+      sender_title.innerText ="제목. " + response_data.message_title;
+      sender_content.innerText = response_data.message_content;
+      sendersender_time_name.innerText = response_data.message_sendDate.slice(11);
+      sendersender_date_name.innerText = response_data.message_sendDate.slice(0,11);
+      // 
+      // const showDmContent = document.querySelector('.Mypage__showDmContent')
+      // showDmContent.classList.add('MypageshowDmContentActive');
+    }
+  })
+}
+
+const message_read = (message_id)=>{
+  const formData = new FormData()
+  formData.append('message_id',message_id)
+  http.post('/message/checkMessage',{ 'message_id' : message_id })
+  .then(response => {
+    console.log('read message',response.data);
+  })
+}
+
+
 
 // const message_read = (message_id)=>{
 //   const formData = new FormData()
@@ -276,4 +358,4 @@ const moveToArtistPage = (user_type)=>{
 //     console.log(response.data,'unfollow');
 //   })
 // }
-export default {init,follow_modal};
+export default {init,follow_modal,DMModal};

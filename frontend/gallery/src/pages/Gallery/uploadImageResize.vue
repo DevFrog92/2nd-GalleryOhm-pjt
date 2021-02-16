@@ -3,10 +3,13 @@
   <body class="upload_picture_page">
     <!-- <div class="upload_picture_page_middle"> -->
     <div class="wrapPicture">
-      <div class="previewPicture">
+      <div class="previewPicture" >
         <p class="preview_pic">작품 미리보기</p>
+
+        
         <image-uploader ref="work_piece" :preview="true" :className="['fileinput', { 'fileinput--loaded': hasImage }]"
-          capture="environment" :debug="1" doNotResize="gif" :autoRotate="true" outputFormat="blob" @input="setImage">
+          capture="environment" :debug="1" doNotResize="gif" :autoRotate="true" outputFormat="blob" @input="setImage"
+          >
           <label for="fileInput" slot="upload-label">
             <!-- <figure>
                 <svg
@@ -22,7 +25,7 @@
                 </svg>
               </figure> -->
             <span class="upload_caption">{{
-                hasImage ? "Replace" : "작품 선택"
+                hasImage ? "작품 변경" : "작품 선택"
               }}</span>
           </label>
         </image-uploader>
@@ -126,8 +129,16 @@
       Back() {
         this.$router.go(-1);
       },
+      description(){
+        let work__desc = this.work_desc.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        let work__tool = this.work_tool.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        this.work_desc = work__desc;
+        this.work_tool = work__tool;
+        console.log('work desc',this.work_desc,this.work_tool);
+      },
       addWork: function () {
         this.hash();
+        this.description()
         if (this.mode) {
           const blob = this.img_url;
           const file = new File([blob], "profile");
@@ -168,8 +179,8 @@
             });
         }
 
-        // console.log(this.$refs.work_piece.files);
-        // this.work_piece = this.$refs.work_piece.files[0];
+        console.log(this.$refs.work_piece.files);
+        this.work_piece = this.$refs.work_piece.files[0];
       },
       setImage: function (output) {
         this.hasImage = true;
