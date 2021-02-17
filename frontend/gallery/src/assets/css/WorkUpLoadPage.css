@@ -13,7 +13,7 @@
   /*  overflow: hidden;*/
   font-family:  'Noto Sans KR', sans-serif;
   letter-spacing: 1px;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   position: relative;
 }
 
@@ -131,7 +131,6 @@
 .info_input input:focus {
   outline: none;
   border-bottom: 2px solid #42329f;
-
 }
 
 .info_input textarea:focus {
@@ -215,6 +214,23 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 14px;
+}
+
+.hashtag textarea {
+  resize: none;
+  height: 94px;
+  width: 90%;
+  border: 0;
+  padding: 10px 12px;
+  margin: 5px 0;
+  border: 2px solid #dfdfdf;
+  background-color: transparent;
+  font-size: 17px;
+}
+
+.hashtag textarea:focus {
+  outline: none;
+  border: 2px solid #42329f;
 }
 
 .tags-input {
@@ -312,7 +328,7 @@
 	font-size: 16px;
 	border-radius: 320px;
 	padding: 0.7rem;
-	background-color: #EBECF0;
+	background-color: #f5f7fa;
 	text-shadow: 1px 1px 0 #FFF;
 }
 
@@ -350,3 +366,4 @@
 	margin: 0 8px;
 	font-size: 19.2px;
 }
+
