@@ -134,7 +134,7 @@ input[value="on"]:checked ~ .lamp:before {
   margin: 0;
   width: 100vw;
   height: 100vh;
- background-image: url('../images/background6.jpg');
+ background-image: url('../images/ex_back.png');
 background-repeat: no-repeat; 
   /* background: #f4f5f9; */
   background-size: cover;
