@@ -18,8 +18,8 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Guest__bell" @click="DMsideopen"><img
-              src="../../assets/images/bell.png" alt=""><span v-if="!bell__state"
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span v-show="!who_state" class="Guest__bell" @click="DMsideopen"><img
+              src="../../assets/images/bell.png" alt=""><span 
               class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
@@ -32,7 +32,7 @@
           <div v-if="modifyabout" class="modal_modify_about">
             <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
               v-model="user_about"></textarea>
-            <div class="modify_btn" @click='registerUserAbout'>
+              <div class="modify_btn" @click='registerUserAbout'>
               <div class="segment__guest">
                 <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png"
                     alt="" class='Guest__dm'></button>
@@ -54,13 +54,13 @@
             <div class="profile_label">더보기</div>
             <div class="profile_spacer"></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
-            <div v-if="who_state" class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
+            <div v-if="!who_state" class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
       </div>
 
 
-      <div class="dm__list_Guest" v-if="who_state">
+      <div class="dm__list_Guest" v-show="who_state">
         <div class="exit__guest__dm" @click="DMsideclose">나가기</div>
         <div class="showDmContent_Guest">
           <div class="message__name__cover__guest">
@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <div class="Guest__dm__list" v-else>
+      <div class="Guest__dm__list" v-show="!who_state">
         <div class="exit__Guest__dm" @click="DMsideclose">나가기</div>
         <div class="contact_to_me">
           <!-- <div class="GuestUnRead__message">읽지않은서신</div> -->

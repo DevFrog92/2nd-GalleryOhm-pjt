@@ -141,6 +141,7 @@
         // this.getAllWorks();
         this.filter__hashs = [];
         this.checkhashimages = [];
+        this.hashTagsObject = {}
         // this.render_image = this.imgList
       },
       searchTag() {

@@ -592,7 +592,6 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  /* background: rgb(223, 22, 232); */
 }
 
 .gallery_box{
@@ -652,10 +651,6 @@
   position: fixed;
   background: #2f2f
 }
-/* 
-.second__section{
-} */
-
 
 
 #DM textarea {
@@ -844,7 +839,10 @@
 /* gallery -album*/
 
 .second__section {
+  height: 100vh;
   position: relative;
+  display: flex;
+  align-items: flex-start;
   /* background-image: url('../images/background6.jpg'); */
 }
 
@@ -1847,4 +1845,17 @@
   left: 50%;
   transform: translate(-50%,-50%);
   font-family: 'S-CoreDream-8Heavy';
+}
+
+@media (max-width:1024px){
+  .profile_wrapper{
+    transform: translate(0,-20%);
+  }
+  .second__section h1{
+    top: 5%; 
+  }
+
+  h1{
+    font-size: 2rem;
+  }
 }

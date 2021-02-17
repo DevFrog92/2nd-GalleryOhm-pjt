@@ -98,7 +98,7 @@
             // array 변환
             for (var i = 0; i < data.length; i++) {
               data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
-              if (data[i].gallery_footPrint === 1 ) {
+              if (data[i].gallery_footPrint === '1' ) {
                 this.footprinted_gallery.push(data[i]);
               }
             }

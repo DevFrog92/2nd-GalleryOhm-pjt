@@ -11,7 +11,7 @@
   font-family:  'Noto Sans KR', sans-serif;
 }
 .wrap__login input {
-  box-shadow: 5px 5px 8px -3px rgba(0,0,0,0.4);
+  /* box-shadow: 5px 5px 8px -3px rgba(0,0,0,0.4); */
   font-family:  'Noto Sans KR', sans-serif;
 }
 
@@ -31,6 +31,7 @@
   line-height: 2rem;
   border-bottom: 1px solid #DDDDDD;
   letter-spacing: 1px;
+  background-color: #f6f5f7;
 }
 
 input ~ .focus-border {
@@ -65,7 +66,6 @@ input:focus ~ .focus-border
   font-size: 2.3rem;
   font-family: 'S-CoreDream-8Heavy';
   
-text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);
 
 }
 
@@ -136,7 +136,7 @@ text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);
 }
 
 .id_check_before {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-left: 10px;
   color: #DDDDDD;
 }
@@ -484,7 +484,7 @@ form {
   letter-spacing: 0px;
   cursor: pointer;
   margin-top: 10px;
-  text-shadow: 1px 1px 1px #666; 
+  /* text-shadow: 1px 1px 1px #666;  */
 }
 
 .trigger{
@@ -497,7 +497,6 @@ form {
   letter-spacing: 0px;
   cursor: pointer;
   margin-top: 20px;
-  text-shadow: 1px 1px 1px #666; 
 
 }
 
@@ -560,11 +559,11 @@ form {
 .overlay-right h1, .overlay-left h1{
   font-size:1.4rem;
   font-weight: bold;
-  text-shadow: 1px 2px 3px #666;
+  /* text-shadow: 1px 2px 3px #666; */
 }
 .overlay-right p, .overlay-left p{
   font-size:1.2rem;
-  text-shadow: 1px 2px 2px #666;
+  /* text-shadow: 1px 2px 2px #666; */
   font-family:  'Noto Sans KR', sans-serif;
 }
 /*
