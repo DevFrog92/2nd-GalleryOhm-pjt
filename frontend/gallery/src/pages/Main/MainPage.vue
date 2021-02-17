@@ -7,22 +7,38 @@
       </div>
       <svg id="svg-sprite">
         <symbol id="paw" viewBox="0 0 249 209.32">
-            <path d="M 154.382812 14.972656 C 143.152344 2.601562 131.777344 0 124.207031 0 C 111.628906 0 99.5 6.84375 90.042969 19.28125 C 81.277344 30.820312 75.738281 46 74.457031 62.03125 C 73.167969 78.128906 75.96875 88.464844 79.847656 102.757812 C 83.308594 115.527344 87.617188 131.417969 91.265625 158.777344 L 92.234375 166.050781 L 165.328125 166.050781 L 166.914062 159.703125 C 167.175781 158.667969 173.273438 134.039062 175.042969 104.183594 C 177.5 62.816406 170.546875 32.800781 154.382812 14.972656 Z M 154.382812 14.972656 "/>
-            <path d="M 92.351562 191.015625 C 92.371094 206.261719 95.570312 220.410156 101.355469 230.851562 C 108.074219 242.980469 117.890625 249.664062 128.988281 249.664062 C 150.203125 249.664062 165.035156 225.546875 165.074219 191.015625 L 165.078125 182.625 L 92.347656 182.625 Z M 92.351562 191.015625 "/>
+          <path
+            d="M 154.382812 14.972656 C 143.152344 2.601562 131.777344 0 124.207031 0 C 111.628906 0 99.5 6.84375 90.042969 19.28125 C 81.277344 30.820312 75.738281 46 74.457031 62.03125 C 73.167969 78.128906 75.96875 88.464844 79.847656 102.757812 C 83.308594 115.527344 87.617188 131.417969 91.265625 158.777344 L 92.234375 166.050781 L 165.328125 166.050781 L 166.914062 159.703125 C 167.175781 158.667969 173.273438 134.039062 175.042969 104.183594 C 177.5 62.816406 170.546875 32.800781 154.382812 14.972656 Z M 154.382812 14.972656 "
+          />
+          <path
+            d="M 92.351562 191.015625 C 92.371094 206.261719 95.570312 220.410156 101.355469 230.851562 C 108.074219 242.980469 117.890625 249.664062 128.988281 249.664062 C 150.203125 249.664062 165.035156 225.546875 165.074219 191.015625 L 165.078125 182.625 L 92.347656 182.625 Z M 92.351562 191.015625 "
+          />
         </symbol>
-    </svg>
-    <div class="ajax-loader">
-        <div class="paw"><svg class="icon"><use xlink:href="#paw" /></svg></div>
-        <div class="paw"><svg class="icon"><use xlink:href="#paw" /></svg></div>
-        <div class="paw"><svg class="icon"><use xlink:href="#paw" /></svg></div>
-        <div class="paw"><svg class="icon"><use xlink:href="#paw" /></svg></div>
-        <div class="paw"><svg class="icon"><use xlink:href="#paw" /></svg></div>
-    </div>
-
-      <div class="DescriptionText">
+      </svg>
+      <div class="ajax-loader">
+        <div class="paw">
+          <svg class="icon"><use xlink:href="#paw" /></svg>
+        </div>
+        <div class="paw">
+          <svg class="icon"><use xlink:href="#paw" /></svg>
+        </div>
+        <div class="paw">
+          <svg class="icon"><use xlink:href="#paw" /></svg>
+        </div>
+        <div class="paw">
+          <svg class="icon"><use xlink:href="#paw" /></svg>
+        </div>
+        <div class="paw">
+          <svg class="icon"><use xlink:href="#paw" /></svg>
+        </div>
+        <!-- <div class="paw">
+          <svg class="icon"><use xlink:href="#paw" /></svg>
+        </div> -->
       </div>
-      <div class="downArrow" @click="downMain">
-         <a><span></span>Scroll</a>
+
+      <div class="DescriptionText"></div>
+      <div class="downArrow" @click="downMain(); playAudio()">
+        <a><span></span><p>Scroll</p></a>
       </div>
     </div>
 
@@ -64,12 +80,10 @@
                 params: { props_id: mainGalleryList[i].gallery_id },
               }"
             >
-              
-              <div
-                class="main_gallery__poster"
-              ><div class="main_poster_nickname">
-                <p>{{ artistsInfo[i].artist_nickName }}</p>
-              </div>
+              <div class="main_gallery__poster">
+                <div class="main_poster_nickname">
+                  <p>{{ artistsInfo[i].artist_nickName }}</p>
+                </div>
                 <div class="poster__header">
                   {{ mainGalleryList[i].gallery_name }}
                 </div>
@@ -94,13 +108,24 @@
       </hooper>
     </div>
     <div class="main_footer">
-        <footer>
-          <div class="main_foot">
-            <p>wwater@google.com</p>
-            <p>tel.010-4433-212</p>
-          </div>
-        </footer>
+      <div class="main_foot">
+        <p>ⓒ 2021. 갤러리옴. All rights reserved.</p>
+        <button class="unit__main unit__btn__main move_to_top" type="button" @click="upMain"><img src="../../assets/images/up-arrow.png"
+          alt=""></button>
+        <!-- <button class="unit__audio unit__btn__audios" id="main_bgm" type="button" @click="muteAudio"><img src="../../assets/images/Main/audio.png" alt=""
+              class='all__audios'></button>
+              <button class="unit__audio unit__btn__audios" id="main_bgm2" type="button" @click="playAudio"><img src="../../assets/images/Main/audio_mute.png" alt=""
+              class='all__audios'></button>
+        <audio
+          autoplay
+          controls
+          id="sound"
+          loop
+          preload="auto"
+          src="../../assets/images/Main/audio4_slow.mp3"
+        ></audio> -->
       </div>
+    </div>
   </div>
 </template>
 
@@ -168,7 +193,8 @@ export default {
   created() {
     this.getAllMainGallery();
   },
-  mounted() {},
+  mounted() {
+  },
   updated() {},
   methods: {
     downMain() {
@@ -176,6 +202,13 @@ export default {
         behavior: "smooth",
         left: 0,
         top: document.querySelector(".main_center_wrapper").offsetTop,
+      });
+    },
+    upMain() {
+      window.scrollTo({
+        behavior: "smooth",
+        left: 0,
+        top: 0,
       });
     },
     getAllMainGallery() {
@@ -242,7 +275,7 @@ export default {
   font-style: normal;
 }
 .Main_container {
-  background-color: #f4f5f9;
+  background-color:#f5f7fa;
   width: 100%;
   height: 100%;
 }
@@ -254,10 +287,10 @@ export default {
 } */
 .main_top_wrapper {
   width: 100%;
-  height: 95vh;
+  height: 101.2vh;
   background-size: cover;
   padding: 1%;
-  background-color: #f4f5f9;
+   background-color: #f5f7fa;
 }
 
 .main_top_wrapper .banner {
@@ -266,7 +299,7 @@ export default {
   width: 50%;
   height: 55%;
   margin: 5.5vh auto;
-  padding:auto;
+  padding: auto;
 
   /* overflow: hidden;
   position: absolute;
@@ -275,11 +308,15 @@ export default {
   margin-left: 20%; */
 }
 .main_top_wrapper .main_logo {
+  font-size: 12vw;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
   margin: auto;
+  /* background-color: #f5f7fa; */
+  /* font-family: "Hanna"; */
   background-image: url("../../assets/images/Main/gallery_logo.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -302,7 +339,6 @@ export default {
   animation-duration: 1s;
   animation-iteration-count: infinite;
   cursor: pointer;
-  
 }
 .downArrow a {
   padding-top: 60px;
@@ -314,14 +350,16 @@ export default {
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   color: #494949;
-  font : normal 400 20px/1 "S-CoreDream-8Heavy", sans-serif;
-  letter-spacing: .1em;
+  font: normal 400 20px/1 "S-CoreDream-8Heavy", sans-serif;
+  letter-spacing: 0.1em;
   text-decoration: none;
-  transition: opacity .3s;
-
+  transition: opacity 0.3s;
+}
+.downArrow a p{
+  color: #494949;
 }
 .downArrow a:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 .downArrow a span {
   position: absolute;
@@ -330,10 +368,9 @@ export default {
   width: 30px;
   height: 50px;
   margin-left: -15px;
-  border: 3px solid  #494949;
+  border: 3px solid #494949;
   border-radius: 50px;
   box-sizing: border-box;
-  
 }
 
 /***** 8번  *****/
@@ -354,7 +391,7 @@ export default {
   position: absolute;
   top: 10px;
   left: 50%;
-  content: '';
+  content: "";
   width: 6px;
   height: 6px;
   margin-left: -3px;
@@ -406,9 +443,9 @@ export default {
   text-align: center;
   position: relative;
   font-family: "S-CoreDream-8Heavy", sans-serif;
-  /* background-image: url("../../assets/images/Main/paper_bg.jpg");
+  background-image: url("../../assets/images/Main/paper_bg.jpg");
   background-size: 100%;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
 }
 .main_center_wrapper .hooper {
   height: 90vh;
@@ -422,18 +459,19 @@ export default {
 }
 .main_center_wrapper .main_poster_nickname {
   width: 150%;
-  height:50%;
-  -webkit-text-stroke: 3px #494949;
+  height: 50%;
+  -webkit-text-stroke: 0.1rem #494949;
   -webkit-text-fill-color: #494949;
-  font-size: 6vw;
+  /* -webkit-text-fill-color: transparent; */
+  font-size: 4.9vw;
   font-family: "S-CoreDream-8Heavy", sans-serif;
   z-index: 2;
   position: absolute;
-  float:center;
-  padding:auto;
-  margin-left:-28%;
+  float: center;
+  padding: auto;
+  margin-left: -28%;
   margin-top: 25%;
-  margin-bottom:auto;
+  margin-bottom: auto;
   word-break: keep-all; /*단어 기준 줄바꿈*/
   opacity: 0;
   transition-duration: 1.5s;
@@ -445,132 +483,131 @@ export default {
 /****** HOVER 효과 ******/
 .main_gallery__poster:hover {
   opacity: 1;
-  transform: scale(1.04);
+  transform: scale(1.05);
   transition: all 1.3s;
   transition-duration: 1.5s;
 }
 .main_gallery__poster:hover .main_poster_nickname {
   opacity: 1;
   /* 크게 */
-  /* transform: scale(1.05);
+  transform: scale(1.2);
   transition: all 1.3s;
-  transition-duration: 1.5s; */
+  transition-duration: 2s;
 
-/* 심박 */
+  /* 심박 */
   /* animation-name: pulse-shrink;
 		animation-duration:  0.8s;
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
     animation-direction: alternate; */
-    /* 위아래로 흔들 */
+  /* 위아래로 흔들 */
   /* animation-name: wobble-vertical;
 		animation-duration: 1s;
 		animation-timing-function: ease-in-out;
     animation-iteration-count: 1; */
-    /* 옆으로 흔들 */
-    /* animation-name: wobble-horizontal;
+  /* 옆으로 흔들 */
+  /* animation-name: wobble-horizontal;
 		animation-duration: 1s;
 		animation-timing-function: ease-in-out;
     animation-iteration-count: 1; */
-    /* 위쪽 흔들 */
-    animation-name: wobble-top;
+  /* 위쪽 흔들 */
+  /* animation-name: wobble-top;
 		animation-duration: 1.5s;
 		animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
+    animation-iteration-count: 1; */
 }
 /* Wobble Vertical */
 @keyframes wobble-vertical {
-	16.65% {
-		transform: translateY(8px);
-	}
+  16.65% {
+    transform: translateY(8px);
+  }
 
-	33.3% {
-		transform: translateY(-6px);
-	}
+  33.3% {
+    transform: translateY(-6px);
+  }
 
-	49.95% {
-		transform: translateY(4px);
-	}
+  49.95% {
+    transform: translateY(4px);
+  }
 
-	66.6% {
-		transform: translateY(-2px);
-	}
+  66.6% {
+    transform: translateY(-2px);
+  }
 
-	83.25% {
-		transform: translateY(1px);
-	}
+  83.25% {
+    transform: translateY(1px);
+  }
 
-	100% {
-		transform: translateY(0);
-	}
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Wobble Horizontal */
 @keyframes wobble-horizontal {
-	16.65% {
-		transform: translateX(8px);
-	}
+  16.65% {
+    transform: translateX(8px);
+  }
 
-	33.3% {
-		transform: translateX(-6px);
-	}
+  33.3% {
+    transform: translateX(-6px);
+  }
 
-	49.95% {
-		transform: translateX(4px);
-	}
+  49.95% {
+    transform: translateX(4px);
+  }
 
-	66.6% {
-		transform: translateX(-2px);
-	}
+  66.6% {
+    transform: translateX(-2px);
+  }
 
-	83.25% {
-		transform: translateX(1px);
-	}
+  83.25% {
+    transform: translateX(1px);
+  }
 
-	100% {
-		transform: translateX(0);
-	}
+  100% {
+    transform: translateX(0);
+  }
 }
-
 
 /* Wobble Top */
 @keyframes wobble-top {
-	16.65% {
-		transform: skew(-12deg);
-	}
+  16.65% {
+    transform: skew(-12deg);
+  }
 
-	33.3% {
-		transform: skew(10deg);
-	}
+  33.3% {
+    transform: skew(10deg);
+  }
 
-	49.95% {
-		transform: skew(-6deg);
-	}
+  49.95% {
+    transform: skew(-6deg);
+  }
 
-	66.6% {
-		transform: skew(4deg);
-	}
+  66.6% {
+    transform: skew(4deg);
+  }
 
-	83.25% {
-		transform: skew(-2deg);
-	}
+  83.25% {
+    transform: skew(-2deg);
+  }
 
-	100% {
-		transform: skew(0);
-	}
+  100% {
+    transform: skew(0);
+  }
 }
 /* Pulse Shrink */
 @keyframes pulse-shrink {
-	to {
-		transform: scale(.9);
-	}
+  to {
+    transform: scale(0.9);
+  }
 }
 
 /* 번호 */
 .main_center_wrapper .number {
-  padding-top:1%;
+  padding-top: 1%;
   margin-bottom: -1%;
-  font-size:2vw;
+  font-size: 2vw;
   margin-left: 13%;
   height: 9vh;
   width: 5vw;
@@ -590,7 +627,7 @@ export default {
   margin-top: 3%;
   margin-left: 15%;
   z-index: 1;
-  background-image: url("../../assets/images/Main/poster2.png");
+  background-image: url("../../assets/images/Main/poster.png");
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0px 16px 25px 2px #353535,
@@ -604,6 +641,7 @@ export default {
   padding: 2.5rem 7.5rem 2rem 0.5rem;
   text-align: center;
   transition-duration: 1.5s;
+  border: 0.3rem solid white;
 }
 
 .main_center_wrapper .poster__header {
@@ -625,7 +663,14 @@ export default {
   top: 6.4rem;
   font-size: 0.9rem;
   /*  font-weight: bold*/
+  text-decoration: none;
+  color:black;
 }
+.main_center_wrapper .poster__writer {
+  text-decoration: none;
+  color:black;
+}
+
 .main_center_wrapper .poster__date {
   position: absolute;
   z-index: 100;
@@ -647,91 +692,161 @@ export default {
 
 /*******  발자국 *******/
 .ajax-loader {
-    position: absolute;
-    top: 42.5%;
-    left: 12.5%;
-    transform: rotate(57.5deg) translate(0%, 0%);
-    font-size: 5vw;
-    width: 1em;
-    height: 7em;
-    color:  #494949;
+  position: absolute;
+  top: 41.5%;
+  left: 11.5%;
+  transform: rotate(62.5deg) translate(0%, 0%);
+  font-size: 5vw;
+  width: 1em;
+  height: 7em;
+  color: #494949;
 }
 
 .ajax-loader .paw {
-    width: 1.0em;
-    height: 1.3em;
-    animation: 10050ms pawAnimation ease-in-out infinite;
-    opacity: 0;
+  width: 1em;
+  height: 1.3em;
+  animation: 7050ms pawAnimation ease-in-out infinite;
+  opacity: 0;
 }
 
 .ajax-loader .paw svg {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .ajax-loader .paw .icon {
-    fill: currentColor;
+  fill: currentColor;
 }
 
 .ajax-loader .paw:nth-child(odd) {
-    transform: rotate(-10deg);
+  transform: rotate(-10deg);
 }
 
 .ajax-loader .paw:nth-child(even) {
-    transform: rotate(10deg) translate(125%, 0);
+  transform: rotate(10deg) translate(125%, 0);
+}
+
+.ajax-loader .paw:nth-child(0) {
+  animation-delay: 5.4s;
 }
 
 .ajax-loader .paw:nth-child(1) {
-    animation-delay: 2.5s;
+  animation-delay: 4.5s;
 }
 
 .ajax-loader .paw:nth-child(2) {
-    animation-delay: 2s;
+  animation-delay: 3.6s;
 }
 
 .ajax-loader .paw:nth-child(3) {
-    animation-delay: 1.5s;
+  animation-delay: 2.7s;
 }
 
 .ajax-loader .paw:nth-child(4) {
-    animation-delay: 1.0s;
+  animation-delay: 1.8s;
 }
 
 .ajax-loader .paw:nth-child(5) {
-    animation-delay: 0.5s;
+  animation-delay: 0.9s;
 }
 .no-cssanimations .ajax-loader .paw {
-    opacity: 1;
+  opacity: 1;
 }
 
 @keyframes pawAnimation {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Footer */
 .main_footer {
   display: block;
   background-color: #f4f5f9;
-  margin-top:-6.5vh;
-}
-
-.main_footer footer {
-  height: 3vh;
-}
-
-.main_footer footer .main_foot {
+  margin-top: -4.5vh;
+  height: 4vh;
+  height: auto;
+  text-align: center;
+  padding-left: 90vw;
+  overflow: visible;
+  background-color: cornflowerblue;
   width: 100%;
   font-family: "S-CoreDream-8Heavy", sans-serif;
-  color:#494949;
-  background-color: #f4f5f9;
+  color: #494949;
+}
+.main_footer .main_foot {
+  height: auto;
+  width: auto;
+}
+.main_footer .main_foot p {
+  width: 20vw;
+  height: 2vh;
+  opacity: 1;
+  margin-top: 0.5vh;
+  margin-left: -12vw;
+  position: absolute;
+}
+/* .main_footer .main_foot #main_bgm {
+  z-index: 1;
+  position: absolute;
+}
+.main_footer .main_foot #main_bgm2 {
+  z-index: 1;
+  position: absolute;
+  display: none;
 }
 
+.main_footer .main_foot audio {
+  display: none;
+} */
+
+/* 버튼 모양 */
+.main_footer .move_to_top{
+  z-index: 1;
+  position: absolute;
+  margin-left: 1.5vw;
+  margin-top:-0.3vh;
+}
+.unit__btn__main {
+	border: 0;
+	outline: 0;
+	font-size: 16px;
+	border-radius: 8px;
+	padding: 0.35rem;
+	background-color: #EBECF0;
+	text-shadow: 1px 1px 0 #FFF;
+  z-index: 99;
+	width: 35px;
+	height: 35px;
+  font-size: 19.2px;
+}
+
+.unit__btn__main {
+	color: #61677C;
+	font-weight: bold;
+	box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+.unit__btn__main:hover {
+	box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+
+.unit__btn__main:active {
+	box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+.unit__btn__main img {
+  width: 100%;
+  height: 100%;
+}
+/* .all__audios{
+width: 100%;
+height: 100%;
+} */
 </style>
