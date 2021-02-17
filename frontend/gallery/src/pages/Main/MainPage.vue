@@ -1,5 +1,5 @@
 <template>
-  <div class="Main_container">
+  <div class="Main_container" ondragstart="return false">
     <!-- FADE UP -->
     <div class="main_top_wrapper">
       <div class="banner">

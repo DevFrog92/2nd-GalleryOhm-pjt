@@ -1,6 +1,6 @@
 <template>
 
-  <body class="upload_picture_page">
+  <body class="upload_picture_page" ondragstart="return false">
     <!-- <div class="upload_picture_page_middle"> -->
     <div class="wrapPicture">
       <div class="previewPicture">

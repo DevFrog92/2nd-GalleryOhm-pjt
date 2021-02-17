@@ -1,5 +1,5 @@
 <template>
-  <div class="item-list-container">
+  <div class="item-list-container" ondragstart="return false">
     <div class="segment__works">
           <button class="unit__work unit__btn__works" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
               class='all__works__refresh'></button>

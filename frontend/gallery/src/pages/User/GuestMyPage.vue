@@ -1,5 +1,5 @@
 <template>
-  <div class="My_profile_guest_container">
+  <div class="My_profile_guest_container" ondragstart="return false">
     <div class="guest_profile_wrapper">
 
 
@@ -61,7 +61,7 @@
 
 
       <div class="dm__list_Guest" v-if="who_state">
-        <div class="exit__guest__dm" @click="DMsideclose">exit</div>
+        <div class="exit__guest__dm" @click="DMsideclose">나가기</div>
         <div class="showDmContent_Guest">
           <div class="message__name__cover__guest">
             <div class="sender_name">{{guest_name}}</div>
@@ -511,12 +511,14 @@
     created() {
       console.log('this.propsId', this.props_id)
       if (this.props_id && localStorage.getItem('user_id') !== localStorage.getItem('props_id')) {
+        this.who_state = true;
+        this.bell__state = false;
+      } else if (!this.props_id && localStorage.getItem('user_id') === localStorage.getItem('props_id')) {
         this.who_state = false;
         this.bell__state = true;
-      } else if (!this.props_id && localStorage.getItem('user_id') === localStorage.getItem('props_id')) {
+      } else if (localStorage.getItem('user_id') !== localStorage.getItem('props_id')) {
         this.who_state = true;
-      } else {
-        this.who_state = true;
+        this.bell__state = false;
       }
       this.getUserInfo();
       // following 목록

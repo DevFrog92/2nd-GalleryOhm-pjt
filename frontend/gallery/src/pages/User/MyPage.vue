@@ -1,5 +1,5 @@
 <template>
-  <div class="My_profile_container">
+  <div class="My_profile_container" ondragstart="return false">
     <div class="profile_wrapper">
 
 

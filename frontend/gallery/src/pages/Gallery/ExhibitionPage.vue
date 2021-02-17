@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery__poster__wrapper">
+  <div class="gallery__poster__wrapper" ondragstart="return false">
     <h1 class="titile__all__gallery">현재 기획 전시전 </h1>
     <div class="gallery_poster-list-container">
       <div class="all__gallery__btn">

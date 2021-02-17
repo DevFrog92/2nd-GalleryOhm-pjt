@@ -1,6 +1,6 @@
 <template>
   <div class="setting">
-    <div class="setting_grid">
+    <div class="setting_grid" ondragstart="return false">
 
       <div class="pw_center" v-if="!checkPassword_state">
         <p class="pw_check">회원 정보 수정을 원하시면 비밀번호를 입력해주세요. </p>

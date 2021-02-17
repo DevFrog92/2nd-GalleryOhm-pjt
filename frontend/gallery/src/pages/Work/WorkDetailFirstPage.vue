@@ -1,6 +1,6 @@
 <template>
 
-  <body class="picture_detail" id="why">
+  <body class="picture_detail" id="why" ondragstart="return false">
     <h1 class="picture_title" @click="moveToBottom">{{work_info.work_title}}</h1>
     <p class="picture_date deco_p"><strong><em>ⓒ 2021. {{work_info.work_artistId}} all rights reserved</em></strong></p>
     <h2 class="picture_subtitle">{{datetime.year}}년 {{datetime.month}}월 {{datetime.day}}일 작가 {{work_info.work_artistId}}
