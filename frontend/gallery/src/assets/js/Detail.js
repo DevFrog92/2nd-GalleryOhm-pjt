@@ -28,7 +28,7 @@ const init = ()=>{
         img.style.zIndex = 100;
         console.log('붙혔다')
       }else{
-        img.style.zIndex = 1;
+        img.style.zIndex = -2;
       }
     }
     })

@@ -28,7 +28,7 @@
   /* font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; */
   
   font-size: 16px;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
 }
 .picture_detail:after {
   content: '';
@@ -173,7 +173,7 @@ blockquote + pre_2 {
   -o-object-fit: cover;
      object-fit: contain;
   width: 100vw;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   cursor: pointer;
   position: relative;
 }
@@ -209,7 +209,7 @@ blockquote + pre_2 {
   }
 }
 .picture:before {
-  background: linear-gradient(0deg, #EBECF0, rgba(250,250,250,0.5));
+  background: linear-gradient(0deg, #f5f7fa, rgba(250,250,250,0.5));
   bottom: -2px;
   content: '';
   left: 0;
@@ -219,7 +219,7 @@ blockquote + pre_2 {
   z-index: 2;
 }
 .picture:after {
-  background: linear-gradient(0deg, transparent, #EBECF0);
+  background: linear-gradient(0deg, transparent, #f5f7fa);
   content: '';
   height: 10vh;
   left: 0;
@@ -469,7 +469,7 @@ blockquote + pre_2 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background: #EBECF0;
+  background: #f5f7fa;
   /* width: 120px;  */
   /* height: 60px; */
   /* text-align: left; */
@@ -570,7 +570,7 @@ background-color: indigo;
 	font-size: 16px;
 	border-radius: 320px;
 	padding: 0.7rem;
-	background-color: #EBECF0;
+	background-color: #f5f7fa;
 	text-shadow: 1px 1px 0 #FFF;
 }
 

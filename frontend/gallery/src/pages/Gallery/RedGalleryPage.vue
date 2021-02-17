@@ -65,8 +65,8 @@ export default {
   },
   components: {},
   created() {
-    // http.get(`/gallery/getAdultGallery`).then(
-    http.get(`/gallery/getAllSubGallery`).then(
+    http.get(`/gallery/getAdultGallery`).then(
+    // http.get(`/gallery/getAllSubGallery`).then(
       (response) => {
         var data = response.data;
         for (var i = 0; i < data.length; i++) {

@@ -47,23 +47,24 @@
               <!-- 좋아요 되어있는 상태 -->
               <div class="cost_info">
                 <img
-                  src="../../assets/images/coin_active.png"
+                  src="../../assets/images/won (1).png"
                   alt="코스트"
                   @click="deleteCost()"
                 />
-                <p>{{ costCnt }}</p>
               </div>
             </div>
             <div class="cost cost_no" v-else>
               <!-- 좋아요 안되어있는 상태 -->
               <div class="cost_info">
                 <img
-                  src="../../assets/images/coin.png"
+                  src="../../assets/images/won.png"
                   alt="코스트"
                   @click="addCost()"
                 />
-                <p>{{ costCnt }}</p>
               </div>
+            </div>
+            <div class="costCnt">
+              {{ totalCost }}
             </div>
           </div>
         </div>
@@ -89,13 +90,13 @@
             <!-- 작품 해시태그 -->
             <div class="hashtags" v-if="hashtags.length != 0">
               <p v-for="(tag, i) in hashtags" :key="i" class="hashtag">
-                #{{tag}}
+                #{{ tag }}
               </p>
             </div>
             <div class="modify" v-if="artistState">
               <!-- 작가 본인이라면 수정, 삭제 -->
               <button
-                class="unit__work unit__btn__works"
+                class="modify__work modify__btn__works"
                 type="button"
                 @click="modifyWork()"
               >
@@ -107,7 +108,7 @@
               </button>
 
               <button
-                class="unit__work unit__btn__works"
+                class="modify__work modify__btn__works"
                 type="button"
                 @click="deleteWork()"
               >
@@ -115,6 +116,30 @@
                   src="../../assets/images/delete.png"
                   alt=""
                   class="all__works__delete"
+                />
+              </button>
+              <button
+                class="modify__work modify__btn__works"
+                type="button"
+                @click="goBack()"
+              >
+                <img
+                  src="../../assets/images/back.png"
+                  alt=""
+                  class="all__works__back"
+                />
+              </button>
+            </div>
+            <div class="modify" v-else>
+              <button
+                class="modify__work modify__btn__works"
+                type="button"
+                @click="goBack()"
+              >
+                <img
+                  src="../../assets/images/back.png"
+                  alt=""
+                  class="all__works__back"
                 />
               </button>
             </div>
@@ -153,6 +178,7 @@ export default {
       costState: false,
       scrapState: false,
       costCnt: 0,
+      totalCost: 0,
       hashtags: [],
     };
   },
@@ -184,6 +210,7 @@ export default {
           work.work_piece = "data:image/jpeg;base64," + work.work_piece;
           this.work = work;
           this.costCnt = this.work.work_cost;
+          this.totalCost = this.costCnt * 100;
           this.hashtags = this.work.hashtags;
         },
         (error) => {
@@ -262,7 +289,7 @@ export default {
         localStorage.setItem("props_id", this.work.work_artistId);
 
         router.push({
-          name: "UserProfile",
+          name: "ArtistMyPage",
           params: { props_id: this.work.work_artistId },
         });
       }
@@ -316,6 +343,7 @@ export default {
             alert("작품 좋아요");
             this.costState = true;
             this.costCnt += 1;
+            this.totalCost += 100;
           },
           (error) => {
             console.log(error);
@@ -335,6 +363,7 @@ export default {
             alert("작품 좋아요 취소");
             this.costState = false;
             this.costCnt -= 1;
+            this.totalCost -= 100;
           },
           (error) => {
             console.log(error);
@@ -342,13 +371,24 @@ export default {
         );
     },
     deleteWork() {
-      this.$store.dispatch("deleteWork", this.work.work_id);
+      if (confirm("작품을 삭제하시겠습니까?")) {
+        this.$store.dispatch("deleteWork", this.work.work_id).then(() => {
+          history.go(-1);
+        });
+      }
     },
     modifyWork() {
       this.$router.push({
         name: "WorkUpLoad",
-        params: { work_info: this.work, mode: "modify" },
+        params: {
+          work_info: this.work,
+          mode: "modify",
+          hashtags: this.hashtags,
+        },
       });
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };
@@ -364,10 +404,11 @@ export default {
   font-style: normal;
 }
 @font-face {
-    font-family: 'Cafe24Ohsquare';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Cafe24Ohsquare";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .preview {
@@ -583,15 +624,49 @@ footer .foot .t {
   filter: opacity(0.5) drop-shadow(0 0 0 yellow);
 }
 
-.unit__btn__works:hover {
+.costCnt {
+  display: inline;
+  width: 5vw;
+  height: 5vh;
+  padding-left: 1vw;
+
+  font-family: "S-CoreDream-8Heavy";
+}
+
+.modify__btn__works {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 0.7rem;
+  background-color: #ebecf0;
+  text-shadow: 1px 1px 0 #fff;
+  z-index: 99;
+}
+
+.modify__btn__works {
+  color: #61677c;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.all__works__modify,
+.all__works__delete,
+.all__works__back {
+  width: 100%;
+  height: 100%;
+}
+
+.modify__btn__works:hover {
   box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
 }
 
-.unit__btn__works:active {
+.modify__btn__works:active {
   box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
 }
 
-.unit__btn__works.unit__work {
+.modify__btn__works.modify__work {
   border-radius: 8px;
   line-height: 0;
   width: 50px;
@@ -599,24 +674,23 @@ footer .foot .t {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  vertical-align: middle;
   margin: 0 8px;
   font-size: 19.2px;
 }
 
-.modify{
+.modify {
   margin-top: 2vh;
 }
 
-.size{
+.size {
   margin-top: 1.5vh;
 }
 
-.hashtags{
+.hashtags {
   margin-top: 1.5vh;
 }
 
-.hashtags .hashtag{
+.hashtags .hashtag {
   display: inline;
 }
 </style>
