@@ -6,15 +6,11 @@
         <div class="gallery_article">
           <div class="gallery__desc__aside">
             <span></span>
-            <div class="created_by">
-              Curated by
-            </div>
+            <div class="created_by">Curated by</div>
             <div class="gallery_director">
               {{ gallery_info.gallery_artistId }}
             </div>
-            <div class="gallery__desc__show">
-              Explore
-            </div>
+            <div class="gallery__desc__show">Explore</div>
           </div>
           <div class="gallery__desc__aside_desc">
             <p>
@@ -31,10 +27,13 @@
         <div class="gonna-give-light"></div>
       </div>
     </div>
-    <div class="close__btn" @click="goBack">
-      <!-- <i class="icon-back"></i> -->
-      <img class="icon-back" src="../../assets/images/back.png" style="width: 1.5vw;"/>
-    </div>
+    <button
+      class="back__gallery back__btn__gallery"
+      type="button"
+      @click="goBack"
+    >
+      <img class="back__btn" src="../../assets/images/back.png" />
+    </button>
     <div class="qurating" @click="qurating = !qurating">
       <i class="icon-mic-1" v-if="!qurating"></i>
       <i class="icon-mic-1" v-else></i>
@@ -58,7 +57,12 @@
             v-for="(item, index) of work_list"
             :key="index"
           >
-            <img class="gallery__image" :src="item.work_piece" :alt="item.work_title" :data-value="item.work_id" />
+            <img
+              class="gallery__image"
+              :src="item.work_piece"
+              :alt="item.work_title"
+              :data-value="item.work_id"
+            />
             <div class="item__title">
               <h1>{{ item.work_title }}</h1>
             </div>
@@ -106,7 +110,7 @@ export default {
   methods: {
     clickHandler(e) {
       if (e.target.classList.contains("gallery__image")) {
-        console.log("===> "+e.target.dataset.value);
+        console.log("===> " + e.target.dataset.value);
         router.push({
           name: "DetailPage2",
           params: { work_id: e.target.dataset.value },
@@ -115,10 +119,13 @@ export default {
     },
     getFootPrint() {
       http
-        .post(`/gallery/isFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
+        .post(
+          `/gallery/isFootPrintToGallery/${this.props_id}`,
+          localStorage.getItem("user_id")
+        )
         .then((response) => {
           const flag = response.data.count;
-          if(flag == 0) {
+          if (flag == 0) {
             this.footprint = false;
           } else {
             this.footprint = true;
@@ -129,27 +136,33 @@ export default {
         });
     },
     giveFootprint() {
-      if(!this.footprint) {
+      if (!this.footprint) {
         // 발자국 X
-         http
-        .post(`/gallery/giveFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
-        .then((response) => {
-          console.log("====> "+response.data.state)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        http
+          .post(
+            `/gallery/giveFootPrintToGallery/${this.props_id}`,
+            localStorage.getItem("user_id")
+          )
+          .then((response) => {
+            console.log("====> " + response.data.state);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         this.footprint = !this.footprint;
       } else {
         // 발자국 O
-         http
-        .post(`/gallery/cleanFootPrintToGallery/${this.props_id}`, localStorage.getItem('user_id'))
-        .then((response) => {
-          console.log("====> "+response.data.state)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        http
+          .post(
+            `/gallery/cleanFootPrintToGallery/${this.props_id}`,
+            localStorage.getItem("user_id")
+          )
+          .then((response) => {
+            console.log("====> " + response.data.state);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         this.footprint = !this.footprint;
       }
     },
@@ -177,7 +190,7 @@ export default {
         this.gallery_desc = this.gallery_info.gallery_desc;
       });
     },
-    tts: function() {
+    tts: function () {
       return http
         .post(
           `/kakao/makeVoice_byteArr`,
