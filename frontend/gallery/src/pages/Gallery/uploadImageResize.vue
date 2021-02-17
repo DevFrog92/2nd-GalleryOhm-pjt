@@ -81,12 +81,12 @@
           <label for="pictureTag">해쉬태그</label>
           <div class="hashtag">
             <p>* 태그는 ,(쉼표)를 기준으로 구분됩니다.</p>
-            <textarea
+            <!-- <textarea
               name="hashtagList"
               id="hashtagList"
               v-model="hashtag_list"
-            ></textarea>
-            <!-- <div class="tags-input"></div> -->
+            ></textarea> -->
+            <div class="tags-input"></div>
           </div>
         </div>
 
