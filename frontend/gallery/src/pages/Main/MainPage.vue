@@ -1,5 +1,5 @@
 <template>
-  <div class="Main_container" ondragstart="return false">
+  <div class="Main_container">
     <!-- FADE UP -->
     <div class="main_top_wrapper">
       <div class="banner">
@@ -349,14 +349,13 @@ export default {
   display: inline-block;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
-  color: #494949;
   font: normal 400 20px/1 "S-CoreDream-8Heavy", sans-serif;
   letter-spacing: 0.1em;
   text-decoration: none;
   transition: opacity 0.3s;
 }
 .downArrow a p{
-  color: #494949;
+  color: #EFB730;
 }
 .downArrow a:hover {
   opacity: 0.5;
@@ -368,7 +367,7 @@ export default {
   width: 30px;
   height: 50px;
   margin-left: -15px;
-  border: 3px solid #494949;
+  border: 3px solid #EFB730;
   border-radius: 50px;
   box-sizing: border-box;
 }
@@ -395,7 +394,7 @@ export default {
   width: 6px;
   height: 6px;
   margin-left: -3px;
-  background-color: #494949;
+  background-color: #EFB730;
   border-radius: 100%;
   -webkit-animation: sdb10 2s infinite;
   animation: sdb10 2s infinite;
@@ -460,8 +459,8 @@ export default {
 .main_center_wrapper .main_poster_nickname {
   width: 150%;
   height: 50%;
-  -webkit-text-stroke: 0.1rem #494949;
-  -webkit-text-fill-color: #494949;
+  -webkit-text-stroke: 0.3rem #EFB730;
+  -webkit-text-fill-color: transparent;
   /* -webkit-text-fill-color: transparent; */
   font-size: 4.9vw;
   font-family: "S-CoreDream-8Heavy", sans-serif;
