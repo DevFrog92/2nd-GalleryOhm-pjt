@@ -1,6 +1,18 @@
 
 * {
   box-sizing: border-box;
+
+}
+
+.wrap__login{
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f5f7;
+  font-family:  'Noto Sans KR', sans-serif;
+}
+.wrap__login input {
+  box-shadow: 5px 5px 8px -3px rgba(0,0,0,0.4);
+  font-family:  'Noto Sans KR', sans-serif;
 }
 
 #singup_container {
@@ -27,7 +39,7 @@ input ~ .focus-border {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #FF416C;
+  background-color: #EFB730;
 }
 
 input:focus ~ .focus-border 
@@ -41,40 +53,44 @@ input:focus ~ .focus-border
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
-  margin: 5rem 0;
+  font-family:  'Noto Sans KR', sans-serif;
+  /* margin: 5rem 0; */
   
 }
 
 .signup_title,
 .signin_title {
   font-weight: bold;
-  margin: 1.2rem 0 1.2em ;
+  margin: 2rem 0 1.2em ;
   font-size: 2.3rem;
+  font-family: 'S-CoreDream-8Heavy';
+  
+text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);
+
 }
 
 
 .login_signup_form p {
-  font-size: 14px;
-  font-weight: 100;
+  font-size: 0.8rem;
+  font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
 }
 
-
 .loginFormBtn {
   border-radius: 20px;
-  border: 1px solid #FF4B2B;
-  background-color: #FF4B2B;
+  border: 1px solid #EFB730;
+  background-color: #EFB730;
   color: #FFFFFF;
-  font-size: 12px;
+  font-size: 1rem;
   font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
   cursor: pointer;
+  box-shadow: 5px 5px 8px -3px rgba(0,0,0,0.4);
 }
 
 
@@ -107,7 +123,8 @@ input:focus ~ .focus-border
 
 .signup_btn {
   /* margin-top: 2.5em; */
-  margin-bottom:1rem;
+  margin-bottom:2.5rem;
+  box-shadow: 5px 5px 8px -3px rgba(0,0,0,0.4);
 }
 
 #id_uniqe_check {
@@ -119,12 +136,13 @@ input:focus ~ .focus-border
 }
 
 .id_check_before {
-  font-size: 2rem;
+  font-size: 3rem;
+  margin-left: 10px;
   color: #DDDDDD;
 }
 
 .id_check_after {
-  color: #FF416C;
+  color: #EFB730;
 }
 .id_unique {
   width: 100%;
@@ -140,7 +158,8 @@ input:focus ~ .focus-border
 }
 
 .signin_btn {
-  margin-top: 22px;
+  margin-top: 25px;
+  box-shadow: 5px 5px 8px -3px rgba(0,0,0,0.4);
 }
 
 .loginFormBtn:active {
@@ -153,13 +172,15 @@ input:focus ~ .focus-border
 
 .ghost {
   background-color: transparent;
-  border-color: #FFFFFF;
+  /* border-color: #f6f5f7; */
+  text-shadow: 1px 1px 2px #666; 
+
 }
 
 
 
 form {
-    background-color: #FFFFFF;
+    background-color: #f6f5f7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +199,7 @@ form {
 }
 
 .login_signup_container {
-  background-color: #fff;
+  background-color: #f6f5f7;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
@@ -187,15 +208,9 @@ form {
   width: 60%;
   max-width: 100%;
   min-height: 60%;
+  margin: 6rem 0;
 }
-@media (max-width:1366px){
-  .login_signup_container{
-    width: 70%;
-  }
-  .signup_title{
-    font-size: 2rem;
-  }
-}
+
 
 .form-container {
   position: absolute;
@@ -259,9 +274,9 @@ form {
 }
 
 .overlay {
-  background: #FF416C;
-  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  background: #EFB730;
+  background: -webkit-linear-gradient(to right,#f7a72f, #f09307, #EFB730);
+  background: linear-gradient(to right,#EFB730 ,#f7a72f, #EFB730);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -279,6 +294,7 @@ form {
 }
 
 .overlay-panel {
+  
   position: absolute;
   display: flex;
   align-items: center;
@@ -355,7 +371,7 @@ form {
   width: 400px;
   height:300px;
   border-radius: 0.5rem;
-  border: 2px solid red;
+  border: 2px solid #EFB730;
 }
 
 
@@ -369,14 +385,14 @@ form {
   width: 400px;
   height:350px;;
   border-radius: 0.5rem;
-  border: 2px solid red;
+  border: 2px solid #EFB730;
 }
 
 .modal_focus_container {
   margin:0.2rem 0 0.2rem 0.9rem;
   width: 90%;
   position: relative;
-  
+  font-family:  'Noto Sans KR', sans-serif;
 }
 
 .close_button,
@@ -449,9 +465,10 @@ form {
   text-align: center;
   font-size: 32px;
   margin-bottom: 15px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'S-CoreDream-8Heavy';
   font-weight: bold;
   margin-top: 29px;
+  text-shadow: 1px 2px 3px #666;
 
 }
 
@@ -463,11 +480,11 @@ form {
   outline: 0;
   background-color: transparent;
   color: black;
-  font-size: 13px;
+  font-size: 0.8rem;
   letter-spacing: 0px;
   cursor: pointer;
-  margin-top: 5px;
- 
+  margin-top: 10px;
+  text-shadow: 1px 1px 1px #666; 
 }
 
 .trigger{
@@ -476,10 +493,12 @@ form {
   outline: 0;
   background-color: transparent;
   color: black;
-  font-size: 13px;
+  font-size: 0.8rem;
   letter-spacing: 0px;
   cursor: pointer;
-  margin-top: 13px;
+  margin-top: 20px;
+  text-shadow: 1px 1px 1px #666; 
+
 }
 
 .trigger:hover,
@@ -511,7 +530,7 @@ form {
   width: 32rem;
   z-index: 999;
   border-radius: 0.5rem;
-  border: 2px solid red;
+  border: 2px solid #EFB730;
 }
 #info_terms{
   font-weight: bold;
@@ -531,6 +550,7 @@ form {
 /*  height: auto;*/
   margin:0 1em;
   margin-top:0.4em;
+  box-shadow: 0px 0px ;
 }
 .triggerTerms{
   font-size: 15px;
@@ -540,11 +560,12 @@ form {
 .overlay-right h1, .overlay-left h1{
   font-size:1.4rem;
   font-weight: bold;
-  
+  text-shadow: 1px 2px 3px #666;
 }
 .overlay-right p, .overlay-left p{
   font-size:1.2rem;
-  
+  text-shadow: 1px 2px 2px #666;
+  font-family:  'Noto Sans KR', sans-serif;
 }
 /*
 .social-container {
@@ -592,3 +613,18 @@ object-fit: cover;
 }
 
 */
+
+
+@media (max-width:1366px){
+  .login_signup_container{
+    width: 70%;
+  }
+  .signup_title{
+    font-size: 2rem;
+  }
+  .login_signup_form p{
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+}
