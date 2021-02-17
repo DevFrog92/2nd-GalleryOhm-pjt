@@ -1,5 +1,20 @@
 <template>
   <header id='headerpage-header'>
+    <div class="nav__left">
+      <router-link to="/"> <div class="nav__logo"></div></router-link>
+      <button class="unit__audio unit__btn__audios" id="main_bgm" type="button" @click="muteAudio"><img src="../assets/images/Main/audio.png" alt=""
+              class='all__audios'></button>
+              <button class="unit__audio unit__btn__audios" id="main_bgm2" type="button" @click="playAudio"><img src="../assets/images/Main/audio_mute.png" alt=""
+              class='all__audios'></button>
+        <audio
+          autoplay
+          controls
+          id="sound"
+          loop
+          preload="auto"
+          src="../assets/images/Main/bgm.mp3"
+        ></audio>
+    </div>
       <nav class="nav" >
     <input type="checkbox" class="nav__cb" id="menu-cb" />
     <div class="nav__content">
@@ -119,7 +134,25 @@
           console.log('Artist')
           this.$router.push('/mypage')
         }
-      }
+      },
+      muteAudio() {
+      var audioBtn = document.querySelector(".nav__left #main_bgm");
+      var audioMuteBtn = document.querySelector(".nav__left #main_bgm2");
+      audioBtn.style.display = "none";
+      audioMuteBtn.style.display = "block";
+
+     var sound = document.querySelector(".nav__left #sound");
+      sound.pause();
+    },
+    playAudio() {
+      var audioBtn = document.querySelector(".nav__left #main_bgm");
+      var audioMuteBtn = document.querySelector(".nav__left #main_bgm2");
+      audioBtn.style.display = "block";
+      audioMuteBtn.style.display = "none";
+
+      var sound = document.querySelector(".nav__left #sound");
+      sound.play();
+    },
     }
   }
 </script>
