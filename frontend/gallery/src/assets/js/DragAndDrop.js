@@ -1,6 +1,6 @@
 
 const init = (gallery_works,num) => {
-  console.log('함수 실행',gallery_works);
+  // console.log('함수 실행',gallery_works);
   // if(gallery_works.length >0 && gallery_works.length !== 15){
   //   for(let i=0; i<(15-Number(num));i++){
   //     gallery_works.push({work_id:'',work_piece:''});
@@ -11,7 +11,7 @@ const init = (gallery_works,num) => {
   const slider = document.querySelector('.sub_carousel__slider');
 
 
-  console.log(slider);
+  // console.log(slider);
   const prevBtn = document.querySelector('.sub_carousel__prev');
   const nextBtn = document.querySelector('.sub_carousel__next');
 
@@ -23,7 +23,7 @@ const init = (gallery_works,num) => {
   function createBlock() {
     const maxNumGallery = 15;
     if(gallery_works.length){
-      console.log('galley id 존재',gallery_works);
+      // console.log('galley id 존재',gallery_works);
       for (let i = 0; i < num; i++) {
         // let img_url = gallery_works[i].work_piece
         const subItem = document.createElement('div');
@@ -34,9 +34,9 @@ const init = (gallery_works,num) => {
         slider.appendChild(subItem);
       }
       const fills = document.querySelectorAll('.sub_carousel__slider__item .empty .fill');
-      console.log(fills)
+      // console.log(fills)
       for (let i=0; i< num; i++){
-        console.log(fills[i].style);
+        // console.log(fills[i].style);
         fills[i].style.backgroundImage ="url(data:image/jpeg;base64,"+ gallery_works[i].work_piece+")";
       }
     }
@@ -65,7 +65,7 @@ const init = (gallery_works,num) => {
       totalWidth = width * items.length;
 
     slider.style.width = totalWidth + "px";
-    console.log(slider.style.width);
+    // console.log(slider.style.width);
     for (var i = 0; i < items.length; i++) {
       let item = items[i];
       item.style.width = (width - (margin * 2)) + "px";
@@ -76,7 +76,7 @@ const init = (gallery_works,num) => {
   function move(index) {
     const items = document.querySelectorAll('.sub_carousel__slider__item');
 
-    console.log("move", index);
+    // console.log("move", index);
     if (index < 1) index = items.length;
     if (index > items.length) index = 1;
     currIndex = index;
@@ -118,28 +118,6 @@ const init = (gallery_works,num) => {
   }
 
 
-  // function sliderEventHandler (e){
-  // let targetElem = e.target;
-  //   if(targetElem.classList.contains('gallery__image')){
-  //     alert(targetElem.dataset.value,"디테일 페이지로 이동");
-  //     // let targetParentNode = targetElem.parentNode;
-  //     // while(!targetParentNode.classList.contains("carousel__slider__item")){
-  //     //       targetParentNode = targetParentNode.parentNode;
-  //     // }
-  //     console.log(targetElem.dataset.index);
-  //     move(Number(targetElem.dataset.index)+1);
-  //   }else{
-  //     console.log(targetElem)
-  //   }
-  // }
-  // const mainCarousel = document.querySelector('.main__carousel');
-  // mainCarousel.addEventListener('click',sliderEventHandler);
-
-
-
-
-
-
   // drag and drop/////////////
 
   const filles = document.querySelectorAll('.fill');
@@ -170,7 +148,7 @@ const init = (gallery_works,num) => {
   }
 
   function dragEnd() {
-    console.log('end');
+    // console.log('end');
 
     this.className = "fill";
 
