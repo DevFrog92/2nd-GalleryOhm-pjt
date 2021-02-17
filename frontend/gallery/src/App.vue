@@ -1,5 +1,5 @@
 <template>
-  <div id="app" onselectstart="return false"  oncontextmenu="return false">
+  <div id="app" onselectstart="return false" oncontextmenu="return false">
     <HeaderPage></HeaderPage>
     <router-view :key="$route.fullPath" />
   </div>

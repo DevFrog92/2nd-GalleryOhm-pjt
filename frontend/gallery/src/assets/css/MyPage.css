@@ -721,6 +721,9 @@
 
 .second__section {
   position: relative;
+  display: flex;
+  align-items: flex-start;
+height: 100vh;
   /* background-image: url('../images/background6.jpg'); */
 }
 
@@ -999,7 +1002,7 @@ position: relative;
   scrollbar-width:none;
   -ms-overflow-style:none;
 	/* background:#f5f7fa; */
-  /* background-image: url('../images/ex_back.png'); */
+  background-image: url('../images/ex_back.png');
 
 } 
 
@@ -2270,4 +2273,17 @@ position: relative;
   left: 50%;
   transform: translate(-50%,-50%);
   font-family: 'S-CoreDream-8Heavy';
+}
+
+@media (max-width:1024px){
+  .profile_wrapper{
+    transform: translate(0,-20%);
+  }
+  .second__section h1{
+    top: 5%; 
+  }
+
+  h1{
+    font-size: 2rem;
+  }
 }

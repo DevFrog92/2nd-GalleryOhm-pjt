@@ -51,15 +51,15 @@
       <div class="dele_pic_btn_container " v-show="user_state">
         <div class="detail_back_button" @click="showModal = true">
           <button class="unit__detail__first unit__btn__detail__first" type="button"
-            @click.prevent="change_date_works"><img src="../../assets/images/delete.png" alt=""></button></div>
+            ><img src="../../assets/images/delete.png" alt=""></button></div>
       </div>
       <div class="mod_pic_btn_container " v-show="user_state">
         <div class="detail_back_button" @click="modifyWork"> <button class="unit__detail__first unit__btn__detail__first" type="button"
-            @click.prevent="change_date_works"><img src="../../assets/images/pencil.png" alt=""></button></div>
+            ><img src="../../assets/images/pencil.png" alt=""></button></div>
       </div>
       <div class="back_btn_container last_p">
         <div class="detail_back_button" @click="Back"> <button class="unit__detail__first unit__btn__detail__first" type="button"
-            @click.prevent="change_date_works"><img src="../../assets/images/undo.png" alt=""></button></div>
+            ><img src="../../assets/images/undo.png" alt=""></button></div>
       </div>
     </div>
     <div class="imgSacleUp">
@@ -132,6 +132,7 @@
     },
     mounted() {
       init.init();
+      window.scrollTo(0,0);
     },
     props: [
       'work_id'
@@ -220,13 +221,14 @@
         this.like_state = !this.like_state;
       },
       getWorkDetail() {
-        http.get(`/work/getWork/${localStorage.getItem('work_id')}`)
+        http.get(`/work/getWork/`+localStorage.getItem('work_id'))
           .then(response => {
+            console.log('work id',response.data)
             this.work_info = response.data;
             this.total_like = response.data.work_cost;
 
             this.work_info.work_piece = "data:image/jpeg;base64," + response.data.work_piece;
-
+            this.img_url = this.work_info.work_piece;
             this.datetime.year = this.work_info.work_uploadDate.slice(0, 4)
             this.datetime.month = this.work_info.work_uploadDate.slice(5, 7)
             this.datetime.day = this.work_info.work_uploadDate.slice(8, 10)

@@ -143,20 +143,26 @@ export default {
       }
     },
     moveToMypage() {
-      if (
-        this.$router.history.current.name === "MyPage" ||
-        this.$router.history.current.name === "GuestMyPage"
-      ) {
-        this.$router.go();
-        return;
-      }
+     
       this.user_type = localStorage.getItem("user_type");
       this.user_id = localStorage.getItem("user_id");
-      if (this.user_type === "1" || this.user_type === "0") {
-        localStorage.setItem("props_id", this.user_id);
+      if (this.user_type === "1") {
+        console.log('Guest')
+        if(this.$router.history.current.name === "GuestMyPage"){
+          this.$router.history.current.name === "GuestMyPage"
+        }else{
+
+          localStorage.setItem("props_id", this.user_id);
         this.$router.push("/guestmypage");
+        }
       } else if (this.user_type === "2") {
+         if (this.$router.history.current.name === "MyPage"){
+        this.$router.go();
+        
+      }else{
+        console.log('Artist')
         this.$router.push("/mypage");
+      }
       }
     },
     /* 오디오 일시정지 */

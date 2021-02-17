@@ -18,6 +18,7 @@
   font-family: 'S-CoreDream-8Heavy';
   font-size: 3rem;
   letter-spacing: 5px;
+	/* color: #EFB730; */
 	text-shadow: 3px 2.5px 3px #777;
 }
 
@@ -52,42 +53,29 @@
 
 }
 
-@media (max-width: 1250px) {
-	.gallery_poster-list-container {
-		padding: 0 2rem;
-	}
-	.gallery_poster-lists {
-		grid-template-columns: 1fr 1fr 1fr;
-		/* grid-auto-rows: 7%; */
 
-	}
-}
-	 
-
- @media (max-width: 1200px) {
+ /* @media (max-width: 1200px) {
 	.gallery_poster-list-container  {
 		padding: 0 2rem;
 	}
 	 
 	.gallery_poster-lists{
 		grid-template-columns: 1fr 1fr 1fr 1fr;
-		/* grid-auto-rows: 15%; */
 
 	}
-}
- @media (max-width: 992px) {
+} */
+ /* @media (max-width: 992px) {
 	.gallery_poster-list-container  {
 		padding: 0 2rem;
 	}
 	 
 	.gallery_poster-lists {
 		grid-template-columns: 1fr 1fr 1fr;
-		/* grid-auto-rows: 10%; */
 
 
 	}
-}
- @media (max-width: 760px) {
+} */
+ @media (max-width: 768px) {
 	.gallery_poster-list-container  {
 		padding: 0 1rem;
 	}
@@ -188,7 +176,7 @@
 	left: 0;
 	width: 30px;
 	height: 30px;
-	background: #333;
+	background: #EFB730;
 	box-shadow: 112.5px 112.5px 20px #000;
 	animation: move 2s ease-in-out infinite both;
 	transform-style: preserve-3d;
@@ -212,14 +200,14 @@
 .gallery_poster_box:before {
 	top: 100%;
 	left: 0;
-	background: #333;
+	background: #EFB730;
 	transform-origin: center top;
 	transform: rotateX(-90deg);
 }
 .gallery_poster_box:after {
 	top: 0;
 	left: 100%;
-	background: #222;
+	background: #EFB730;
 	transform-origin: center left;
 	transform: rotateY(90deg);
 }
@@ -513,3 +501,42 @@ height: 130%
 	font-size: 19.2px;
 }
 
+@media (max-width:1366px){
+	.all__gallery__btn{
+		left: 1.4rem;
+	}
+	.gallery__poster{
+		width: 27rem;
+		height: 39rem;
+	}
+	.gallery__poster img {
+		filter: grayscale(0%);
+	}
+}
+
+@media (max-width:1024px){
+	.all__gallery__btn{
+		left: 0rem;
+	}
+	.gallery__poster{
+		width: 21rem;
+		height: 28rem;
+	}
+	.gallery__poster img {
+		filter: grayscale(0%);
+	}
+}
+
+@media (max-width:768px){
+	.all__gallery__btn{
+		left: 50%;
+		transform: translate(-50%);
+	}
+	.gallery__poster{
+		width: 21rem;
+		height: 30rem;
+	}
+	.gallery__poster img {
+		filter: grayscale(0%);
+	}
+}
