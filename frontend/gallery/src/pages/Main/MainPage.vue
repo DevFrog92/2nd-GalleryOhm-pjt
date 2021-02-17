@@ -1,5 +1,5 @@
 <template>
-  <div class="Main_container" ondragstart="return false">
+  <div class="Main_container">
     <!-- FADE UP -->
     <div class="main_top_wrapper">
       <div class="banner">
@@ -37,8 +37,17 @@
       </div>
 
       <div class="DescriptionText"></div>
-      <div class="downArrow" @click="downMain(); playAudio()">
-        <a><span></span><p>Scroll</p></a>
+      <div
+        class="downArrow"
+        @click="
+          downMain();
+          playAudio();
+        "
+      >
+        <a
+          ><span></span>
+          <p>Scroll</p></a
+        >
       </div>
     </div>
 
@@ -110,20 +119,13 @@
     <div class="main_footer">
       <div class="main_foot">
         <p>ⓒ 2021. 갤러리옴. All rights reserved.</p>
-        <button class="unit__main unit__btn__main move_to_top" type="button" @click="upMain"><img src="../../assets/images/up-arrow.png"
-          alt=""></button>
-        <!-- <button class="unit__audio unit__btn__audios" id="main_bgm" type="button" @click="muteAudio"><img src="../../assets/images/Main/audio.png" alt=""
-              class='all__audios'></button>
-              <button class="unit__audio unit__btn__audios" id="main_bgm2" type="button" @click="playAudio"><img src="../../assets/images/Main/audio_mute.png" alt=""
-              class='all__audios'></button>
-        <audio
-          autoplay
-          controls
-          id="sound"
-          loop
-          preload="auto"
-          src="../../assets/images/Main/audio4_slow.mp3"
-        ></audio> -->
+        <button
+          class="unit__main unit__btn__main move_to_top"
+          type="button"
+          @click="upMain"
+        >
+          <img src="../../assets/images/up-arrow.png" alt="" />
+        </button>
       </div>
     </div>
   </div>
@@ -131,10 +133,6 @@
 
 <script>
 import http from "../../api/http";
-// npm install --save vue-typed-js
-// import Vue from "vue";
-// import VueTypedJs from "vue-typed-js";
-// Vue.use(VueTypedJs);
 
 export default {
   data() {
@@ -193,8 +191,7 @@ export default {
   created() {
     this.getAllMainGallery();
   },
-  mounted() {
-  },
+  mounted() {},
   updated() {},
   methods: {
     downMain() {
@@ -275,22 +272,17 @@ export default {
   font-style: normal;
 }
 .Main_container {
-  background-color:#f5f7fa;
+  background-color: #f5f7fa;
   width: 100%;
   height: 100%;
 }
 /*************** 첫 화면 *****************/
-/* @keyframes showTopText {
-  0% { transform: translate3d(0, 100%, 0); }
-  40%, 60% { transform: translate3d(0, 50%, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-} */
 .main_top_wrapper {
   width: 100%;
   height: 101.2vh;
   background-size: cover;
   padding: 1%;
-   background-color: #f5f7fa;
+  background-color: #f5f7fa;
 }
 
 .main_top_wrapper .banner {
@@ -300,12 +292,6 @@ export default {
   height: 55%;
   margin: 5.5vh auto;
   padding: auto;
-
-  /* overflow: hidden;
-  position: absolute;
-  border-bottom: 1vmin solid #494949;
-  top: 0;
-  margin-left: 20%; */
 }
 .main_top_wrapper .main_logo {
   font-size: 12vw;
@@ -315,18 +301,11 @@ export default {
   width: 100%;
   height: 100%;
   margin: auto;
-  /* background-color: #f5f7fa; */
-  /* font-family: "Hanna"; */
   background-image: url("../../assets/images/Main/gallery_logo.png");
   background-size: 100%;
   background-repeat: no-repeat;
-
-  /* position:absolute;
-  animation: showTopText 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
-  transform: translate(0, 100%); */
 }
+
 /*************** scroll ***************/
 .main_top_wrapper .downArrow {
   position: absolute;
@@ -349,14 +328,13 @@ export default {
   display: inline-block;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
-  color: #494949;
   font: normal 400 20px/1 "S-CoreDream-8Heavy", sans-serif;
   letter-spacing: 0.1em;
   text-decoration: none;
   transition: opacity 0.3s;
 }
-.downArrow a p{
-  color: #494949;
+.downArrow a p {
+  color: #efb730;
 }
 .downArrow a:hover {
   opacity: 0.5;
@@ -368,24 +346,10 @@ export default {
   width: 30px;
   height: 50px;
   margin-left: -15px;
-  border: 3px solid #494949;
+  border: 3px solid #efb730;
   border-radius: 50px;
   box-sizing: border-box;
 }
-
-/***** 8번  *****/
-/* .downArrow a span::before {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  content: '';
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
-  background-color: #494949;
-  border-radius: 100%;
-  box-sizing: border-box;
-} */
 
 .downArrow a span::before {
   position: absolute;
@@ -395,7 +359,7 @@ export default {
   width: 6px;
   height: 6px;
   margin-left: -3px;
-  background-color: #494949;
+  background-color: #efb730;
   border-radius: 100%;
   -webkit-animation: sdb10 2s infinite;
   animation: sdb10 2s infinite;
@@ -443,7 +407,7 @@ export default {
   text-align: center;
   position: relative;
   font-family: "S-CoreDream-8Heavy", sans-serif;
-  background-image: url("../../assets/images/Main/paper_bg.jpg");
+  background-image: url("../../assets/images/ex_back.png");
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -460,8 +424,8 @@ export default {
 .main_center_wrapper .main_poster_nickname {
   width: 150%;
   height: 50%;
-  -webkit-text-stroke: 0.1rem #494949;
-  -webkit-text-fill-color: #494949;
+  -webkit-text-stroke: 0.3rem #efb730;
+  -webkit-text-fill-color: transparent;
   /* -webkit-text-fill-color: transparent; */
   font-size: 4.9vw;
   font-family: "S-CoreDream-8Heavy", sans-serif;
@@ -664,11 +628,11 @@ export default {
   font-size: 0.9rem;
   /*  font-weight: bold*/
   text-decoration: none;
-  color:black;
+  color: black;
 }
 .main_center_wrapper .poster__writer {
   text-decoration: none;
-  color:black;
+  color: black;
 }
 
 .main_center_wrapper .poster__date {
@@ -792,61 +756,44 @@ export default {
   margin-left: -12vw;
   position: absolute;
 }
-/* .main_footer .main_foot #main_bgm {
-  z-index: 1;
-  position: absolute;
-}
-.main_footer .main_foot #main_bgm2 {
-  z-index: 1;
-  position: absolute;
-  display: none;
-}
-
-.main_footer .main_foot audio {
-  display: none;
-} */
 
 /* 버튼 모양 */
-.main_footer .move_to_top{
+.main_footer .move_to_top {
   z-index: 1;
   position: absolute;
-  margin-left: 1.5vw;
-  margin-top:-0.3vh;
+  margin-left: 1.4vw;
+  margin-top: -0.5vh;
 }
 .unit__btn__main {
-	border: 0;
-	outline: 0;
-	font-size: 16px;
-	border-radius: 8px;
-	padding: 0.35rem;
-	background-color: #EBECF0;
-	text-shadow: 1px 1px 0 #FFF;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 0.28rem;
+  background-color: #ebecf0;
+  text-shadow: 1px 1px 0 #fff;
   z-index: 99;
-	width: 35px;
-	height: 35px;
+  width: 33px;
+  height: 33px;
   font-size: 19.2px;
 }
 
 .unit__btn__main {
-	color: #61677C;
-	font-weight: bold;
-	box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
-	transition: all 0.2s ease-in-out;
-	cursor: pointer;
+  color: #61677c;
+  font-weight: bold;
+  box-shadow: -3.5px -3.5px 20px #fff, 3px 3px 20px #babecc;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 .unit__btn__main:hover {
-	box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
 }
 
 .unit__btn__main:active {
-	box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  box-shadow: inset 1px 1px 2px #ebecf0, inset -1px -1px 2px #fff;
 }
 .unit__btn__main img {
   width: 100%;
   height: 100%;
 }
-/* .all__audios{
-width: 100%;
-height: 100%;
-} */
 </style>
