@@ -7,13 +7,15 @@
               class='all__works__footprints'></button>
           <button class="unit__work unit__btn__works" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="moveToCreateWork"><img src="../../assets/images/add.png" alt=""
+              class='all__works__refresh'></button>
         </div>
     <div class="search-bar">
       <div class="search__bar">
         <svg xmlns="http://www.w3.org/2000/svg" width="355.5" height="87.99">
-          <path class="right" fill="none" stroke="#42329f" stroke-width="7" stroke-miterlimit="10"
+          <path class="right" fill="none" stroke="#EFB730" stroke-width="7" stroke-miterlimit="10"
             d="M177.75 85.99h133.5c23.334 0 42.25-18.916 42.25-42.25C352.944 20.528 333.967 2 310.748 2H177.75" />
-          <path class="left" fill="none" stroke="#42329f" stroke-width="7" stroke-miterlimit="10"
+          <path class="left" fill="none" stroke="#EFB730" stroke-width="7" stroke-miterlimit="10"
             d="M177.75 85.99H44.25C20.916 85.99 2 67.074 2 43.74 2.556 20.528 21.533 2 44.752 2H177.75" />
         </svg>
 
@@ -89,6 +91,9 @@
       })
     },
     methods: {
+      moveToCreateWork(){
+        this.$router.push('/test/uploadImageResize')
+      },
       delete__hash__word(index) {
         this.resetarray = [];
         delete this.hashTagsObject[this.filter__hashs[index]];

@@ -51,15 +51,15 @@
       <div class="dele_pic_btn_container " v-show="user_state">
         <div class="detail_back_button" @click="showModal = true">
           <button class="unit__detail__first unit__btn__detail__first" type="button"
-            @click.prevent="change_date_works"><img src="../../assets/images/delete.png" alt=""></button></div>
+            ><img src="../../assets/images/delete.png" alt=""></button></div>
       </div>
       <div class="mod_pic_btn_container " v-show="user_state">
         <div class="detail_back_button" @click="modifyWork"> <button class="unit__detail__first unit__btn__detail__first" type="button"
-            @click.prevent="change_date_works"><img src="../../assets/images/pencil.png" alt=""></button></div>
+            ><img src="../../assets/images/pencil.png" alt=""></button></div>
       </div>
       <div class="back_btn_container last_p">
         <div class="detail_back_button" @click="Back"> <button class="unit__detail__first unit__btn__detail__first" type="button"
-            @click.prevent="change_date_works"><img src="../../assets/images/undo.png" alt=""></button></div>
+            ><img src="../../assets/images/undo.png" alt=""></button></div>
       </div>
     </div>
     <div class="imgSacleUp">
@@ -132,6 +132,7 @@
     },
     mounted() {
       init.init();
+      window.scrollTo(0,0);
     },
     props: [
       'work_id'

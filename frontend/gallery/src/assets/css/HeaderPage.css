@@ -158,7 +158,7 @@ a{
   width: 20px;
   height: 4px;
   border-radius: 2px;
-  background: black;
+  background: #EFB730;
   transform-origin: 50% 50%;
   transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s;
 }
@@ -166,7 +166,7 @@ a{
   margin-bottom: 10px;
 }
 .nav__btn:hover:before, .nav__btn:hover:after {
-  background: black;
+  background: #EFB730;
 }
 .nav__cb:checked ~ .nav__btn:before {
   transform: translateY(7px) rotate(-225deg);
