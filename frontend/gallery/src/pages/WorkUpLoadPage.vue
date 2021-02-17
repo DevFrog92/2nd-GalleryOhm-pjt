@@ -139,6 +139,7 @@ export default {
       this.work_title = this.work_info.work_title;
       this.work_desc = this.work_info.work_desc;
       this.work_tool = this.work_info.work_tool;
+      this.work_rating = this.work_info.work_rating;
 
       for (let i = 0; i < this.work_info.hashtags.length - 1; i++) {
         this.hashtag_list += this.work_info.hashtags[i] + ",";
@@ -153,6 +154,7 @@ export default {
       } else if (this.work_info.work_rating == 19) {
         console.log("19금");
         document.querySelector("#redAge").checked = true;
+        this.work_rating = this.work_info.work_rating;
       }
     }
   },

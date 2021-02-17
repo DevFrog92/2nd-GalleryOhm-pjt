@@ -21,28 +21,13 @@
         :style="'background-image: url(' + work.work_piece + ')'"
       ></div>
       <div class="detail">
+        <div class="blank_box"></div>
         <div class="img_box">
           <div class="img">
             <img :src="work.work_piece" alt="" class="detail_img" />
           </div>
           <div class="actions">
-            <!-- 좋아요, 북마크 -->
-            <div class="scrap scrap_active" v-if="scrapState">
-              <!-- 북마크 되어있는 상태 -->
-              <img
-                src="../../assets/images/bookmark_active.png"
-                alt=""
-                @click="deleteBookmark()"
-              />
-            </div>
-            <div class="scrap scrap_no" v-else>
-              <img
-                src="../../assets/images/bookmark.png"
-                alt=""
-                @click="addBookmark()"
-              />
-              <!-- 북마크 안되어있는 상태 -->
-            </div>
+            <!-- 좋아요 -->
             <div class="cost cost_active" v-if="costState">
               <!-- 좋아요 되어있는 상태 -->
               <div class="cost_info">
@@ -71,7 +56,25 @@
         <div class="info_box">
           <div class="info">
             <!-- 작품 이름 -->
-            <div class="first">{{ work.work_title }}</div>
+            <div class="first">
+              <div class="title">{{ work.work_title }}</div>
+              <div class="scrap scrap_active" v-if="scrapState">
+                <!-- 북마크 되어있는 상태 -->
+                <img
+                  src="../../assets/images/bookmark1_active.png"
+                  alt=""
+                  @click="deleteBookmark()"
+                />
+              </div>
+              <div class="scrap scrap_no" v-else>
+                <!-- 북마크 안되어있는 상태 -->
+                <img
+                  src="../../assets/images/bookmark1.png"
+                  alt=""
+                  @click="addBookmark()"
+                />
+              </div>
+            </div>
             <!-- 작가 이름-->
             <div class="name" @click="moveToArtistPage()">
               <!-- 작가 페이지 이동 함수 넣기 -->
@@ -145,6 +148,7 @@
             </div>
           </div>
         </div>
+        <div class="blank_box"></div>
       </div>
       <div class="footer">
         <footer>
@@ -303,8 +307,7 @@ export default {
           },
         })
         .then(
-          () => {
-            alert("즐겨찾기 했습니다.");
+          () => { 
             this.scrapState = true;
           },
           (error) => {
@@ -322,7 +325,6 @@ export default {
         })
         .then(
           () => {
-            alert("즐겨찾기를 취소했습니다.");
             this.scrapState = false;
           },
           (error) => {
@@ -340,7 +342,6 @@ export default {
         })
         .then(
           () => {
-            alert("작품 좋아요");
             this.costState = true;
             this.costCnt += 1;
             this.totalCost += 100;
@@ -360,7 +361,6 @@ export default {
         })
         .then(
           () => {
-            alert("작품 좋아요 취소");
             this.costState = false;
             this.costCnt -= 1;
             this.totalCost -= 100;
@@ -465,9 +465,15 @@ export default {
   background-color: #f5f7fa;
 }
 
+.detail .blank_box {
+  order: flex;
+  width: 13%;
+  height: 100%;
+}
+
 .detail .img_box {
   order: flex;
-  width: 45%;
+  width: 37%;
   height: 100%;
   top: 0%;
 }
@@ -487,7 +493,8 @@ export default {
 }
 .detail .info_box {
   order: flex;
-  width: 45%;
+  margin-top: 5vh;
+  width: 37%;
   height: 100%;
   position: relative;
   color: black;
@@ -505,6 +512,31 @@ export default {
 
 .detail .info_box .info .first {
   font-size: 40px;
+}
+
+.detail .info_box .info .title{
+  display: inline;
+  width: 50%;
+}
+
+.detail .info_box .info .first .scrap {
+  display: inline;
+  width: 2vw;
+  height: 3.8vh;
+  vertical-align: top;
+  padding-left: 0.8vw;
+}
+
+.detail .info_box .info .first .scrap img {
+  width: 1.2vw;
+  height: 2.2vh;
+  cursor: pointer;
+  /* vertical-align: top; */
+}
+
+.detail .info_box .info .first .scrap img:hover {
+  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 blue);
+  filter: opacity(0.3) drop-shadow(0 0 0 blue);
 }
 
 .detail .info_box .info .name {
@@ -584,24 +616,6 @@ footer .foot .t {
   margin: 0 auto;
 }
 
-.scrap {
-  display: inline;
-  width: 2vw;
-  height: 3.8vh;
-}
-
-.scrap img {
-  display: inline;
-  width: 2vw;
-  height: 3.8vh;
-  cursor: pointer;
-}
-
-.scrap img:hover {
-  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 yellow);
-  filter: opacity(0.3) drop-shadow(0 0 0 yellow);
-}
-
 .cost {
   display: inline;
   width: 5vw;
@@ -679,7 +693,7 @@ footer .foot .t {
 }
 
 .modify {
-  margin-top: 2vh;
+  margin-top: 4vh;
 }
 
 .size {
