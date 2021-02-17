@@ -102,7 +102,7 @@ const init = () => {
         params: { work_id: e.target.dataset.value },
       });
     } else {
-      console.log(targetElem);
+      // console.log(targetElem);
     }
   }
   const mainCarousel = document.querySelector(".main__carousel");

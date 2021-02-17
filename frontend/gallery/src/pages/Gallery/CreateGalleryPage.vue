@@ -16,10 +16,17 @@
       </div>
     </div>
     <div class="save_btn_container">
-        <div class="gallery_list_btn" @click="clickEventHandler">
-          <span>전시관 등록</span>
-        </div>
+      <div class="gallery_list_btn" @click="clickEventHandler">
+        <span>전시관 등록</span>
       </div>
+    </div>
+    <button
+      class="d_back__gallery d_back__btn__gallery"
+      type="button"
+      @click="goBack"
+    >
+      <img class="d_back__btn" src="../../assets/images/back.png" />
+    </button>
     <div class="sub_all_works_container">
       <div class="empty_block">
         <div class="empty">
@@ -36,11 +43,7 @@
           ></div>
         </div>
       </div>
-
-      
     </div>
-
-    <!-- <button class="gallery_list_btn" @click="clickEventHandler">전시관 등록</button> -->
 
     <Modal v-if="showModal_register" @close="showModal_register = false">
       <!--
@@ -194,6 +197,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     getGallery() {
       http.get("/gallery/getGallery/" + this.props_id).then((response) => {
         this.gallery_info = response.data;
