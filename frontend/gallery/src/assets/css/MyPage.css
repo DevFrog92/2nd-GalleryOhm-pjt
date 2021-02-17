@@ -9,7 +9,7 @@
   height: 400vh;
   overflow: hidden;
   text-align: left;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   /* background-color: rgb(44, 49, 57); */
 }
 
@@ -24,7 +24,7 @@
   padding: 5rem 0;
   overflow: hidden;
   position: relative;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   background-image: url('../images/ex_back.png');
   font-family: 'S-CoreDream-8Heavy';
 
@@ -188,7 +188,7 @@
   padding: 10px 12px;
   margin: 3px 0;
   border: 2px solid #dfdfdf;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   font-size: 17px;
 }
 .modify_btn {
@@ -586,7 +586,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-	background:#EBECF0;
+	background:#f5f7fa;
 
 }
 .third__section h1{
@@ -609,7 +609,7 @@
   /* grid-gap:1rem; */
   /* padding:10rem 20rem 0; */
   padding: 0 6rem;
-	background:#EBECF0;
+	background:#f5f7fa;
   
 }
 /* @media (min-width: 600px) { */
@@ -979,7 +979,7 @@ position: relative;
   position: absolute;
   scrollbar-width:none;
   -ms-overflow-style:none;
-	background:#EBECF0;
+	background:#f5f7fa;
   background-image: url('../images/ex_back.png');
   
   
@@ -1130,7 +1130,7 @@ position: relative;
   width: 100%;
   height: 100%;
   transition: all 500ms;
-  background: #EBECF0;
+  background: #f5f7fa;
   z-index:-12;
   overflow-y: scroll;
   border: 10px solid #444;
@@ -1165,7 +1165,7 @@ position: relative;
   right: 0;
   width: 100%;
   height: 100%;
-	background:#EBECF0;
+	background:#f5f7fa;
   
   overflow-y: scroll;
   padding:8rem;
@@ -1234,7 +1234,7 @@ position: relative;
   height: 40rem;
   border: 15px solid #1D2127;
   border-radius: 0px 10px 10px 0;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   transition: all 600ms;
   overflow: hidden;
   padding:0  1rem;
@@ -1249,7 +1249,7 @@ position: relative;
   width:100%;
   height: 5rem;
   /* border-radius: 0 10px 0 0; */
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   text-align: center;
   /* color: white; */
   font-size: 2.5rem;
@@ -1260,7 +1260,7 @@ position: relative;
 .Mypage__message__title__cover{
   width: 100%;
   height: 4rem;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   padding: 1rem;
   line-height: 2rem;
   font-size: 1.3rem;
@@ -1290,7 +1290,7 @@ position: relative;
   width: 100%;
   padding:2rem 2rem;
   font-size: 1.3rem;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
   height: 15rem;
   word-break:break-all;
   overflow-y: scroll;
@@ -1320,7 +1320,7 @@ position: relative;
   height: 3rem;
   position: absolute;
   bottom: 0;
-  background-color: #EBECF0;
+  background-color: #f5f7fa;
 }
 #Mypage__response_message_title {
   resize: none;
@@ -1437,7 +1437,7 @@ position: relative;
   box-shadow: 0px 5px 10px 0px rgb( 0, 0, 0, .2 );
 } */
 .Mypage__DM__item__read{
-  background-color:#EBECF0;
+  background-color:#f5f7fa;
   color: #999;
   transform: scale( 1 );
   box-shadow: 0px 5px 10px 0px rgb( 55, 55, 55, .2 );
@@ -2185,7 +2185,7 @@ position: relative;
 	font-size: 16px;
 	border-radius: 320px;
 	padding: 0.7rem;
-	background-color: #EBECF0;
+	background-color: #f5f7fa;
 	text-shadow: 1px 1px 0 #FFF;
 }
 
