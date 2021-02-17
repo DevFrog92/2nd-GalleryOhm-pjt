@@ -466,7 +466,7 @@
       },
       modifyGallery(gallery_id) {
         this.$router.push({
-          name: 'DragAndDrop',
+          name: 'CreateGalleryPage',
           params: {
             props_id: gallery_id
           }
