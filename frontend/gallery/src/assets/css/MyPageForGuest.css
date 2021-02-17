@@ -190,6 +190,7 @@
   transition: all 1.5s;
 }
 
+
 .show_dm_side{
   opacity: 1;
   z-index: 999;
@@ -211,6 +212,15 @@
   transition: all 600ms;
   border: 15px solid #1D2127;
   border-radius: 15px;
+}
+
+@media (max-width:1366px){
+  .exit__guest__dm{
+    right: 29.5%;
+  }
+  .showDmContent_Guest{
+    width: 70%;
+  }
 }
 
 .message__name__cover__guest{
@@ -290,6 +300,19 @@
   outline: none;
 }
 
+
+@media (max-width:1366px){
+  .exit__guest__dm{
+    right: 22%;
+  }
+  .showDmContent_Guest{
+    width: 70%;
+  }
+  #response_message_title__guest{
+    width: 88%;
+  }
+
+}
 .response_title{
   font-size: 1.2rem;
   font-weight: 600;

@@ -5,8 +5,8 @@ const init = () => {
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
   console.log('top Btn',topBtn);
-  const gallery1 = document.querySelector(".poster_card1");
-  const gallery2 = document.querySelector(".poster_card2");
+  const gallery1 = document.querySelector(".Artist__gallery__entrance_1");
+  const gallery2 = document.querySelector(".Artist__gallery__entrance_2");
 
   const options = document.querySelector('.options')
   let activeOption = document.querySelector('.active')
@@ -38,21 +38,24 @@ const init = () => {
 
   
   
-
-  gallery1.addEventListener('click',function(e){
-    console.log('click event',e.target.dataset.value);
-    if(e.target.dataset.value){
-    router.push({'name':'GalleryPage',params:{props_id:e.target.dataset.value}})
+    if(gallery1){
+      gallery1.addEventListener('click',function(e){
+        console.log('click event',e.target.dataset.value);
+        if(e.target.parentNode.dataset.value){
+          router.push({'name':'GalleryPage',params:{props_id:e.target.parentNode.dataset.value}})
+        }
+      })
     }
-  })
+      
+  if(gallery2){
 
-
-  gallery2.addEventListener('click',function(e){
-    console.log('click event',e.target.dataset.value);
-    if(e.target.dataset.value){
-      router.push({'name':'GalleryPage',params:{props_id:e.target.dataset.value}})
-    }
-  })
+    gallery2.addEventListener('click',function(e){
+      console.log('click event',e.target.dataset.value);
+      if(e.target.parentNode.dataset.value){
+        router.push({'name':'GalleryPage',params:{props_id:e.target.parentNode.dataset.value}})
+      }
+    })
+  }
   const pintModal = document.querySelector('.third__section')
   // const seasonModal = document.querySelector('.pinter__side .photo-count')
   const exitSide = document.querySelector('.exit_side')

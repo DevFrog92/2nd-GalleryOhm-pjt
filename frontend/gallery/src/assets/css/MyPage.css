@@ -341,6 +341,7 @@
   display: inline-block;
   cursor: pointer;
   pointer-events: all;
+  text-shadow: 1px 1px 1px #666;
 }
 .profile_spacer {
   display: inline-block;
@@ -371,6 +372,7 @@
   
 }
 .profile_item {
+  text-shadow: 1px 1px 1px #666;
   position: relative;
   display: inline-block;
   margin-right: 1.5rem;
@@ -887,6 +889,18 @@
 
 
 
+@media (max-width:1366px){
+  .Mypage__poster__card1,.Mypage__poster_card2{
+    width: 27.5rem;
+    height: 39rem;
+  }
+  .Mypage__options{
+    padding: 1rem 4rem;
+  }
+}
+
+
+
 /* gallery- two */
 
 .follow span {
@@ -984,12 +998,8 @@ position: relative;
   position: absolute;
   scrollbar-width:none;
   -ms-overflow-style:none;
-	background:#f5f7fa;
-  background-image: url('../images/ex_back.png');
-  
-  
-
-  
+	/* background:#f5f7fa; */
+  /* background-image: url('../images/ex_back.png'); */
 
 } 
 
