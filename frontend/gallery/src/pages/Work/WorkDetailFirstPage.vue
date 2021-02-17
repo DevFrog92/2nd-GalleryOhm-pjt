@@ -110,7 +110,7 @@
   export default {
     data() {
       return {
-        work_info: {},
+        work_info: [],
         img_url: '',
         work_id_store: '',
         like_state: 0,
@@ -220,13 +220,13 @@
         this.like_state = !this.like_state;
       },
       getWorkDetail() {
-        http.get(`/work/getWork/${localStorage.getItem('work_id')}`)
+        http.get(`/work/getWork/`+localStorage.getItem('work_id'))
           .then(response => {
             this.work_info = response.data;
             this.total_like = response.data.work_cost;
 
             this.work_info.work_piece = "data:image/jpeg;base64," + response.data.work_piece;
-
+            
             this.datetime.year = this.work_info.work_uploadDate.slice(0, 4)
             this.datetime.month = this.work_info.work_uploadDate.slice(5, 7)
             this.datetime.day = this.work_info.work_uploadDate.slice(8, 10)
