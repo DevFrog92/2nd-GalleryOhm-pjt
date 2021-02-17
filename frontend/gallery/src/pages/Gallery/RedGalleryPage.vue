@@ -1,5 +1,5 @@
 <template>
-  <div class="subgallery" v-if="imgList.length != 0">
+  <div class="subgallery" v-if="imgList.length != 0" ondragstart="return false">
     <!-- 문열림 -->
     <div class="welcome">
       <div class="dark">

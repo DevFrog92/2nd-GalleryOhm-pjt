@@ -1,5 +1,5 @@
 <template>
-  <div class="My_profile_guest_container">
+  <div class="My_profile_guest_container" ondragstart="return false">
     <div class="guest_profile_wrapper">
 
 
