@@ -12,7 +12,7 @@
               hidden
               @change="onChangeImage"
             /><br />
-            <button @click.prevent="onClickUploadImage" v-if="!modifyState">
+            <button @click.prevent="onClickUploadImage" v-if="!mode">
               그림업로드</button
             ><br />
           </div>
@@ -37,6 +37,7 @@
                 value="0"
                 required
                 @click="rating"
+                id="allAge"
               />전체관람</label
             >
             <label class="gallery19"
@@ -46,6 +47,7 @@
                 required
                 value="19"
                 @click="rating"
+                id="redAge"
               />19금</label
             >
           </div>
@@ -74,14 +76,48 @@
             <label for="pictureTag">해쉬태그</label>
             <div class="hashtag">
               <p>* Separate your tags with a comma</p>
-              <div class="tags-input"></div>
+              <textarea
+                name="hashtagList"
+                id="hashtagList"
+                v-model="hashtag_list"
+              ></textarea>
+              <!-- <div class="tags-input"></div> -->
             </div>
           </div>
 
           <div class="uploadBtn">
-            <button v-if="mode" @click="addWork">MODIFY</button>
-            <button @click="Back">뒤로가기</button>
-            <button @click="hash">해쉬태그뽑기</button>
+            <button
+              class="unit__detail__upload unit__btn__upload"
+              v-if="mode"
+              @click="addWork"
+              type="button"
+            >
+              <img
+                src="../assets/images/pencil.png"
+                alt=""
+                class="all__works__modify"
+              />
+            </button>
+            <button
+              class="unit__detail__upload unit__btn__upload"
+              @click="Back"
+            >
+              <img
+                src="../assets/images/back.png"
+                alt=""
+                class="all__works__back"
+              />
+            </button>
+            <button
+              class="unit__detail__upload unit__btn__upload"
+              @click="hash"
+            >
+              <img
+                src="../assets/images/hashtag.png"
+                alt=""
+                class="all__works__hashtag"
+              />
+            </button>
           </div>
         </div>
       </div>
@@ -95,16 +131,29 @@ import init from "../assets/js/UploadWork";
 // import http from '../api/http'
 export default {
   components: {},
-  props: ["work_info", "mode", "hashtags"],
+  props: ["work_info", "mode"],
   mounted() {
     init.input();
     if (this.work_info) {
-      console.log("asd", this.work_info.hashtags.includes("안녕"));
       this.img_url = this.work_info.work_piece;
       this.work_title = this.work_info.work_title;
       this.work_desc = this.work_info.work_desc;
       this.work_tool = this.work_info.work_tool;
-      this.modifyState = true;
+
+      for (let i = 0; i < this.work_info.hashtags.length - 1; i++) {
+        this.hashtag_list += this.work_info.hashtags[i] + ",";
+      }
+      this.hashtag_list += this.work_info.hashtags[
+        this.work_info.hashtags.length - 1
+      ];
+
+      if (this.work_info.work_rating == 0) {
+        console.log("전연령");
+        document.getElementById("allAge").checked = true;
+      } else if (this.work_info.work_rating == 19) {
+        console.log("19금");
+        document.querySelector("#redAge").checked = true;
+      }
     }
   },
   created() {},
@@ -112,7 +161,7 @@ export default {
   computed: {},
   methods: {
     hash() {
-      const hashTag = document.querySelectorAll(".tags-input span");
+      const hashTag = document.querySelectorAll(".tags-input");
 
       for (let item of hashTag) {
         if (
@@ -130,6 +179,7 @@ export default {
     addWork: function() {
       // console.log(this.img_url.slice(23))
       this.hash();
+      console.log(this.hashtag_list);
       if (this.mode) {
         const byteCharacters = atob(this.img_url.slice(23));
         const byteNumbers = new Array(byteCharacters.length);
@@ -178,7 +228,6 @@ export default {
       work_tool: "",
       img_url: "",
       hashtag_list: "",
-      modifyState: false,
     };
   },
 };
