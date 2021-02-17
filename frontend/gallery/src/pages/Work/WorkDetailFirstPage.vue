@@ -186,7 +186,7 @@
       modifyWork() {
         console.log('이동', this.work_info);
         this.$router.push({
-          name: "uploadImageResize",
+          name: "WorkUpLoad",
           params: {
             work_info: this.work_info,
             mode: 'modify'

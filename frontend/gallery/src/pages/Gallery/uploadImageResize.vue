@@ -98,6 +98,7 @@
         this.work_title = this.work_info.work_title;
         this.work_desc = this.work_info.work_desc;
         this.work_tool = this.work_info.work_tool;
+        this.work_piece = this.work_info.work_piece;
         // const imgPanel = document.querySelector('.img-preview')
         // imgPanel.style.display = 'block';
         // imgPanel.style.width = '100%';
@@ -205,6 +206,7 @@
         work_tool: "",
         img_url: "",
         hashtag_list: "",
+        hasImage: false,
       };
     },
   };
