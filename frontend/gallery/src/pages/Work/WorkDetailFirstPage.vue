@@ -141,8 +141,10 @@
         if (this.work_info.work_artistId === localStorage.getItem('user_id')) {
           this.$router.push('/mypage');
         } else {
+          localStorage.setItem("props_id", this.work_info.work_artistId);
+
           this.$router.push({
-            name: 'UserProfile',
+            name: 'ArtistMyPage',
             params: {
               props_id: this.work_info.work_artistId
             }

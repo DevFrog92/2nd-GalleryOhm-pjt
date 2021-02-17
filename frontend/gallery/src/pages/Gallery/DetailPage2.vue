@@ -414,7 +414,7 @@ export default {
 .preview {
   /* background-color: #ffe8e8; */
   /* background-color: #f4f5f9; */
-  background-color: #ebecf0;
+  background-color: #f5f7fa;
   color: black;
 }
 
@@ -462,7 +462,7 @@ export default {
   display: flex;
   justify-content: space-around;
   /* background-color: #f4f5f9; */
-  background-color: #ebecf0;
+  background-color: #f5f7fa;
 }
 
 .detail .img_box {
@@ -525,7 +525,7 @@ export default {
 .footer {
   display: block;
   /* background-color: #f4f5f9; */
-  background-color: #ebecf0;
+  background-color: #f5f7fa;
   padding-top: 10vh;
 }
 
@@ -598,8 +598,8 @@ footer .foot .t {
 }
 
 .scrap img:hover {
-  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 red);
-  filter: opacity(0.3) drop-shadow(0 0 0 red);
+  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 yellow);
+  filter: opacity(0.3) drop-shadow(0 0 0 yellow);
 }
 
 .cost {
@@ -639,7 +639,7 @@ footer .foot .t {
   font-size: 16px;
   border-radius: 320px;
   padding: 0.7rem;
-  background-color: #ebecf0;
+  background-color: #f5f7fa;
   text-shadow: 1px 1px 0 #fff;
   z-index: 99;
 }
