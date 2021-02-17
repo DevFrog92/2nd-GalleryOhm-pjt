@@ -72,7 +72,7 @@
         this.getAllGallery();
       },
       footPrintAll(){
-        this.render_image = this.footprinted_gallery;
+        this.render_image = this.most_like;
       },
       followAll(){
         this.render_image = this.following_work;
@@ -94,24 +94,38 @@
         http.get('/gallery/getAllGallery').then(
           (response) => {
             const data = response.data;
-            this.footprinted_gallery  = [];
-            // array 변환
+            this.most_like = [];
             for (var i = 0; i < data.length; i++) {
-              data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
-              if (data[i].gallery_footPrint === '1' ) {
-                this.footprinted_gallery.push(data[i]);
+              if(data[i].work_piece){
+                data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
               }
             }
+
+                 data.forEach(item => {
+              const tempArr = [];
+              for (let work in item) {
+                tempArr.push([work, item[work]]);
+              }
+              this.most_like_work.push(tempArr);
+            })
+            this.most_like_work.sort(function (a, b) {
+              return -a[3][1] + b[3][1]
+            });
+            this.most_like_work.forEach(items => {
+              let most = {};
+              for (let item of items) {
+                most[item[0]] = item[1];
+              }
+              this.most_like.push(most);
+            })
+            ///
+
+
             this.imgList = data;
             this.render_image = data;
             this.spinner_state = false;
-            console.log(this.render_image);
-            console.log('filtering end', this.footprinted_gallery)
             this.getMyFollowings();
 
-          },
-          (error) => {
-            console.log(error);
           }
         );
       },
@@ -126,15 +140,11 @@
           })
           .then(response => {
             this.following_list = response.data;
-            console.log('this.following_list', this.following_list);
             this.imgList.forEach(item => {
-              console.log(item.gallery_artistId)
               if (this.following_list.includes(item.gallery_artistId)) {
                 this.following_work.push(item);
               }
             })
-            console.log(this.following_work)
-
           })
       },
     },

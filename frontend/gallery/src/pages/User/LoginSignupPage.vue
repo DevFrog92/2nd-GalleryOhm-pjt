@@ -256,7 +256,6 @@
           .then(response => {
             this.findIdState = true;
             this.userInfo.user_id = response.data;
-            console.log(response.data, 'findId');
           })
       },
       makeUserNickName() {
@@ -278,8 +277,6 @@
                 checkBtn.classList.remove('id_check_after');
 
               }
-            }).catch(err => {
-              console.log(err);
             })
         }
       },

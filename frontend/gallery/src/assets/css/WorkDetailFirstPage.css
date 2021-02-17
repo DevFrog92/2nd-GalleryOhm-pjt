@@ -638,3 +638,11 @@ background-color: indigo;
   object-fit: contain;
   cursor: pointer;
 }
+
+
+@media (max-width:1366px){
+  .picture_artist{
+    margin-top: 170vh;
+  }
+
+}

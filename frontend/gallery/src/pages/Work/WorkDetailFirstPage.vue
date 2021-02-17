@@ -59,7 +59,7 @@
       </div>
       <div class="back_btn_container last_p">
         <div class="detail_back_button" @click="Back"> <button class="unit__detail__first unit__btn__detail__first" type="button"
-            ><img src="../../assets/images/undo.png" alt=""></button></div>
+            ><img src="../../assets/images/back.png" alt=""></button></div>
       </div>
     </div>
     <div class="imgSacleUp">
@@ -102,9 +102,9 @@
   </body>
 </template>
 <script>
-  import '../../assets/css/Detail.css'
+  import '../../assets/css/WorkDetailFirstPage.css'
   import http from '../../api/http'
-  import init from '../../assets/js/Detail'
+  import init from '../../assets/js/WorkDetailFirstPage'
   import Modal from '../../pages/Modal'
 
   export default {
@@ -223,7 +223,6 @@
       getWorkDetail() {
         http.get(`/work/getWork/`+localStorage.getItem('work_id'))
           .then(response => {
-            console.log('work id',response.data)
             this.work_info = response.data;
             this.total_like = response.data.work_cost;
 
@@ -269,14 +268,8 @@
             this.bookmark_state = response.data;
           })
       }
-
     },
     watch: {
-      $route(to, form) {
-        if (to.path !== form.path) {
-          console.log('저장되어 있는가?', this.work_id_store);
-        }
-      },
     },
     created() {
       this.work_id_store = this.work_id;

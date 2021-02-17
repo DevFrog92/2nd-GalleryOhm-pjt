@@ -892,18 +892,6 @@ height: 100vh;
 
 
 
-@media (max-width:1366px){
-  .Mypage__poster__card1,.Mypage__poster_card2{
-    width: 27.5rem;
-    height: 39rem;
-  }
-  .Mypage__options{
-    padding: 1rem 4rem;
-  }
-}
-
-
-
 /* gallery- two */
 
 .follow span {
@@ -2286,4 +2274,34 @@ position: relative;
   h1{
     font-size: 2rem;
   }
+}
+
+
+
+@media (max-width:1366px){
+  .Mypage__poster__card1,.Mypage__poster_card2{
+    width: 27.5rem;
+    height: 39rem;
+  }
+  .Mypage__options{
+    padding: 1rem 4rem;
+  }
+}
+
+@media (max-width:1024px){
+  .Mypage__poster__card1,.Mypage__poster_card2{
+    width: 27.5rem;
+    height: 28rem;
+  }
+  .Mypage__options{
+    padding: 1rem 4rem;
+  }
+  .Mypage__dm__list {
+    transform: translateY(20%);
+
+  }
+  .exit__Mypage__dm{
+    top: 53%;
+  }
+
 }
