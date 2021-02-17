@@ -301,6 +301,19 @@
   /* margin-top: 1%; */
 }
 
+.cancel_btn_container {
+  /* position: absolute; */
+  position: relative;
+  width: 150px;
+  height: 80px;
+  /* padding: 50% 30% 0 0; */
+  top:5%;
+  left: 80%;
+  transform: translateX(-50%);
+  z-index: 200;
+  /* margin-top: 1%; */
+}
+
 .gallery_list_btn {
   margin-top: 2rem;
   color:#f5f7fa;;
