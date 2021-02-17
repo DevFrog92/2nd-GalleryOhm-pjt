@@ -34,7 +34,7 @@ const init = () => {
     scrap.addEventListener('click',function(e){
       if(e.target.classList.contains("scrap__image")){
         const work_id = e.target.dataset.value;
-        router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+        router.push({name:'WorkDetailFirstPage',params:{work_id:work_id}})
       }
     }) 
   }
@@ -300,7 +300,17 @@ const DMModal =() =>{
           item.classList.add('delete');       
           http.post('/message/deleteMessage',Number(e.target.dataset.value))
           .then(response => {
-           console.log('remove message',response.data);    
+           console.log('remove message',response.data);
+           const sender_name = document.querySelector('.sender_name');
+            const sender_title = document.querySelector('.sender_title');
+            const sender_content = document.querySelector('.sender_content');
+            const sendersender_time_name = document.querySelector('.sender_time');
+            const sendersender_date_name = document.querySelector('.sender_date');
+            sender_name.innerText = '';
+            sender_title.innerText ="제목. ";
+            sender_content.innerText = '';
+            sendersender_time_name.innerText ='';
+            sendersender_date_name.innerText = '';
           })
         }
       }

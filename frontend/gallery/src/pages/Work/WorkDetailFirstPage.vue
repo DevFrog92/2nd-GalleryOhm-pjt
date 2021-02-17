@@ -1,6 +1,6 @@
 <template>
 
-  <body class="picture_detail" id="why">
+  <body class="picture_detail" id="why" ondragstart="return false">
     <h1 class="picture_title" @click="moveToBottom">{{work_info.work_title}}</h1>
     <p class="picture_date deco_p"><strong><em>ⓒ 2021. {{work_info.work_artistId}} all rights reserved</em></strong></p>
     <h2 class="picture_subtitle">{{datetime.year}}년 {{datetime.month}}월 {{datetime.day}}일 작가 {{work_info.work_artistId}}
@@ -8,9 +8,9 @@
     <p class="picture deco_p"><img :src="img_url" alt="" class="artist__work__detail"></p>
     <p class="picture_artist deco_p"><span @click="moveToArtistPage">{{work_info.work_title}}</span> <span
         class="picture_detail_bookmark">
-        <img v-if="!bookmark_state" src="../../assets/images/bookmark.png" @click="BookMark" alt=""
+        <img v-if="!bookmark_state" src="../../assets/images/bookmark1.png" @click="BookMark" alt=""
           class='detail__first__bookmark'>
-        <img v-else src="../../assets/images/bookmark_active.png" alt="" @click="UnBookMark"
+        <img v-else src="../../assets/images/bookmark1_active.png" alt="" @click="UnBookMark"
           class='detail__first__bookmark'>
       </span></p>
 
@@ -141,8 +141,10 @@
         if (this.work_info.work_artistId === localStorage.getItem('user_id')) {
           this.$router.push('/mypage');
         } else {
+          localStorage.setItem("props_id", this.work_info.work_artistId);
+
           this.$router.push({
-            name: 'UserProfile',
+            name: 'ArtistMyPage',
             params: {
               props_id: this.work_info.work_artistId
             }
@@ -184,7 +186,6 @@
         this.deleteState = true;
       },
       modifyWork() {
-        console.log('이동', this.work_info);
         this.$router.push({
           name: "WorkUpLoad",
           params: {
@@ -195,27 +196,23 @@
       },
       likeWork() {
         if (this.like_state) {
-          console.log('like')
           http.get('/work/clearToWorkCost', {
               params: {
                 cost_userId: localStorage.getItem('user_id'),
                 cost_workId: localStorage.getItem('work_id')
               }
             })
-            .then(response => {
-              console.log(response.data);
+            .then(() => {
               this.getWorkDetail();
             })
         } else {
-          console.log('여기다')
           http.get('/work/giveCostToWork', {
               params: {
                 cost_userId: localStorage.getItem('user_id'),
                 cost_workId: localStorage.getItem('work_id')
               }
             })
-            .then(response => {
-              console.log(response.data);
+            .then(() => {
               this.getWorkDetail();
             })
 
@@ -227,10 +224,9 @@
           .then(response => {
             this.work_info = response.data;
             this.total_like = response.data.work_cost;
-            console.log(this.total_like)
+
             this.work_info.work_piece = "data:image/jpeg;base64," + response.data.work_piece;
-            this.img_url = this.work_info.work_piece;
-            console.log('getinfo', this.work_info);
+
             this.datetime.year = this.work_info.work_uploadDate.slice(0, 4)
             this.datetime.month = this.work_info.work_uploadDate.slice(5, 7)
             this.datetime.day = this.work_info.work_uploadDate.slice(8, 10)
@@ -239,9 +235,6 @@
             }else{
               this.user_state = false;
             }
-            // const my_desc = document.querySelector('.deco_p.explain_size');
-            // console.log('my_desc', my_desc);
-            // my_desc.innerHTML = this.work_info.work_desc;
           })
       },
       isCheckCost() {
@@ -252,7 +245,6 @@
             }
           })
           .then(response => {
-            console.log('checkCost  ', response.data);
             this.like_state = response.data;
             window.scrollTo(0, 0);
 
@@ -261,7 +253,6 @@
       getWorkHashTag() {
         http.get(`/work/getWorkHashTag/${localStorage.getItem('work_id')}`)
           .then(response => {
-            console.log(response.data)
             this.hashTagList = response.data;
           })
       },
@@ -274,7 +265,6 @@
           })
           .then(response => {
             this.bookmark_state = response.data;
-            console.log('bookmark', this.bookmark_state)
           })
       }
 
@@ -283,17 +273,15 @@
       $route(to, form) {
         if (to.path !== form.path) {
           console.log('저장되어 있는가?', this.work_id_store);
-          //  this.getInfo();
         }
       },
     },
     created() {
-
       this.work_id_store = this.work_id;
       if (this.work_id !== undefined) {
         localStorage.setItem('work_id', this.work_id);
       }
-      console.log('detail', this.work_id_store);
+
       this.getWorkDetail();
       this.getWorkHashTag();
       this.isCheckCost();

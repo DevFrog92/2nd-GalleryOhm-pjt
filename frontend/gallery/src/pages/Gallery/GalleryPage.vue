@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery__render">
+  <div class="gallery__render" ondragstart="return false">
     <div class="gallery__desc__front">
       <div class="gallery__desc__section">
         <h1>{{ gallery_info.gallery_name }}</h1>

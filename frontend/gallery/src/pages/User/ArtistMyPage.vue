@@ -1,5 +1,5 @@
 <template>
-  <div class="My_profile_artist_container">
+  <div class="My_profile_artist_container" ondragstart="return false">
     <div class="artist_profile_wrapper">
 
 
@@ -93,7 +93,7 @@
       <h1>{{userInfo.user_nickName}}의 전시관</h1>
       <div class="my_works">
         <div class="poster_card1" :data-value="my_gallery_1.gallery_id">
-         
+          <div v-if="my_gallery_1.gallery_id" class="Artist__gallery__entrance_1">입장</div>
           <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
 
           <h3>{{my_gallery_1.gallery_name}}</h3>
@@ -102,6 +102,7 @@
         </div>
 
         <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
+          <div v-if="my_gallery_2.gallery_id" class="Artist__gallery__entrance_2">입장</div>
           
           <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>

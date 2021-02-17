@@ -1,5 +1,5 @@
 <template>
-   <div class="about">
+   <div class="about" ondragstart="return false">
     <div class="about_grid">
       <div class="about_con about_left_size">
         <div class="menu">

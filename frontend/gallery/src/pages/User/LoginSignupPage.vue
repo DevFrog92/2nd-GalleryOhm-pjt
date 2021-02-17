@@ -1,5 +1,5 @@
 <template>
-<div class="wrap__login">
+<div class="wrap__login" ondragstart="return false">
   <body class="login_signup_form">
     <div class="login_signup_container" id="singup_container">
       <!-- 회원가입-->
