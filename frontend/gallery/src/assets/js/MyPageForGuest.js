@@ -4,56 +4,6 @@ const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
-  
-
-
-
-  // const scrap = document.querySelector('.scroll-wrapper')
-  // scrap.addEventListener('click',function(e){
-  //   if(e.target.classList.contains("scrap__image")){
-  //     const work_id = e.target.dataset.value;
-  //     router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-  //   }
-  // })
-
-
-  // const pintModal = document.querySelector('.third__section')
-  // const seasonModal = document.querySelector('.pinter__side .photo-count')
-  // const exitSide = document.querySelector('.exit_side')
-  // const exitSeason = document.querySelector('.exit_season')
-  // pintModal.addEventListener('click',function(e){
-  //   if(e.target.classList.contains('show__my__pint')){
-  //     gotoDetail()
-  //     const pintSide = document.querySelector('.pinter__side');
-  //     pintSide.classList.add('active_side');
-  //   }
-  //   })
-  // exitSide.addEventListener('click',function(){
-  //   console.log('click')
-  //     const pintSide = document.querySelector('.pinter__side');
-  //     pintSide.classList.remove('active_side');
-  //   })
-  // exitSeason.addEventListener('click',function(){
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.remove('active_season');
-  // })
-  // seasonModal.addEventListener('click',function(){
-  //   console.log('season click')
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.add('active_season');
-  // })
-// function gotoDetail(){
-//   console.log('실행한다.')
-//   const imgList = document.querySelector('.pinter_item-lists')
-//   imgList.addEventListener('click',function(e){
-//     if(e.target.classList.contains('pinter_grid__body')){
-//       const work_id = e.target.dataset.value
-//       console.log(work_id)
-//       router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-//     }
-//   })
-
-// }
 
 function manuclickHandler(e){
   const targetItem = e.target;
@@ -271,12 +221,7 @@ const DMModal =() =>{
       for(let item of DMLIST){
         if(e.target.dataset.value === item.dataset.name){
           item.classList.add('delete');
-          const formData = new FormData();
-          const id = new Array();
-          id.push(e.target.dataset.value)  
-          formData.append('message_ids',id)
-          
-          http.post('/message/deleteMessage',{ 'message_id' : e.target.dataset.value })
+          http.post('/message/deleteMessage',Number(e.target.dataset.value))
           .then(response => {
            console.log('remove message',response.data);    
           })
@@ -303,7 +248,7 @@ const DMModal =() =>{
 
 
       
-      message_read(response_data.message_id);
+      message_read(response_data.message_id,e.target);
       // e.target.classList.add('Mypage__DM__item__read')
       const sender_name = document.querySelector('.sender_name');
       const sender_title = document.querySelector('.sender_title');
@@ -322,12 +267,11 @@ const DMModal =() =>{
   })
 }
 
-const message_read = (message_id)=>{
-  const formData = new FormData()
-  formData.append('message_id',message_id)
-  http.post('/message/checkMessage',{ 'message_id' : message_id })
+const message_read = (message_id,target)=>{
+  http.post('/message/checkMessage',Number(message_id))
   .then(response => {
     console.log('read message',response.data);
+    target.classList.add('Guest__DM__item__read');
   })
 }
 

@@ -13,6 +13,7 @@
   text-align: left;
   background-color: #EBECF0;
   font-family:  'Noto Sans KR', sans-serif;
+  position: relative;
 
   /* background-color: rgb(44, 49, 57); */
 }
@@ -911,7 +912,7 @@
 .forth__section__guest .outer__wrapper__title{
   position: absolute;
   left: 50%;
-  top: 10%;
+  top: 7%;
   font-family: 'S-CoreDream-8Heavy';
   margin: 0;
   transform: translate(-50%,-50%);

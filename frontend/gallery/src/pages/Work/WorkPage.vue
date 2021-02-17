@@ -3,7 +3,7 @@
     <div class="segment__works">
           <button class="unit__work unit__btn__works" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
               class='all__works__refresh'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/footprints.png" alt=""
+          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/won.png" alt=""
               class='all__works__footprints'></button>
           <button class="unit__work unit__btn__works" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
@@ -35,14 +35,14 @@
       검색한 태그와 관련한 작품이 없습니다.
     </div>
 
-    <div class="spinner" v-if="spinner_state">
+    <div class="spinner" v-show="spinner_state">
       <div class="loader">
         <div class="box"></div>
         <div class="box"></div>
       </div>
     </div>
 
-    <div class="item-lists" v-else>
+    <div class="item-lists" v-show="!spinner_state">
       <div class="grid" v-for="(img, i) in render_image" :key="i">
         <img :src="img.work_piece" alt="DB이미지" />
         <div class="grid__body" :data-value="img.work_id">
@@ -58,6 +58,7 @@
   import "../../assets/css/ItemListPage.css";
   import http from "../../api/http.js";
   import init from '../../assets/js/Works'
+  import prevent from '../../assets/js/common/prevent'
   export default {
     data: () => {
       return {
@@ -77,8 +78,11 @@
       };
     },
     mounted() {
-      setTimeout(() => {
+      window.addEventListener('load',function(){
         init.init();
+      })
+      setTimeout(() => {
+        prevent.init();
       }, 1000)
       window.addEventListener('scroll',function(){
         console.log('scroll',window.scrollY);
@@ -213,10 +217,10 @@
             this.imgList = data;
             this.render_image = data;
             this.spinner_state = false;
-
+            
             console.log('filtering end')
             this.getMyFollowings();
-
+            init.init();
           },
           (error) => {
             console.log(error);

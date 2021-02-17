@@ -42,7 +42,6 @@
             <div class="profile_spacer"></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
       </div>
@@ -596,6 +595,7 @@
       }, 1000)
     },
     created() {
+
       this.getUserInfo();
       // following 목록
       this.getAllMyFollowing();

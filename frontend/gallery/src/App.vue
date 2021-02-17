@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" onselectstart="return false" ondragstart="return false" oncontextmenu="return false">
     <HeaderPage></HeaderPage>
     <router-view :key="$route.fullPath" />
   </div>
@@ -9,6 +9,7 @@
 <script>
   import '../src/assets/css/ResetCss.css'
   import HeaderPage from './pages/HeaderPage'
+  import init from './assets/js/common/prevent'
   export default {
     data() {
       return {}
@@ -16,6 +17,10 @@
     components: {
       HeaderPage
     },
+    created(){
+      init.init()
+    }
+
   }
 </script>
 
