@@ -66,7 +66,7 @@ export default {
   components: {},
   created() {
     http.get(`/gallery/getAdultGallery`).then(
-    // http.get(`/gallery/getAllSubGallery`).then(
+      // http.get(`/gallery/getAllSubGallery`).then(
       (response) => {
         var data = response.data;
         for (var i = 0; i < data.length; i++) {
@@ -80,6 +80,7 @@ export default {
     );
 
     this.nowPage = 1;
+    localStorage.setItem("redState", true);
   },
   mounted() {
     setTimeout(() => {
@@ -161,6 +162,9 @@ export default {
         window.scrollTo(0, 0);
       }, 1100);
     },
+  },
+  destroyed() {
+    localStorage.setItem("redState", false);
   },
 };
 </script>

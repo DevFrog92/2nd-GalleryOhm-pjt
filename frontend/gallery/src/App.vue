@@ -15,10 +15,11 @@
       return {}
     },
     components: {
-      HeaderPage
+      HeaderPage,
     },
     created(){
-      init.init()
+      init.init();
+      localStorage.setItem('redState',false);
     }
 
   }
