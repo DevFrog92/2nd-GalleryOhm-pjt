@@ -1,5 +1,5 @@
 <template>
-
+<div class="wrap__login">
   <body class="login_signup_form">
     <div class="login_signup_container" id="singup_container">
       <!-- 회원가입-->
@@ -185,6 +185,7 @@
     </div>
 
   </body>
+  </div>
 </template>
 
 <script>

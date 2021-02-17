@@ -38,6 +38,7 @@
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
+  text-shadow: 1px 2px 3px #666;
   /* font-family:  'Noto Sans KR', sans-serif; */
 
 }
@@ -169,6 +170,7 @@
 .icon-pencil-alt-span{
   mix-blend-mode: difference;
   position: absolute;
+  bottom: 15%;
   right:0;
 }
 
@@ -258,6 +260,7 @@
   margin-bottom:.9rem;
   font-size: 2.5rem;
   font-weight: 700;
+  text-shadow: 1px 1px 2px #666;
 }
 
 .Mypage__bell{
@@ -596,6 +599,7 @@
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
+  text-shadow: 1px 2px 3px #666;
 }
 .third__section__wrapper {
   /* position: relative; */
@@ -723,6 +727,7 @@
   top: 15%;
   font-size: 3rem;
   font-weight: 600;
+  text-shadow: 1px 2px 3px #666;
 }
 
 .Mypage__my_works  {
@@ -1189,6 +1194,11 @@ position: relative;
   cursor: pointer;
 }
 
+@media (max-width:1366px){
+  .exit__Mypage__dm{
+    right: 12%;
+  }
+}
 .contact_to_me {
   /* position: absolute; */
   /* bottom:0; */

@@ -514,7 +514,7 @@
         this.who_state = false;
         this.bell__state = true;
       } else if (!this.props_id && localStorage.getItem('user_id') === localStorage.getItem('props_id')) {
-        this.who_state = false;
+        this.who_state = true;
       } else {
         this.who_state = true;
       }
