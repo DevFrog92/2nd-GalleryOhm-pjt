@@ -13,7 +13,7 @@ const init = () => {
     if(e.target.classList.contains('gallery__poster')){
       const gallery_id = e.target.dataset.value;
       console.log('gallery_id',gallery_id)
-      router.push({name:'GalleryRenderPage',params:{props_id:gallery_id}})
+      router.push({name:'GalleryPage',params:{props_id:gallery_id}})
     }
   })
 }

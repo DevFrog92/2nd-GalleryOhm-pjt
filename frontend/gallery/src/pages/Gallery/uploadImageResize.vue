@@ -3,27 +3,13 @@
   <body class="upload_picture_page">
     <!-- <div class="upload_picture_page_middle"> -->
     <div class="wrapPicture">
-      <div class="previewPicture" >
+      <div class="previewPicture">
         <p class="preview_pic">작품 미리보기</p>
 
-        
+
         <image-uploader ref="work_piece" :preview="true" :className="['fileinput', { 'fileinput--loaded': hasImage }]"
-          capture="environment" :debug="1" doNotResize="gif" :autoRotate="true" outputFormat="blob" @input="setImage"
-          >
+          capture="environment"  :debug="1" doNotResize="gif" :autoRotate="true" outputFormat="blob" @input="setImage">
           <label for="fileInput" slot="upload-label">
-            <!-- <figure>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                >
-                  <path
-                    class="path1"
-                    d="M9.5 19c0 3.59 2.91 6.5 6.5 6.5s6.5-2.91 6.5-6.5-2.91-6.5-6.5-6.5-6.5 2.91-6.5 6.5zM30 8h-7c-0.5-2-1-4-3-4h-8c-2 0-2.5 2-3 4h-7c-1.1 0-2 0.9-2 2v18c0 1.1 0.9 2 2 2h28c1.1 0 2-0.9 2-2v-18c0-1.1-0.9-2-2-2zM16 27.875c-4.902 0-8.875-3.973-8.875-8.875s3.973-8.875 8.875-8.875c4.902 0 8.875 3.973 8.875 8.875s-3.973 8.875-8.875 8.875zM30 14h-4v-2h4v2z"
-                  ></path>
-                </svg>
-              </figure> -->
             <span class="upload_caption">{{
                 hasImage ? "작품 변경" : "작품 선택"
               }}</span>
@@ -66,13 +52,19 @@
         <div class="upload_btn_container1">
           <div class="uploadBtns1">
             <!-- <div class="uploadBtn1" v-if="mode" @click="addWork" data-display="작품수정"></div> -->
-            <div class="upload_art_button"  v-if="mode" @click="addWork"><span>작품수정</span></div>
-            <div class="upload_art_button"  v-else @click="addWork"><span>작품등록</span></div>
+            <div class="upload_art_button" v-if="mode" @click="addWork"> <button
+                class="unit__detail__upload unit__btn__upload" type="button" @click.prevent="change_date_works"><img
+                  src="../../assets/images/pencil.png" alt=""></button></div>
+            <div class="upload_art_button" v-else @click="addWork"> <button
+                class="unit__detail__upload unit__btn__upload" type="button" @click.prevent="change_date_works"><img
+                  src="../../assets/images/pencil.png" alt=""></button></div>
             <!-- <div class="uploadBtn1" v-else @click="addWork" data-display="작품등록"></div> -->
           </div>
         </div>
         <div class="upload_btn_container2">
-           <div class="upload_art_button" @click="Back"><span>뒤로가기</span></div>
+          <div class="upload_art_button" @click="Back"> <button class="unit__detail__upload unit__btn__upload"
+              type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png"
+                alt=""></button></div>
           <!-- <div class="uploadBtns2">
             <div class="uploadBtn2" @click="Back" data-display="뒤로가기"></div>
           </div> -->
@@ -106,6 +98,16 @@
         this.work_title = this.work_info.work_title;
         this.work_desc = this.work_info.work_desc;
         this.work_tool = this.work_info.work_tool;
+        // const imgPanel = document.querySelector('.img-preview')
+        // imgPanel.style.display = 'block';
+        // imgPanel.style.width = '100%';
+        // imgPanel.style.height = '100%';
+        // imgPanel.style.zIndex = '100';
+        
+        // imgPanel.setAttribute(':src',this.img_url)
+
+        // console.log('this.img src',imgPanel)
+        // console.log('this img urll',imgPanel.getAttribute('src'))
       }
     },
     created() {},
@@ -120,7 +122,7 @@
             !this.work_info.hashtags.includes(item.innerText)
           ) {
             this.hashtag_list += item.innerText + ",";
-          }else{
+          } else {
             this.hashtag_list += item.innerText + ",";
           }
         }
@@ -129,12 +131,12 @@
       Back() {
         this.$router.go(-1);
       },
-      description(){
+      description() {
         let work__desc = this.work_desc.replace(/(?:\r\n|\r|\n)/g, '<br/>');
         let work__tool = this.work_tool.replace(/(?:\r\n|\r|\n)/g, '<br/>');
         this.work_desc = work__desc;
         this.work_tool = work__tool;
-        console.log('work desc',this.work_desc,this.work_tool);
+        console.log('work desc', this.work_desc, this.work_tool);
       },
       addWork: function () {
         this.hash();

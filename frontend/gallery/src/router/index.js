@@ -5,20 +5,28 @@ import VueRouter from 'vue-router'
 import MainPage from '../pages/Main/MainPage'
 
 
+// User
+import LoginSignupPage from '../pages/User/LoginSignupPage'
+import SettingsPage from '../pages/User/SettingsPage'
+import MyPage from '../pages/User/MyPage'
+import ArtistMyPage from '../pages/User/ArtistMyPage'
+import GuestMyPage from '../pages/User/GuestMyPage'
 
-import ItemListPage from '../pages/ItemLisetPage'
-import ItemDetailPage from '../pages/ItemDetailPage'
-import MyPage from '../pages/MyPage'
-import UserProfile from '../pages/MyPageForArtist'
-import GuestProfile from '../pages/MyPageForGuest'
-import GalleryRenderPage from '../pages/GalleryRenderPage'
-import LoginSignup from '../pages/User/LoginSignup'
-import Settings from '../pages/Settings'
+// Gallery
+import CreateGalleryPage from '../pages/Gallery/CreateGalleryPage'
+import RedGalleryPage from '../pages/Gallery/RedGalleryPage'
+import GalleryPage from '../pages/Gallery/GalleryPage'
+import ExhibitionPage from '../pages/Gallery/ExhibitionPage'
+
+
+import WorkPage from '../pages/Work/WorkPage'
+
+
+
+import WorkDetailFirstPage from '../pages/Work/WorkDetailFirstPage'
+
 import WorkUpLoad from '../pages/WorkUpLoadPage'
 
-
-import DragAndDrop from '../pages/DragAndDrop'
-import RedGallery from "../pages/Adult/RedGallery";
 import AdultPage from "../pages/Adult/AdultPage";
 
 import SubGallery from "../pages/Sub/SubGalleryPage";
@@ -31,7 +39,7 @@ import AdminPage2 from '../pages/Admin/AdminPage2'
 
 // Gallery BJO
 import GalleryTest from '../pages/Gallery/GalleryTest'
-import GalleryB from '../pages/Gallery/GalleryB'
+
 import GalleryJ from '../pages/Gallery/GalleryJ'
 import GalleryO from '../pages/Gallery/GalleryO'
 import DetailPage from '../pages/Gallery/DetailPage'
@@ -41,7 +49,6 @@ import uploadImageResize from '../pages/Gallery/uploadImageResize'
 import GalleryOWorks from '../pages/Gallery/GalleryO_works'
 
 
-import testmainpage from '../pages/testmainpage'
 import gridTestPage from '../pages/gridTestPage'
 import About from '../pages/About'
 
@@ -54,15 +61,15 @@ const routes = [
     component: MainPage
   },
   {
-    path: '/detail',
-    name: 'ItemDetailPage',
-    component: ItemDetailPage,
+    path: '/firstdetail',
+    name: 'WorkDetailFirstPage',
+    component: WorkDetailFirstPage,
     props:true
   },
   {
-    path:'/listitem',
-    name:'ItemListPage',
-    component:ItemListPage
+    path:'/work',
+    name:'WorkPage',
+    component:WorkPage
   },
   {
     path:'/mypage',
@@ -71,26 +78,26 @@ const routes = [
     props:true,
   },
   {
-    path:'/userprofile',
-    name:'UserProfile',
-    component:UserProfile,
+    path:'/artistmypage',
+    name:'ArtistMyPage',
+    component:ArtistMyPage,
     props:true,
   },
   {
-    path:'/galleryrender',
-    name:'GalleryRenderPage',
-    component:GalleryRenderPage,
+    path:'/gallery',
+    name:'GalleryPage',
+    component:GalleryPage,
     props:true,
   },
   {
     path:'/loginsignup',
-    name:"LoginSignup",
-    component:LoginSignup,
+    name:"LoginSignupPage",
+    component:LoginSignupPage,
   },
   {
     path:'/settings',
-    name:"Settings",
-    component:Settings,
+    name:"SettingsPage",
+    component:SettingsPage,
   },
   {
     path:'/workupload',
@@ -105,14 +112,9 @@ const routes = [
   },
   {
     path:'/creategallery',
-    name:"DragAndDrop",
-    component:DragAndDrop,
+    name:"CreateGalleryPage",
+    component:CreateGalleryPage,
     props:true
-  },
-  {
-    path: "/RedGallery",
-    name: "RedGallery",
-    component: RedGallery,
   },
   {
     path: "/SubGallery",
@@ -135,9 +137,9 @@ const routes = [
     component:AdminPage2
   },
   {
-    path:'/test/GalleryB',
-    name:"GalleryB",
-    component:GalleryB
+    path:'/redgallery',
+    name:"RedGalleryPage",
+    component:RedGalleryPage
   },
   {
     path:'/test/GalleryJ',
@@ -172,12 +174,13 @@ const routes = [
   {
     path:'/test/uploadImageResize',
     name:"uploadImageResize",
-    component:uploadImageResize
+    component:uploadImageResize,
+    props:true,
   },
   {
-    path:'/testmainpage',
-    name:'testmainpage',
-    component:testmainpage
+    path:'/exhibition',
+    name:'ExhibitionPage',
+    component:ExhibitionPage
   },
   {
     path:'/gridtestpage',
@@ -190,9 +193,9 @@ const routes = [
     component:About,
   },
   {
-    path:'/guestpage',
-    name:'GuestProfile',
-    component:GuestProfile,
+    path:'/guestmypage',
+    name:'GuestMyPage',
+    component:GuestMyPage,
     props:true,
   }
 ]

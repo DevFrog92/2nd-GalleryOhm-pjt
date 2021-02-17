@@ -22,9 +22,6 @@
       ></div>
       <div class="detail">
         <div class="img_box">
-          <div class="modify" v-if="artistState">
-            <!-- 작가 본인이라면 수정, 삭제 -->
-          </div>
           <div class="img">
             <img :src="work.work_piece" alt="" class="detail_img" />
           </div>
@@ -90,7 +87,37 @@
             <!-- 작품 사이즈 -->
             <div class="size">size : {{ size }}</div>
             <!-- 작품 해시태그 -->
-            <div class="hashtags"></div>
+            <div class="hashtags" v-if="hashtags.length != 0">
+              <p v-for="(tag, i) in hashtags" :key="i" class="hashtag">
+                #{{tag}}
+              </p>
+            </div>
+            <div class="modify" v-if="artistState">
+              <!-- 작가 본인이라면 수정, 삭제 -->
+              <button
+                class="unit__work unit__btn__works"
+                type="button"
+                @click="modifyWork()"
+              >
+                <img
+                  src="../../assets/images/pencil.png"
+                  alt=""
+                  class="all__works__modify"
+                />
+              </button>
+
+              <button
+                class="unit__work unit__btn__works"
+                type="button"
+                @click="deleteWork()"
+              >
+                <img
+                  src="../../assets/images/delete.png"
+                  alt=""
+                  class="all__works__delete"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -126,6 +153,7 @@ export default {
       costState: false,
       scrapState: false,
       costCnt: 0,
+      hashtags: [],
     };
   },
   props: ["work_id"],
@@ -156,6 +184,7 @@ export default {
           work.work_piece = "data:image/jpeg;base64," + work.work_piece;
           this.work = work;
           this.costCnt = this.work.work_cost;
+          this.hashtags = this.work.hashtags;
         },
         (error) => {
           console.log(error);
@@ -334,10 +363,17 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .preview {
   /* background-color: #ffe8e8; */
-  background-color: #f4f5f9;
+  /* background-color: #f4f5f9; */
+  background-color: #ebecf0;
   color: black;
 }
 
@@ -384,7 +420,8 @@ export default {
   height: 70vh;
   display: flex;
   justify-content: space-around;
-  background-color: #f4f5f9;
+  /* background-color: #f4f5f9; */
+  background-color: #ebecf0;
 }
 
 .detail .img_box {
@@ -446,7 +483,8 @@ export default {
 
 .footer {
   display: block;
-  background-color: #f4f5f9;
+  /* background-color: #f4f5f9; */
+  background-color: #ebecf0;
   padding-top: 10vh;
 }
 
@@ -543,5 +581,42 @@ footer .foot .t {
 .cost .cost_info img:hover {
   -webkit-filter: opacity(0.5) drop-shadow(0 0 0 yellow);
   filter: opacity(0.5) drop-shadow(0 0 0 yellow);
+}
+
+.unit__btn__works:hover {
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+}
+
+.unit__btn__works:active {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+
+.unit__btn__works.unit__work {
+  border-radius: 8px;
+  line-height: 0;
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 8px;
+  font-size: 19.2px;
+}
+
+.modify{
+  margin-top: 2vh;
+}
+
+.size{
+  margin-top: 1.5vh;
+}
+
+.hashtags{
+  margin-top: 1.5vh;
+}
+
+.hashtags .hashtag{
+  display: inline;
 }
 </style>

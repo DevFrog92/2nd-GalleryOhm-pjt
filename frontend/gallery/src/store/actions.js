@@ -74,7 +74,7 @@ const addWork = (context, info) => {
                       const user_id = localStorage.getItem('user_id')
                       console.log(response.data);
                       alert(`작품이 등록되었습니다. ${user_id}작가님!`)
-                      router.push('/listitem');
+                      router.push('/work');
                       // console.log(response);
                     }).catch(() => {
                       // console.log(error);
@@ -106,7 +106,7 @@ const modifyWork = (context, info) => {
                       const user_id = localStorage.getItem('user_id')
                       console.log(response.data);
                       alert(`작품이 수정되었습니다. ${user_id}작가님!`)
-                      router.push('/listitem');
+                      router.push('/work');
                       // console.log(response);
                     }).catch(() => {
                       // console.log(error);

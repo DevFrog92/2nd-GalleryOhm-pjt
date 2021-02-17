@@ -60,7 +60,7 @@
 
             <router-link
               :to="{
-                name: 'GalleryRenderPage',
+                name: 'GalleryPage',
                 params: { props_id: mainGalleryList[i].gallery_id },
               }"
             >

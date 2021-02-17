@@ -42,7 +42,7 @@ const init = () => {
   gallery1.addEventListener('click',function(e){
     console.log('click event',e.target.dataset.value);
     if(e.target.dataset.value){
-    router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
+    router.push({'name':'GalleryPage',params:{props_id:e.target.dataset.value}})
     }
   })
 
@@ -50,7 +50,7 @@ const init = () => {
   gallery2.addEventListener('click',function(e){
     console.log('click event',e.target.dataset.value);
     if(e.target.dataset.value){
-      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.dataset.value}})
+      router.push({'name':'GalleryPage',params:{props_id:e.target.dataset.value}})
     }
   })
   const pintModal = document.querySelector('.third__section')
@@ -267,20 +267,24 @@ const moveToArtistPage = (user_type)=>{
   if(localStorage.getItem('props_id') === localStorage.getItem('user_id')){
     if(localStorage.getItem('user_type') == 1){
       console.log('guest 이동합니다.');
-      router.push('/guestpage');
+      router.push('/guestmypage');
     }else{
       router.push('/mypage');
     }
   }else if(user_type=='2'){
     console.log('이동할게 아티스트로',router.history.current.name);
-    if(router.history.current.name ==='UserProfile'){
+    if(router.history.current.name ==='ArtistMyPage'){
       router.go();
     }else{
-      router.push({name:'UserProfile',params:{props_id:localStorage.getItem('props_id')}})
+      router.push({name:'ArtistMyPage',params:{props_id:localStorage.getItem('props_id')}})
     }
   }else if(user_type=='1'){
-    console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
-    router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
+    if(router.history.current.name === 'GuestMyPage'){
+      router.go();
+    }else{
+      console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
+      router.push({name:'GuestMyPage',params:{props_id: localStorage.getItem('props_id')}});
+    }
   }
 }
 
