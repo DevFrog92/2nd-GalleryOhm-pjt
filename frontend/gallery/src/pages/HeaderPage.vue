@@ -39,9 +39,14 @@
             <a class="router" @click="moveToMypage">내정보</a>
           </span>
         </li>
+         <li class="nav__item" v-if="user_type==0">
+          <span class="nav__item-text">
+            <router-link  class="router" to="/AdminPage1">관장실</router-link>
+          </span>
+        </li>
         <li class="nav__item">
           <span class="nav__item-text">
-            <router-link  class="router" to="/about">어바웃</router-link>
+            <router-link  class="router" to="/about">옴스토리</router-link>
           </span>
         </li>
           <li class="nav__item">
@@ -100,7 +105,6 @@
       init.init();
     },
     created() {
-      console.log('user_type',this.user_type);
     },
     methods: {
       logout() {
@@ -125,13 +129,10 @@
         }
         this.user_type = localStorage.getItem('user_type');
         this.user_id = localStorage.getItem('user_id');
-        console.log('누른다 ',typeof this.user_type)
-        if(this.user_type === '1'){
-          console.log('Guest')
+        if(this.user_type === '1' || this.user_type === '0'){
           localStorage.setItem('props_id',this.user_id)
           this.$router.push('/guestmypage');
         }else if(this.user_type === '2'){
-          console.log('Artist')
           this.$router.push('/mypage')
         }
       },
