@@ -55,7 +55,7 @@
 </template>
 
 <script>
-  import "../../assets/css/ItemListPage.css";
+  import "../../assets/css/WorkPage.css";
   import http from "../../api/http.js";
   import init from '../../assets/js/Works'
   import prevent from '../../assets/js/common/prevent'

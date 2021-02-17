@@ -42,9 +42,9 @@
 </template>
 
 <script>
-  import "../../assets/css/testmaingallery.css";
+  import "../../assets/css/ExhibitionPage.css";
   import http from "../../api/http.js";
-  import init from '../../assets/js/testmaingallery.js'
+  import init from '../../assets/js/ExhibitionPage.js'
   export default {
     data: () => {
       return {

@@ -9,7 +9,7 @@
   height: 300vh;
   overflow: hidden;
   text-align: left;
-	background-color: #EBECF0;
+	background-color: #f5f7fa;
   
   /* background-color: rgb(44, 49, 57); */
 }
@@ -701,7 +701,7 @@
 	 font-size: 0.9rem;
 }
 .third__section {
-	background-color: #EBECF0;
+	background-color: #f5f7fa;
   font-family: 'S-CoreDream-8Heavy';
   
   width: 100vw;
@@ -1071,7 +1071,7 @@
   position: absolute;
   scrollbar-width:none;
   -ms-overflow-style:none;
-	background-color: #EBECF0;
+	background-color: #f5f7fa;
   
   
 
@@ -1280,7 +1280,7 @@
   width: 100%;
   height: 100%;
   transition: all 500ms;
-  background: #EBECF0;
+  background: #f5f7fa;
   z-index:-12;
   overflow-y: scroll;
   border: 10px solid #444;
