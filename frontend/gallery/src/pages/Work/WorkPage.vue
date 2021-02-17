@@ -1,11 +1,11 @@
 <template>
   <div class="item-list-container" ondragstart="return false">
     <div class="segment__works">
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
+          <button class="unit__work unit__btn__works all__works__artist" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
               class='all__works__refresh'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/won.png" alt=""
+          <button class="unit__work unit__btn__works won__base__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/won.png" alt=""
               class='all__works__footprints'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
+          <button class="unit__work unit__btn__works follower__works__artist" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
           <button class="unit__work unit__btn__works" type="button" @click.prevent="moveToCreateWork"><img src="../../assets/images/add.png" alt=""
               class='all__works__refresh'></button>

@@ -4,11 +4,11 @@
     <div class="gallery_poster-list-container">
       <div class="all__gallery__btn">
         <div class="segment">
-          <button class="unit unit__btn" type="button" @click.prevent="refreshAll"><img src="../../assets/images/refresh.png" alt=""
+          <button class="unit unit__btn all__works" type="button" @click.prevent="refreshAll"><img src="../../assets/images/refresh.png" alt=""
               class='all__gallery__refresh'></button>
-          <button class="unit unit__btn" type="button" @click.prevent="footPrintAll"><img src="../../assets/images/footprints.png" alt=""
+          <button class="unit unit__btn foot__base__works" type="button" @click.prevent="footPrintAll"><img src="../../assets/images/footprints.png" alt=""
               class='all__gallery__footprints'></button>
-          <button class="unit unit__btn" type="button" @click.prevent="followAll"><img src="../../assets/images/followers.png" alt=""
+          <button class="unit unit__btn follower__works" type="button" @click.prevent="followAll"><img src="../../assets/images/followers.png" alt=""
               class='all__gallery__refresh'></button>
         </div>
       </div>
