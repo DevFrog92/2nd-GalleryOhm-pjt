@@ -185,6 +185,12 @@
       "css": "back",
       "code": 59418,
       "src": "entypo"
+    },
+    {
+      "uid": "82f0dc5149d842219e45000bebd683fb",
+      "css": "won",
+      "code": 61785,
+      "src": "fontawesome"
     }
   ]
 }

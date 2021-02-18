@@ -4,8 +4,8 @@ const init =()=>{
 
   function clickHandler(e) {
     if(e.target.classList.contains('gallery__poster')){
-      console.log(e.target)
-      console.log(e.target);
+      // console.log(e.target)
+      // console.log(e.target);
       // router.push({name:'ItemDetailPage',params:{work_id:e.target.dataset.value}});
     }
   }

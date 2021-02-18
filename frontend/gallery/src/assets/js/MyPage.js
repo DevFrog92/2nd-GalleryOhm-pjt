@@ -34,7 +34,7 @@ const init = () => {
     scrap.addEventListener('click',function(e){
       if(e.target.classList.contains("scrap__image")){
         const work_id = e.target.dataset.value;
-        router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+        router.push({name:'WorkDetailFirstPage',params:{work_id:work_id}})
       }
     }) 
   }
@@ -42,18 +42,18 @@ const init = () => {
   
   if(gallery1){
     gallery1.addEventListener('click',function(e){
-      console.log('click event',e.target.parentNode.dataset.value);
+      // console.log('click event',e.target.parentNode.dataset.value);
       if(e.target.parentNode.dataset.value){
-      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
+      router.push({'name':'GalleryPage',params:{props_id:e.target.parentNode.dataset.value}})
       }
     })
   }
 
   if(gallery2){
   gallery2.addEventListener('click',function(e){
-    console.log('click event',e.target.parentNode.dataset.value);
+    // console.log('click event',e.target.parentNode.dataset.value);
     if(e.target.parentNode.dataset.value){
-      router.push({'name':'GalleryRenderPage',params:{props_id:e.target.parentNode.dataset.value}})
+      router.push({'name':'GalleryPage',params:{props_id:e.target.parentNode.dataset.value}})
     }
   })
 }
@@ -70,26 +70,18 @@ const init = () => {
     }
     })
   exitSide.addEventListener('click',function(){
-    console.log('click')
+    // console.log('click')
       const pintSide = document.querySelector('.pinter__side');
       pintSide.classList.remove('active_side');
     })
-  // exitSeason.addEventListener('click',function(){
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.remove('active_season');
-  // })
-  // seasonModal.addEventListener('click',function(){
-  //   console.log('season click')
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.add('active_season');
-  // })
+
 function gotoDetail(){
-  console.log('실행한다.')
+  // console.log('실행한다.')
   const imgList = document.querySelector('.pinter_item-lists')
   imgList.addEventListener('click',function(e){
     if(e.target.classList.contains('pinter_grid__body')){
       const work_id = e.target.dataset.value
-      console.log(work_id)
+      // console.log(work_id)
       router.push({name:'ItemDetailPage',params:{work_id:work_id}})
     }
   })
@@ -101,7 +93,7 @@ function manuclickHandler(e){
   if(targetItem.classList.contains("profile_menu_item")){
     let goToElem;
     if(targetItem.dataset.value === "1"){
-      console.log('click')
+      // console.log('click')
       goToElem = document.querySelector('.second__section');
     }else if(targetItem.dataset.value === "2"){
       goToElem = document.querySelector('.third__section');
@@ -113,7 +105,7 @@ function manuclickHandler(e){
 }
 
 function scrollIt(ele){
-  console.log(ele)
+  // console.log(ele)
   topBtn.classList.add('move_to_top_show');
   window.scrollTo({
     'behavior':'smooth',
@@ -123,7 +115,7 @@ function scrollIt(ele){
 }
 
 function topclickHandler(){
-  console.log('click move to top')
+  // console.log('click move to top')
   const first = document.querySelector("#headerpage-header");
   scrollIt(first);
   // window.scrollTo(0,0);
@@ -180,29 +172,36 @@ const getUserInfo = ()=>{
   })
   .then(response=>{
     localStorage.setItem('props_type',response.data.user_type)
-    console.log('저장한다. props_type값',localStorage.getItem('props_type'));
+    // console.log('저장한다. props_type값',localStorage.getItem('props_type'));
   })
 }
 
 
 const follow_modal = ()=>{
-  console.log('실행되었다.')
-  /*
-  * Get all the buttons actions
-  */
+  const notificationItem = document.querySelector('.notification__wrapper');
+  notificationItem.addEventListener('click',function(e){
+    if(e.target.classList.contains('notifications__item')){
+      localStorage.setItem('props_id',e.target.dataset.name)
+      getUserInfo();
+      setTimeout(()=>{
+        moveToArtistPage(localStorage.getItem('props_type'),localStorage.getItem('props_id'));
+      },500);
+      
+    }
+  })
+  // 
   const optionBtns = document.querySelectorAll( '.js-option' );
-  console.log(optionBtns);
+  // console.log(optionBtns);
   for(var i = 0; i < optionBtns.length; i++ ) {
 
     /*
     * When click to a button
     */
     optionBtns[i].addEventListener( 'click', function (e ){
-      console.log('click here',e.target.dataset.name);
+      // console.log('click here',e.target.dataset.name);
       localStorage.setItem('props_id',e.target.dataset.name)
       getUserInfo();
       setTimeout(()=>{
-        console.log(' 시작 텀을 준다.')
         // notification item
         var notificationCard = this.parentNode.parentNode;
         var clickBtn = this;
@@ -246,11 +245,11 @@ const follow_modal = ()=>{
   */
  var archiveOrDelete = function( clickBtn, notificationCard ){
   if( clickBtn.classList.contains( 'archive' ) ){
-    console.log('이동',localStorage.getItem('props_type'));
+    // console.log('이동',localStorage.getItem('props_type'));
     notificationCard.classList.add( 'archive' );
     moveToArtistPage(localStorage.getItem('props_type'),localStorage.getItem('props_id'));
   } else if( clickBtn.classList.contains( 'delete' ) ){
-    // tounfollow();
+    tounfollow();
     notificationCard.classList.add( 'delete' );
   }
 }
@@ -258,24 +257,28 @@ const follow_modal = ()=>{
 }
 
 const moveToArtistPage = (user_type,user_id)=>{
-  console.log('현재 user type이야',user_type);
+  // console.log('현재 user type이야',user_type);
   if(user_id === localStorage.getItem('user_id')){
     if(localStorage.getItem('user_type') == 1){
-      console.log('guest 이동합니다.');
-      router.push('/guestpage');
+      // console.log('guest 이동합니다.');
+      router.push('/guestmypage');
     }else{
       router.push('/mypage');
     }
   }else if(user_type=='2'){
-    console.log('이동할게 아티스트로',router.history.current.name);
-    if(router.history.current.name ==='UserProfile'){
+    // console.log('이동할게 아티스트로',router.history.current.name);
+    if(router.history.current.name ==='ArtistMyPage'){
       router.go();
     }else{
-      router.push({name:'UserProfile',params:{props_id:user_id}})
+      router.push({name:'ArtistMyPage',params:{props_id:user_id}})
     }
   }else if(user_type=='1'){
-    console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
-    router.push({name:'GuestProfile',params:{props_id: user_id}});
+    if(router.history.current.name === 'GuestMyPage'){
+      router.go();
+    }else{
+      // console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
+      router.push({name:'GuestMyPage',params:{props_id: localStorage.getItem('props_id')}});
+    }
   }
 }
 
@@ -289,31 +292,36 @@ const DMModal =() =>{
 
   dmOption.forEach(btn => {
     btn.addEventListener('click',function(e){
-      console.log('click to delete',e.target)
+      // console.log('click to delete',e.target)
       const DMLIST = document.querySelectorAll('.Mypage__DM__item')
       for(let item of DMLIST){
         if(e.target.dataset.value === item.dataset.name){
-          item.classList.add('delete');
-          const formData = new FormData();
-          const id = new Array();
-          id.push(e.target.dataset.value)  
-          formData.append('message_ids',id)
-          
-          http.post('/message/deleteMessage',{ 'message_id' : e.target.dataset.value })
+          item.classList.add('delete');       
+          http.post('/message/deleteMessage',Number(e.target.dataset.value))
           .then(response => {
-           console.log('remove message',response.data);    
+           console.log('remove message',response.data);
+           const sender_name = document.querySelector('.sender_name');
+            const sender_title = document.querySelector('.sender_title');
+            const sender_content = document.querySelector('.sender_content');
+            const sendersender_time_name = document.querySelector('.sender_time');
+            const sendersender_date_name = document.querySelector('.sender_date');
+            sender_name.innerText = '';
+            sender_title.innerText ="제목. ";
+            sender_content.innerText = '';
+            sendersender_time_name.innerText ='';
+            sendersender_date_name.innerText = '';
           })
         }
       }
     })
   })
 
-  console.log('DM__list',DMList);
+  // console.log('DM__list',DMList);
   DMList.addEventListener('click',function(e){
     if(e.target.classList.contains('Mypage__DM__item'))
     {
-      console.log('읽음 처리 합니다.')
-      console.log(JSON.parse(e.target.dataset.value));
+      // console.log('읽음 처리 합니다.')
+      // console.log(JSON.parse(e.target.dataset.value));
       const response_data = JSON.parse(e.target.dataset.value);
       const messages = document.querySelectorAll('.Mypage__DM__item')
       for(let item of messages){
@@ -326,7 +334,7 @@ const DMModal =() =>{
 
 
       
-      message_read(response_data.message_id);
+      message_read(response_data.message_id,e.target);
       // e.target.classList.add('Mypage__DM__item__read')
       const sender_name = document.querySelector('.sender_name');
       const sender_title = document.querySelector('.sender_title');
@@ -345,22 +353,22 @@ const DMModal =() =>{
   })
 }
 
-const message_read = (message_id)=>{
-  const formData = new FormData()
-  formData.append('message_id',message_id)
-  http.post('/message/checkMessage',{ 'message_id' : message_id })
+const message_read = (message_id,target)=>{
+  http.post('/message/checkMessage',Number(message_id))
   .then(response => {
     console.log('read message',response.data);
+    target.classList.add('Guest__DM__item__read');
+
   })
 }
-// const tounfollow=()=>{
-//   const formData = {
-//     follow_artistId: localStorage.getItem('props_id'),
-//     follow_userId:localStorage.getItem('user_id')
-//   }
-//   http.post('/follow/cancelFollow',formData)
-//   .then(response=>{
-//     console.log(response.data,'unfollow');
-//   })
-// }
+const tounfollow=()=>{
+  const formData = {
+    follow_artistId: localStorage.getItem('props_id'),
+    follow_userId:localStorage.getItem('user_id')
+  }
+  http.post('/follow/cancelFollow',formData)
+  .then(
+    // console.log(response.data,'unfollow');
+  )
+}
 export default {init,follow_modal,DMModal};

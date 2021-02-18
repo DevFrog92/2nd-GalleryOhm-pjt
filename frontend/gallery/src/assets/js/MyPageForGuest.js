@@ -4,76 +4,23 @@ const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
-  
-
-
-
-  // const scrap = document.querySelector('.scroll-wrapper')
-  // scrap.addEventListener('click',function(e){
-  //   if(e.target.classList.contains("scrap__image")){
-  //     const work_id = e.target.dataset.value;
-  //     router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-  //   }
-  // })
-
-
-  // const pintModal = document.querySelector('.third__section')
-  // const seasonModal = document.querySelector('.pinter__side .photo-count')
-  // const exitSide = document.querySelector('.exit_side')
-  // const exitSeason = document.querySelector('.exit_season')
-  // pintModal.addEventListener('click',function(e){
-  //   if(e.target.classList.contains('show__my__pint')){
-  //     gotoDetail()
-  //     const pintSide = document.querySelector('.pinter__side');
-  //     pintSide.classList.add('active_side');
-  //   }
-  //   })
-  // exitSide.addEventListener('click',function(){
-  //   console.log('click')
-  //     const pintSide = document.querySelector('.pinter__side');
-  //     pintSide.classList.remove('active_side');
-  //   })
-  // exitSeason.addEventListener('click',function(){
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.remove('active_season');
-  // })
-  // seasonModal.addEventListener('click',function(){
-  //   console.log('season click')
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.add('active_season');
-  // })
-// function gotoDetail(){
-//   console.log('실행한다.')
-//   const imgList = document.querySelector('.pinter_item-lists')
-//   imgList.addEventListener('click',function(e){
-//     if(e.target.classList.contains('pinter_grid__body')){
-//       const work_id = e.target.dataset.value
-//       console.log(work_id)
-//       router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-//     }
-//   })
-
-// }
 
 function manuclickHandler(e){
   const targetItem = e.target;
   if(targetItem.classList.contains("profile_menu_item")){
     let goToElem;
     if(targetItem.dataset.value === "1"){
-      console.log('click')
       goToElem = document.querySelector('.second__section');
     }else if(targetItem.dataset.value === "2"){
       goToElem = document.querySelector('.third__section');
     }else if(targetItem.dataset.value === "3"){
       goToElem = document.querySelector('.forth__section__guest');
-      console.log(goToElem)
     }
     scrollIt(goToElem)
   }
 }
 
 function scrollIt(ele){
-  console.log(ele)
   topBtn.classList.add('move_to_top_show');
   window.scrollTo({
     'behavior':'smooth',
@@ -148,29 +95,24 @@ const getUserInfo = ()=>{
   })
   .then(response=>{
     localStorage.setItem('props_type',response.data.user_type)
-    console.log('저장한다. props_type값',localStorage.getItem('props_type'));
   })
 }
 
 
 const follow_modal = ()=>{
-  console.log('실행되었다.')
   /*
   * Get all the buttons actions
   */
   const optionBtns = document.querySelectorAll( '.js-option' );
-  console.log(optionBtns);
   for(var i = 0; i < optionBtns.length; i++ ) {
 
     /*
     * When click to a button
     */
     optionBtns[i].addEventListener( 'click', function (e ){
-      console.log('click here',e.target.dataset.name);
       localStorage.setItem('props_id',e.target.dataset.name)
       getUserInfo();
       setTimeout(()=>{
-        console.log(' 시작 텀을 준다.')
         // notification item
         var notificationCard = this.parentNode.parentNode;
         var clickBtn = this;
@@ -214,7 +156,6 @@ const follow_modal = ()=>{
   */
   var archiveOrDelete = function( clickBtn, notificationCard ){
     if( clickBtn.classList.contains( 'archive' ) ){
-      console.log('이동',localStorage.getItem('props_type'));
       notificationCard.classList.add( 'archive' );
       moveToArtistPage(localStorage.getItem('props_type'));
     } else if( clickBtn.classList.contains( 'delete' ) ){
@@ -226,27 +167,23 @@ const follow_modal = ()=>{
 }
 
 const moveToArtistPage = (user_type)=>{
-  console.log('현재 user type이야',user_type);
   if(localStorage.getItem('props_id') === localStorage.getItem('user_id')){
     if(localStorage.getItem('user_type') == 1){
-      console.log('guest 이동합니다.');
-      router.push('/guestpage');
+      router.push('/guestmypage');
     }else{
       router.push('/mypage');
     }
   }else if(user_type=='2'){
-    console.log('이동할게 아티스트로',router.history.current.name);
-    if(router.history.current.name ==='UserProfile'){
+    if(router.history.current.name ==='ArtistMyPage'){
       router.go();
     }else{
-      router.push({name:'UserProfile',params:{props_id:localStorage.getItem('props_id')}})
+      router.push({name:'ArtistMyPage',params:{props_id:localStorage.getItem('props_id')}})
     }
   }else if(user_type=='1'){
-    if(router.history.current.name === 'GuestProfile'){
+    if(router.history.current.name === 'GuestMyPage'){
       router.go();
     }else{
-      console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
-      router.push({name:'GuestProfile',params:{props_id: localStorage.getItem('props_id')}});
+      router.push({name:'GuestMyPage',params:{props_id: localStorage.getItem('props_id')}});
     }
   }
 
@@ -266,31 +203,21 @@ const DMModal =() =>{
 
   dmOption.forEach(btn => {
     btn.addEventListener('click',function(e){
-      console.log('click to delete',e.target)
       const DMLIST = document.querySelectorAll('.Guest__DM__item')
       for(let item of DMLIST){
         if(e.target.dataset.value === item.dataset.name){
           item.classList.add('delete');
-          const formData = new FormData();
-          const id = new Array();
-          id.push(e.target.dataset.value)  
-          formData.append('message_ids',id)
-          
-          http.post('/message/deleteMessage',{ 'message_id' : e.target.dataset.value })
-          .then(response => {
-           console.log('remove message',response.data);    
+          http.post('/message/deleteMessage',Number(e.target.dataset.value))
+          .then(() => {
           })
         }
       }
     })
   })
 
-  console.log('DM__list',DMList);
   DMList.addEventListener('click',function(e){
     if(e.target.classList.contains('Guest__DM__item'))
     {
-      console.log('읽음 처리 합니다.')
-      console.log(JSON.parse(e.target.dataset.value));
       const response_data = JSON.parse(e.target.dataset.value);
       const messages = document.querySelectorAll('.Guest__DM__item')
       for(let item of messages){
@@ -303,59 +230,28 @@ const DMModal =() =>{
 
 
       
-      message_read(response_data.message_id);
-      // e.target.classList.add('Mypage__DM__item__read')
-      const sender_name = document.querySelector('.sender_name');
-      const sender_title = document.querySelector('.sender_title');
-      const sender_content = document.querySelector('.sender_content');
-      const sendersender_time_name = document.querySelector('.sender_time');
-      const sendersender_date_name = document.querySelector('.sender_date');
+      message_read(response_data.message_id,e.target);
+
+      const sender_name = document.querySelector('.Guest__message__name__cover .sender_name');
+      const sender_title = document.querySelector('.Guest__message__title__cover .sender_title');
+      const sender_content = document.querySelector('.Guest__message__content__cover .sender_content');
+      const sendersender_time_name = document.querySelector('.Guest__message__date__tiem .sender_time');
+      const sendersender_date_name = document.querySelector('.Guest__message__date__tiem .sender_date');
+
       sender_name.innerText = response_data.message_senderId;
       sender_title.innerText ="제목. " + response_data.message_title;
       sender_content.innerText = response_data.message_content;
       sendersender_time_name.innerText = response_data.message_sendDate.slice(11);
       sendersender_date_name.innerText = response_data.message_sendDate.slice(0,11);
-      // 
-      // const showDmContent = document.querySelector('.Mypage__showDmContent')
-      // showDmContent.classList.add('MypageshowDmContentActive');
     }
   })
 }
 
-const message_read = (message_id)=>{
-  const formData = new FormData()
-  formData.append('message_id',message_id)
-  http.post('/message/checkMessage',{ 'message_id' : message_id })
-  .then(response => {
-    console.log('read message',response.data);
+const message_read = (message_id,target)=>{
+  http.post('/message/checkMessage',Number(message_id))
+  .then(() => {
+    target.classList.add('Guest__DM__item__read');
   })
 }
 
-
-
-// const message_read = (message_id)=>{
-//   const formData = new FormData()
-//   formData.append('message_ids',Array(message_id))
-//   http.post('/message/checkMessage/',formData)
-//   .then(response => {
-//     console.log('read message',response.data);
-//   })
-// }
-
-
-// const DMModal =() =>{
-//   const DMList = document.querySelector('.dm__list_props');
-// }
-
-
-// const tounfollow=()=>{
-//   const formData = {
-//     follow_artistId: localStorage.getItem('props_id'),
-//     follow_userId:localStorage.getItem('user_id')
-//   }
-//   http.post('/follow/cancelFollow',formData)
-//   .then(response=>{
-//     console.log(response.data,'unfollow');
-//   })
-// }
 export default {init,follow_modal,DMModal};

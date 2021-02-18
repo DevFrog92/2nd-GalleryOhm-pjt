@@ -29,13 +29,11 @@ const login = (context,userInfo) => {
 
 const leaveUser = (context,user_id) =>{
   // console.log('actions');
-  setTimeout(()=>{
     http.get(`/user/leaveUser?user_id=${user_id}`).then(()=>{
       context.commit("leaveUser");
       alert('이용해 주셔서 감사합니다.');
       router.push('/');
     })
-  },3200);
 }
 
 const findPw = (context,userInfo) => {
@@ -74,7 +72,7 @@ const addWork = (context, info) => {
                       const user_id = localStorage.getItem('user_id')
                       console.log(response.data);
                       alert(`작품이 등록되었습니다. ${user_id}작가님!`)
-                      router.push('/listitem');
+                      router.push('/work');
                       // console.log(response);
                     }).catch(() => {
                       // console.log(error);
@@ -106,7 +104,7 @@ const modifyWork = (context, info) => {
                       const user_id = localStorage.getItem('user_id')
                       console.log(response.data);
                       alert(`작품이 수정되었습니다. ${user_id}작가님!`)
-                      router.push('/listitem');
+                      router.push('/work');
                       // console.log(response);
                     }).catch(() => {
                       // console.log(error);
@@ -117,7 +115,7 @@ const modifyUser = (context,modifyUserInfo) => {
   // console.log('modify',modifyUserInfo);
 
   let formData = new FormData();
-
+  console.log(modifyUserInfo);
   formData.append('user_birth', modifyUserInfo.user_birth);
   formData.append('user_email',modifyUserInfo.user_email);
   formData.append('user_id',modifyUserInfo.user_id);

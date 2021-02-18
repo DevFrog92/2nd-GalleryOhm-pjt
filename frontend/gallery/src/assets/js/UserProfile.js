@@ -1,5 +1,5 @@
 import router from '../../router'
-// import http from '../../api/http'
+
 const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
@@ -25,7 +25,7 @@ function manuclickHandler(e){
 }
 
 function scrollIt(ele){
-  console.log(ele)
+  // console.log(ele)
   topBtn.classList.add('move_to_top_show');
   window.scrollTo({
     'behavior':'smooth',
@@ -78,28 +78,24 @@ function moveToArtistPage(artist_id){
       
     })
   })
-  
-  // const scrollWrapper = document.querySelector('.scroll-wrapper');
-  // const scrollWrapper_items = document.querySelectorAll('.scroll-wrapper img');
-  // scrollWrapper.style.width = scrollWrapper_items.length*(30*16+72)+'px'
 
 }
 
 
 const follow_modal = ()=>{
-  console.log('실행되었다.')
+  // console.log('실행되었다.')
   /*
   * Get all the buttons actions
   */
   const optionBtns = document.querySelectorAll( '.js-option' );
-  console.log(optionBtns);
+  // console.log(optionBtns);
   for(var i = 0; i < optionBtns.length; i++ ) {
 
     /*
     * When click to a button
     */
     optionBtns[i].addEventListener( 'click', function (e ){
-      console.log('click here',e.target.dataset.name);
+      // console.log('click here',e.target.dataset.name);
       localStorage.setItem('props_id',e.target.dataset.name)
       // notification item
       var notificationCard = this.parentNode.parentNode;
@@ -142,7 +138,7 @@ const follow_modal = ()=>{
   */
   var archiveOrDelete = function( clickBtn, notificationCard ){
     if( clickBtn.classList.contains( 'archive' ) ){
-      console.log('이동');
+      // console.log('이동');
       notificationCard.classList.add( 'archive' );
       moveToArtistPage();
     } else if( clickBtn.classList.contains( 'delete' ) ){
@@ -158,20 +154,9 @@ const moveToArtistPage = ()=>{
   if(localStorage.getItem('props_id') === localStorage.getItem('user_id')){
       router.push('/mypage');
   }else{
-    console.log('이동할게 이제',localStorage.getItem('props_id'));
+    // console.log('이동할게 이제',localStorage.getItem('props_id'));
     router.push({name:'UserProfile',params:{props_id: localStorage.getItem('props_id')}});
   }
 }
 
-
-// const tounfollow=()=>{
-//   const formData = {
-//     follow_artistId: localStorage.getItem('props_id'),
-//     follow_userId:localStorage.getItem('user_id')
-//   }
-//   http.post('/follow/cancelFollow',formData)
-//   .then(response=>{
-//     console.log(response.data,'unfollow');
-//   })
-// }
 export default {init,follow_modal};

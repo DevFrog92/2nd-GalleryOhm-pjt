@@ -21,59 +21,60 @@
         :style="'background-image: url(' + work.work_piece + ')'"
       ></div>
       <div class="detail">
+        <div class="blank_box"></div>
         <div class="img_box">
-          <div class="modify" v-if="artistState">
-            <!-- 작가 본인이라면 수정, 삭제 -->
-          </div>
           <div class="img">
             <img :src="work.work_piece" alt="" class="detail_img" />
           </div>
           <div class="actions">
-            <!-- 좋아요, 북마크 -->
-            <div class="scrap scrap_active" v-if="scrapState">
-              <!-- 북마크 되어있는 상태 -->
-              <img
-                src="../../assets/images/bookmark_active.png"
-                alt=""
-                @click="deleteBookmark()"
-              />
-            </div>
-            <div class="scrap scrap_no" v-else>
-              <img
-                src="../../assets/images/bookmark.png"
-                alt=""
-                @click="addBookmark()"
-              />
-              <!-- 북마크 안되어있는 상태 -->
-            </div>
+            <!-- 좋아요 -->
             <div class="cost cost_active" v-if="costState">
               <!-- 좋아요 되어있는 상태 -->
               <div class="cost_info">
                 <img
-                  src="../../assets/images/coin_active.png"
+                  src="../../assets/images/won (1).png"
                   alt="코스트"
                   @click="deleteCost()"
                 />
-                <p>{{ costCnt }}</p>
               </div>
             </div>
             <div class="cost cost_no" v-else>
               <!-- 좋아요 안되어있는 상태 -->
               <div class="cost_info">
                 <img
-                  src="../../assets/images/coin.png"
+                  src="../../assets/images/won.png"
                   alt="코스트"
                   @click="addCost()"
                 />
-                <p>{{ costCnt }}</p>
               </div>
+            </div>
+            <div class="costCnt">
+              {{ totalCost }}
             </div>
           </div>
         </div>
         <div class="info_box">
           <div class="info">
             <!-- 작품 이름 -->
-            <div class="first">{{ work.work_title }}</div>
+            <div class="first">
+              <div class="title">{{ work.work_title }}</div>
+              <div class="scrap scrap_active" v-if="scrapState">
+                <!-- 북마크 되어있는 상태 -->
+                <img
+                  src="../../assets/images/bookmark1_active.png"
+                  alt=""
+                  @click="deleteBookmark()"
+                />
+              </div>
+              <div class="scrap scrap_no" v-else>
+                <!-- 북마크 안되어있는 상태 -->
+                <img
+                  src="../../assets/images/bookmark1.png"
+                  alt=""
+                  @click="addBookmark()"
+                />
+              </div>
+            </div>
             <!-- 작가 이름-->
             <div class="name" @click="moveToArtistPage()">
               <!-- 작가 페이지 이동 함수 넣기 -->
@@ -90,9 +91,64 @@
             <!-- 작품 사이즈 -->
             <div class="size">size : {{ size }}</div>
             <!-- 작품 해시태그 -->
-            <div class="hashtags"></div>
+            <div class="hashtags" v-if="hashtags.length != 0">
+              <p v-for="(tag, i) in hashtags" :key="i" class="hashtag">
+                #{{ tag }}
+              </p>
+            </div>
+            <div class="modify" v-if="artistState">
+              <!-- 작가 본인이라면 수정, 삭제 -->
+              <button
+                class="modify__work modify__btn__works"
+                type="button"
+                @click="modifyWork()"
+              >
+                <img
+                  src="../../assets/images/pencil.png"
+                  alt=""
+                  class="all__works__modify"
+                />
+              </button>
+
+              <button
+                class="modify__work modify__btn__works"
+                type="button"
+                @click="deleteWork()"
+              >
+                <img
+                  src="../../assets/images/delete.png"
+                  alt=""
+                  class="all__works__delete"
+                />
+              </button>
+              <button
+                class="modify__work modify__btn__works"
+                type="button"
+                @click="goBack()"
+              >
+                <img
+                  src="../../assets/images/back.png"
+                  alt=""
+                  class="all__works__back"
+                />
+              </button>
+            </div>
+            <div class="modify" v-else>
+              <button
+                class="modify__work modify__btn__works"
+                type="button"
+                @click="goBack()"
+              >
+                <img
+                  src="../../assets/images/back.png"
+                  alt=""
+                  class="all__works__back"
+                />
+              </button>
+            </div>
           </div>
         </div>
+        <div class="blank_box"></div>
       </div>
       <div class="footer">
         <footer>
@@ -120,19 +176,26 @@ export default {
     return {
       imgSrc: "",
       prop_workId: "",
+      prop_galleryId: "",
       work: [],
       size: "",
       artistState: false,
       costState: false,
       scrapState: false,
       costCnt: 0,
+      totalCost: 0,
+      hashtags: [],
     };
   },
   props: ["work_id"],
   created() {
     this.prop_workId = this.$route.params.work_id;
 
-    if (this.prop_workId == null) {
+    if (this.$route.params.work_id !== undefined) {
+      localStorage.setItem("work_id", this.$route.params.work_id);
+    }
+
+    if (localStorage.getItem("work_id") == null) {
       alert("잘못된 접근방식입니다.");
       history.go(-1);
     } else {
@@ -147,15 +210,18 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
+    // console.log(this.$router.history);
   },
   methods: {
     getWorkInfo() {
-      http.get("/work/getWork/" + this.prop_workId).then(
+      http.get("/work/getWork/" + localStorage.getItem("work_id")).then(
         (response) => {
           var work = response.data;
           work.work_piece = "data:image/jpeg;base64," + work.work_piece;
           this.work = work;
           this.costCnt = this.work.work_cost;
+          this.totalCost = this.costCnt * 100;
+          this.hashtags = this.work.hashtags;
         },
         (error) => {
           console.log(error);
@@ -233,7 +299,7 @@ export default {
         localStorage.setItem("props_id", this.work.work_artistId);
 
         router.push({
-          name: "UserProfile",
+          name: "ArtistMyPage",
           params: { props_id: this.work.work_artistId },
         });
       }
@@ -248,7 +314,6 @@ export default {
         })
         .then(
           () => {
-            alert("즐겨찾기 했습니다.");
             this.scrapState = true;
           },
           (error) => {
@@ -266,7 +331,6 @@ export default {
         })
         .then(
           () => {
-            alert("즐겨찾기를 취소했습니다.");
             this.scrapState = false;
           },
           (error) => {
@@ -284,9 +348,9 @@ export default {
         })
         .then(
           () => {
-            alert("작품 좋아요");
             this.costState = true;
             this.costCnt += 1;
+            this.totalCost += 100;
           },
           (error) => {
             console.log(error);
@@ -303,9 +367,9 @@ export default {
         })
         .then(
           () => {
-            alert("작품 좋아요 취소");
             this.costState = false;
             this.costCnt -= 1;
+            this.totalCost -= 100;
           },
           (error) => {
             console.log(error);
@@ -313,13 +377,24 @@ export default {
         );
     },
     deleteWork() {
-      this.$store.dispatch("deleteWork", this.work.work_id);
+      if (confirm("작품을 삭제하시겠습니까?")) {
+        this.$store.dispatch("deleteWork", this.work.work_id).then(() => {
+          history.go(-1);
+        });
+      }
     },
     modifyWork() {
       this.$router.push({
         name: "WorkUpLoad",
-        params: { work_info: this.work, mode: "modify" },
+        params: {
+          work_info: this.work,
+          mode: "modify",
+          hashtags: this.hashtags,
+        },
       });
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };
@@ -334,10 +409,18 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Cafe24Ohsquare";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .preview {
   /* background-color: #ffe8e8; */
-  background-color: #f4f5f9;
+  /* background-color: #f4f5f9; */
+  background-color: #f5f7fa;
   color: black;
 }
 
@@ -384,12 +467,19 @@ export default {
   height: 70vh;
   display: flex;
   justify-content: space-around;
-  background-color: #f4f5f9;
+  /* background-color: #f4f5f9; */
+  background-color: #f5f7fa;
+}
+
+.detail .blank_box {
+  order: flex;
+  width: 13%;
+  height: 100%;
 }
 
 .detail .img_box {
   order: flex;
-  width: 45%;
+  width: 37%;
   height: 100%;
   top: 0%;
 }
@@ -409,7 +499,8 @@ export default {
 }
 .detail .info_box {
   order: flex;
-  width: 45%;
+  margin-top: 5vh;
+  width: 37%;
   height: 100%;
   position: relative;
   color: black;
@@ -429,6 +520,31 @@ export default {
   font-size: 40px;
 }
 
+.detail .info_box .info .title {
+  display: inline;
+  width: 50%;
+}
+
+.detail .info_box .info .first .scrap {
+  display: inline;
+  width: 2vw;
+  height: 3.8vh;
+  vertical-align: top;
+  padding-left: 0.8vw;
+}
+
+.detail .info_box .info .first .scrap img {
+  width: 1.2vw;
+  height: 2.2vh;
+  cursor: pointer;
+  /* vertical-align: top; */
+}
+
+.detail .info_box .info .first .scrap img:hover {
+  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 blue);
+  filter: opacity(0.3) drop-shadow(0 0 0 blue);
+}
+
 .detail .info_box .info .name {
   margin-top: 2vh;
   font-size: 20px;
@@ -446,7 +562,8 @@ export default {
 
 .footer {
   display: block;
-  background-color: #f4f5f9;
+  /* background-color: #f4f5f9; */
+  background-color: #f5f7fa;
   padding-top: 10vh;
 }
 
@@ -505,24 +622,6 @@ footer .foot .t {
   margin: 0 auto;
 }
 
-.scrap {
-  display: inline;
-  width: 2vw;
-  height: 3.8vh;
-}
-
-.scrap img {
-  display: inline;
-  width: 2vw;
-  height: 3.8vh;
-  cursor: pointer;
-}
-
-.scrap img:hover {
-  -webkit-filter: opacity(0.3) drop-shadow(0 0 0 red);
-  filter: opacity(0.3) drop-shadow(0 0 0 red);
-}
-
 .cost {
   display: inline;
   width: 5vw;
@@ -543,5 +642,75 @@ footer .foot .t {
 .cost .cost_info img:hover {
   -webkit-filter: opacity(0.5) drop-shadow(0 0 0 yellow);
   filter: opacity(0.5) drop-shadow(0 0 0 yellow);
+}
+
+.costCnt {
+  display: inline;
+  width: 5vw;
+  height: 5vh;
+  padding-left: 1vw;
+
+  font-family: "S-CoreDream-8Heavy";
+}
+
+.modify__btn__works {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 0.7rem;
+  background-color: #f5f7fa;
+  text-shadow: 1px 1px 0 #fff;
+  z-index: 99;
+}
+
+.modify__btn__works {
+  color: #61677c;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.all__works__modify,
+.all__works__delete,
+.all__works__back {
+  width: 100%;
+  height: 100%;
+}
+
+.modify__btn__works:hover {
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+}
+
+.modify__btn__works:active {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+
+.modify__btn__works.modify__work {
+  border-radius: 8px;
+  line-height: 0;
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+  font-size: 19.2px;
+}
+
+.modify {
+  margin-top: 4vh;
+}
+
+.size {
+  margin-top: 1.5vh;
+}
+
+.hashtags {
+  margin-top: 1.5vh;
+}
+
+.hashtags .hashtag {
+  display: inline;
 }
 </style>

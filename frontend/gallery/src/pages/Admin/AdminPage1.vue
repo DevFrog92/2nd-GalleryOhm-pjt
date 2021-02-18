@@ -337,7 +337,7 @@ export default {
     updateMainGallery() {
       http.get(`/admin/renewMainGallery`).then(
         (response) => {
-          console.log(response);
+          // console.log(response);
 
           if (response.status == 200) {
             // this.getAllMainAdultGallery();
@@ -400,7 +400,7 @@ export default {
             this.items.push(w);
             this.workHashtag.push(w);
           }
-          console.log(this.items);
+          // console.log(this.items);
         },
         (error) => {
           console.log(error);
@@ -487,7 +487,7 @@ export default {
       var formData = new FormData();
       formData.append("hashtag_name", hashtag);
 
-      console.log(formData);
+      // console.log(formData);
 
       http.post(`/admin/deleteHashTagFromTotal`, formData).then(
         (response) => {
@@ -505,14 +505,22 @@ export default {
 </script>
 
 <style scoped>
+* {
+
+}
+
 .container {
- margin: 0 auto;
+ /* margin: 0 auto; */
+width: 100vw;
+height: 100vh;
 }
 .admin {
+  position: relative;
  margin: 0 auto;
 }
 .admin_tabs {
- margin: 0 auto;
+  left: -50%;
+ /* margin: 0 auto; */
 }
 .mt {
   margin-top: 10%;

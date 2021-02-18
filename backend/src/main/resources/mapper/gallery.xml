@@ -26,7 +26,7 @@
     <select id="isAdultGallery" parameterType="int" resultType="hashmap">
         select w.work_rating
         from work as w
-                 join galleryDetail as g
+                 join gallerydetail as g
                       on w.work_id = g.galleryDetail_workId
         where galleryDetail_galleryId = #{galleryDetail_galleryId}
     </select>

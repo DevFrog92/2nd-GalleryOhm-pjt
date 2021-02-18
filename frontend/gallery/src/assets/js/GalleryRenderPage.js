@@ -89,20 +89,13 @@ const init = () => {
   function sliderEventHandler(e) {
     let targetElem = e.target;
     if (targetElem.classList.contains("gallery__image")) {
-      // alert(targetElem.dataset.value, "디테일 페이지로 이동");
-      
-      // let targetParentNode = targetElem.parentNode;
-      // while(!targetParentNode.classList.contains("carousel__slider__item")){
-      //       targetParentNode = targetParentNode.parentNode;
-      // }
-      // move(Number(targetElem.dataset.index) + 1);
 
       router.push({
         name: "DetailPage2",
-        params: { work_id: e.target.dataset.value },
+        params: { work_id: e.target.dataset.value, galleyr_id: this.gallery_id },
       });
     } else {
-      console.log(targetElem);
+      // console.log(targetElem);
     }
   }
   const mainCarousel = document.querySelector(".main__carousel");

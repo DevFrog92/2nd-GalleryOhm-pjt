@@ -11,10 +11,10 @@ const join = (userInfo) =>{
     if (!err.password) {userInfo.user_password = ""; userInfo.user_passwordConfirm="";}
     if (!err.tel) {userInfo.user_tel = "";}
     if (err.showModal){
-      // console.log('join',userInfo,);
     http.post('/user/joinUser',userInfo).then(() => {
-        alert('회원가입을 축하합니다.');
+        // alert('회원가입을 축하합니다.');
         activeBtn();
+        common.objectCelar(userInfo)
       })
     }
   }else{
