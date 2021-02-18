@@ -50,6 +50,21 @@ public class ArtistController {
         return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
     }
 
+    // 작가 등록
+    @ApiOperation(value = "작가정보를 수정한다.", response = NumberResult.class, notes = "modifyArtist(ArtistDto)")
+    @RequestMapping(value = "/modifyArtist", method = RequestMethod.POST)
+    public ResponseEntity<NumberResult> modifyArtist(@RequestBody ArtistDto artistDto) throws Exception{
+        NumberResult nr = new NumberResult();
+
+        if(artistService.modifyArtist(artistDto)==1){
+            nr.setValue("modifyArtist", 1, "succ");
+        }
+        else
+            return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<NumberResult>(nr, HttpStatus.OK);
+    }
+
+
     @ApiOperation(value = "작가 등록을 해지한다.", response = NumberResult.class, notes = "leaveArtist(artist_id)")
     @RequestMapping(value = "/leaveArtist", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> leaveArtist(@RequestParam(value = "artist_id") String artist_id) throws Exception{

@@ -25,4 +25,9 @@ public class ArtistServiceImpl implements ArtistService{
     public int leaveArtist(String artist_id) throws Exception {
         return artistDao.leaveArtist(artist_id);
     }
+
+    @Override
+    public int modifyArtist(ArtistDto artistDto) throws Exception {
+        return artistDao.modifyArtist(artistDto);
+    }
 }

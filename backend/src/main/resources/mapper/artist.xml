@@ -13,6 +13,14 @@
 		VALUES(#{artist_id}, #{artist_bank}, #{artist_account}, #{artist_nickName})
 	</insert>
 
+	<update id="modifyArtist" parameterType="artist">
+		UPDATE artist
+		SET artist_bank = #{artist_bank},
+		    artist_account = #{artist_account},
+		    artist_nickName = #{artist_nickName}
+		WHERE artist_id = #{artist_id}
+	</update>
+
 	<update id="updateUserType" parameterType="String">
 		UPDATE user
 		SET user_type =
