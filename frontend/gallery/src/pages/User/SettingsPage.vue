@@ -211,13 +211,13 @@
       </div>
 
       <div slot="body" v-if="artist_resister === 'changeArtist'">
-        <h3>{{userInfo.user_nickName}}작가님! 환영합니다.</h3>
+        <h3>{{artist_nickName}}작가님! 환영합니다.</h3>
         <p>저희 '갤러리 Ω,'는 작가님의 다양한 작품 활동을 지원하기 위해서 최선을
           다하고 있습니다. 문의가 있다면 언제나 저희에게 연락을 주십시오. 다시 한번 환영합니다!!
         </p>
       </div>
       <div slot="body" v-else>
-        <h3>{{userInfo.user_nickName}}작가님!</h3>
+        <h3>{{artist_nickName}}작가님!</h3>
         <p>저희 '갤러리 Ω,'에서의 작가활동은 어떠셨나요? 다신 한번 만나뵙기를 기원하겠습니다. 작가님의 앞으로의
           작가활동을 저희 저희 '갤러리 Ω,'이 응원하겠습니다!
         </p>
@@ -342,7 +342,7 @@
           })
       },
       withdraw_artist() {
-        http.post(`/artist/leaveArtist/{artist_id}?artist_id=` + localStorage.getItem('user_id'))
+        http.post(`/artist/leaveArtist?artist_id=` + localStorage.getItem('user_id'))
           .then(response => {
             this.artist_resister = response.data.name;
             console.log(response.data);
