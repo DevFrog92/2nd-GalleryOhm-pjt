@@ -85,19 +85,21 @@
         <p>생성된 전시관 이름 : {{ gallery_name }}</p>
       </div>
 
-      <div slot="footer" v-if="!register_state">
-        <button class="registerGallery" @click="makeGallery">등록하기</button>
-        <button
+      <div slot="footer" class="d_modal_btn_container" v-if="!register_state">
+        <div class="registerGallery" @click="makeGallery">
+          <span>등록하기</span>
+        </div>
+        <div
           class="closeRegisterGalleryBtn"
           @click="showModal_register = false"
         >
-          나가기
-        </button>
+          <span>나가기</span>
+        </div>
       </div>
-      <div slot="footer" v-else>
-        <button class="closeRegisterGalleryBtn" @click="goToMypage">
-          마이페이지로 이동
-        </button>
+      <div slot="footer" class="d_modal_btn_container" v-else>
+        <div class="closeRegisterGalleryBtn" @click="goToMypage">
+          <span>마이페이지로 이동</span>
+        </div>
       </div>
     </Modal>
     <Modal v-if="showModal_modify" @close="showModal_modify = false">
@@ -134,24 +136,24 @@
         <p>수정된 전시관 이름 : {{ gallery_info.gallery_name }}</p>
       </div>
 
-      <div slot="footer" v-if="modify_state">
-        <button class="registerGallery" @click="modifyArtistGallery">
-          등록하기
-        </button>
-        <button
+      <div slot="footer" class="d_modal_btn_container" v-if="modify_state">
+        <div class="registerGallery" @click="modifyArtistGallery">
+          <span>등록하기</span>
+        </div>
+        <div
           class="closeRegisterGalleryBtn"
           @click="showModal_modify = false"
         >
-          나가기
-        </button>
+         <span>나가기</span>
+        </div>
       </div>
       <div slot="footer" v-else>
-        <button class="registerGallery" @click="galleryrender">
+        <div class="registerGallery" @click="galleryrender">
           전시관으로 이동
-        </button>
-        <button class="closeRegisterGalleryBtn" @click="goToMypage">
+        </div>
+        <div class="closeRegisterGalleryBtn" @click="goToMypage">
           마이페이지로 이동
-        </button>
+        </div>
       </div>
     </Modal>
   </div>
