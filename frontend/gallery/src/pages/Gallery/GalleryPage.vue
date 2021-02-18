@@ -78,7 +78,7 @@ import "../../assets/css/GalleryRenderPage.css";
 import init from "../../assets/js/GalleryRenderPage.js";
 import "../../assets/fontello/css/fontello.css";
 import http from "../../api/http";
-import router from "../../router";
+// import router from "../../router";
 export default {
   data() {
     return {
@@ -102,25 +102,28 @@ export default {
       }, 500);
   },
   created() {
-    console.log("gallery render page");
+    if(this.props_id !== undefined){
+      localStorage.setItem("gallery_id", this.props_id);
+    }
+
     this.getArtistGallery();
     this.getGAllery();
     this.getFootPrint();
   },
   methods: {
-    clickHandler(e) {
-      if (e.target.classList.contains("gallery__image")) {
-        console.log("===> " + e.target.dataset.value);
-        router.push({
-          name: "DetailPage2",
-          params: { work_id: e.target.dataset.value },
-        });
-      }
-    },
+    // clickHandler(e) {
+    //   if (e.target.classList.contains("gallery__image")) {
+    //     console.log("===> " + e.target.dataset.value);
+    //     router.push({
+    //       name: "DetailPage2",
+    //       params: { work_id: e.target.dataset.value },
+    //     });
+    //   }
+    // },
     getFootPrint() {
       http
         .post(
-          `/gallery/isFootPrintToGallery/${this.props_id}`,
+          `/gallery/isFootPrintToGallery/${localStorage.getItem('gallery_id')}`,
           localStorage.getItem("user_id")
         )
         .then((response) => {
@@ -140,7 +143,7 @@ export default {
         // 발자국 X
         http
           .post(
-            `/gallery/giveFootPrintToGallery/${this.props_id}`,
+            `/gallery/giveFootPrintToGallery/${localStorage.getItem('gallery_id')}`,
             localStorage.getItem("user_id")
           )
           .then((response) => {
@@ -154,7 +157,7 @@ export default {
         // 발자국 O
         http
           .post(
-            `/gallery/cleanFootPrintToGallery/${this.props_id}`,
+            `/gallery/cleanFootPrintToGallery/${localStorage.getItem('gallery_id')}`,
             localStorage.getItem("user_id")
           )
           .then((response) => {
@@ -168,7 +171,7 @@ export default {
     },
     getArtistGallery() {
       http
-        .get(`/gallery/getArtistGallery/${this.props_id}`)
+        .get(`/gallery/getArtistGallery/${localStorage.getItem('gallery_id')}`)
         .then((response) => {
           console.log("Get gallery data to render page");
           const workList = response.data;
@@ -184,7 +187,7 @@ export default {
         });
     },
     getGAllery() {
-      http.get(`/gallery/getGallery/${this.props_id}`).then((response) => {
+      http.get(`/gallery/getGallery/${localStorage.getItem('gallery_id')}`).then((response) => {
         console.log("get gellery info", response.data);
         this.gallery_info = response.data;
         this.gallery_desc = this.gallery_info.gallery_desc;
