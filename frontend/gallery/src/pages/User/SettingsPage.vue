@@ -399,7 +399,6 @@ export default {
       if (this.userInfo.user_password == null || this.userInfo.user_password == "") {
         alert("비밀번호를 입력해주세요.");
       } else {
-        alert(this.userInfo.user_password);
         mod.modifyUser(this.userInfo, this.password_for_mod);
       }
     },
