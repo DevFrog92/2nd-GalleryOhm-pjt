@@ -286,7 +286,7 @@
       you can use custom content here to overwrite
       default content
     -->
-      <div slot="header" v-if="artist_resister === 'changeArtist'">
+      <div slot="header" v-if="artist_resister === 'changeArtistNickname'">
         <h3>작가 등록</h3>
         <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
       </div>
@@ -299,7 +299,7 @@
         <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
       </div>
 
-      <div slot="body" v-if="artist_resister === 'changeArtist'">
+      <div slot="body" v-if="artist_resister === 'changeArtistNickname'">
         <h3>{{ artist_nickName }}작가님! 환영합니다.</h3>
         <p>
           저희 '갤러리 Ω,'는 작가님의 다양한 작품 활동을 지원하기 위해서 최선을
