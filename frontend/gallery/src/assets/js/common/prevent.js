@@ -7,19 +7,19 @@ function disableclick(e) {
   if (document.all) {
     if (event.button == 2 || event.button == 3) {
       if (event.srcElement.tagName == "IMG") {
-        // alert(clickmessage);
+        alert(clickmessage);
         return false;
       }
     }
   } else if (document.layers) {
     if (e.which == 3) {
-      // alert(clickmessage);
+      alert(clickmessage);
       return false;
     }
   } else if (document.getElementById) {
     if (e.which == 3 && e.target.tagName == "IMG") {
-      // alert(clickmessage)
-      return false
+      alert(clickmessage);
+      return false;
     }
   }
 }
