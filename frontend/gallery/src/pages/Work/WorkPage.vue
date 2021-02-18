@@ -1,11 +1,11 @@
 <template>
   <div class="item-list-container" ondragstart="return false">
     <div class="segment__works">
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
+          <button class="unit__work unit__btn__works all__works__artist" type="button" @click.prevent="change_date_works"><img src="../../assets/images/refresh.png" alt=""
               class='all__works__refresh'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/won.png" alt=""
+          <button class="unit__work unit__btn__works won__base__works" type="button" @click.prevent="change_like_works"><img src="../../assets/images/won.png" alt=""
               class='all__works__footprints'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
+          <button class="unit__work unit__btn__works follower__works__artist" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
           <button class="unit__work unit__btn__works" type="button" @click.prevent="moveToCreateWork"><img src="../../assets/images/add.png" alt=""
               class='all__works__refresh'></button>
@@ -86,9 +86,7 @@
       setTimeout(() => {
         prevent.init();
       }, 1000)
-      window.addEventListener('scroll',function(){
-        console.log('scroll',window.scrollY);
-      })
+      
     },
     methods: {
       moveToCreateWork(){
@@ -98,22 +96,19 @@
         this.resetarray = [];
         delete this.hashTagsObject[this.filter__hashs[index]];
         this.filter__hashs.splice(index, 1);
-        console.log('reset render image',this.render_image)
-        for (let items of Object.values(this.hashTagsObject)) {
-          for (let item of Object.values(items)) {
-            console.log('items add ',this.render_image,item);
-            if(!this.render_image.includes(item)){
-              console.log('push 한다.')
-              this.resetarray.push(item);
-            }
-          }
-        }
-        this.render_image = this.resetarray
-        if(!this.resetarray.length){
-          console.log('안에 그림이 없어')
+        this.checkhashimages.splice(index, 1);
+        // for (let items of Object.values(this.hashTagsObject)) {
+        //   for (let item of Object.values(items)) {
+        //     if(!this.render_image.includes(item)){
+        //       this.resetarray.push(item);
+        //     }
+        //   }
+        // }
+        this.render_image = this.checkhashimages
+        if(!this.checkhashimages.length){
           this.no_works = true
+          this.render_image = this.getAllWorks();
         }else{
-          console.log('안에 그림이 있어')
           this.no_works = false
         }
       },
@@ -133,7 +128,6 @@
       },
       change_followes_works() {
         this.render_image = this.following_work;
-        console.log('follow', this.render_image)
         this.resetAll();
         this.no_works = false;
         this.following_list = [];
@@ -143,27 +137,21 @@
         this.$router.push('/workupload');
       },
       resetAll() {
-        // this.getAllWorks();
         this.filter__hashs = [];
         this.checkhashimages = [];
         this.hashTagsObject = {}
-        // this.render_image = this.imgList
+        // this.getAllWorks();
       },
       searchTag() {
-        console.log('hashs',this.searchHashtag)
         if (this.searchHashtag.trim() !== "" && !Object.keys(this.hashTagsObject).includes(this.searchHashtag.trim())) {
-
-          console.log('sdf', this.searchHashtag.trim())
-          // this.filter__hashs = [];
           http.get(`/work/searchByHashTag?hashtags=${this.searchHashtag.trim()}`).then(
             (response) => {
               const data = response.data;
               for (var i = 0; i < data.length; i++) {
                 data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
               }
-
               this.hashTagsObject[this.searchHashtag.trim()] = data;
-              console.log('hash tag image', this.hashTagsObject)
+              console.log('ths.hash',this.hashTagsObject)
               this.filter__hashs.push(this.searchHashtag);
               this.searchHashtag = "";
               if (data.length === 0) {
@@ -172,37 +160,35 @@
               } else {
                 this.render_image = [];
                 for (let items of Object.values(this.hashTagsObject)) {
+                  console.log('1차 for',items)
                   for (let item of Object.values(items)) {
+                  console.log('2차 for',item)
+                  console.log('checkimage',this.checkhashimages)
                     if(!this.checkhashimages.includes(item)){
+                      console.log('들어갈거야')
                       this.checkhashimages.push(item);
-                      console.log('push 한다 정말')
-                      this.render_image.push(item);
+                      
                     }
                   }
                 }
-                console.log('this render image', this.render_image);
+                this.render_image = this.checkhashimages
                 this.no_works = false;
               }
             },
-            (error) => {
-              console.log(error);
-            })
+            )
         } else {
           this.searchHashtag = "";
         }
 
       },
       getAllWorks() {
-        console.log('filterling start')
         this.spinner_state = true;
         http.get(`/work/getAllWork/` + 1).then(
           (response) => {
             const data = response.data;
-            // array 변환
             for (var i = 0; i < data.length; i++) {
               data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
             }
-
             data.forEach(item => {
               const tempArr = [];
               for (let work in item) {
@@ -224,12 +210,8 @@
             this.render_image = data;
             this.spinner_state = false;
             
-            console.log('filtering end')
             this.getMyFollowings();
             init.init();
-          },
-          (error) => {
-            console.log(error);
           }
         );
       },
@@ -253,9 +235,8 @@
               if (this.following_list.includes(item.work_artistId)) {
                 this.following_work.push(item);
               }
+              console.log(this.following_work);
             })
-            console.log(this.following_work)
-
           })
       }
     },

@@ -40,7 +40,7 @@
         @change="controlAudio()"
       />
     </div>
-    <nav class="nav">
+    <nav class="nav__main">
       <input type="checkbox" class="nav__cb" id="menu-cb" />
       <div class="nav__content">
         <ul class="nav__items" v-if="loginState">
@@ -146,7 +146,7 @@
         @change="controlAudio()"
       />
     </div>
-    <nav class="nav">
+    <nav class="nav__main">
       <input type="checkbox" class="nav__cb" id="menu-cb" />
       <div class="nav__content">
         <ul class="nav__items" v-if="loginState">
@@ -248,7 +248,6 @@ export default {
         localStorage.clear();
         this.user_id = "";
         (this.user_type = ""), this.$store.dispatch("logout");
-        // console.log(this.$router.currentRoute);
         if (this.$router.currentRoute.name === "MainPage") {
           this.$router.go(this.$router.currentRoute);
         } else {
@@ -260,7 +259,6 @@ export default {
       this.user_type = localStorage.getItem("user_type");
       this.user_id = localStorage.getItem("user_id");
       if (this.user_type === "1" || this.user_type === "0") {
-        console.log("Guest");
         if (this.$router.history.current.name === "GuestMyPage") {
           this.$router.history.current.name === "GuestMyPage";
         } else {
@@ -271,7 +269,6 @@ export default {
         if (this.$router.history.current.name === "MyPage") {
           this.$router.go();
         } else {
-          console.log("Artist");
           this.$router.push("/mypage");
         }
       }

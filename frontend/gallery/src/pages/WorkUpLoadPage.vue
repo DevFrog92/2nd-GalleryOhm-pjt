@@ -12,11 +12,10 @@
               hidden
               @change="onChangeImage"
             /><br />
-            <button @click.prevent="onClickUploadImage" v-if="!mode">
-              그림업로드</button
-            ><br />
           </div>
         </div>
+          <button @click.prevent="onClickUploadImage" v-if="!mode" class="upload__btn__work">
+              그림업로드</button>
         <div class="pictureInfo">
           <div class="picture_Title info_input">
             <label for="pictureTitle">작품명</label><br />
@@ -108,7 +107,7 @@
                 class="all__works__back"
               />
             </button>
-            <button
+            <!-- <button
               class="unit__detail__upload unit__btn__upload"
               @click="hash"
             >
@@ -117,7 +116,7 @@
                 alt=""
                 class="all__works__hashtag"
               />
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -128,7 +127,6 @@
 <script>
 import "../assets/css/WorkUpLoadPage.css";
 import init from "../assets/js/UploadWork";
-// import http from '../api/http'
 export default {
   components: {},
   props: ["work_info", "mode"],
@@ -149,10 +147,8 @@ export default {
       ];
 
       if (this.work_info.work_rating == 0) {
-        console.log("전연령");
         document.getElementById("allAge").checked = true;
       } else if (this.work_info.work_rating == 19) {
-        console.log("19금");
         document.querySelector("#redAge").checked = true;
         this.work_rating = this.work_info.work_rating;
       }
@@ -173,15 +169,12 @@ export default {
           this.hashtag_list += item.innerText + ",";
         }
       }
-      console.log(this.hashtag_list);
     },
     Back() {
       this.$router.go(-1);
     },
     addWork: function() {
-      // console.log(this.img_url.slice(23))
       this.hash();
-      console.log(this.hashtag_list);
       if (this.mode) {
         const byteCharacters = atob(this.img_url.slice(23));
         const byteNumbers = new Array(byteCharacters.length);
@@ -191,7 +184,6 @@ export default {
         const byteArray = new Uint8Array(byteNumbers);
         const blob = new Blob([byteArray], { type: "image/jpeg" });
         const file = new File([blob], "profile");
-        // console.log(file);
         this.work_piece = file;
         this.$store
           .dispatch("modifyWork", {
@@ -204,9 +196,6 @@ export default {
             work_tool: this.work_tool,
             hashTags: this.hashtag_list,
           })
-          .then(() => {
-            // http.post("/work/addHashTag",{hashTags:this.hashtag_list,"hashtag_workId"})
-          });
       }
     },
     onChangeImage(event) {

@@ -1,14 +1,10 @@
 import router from '../../router'
 const init = () => {
   
-    console.log('실행한다.')
-
     const itemList = document.querySelector('.item-lists');
 
     function clickHandler(e) {
-      console.log(e.target)
       if (e.target.classList.contains('grid__body')) {
-        console.log(e.target.dataset.value);
         router.push({
           name: 'WorkDetailFirstPage',
           params: {

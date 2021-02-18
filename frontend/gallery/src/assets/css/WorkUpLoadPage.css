@@ -47,6 +47,7 @@
 }
 .previewPicture {
   position: relative;
+  top: 6%;
   /* background-image: url('../images/noimage.png'); */
   /* background-repeat:no-repeat; */
   /* background-position: 50% 50%; */
@@ -155,6 +156,13 @@
 
 .picture_Upload input {
   border: 0;
+}
+
+.upload__btn__work{
+  position: absolute;
+  left: 23rem;
+  top: 0%;
+
 }
 
 .gallery19 {
@@ -356,6 +364,8 @@
 }
 
 .unit__btn__upload.unit__detail__upload {
+  position: absolute;
+  right: 3rem;
 	border-radius: 8px;
 	line-height: 0;
 	width: 50px;

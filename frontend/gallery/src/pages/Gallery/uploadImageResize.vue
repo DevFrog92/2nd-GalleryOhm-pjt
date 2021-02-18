@@ -98,7 +98,7 @@
                 class="unit__detail__upload unit__btn__upload"
                 type="button"
               >
-                <img src="../../assets/images/pencil.png" alt="" />
+                <img src="../../assets/images/checked.png" alt="" />
               </button>
             </div>
             <div class="upload_art_button" v-else @click="addWork">
@@ -106,7 +106,7 @@
                 class="unit__detail__upload unit__btn__upload"
                 type="button"
               >
-                <img src="../../assets/images/pencil.png" alt="" />
+                <img src="../../assets/images/checked.png" alt="" />
               </button>
             </div>
             <!-- <div class="uploadBtn1" v-else @click="addWork" data-display="작품등록"></div> -->
@@ -119,7 +119,7 @@
               type="button"
               @click.prevent="change_date_works"
             >
-              <img src="../../assets/images/refresh.png" alt="" />
+              <img src="../../assets/images/back.png" alt="" />
             </button>
           </div>
           <!-- <div class="uploadBtns2">
@@ -150,7 +150,6 @@ export default {
   mounted() {
     init.input();
     if (this.work_info) {
-      console.log("asd", this.work_info.hashtags.includes("안녕"));
       this.img_url = this.work_info.work_piece;
       this.work_title = this.work_info.work_title;
       this.work_desc = this.work_info.work_desc;
@@ -164,7 +163,6 @@ export default {
   methods: {
     hash() {
       const hashTag = document.querySelectorAll(".tags-input span");
-      console.log(hashTag);
       for (let item of hashTag) {
         if (
           this.work_info &&
@@ -175,7 +173,6 @@ export default {
           this.hashtag_list += item.innerText + ",";
         }
       }
-      console.log(this.hashtag_list);
     },
     Back() {
       this.$router.go(-1);
@@ -185,7 +182,6 @@ export default {
       let work__tool = this.work_tool.replace(/(?:\r\n|\r|\n)/g, "<br/>");
       this.work_desc = work__desc;
       this.work_tool = work__tool;
-      console.log("work desc", this.work_desc, this.work_tool);
     },
     addWork: function() {
       this.hash();
@@ -194,7 +190,6 @@ export default {
       const blob = this.img_url;
       const file = new File([blob], "profile");
       this.work_piece = file;
-      console.log(this.work_piece);
       // 업로드한 파일로 부터 url 을 생성할 수 있다.
       this.$store
         .dispatch("addWork", {
@@ -206,12 +201,6 @@ export default {
           work_tool: this.work_tool,
           hashTags: this.hashtag_list,
         })
-        .then(() => {
-          // http.post("/work/addHashTag",{hashTags:this.hashtag_list,"hashtag_workId"})
-        });
-
-      // console.log(this.$refs.work_piece.files);
-      // this.work_piece = this.$refs.work_piece.files[0];
     },
     setImage: function(output) {
       this.hasImage = true;

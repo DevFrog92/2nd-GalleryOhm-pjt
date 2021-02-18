@@ -419,7 +419,6 @@
         } else {
           this.pinter_image = this.all_my_works_month_second[index]
         }
-        console.log(this.pinter_image, 'show')
 
       },
       DMsideopen() {
@@ -431,21 +430,15 @@
         const DMList = document.querySelector('.Mypage__dm__list');
         DMList.classList.remove('show_dm_side');
       },
-      DmRead(message_id) {
-        console.log('Dm Read', message_id);
-      },
       DmDelete(id) {
         // const DMList = document.querySelector('.DMList')
         setTimeout(() => {
-          console.log('DM Delete', id);
           const DMLIST = document.querySelectorAll('.Mypage__DM__item')
           for (let item of DMLIST) {
             if (item.dataset.name == id) {
-              console.log('지운다.')
               item.remove()
             }
           }
-          console.log('뺀다')
         }, 1400);
       },
       refresh() {
@@ -455,13 +448,10 @@
         this.$router.push('/creategallery');
       },
       deleteGallery(gallery_id) {
-        console.log('지운다')
         http.post('/gallery/deleteArtistGallery/' + gallery_id)
-          .then(response => {
+          .then(() => {
             this.getMyGallery();
-            console.log('response.data', response.data);
             this.delete_gallery_state = true;
-
           })
       },
       modifyGallery(gallery_id) {
@@ -473,7 +463,6 @@
         });
       },
       following_view() {
-        console.log('Show me following')
         this.modal_following = true;
         setTimeout(() => {
           init.follow_modal();
@@ -482,7 +471,6 @@
 
       },
       follower_view() {
-        console.log('Show me follower')
         setTimeout(() => {
           init.follow_modal();
         }, 200);
@@ -501,28 +489,25 @@
               'Content-Type': 'application/json'
             }
           })
-          .then(response => {
+          .then(() => {
             this.modify_state = true;
-            console.log('Register user_about', response);
             this.modifyabout = !this.modifyabout;
           })
       },
       DM() {
         const reply_id = document.querySelector('.sender_name')
-        console.log(reply_id.innerText);
 
         const test = {
           "message_content": this.dm_content,
-          "message_id": 0,
-          "message_isCheck": 1,
+          // "message_id": 0,
+          // "message_isCheck": 1,
           "message_receiverId": reply_id.innerText,
-          "message_sendDate": "string",
+          // "message_sendDate": "string",
           "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }
         http.post('/message/sendMessage', test)
-          .then(response => {
-            console.log('Send DM', response.data)
+          .then(() => {
             this.dm_title = "";
             this.dm_content = "";
           })
@@ -530,7 +515,6 @@
       DMpull() {
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get all my dm list', response.data);
             this.dm_list = response.data;
             for (let dm of this.dm_list) {
               if (dm.message_isCheck == 1) {
@@ -538,7 +522,6 @@
                 this.UnreadDmList.push(dm);
               }
             }
-            console.log('총 읽지 않은 디엠', this.UnreadDm)
           })
       },
       galleryRender() {
@@ -554,7 +537,6 @@
             }
           })
           .then(response => {
-            console.log('Get all my followings', response.data);
             this.followings = response.data;
           })
       },
@@ -565,22 +547,18 @@
             }
           })
           .then(response => {
-            console.log('Get all my followers', response.data);
             this.followers = response.data;
           })
       },
       getMyWorksCount() {
         http.get('/work/getMyWorksCount/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get all my works count', response.data);
-
             this.posts = response.data;
           })
       },
       getMyGallery() {
         http.get('/gallery/getMyGallery/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get my gallery', response.data);
             if (response.data.length !== 2) {
               if (response.data.length === 1) {
                 this.my_gallery_list = response.data;
@@ -628,11 +606,9 @@
       getAllScrapWork() {
         http.get('/work/getAllScrapWork/' + localStorage.getItem('user_id'))
           .then(response => {
-            console.log('Get all scrap', response.data);
             this.scrap_list = response.data;
             if (!this.scrap_list.length) {
               this.scrap_state = true;
-              console.log('스트랩한 작품이 없습니다.')
             }
 
           })
@@ -641,23 +617,19 @@
         http.get('/work/getMyWorks/' + localStorage.getItem('user_id'))
           .then(response => {
 
-            console.log('Create year category', this.all_my_works_year);
             for (let item of response.data) {
               let itemMonth = item.work_uploadDate.slice(5, 7)
               if (Object.keys(this.all_my_works_month_first).includes(itemMonth)) {
-                console.log('itemMonth', itemMonth)
                 this.all_my_works_month_first[itemMonth].push(item);
               } else {
                 this.all_my_works_month_second[Number(itemMonth) - 6].push(item);
               }
             }
-            console.log(this.all_my_works_month_first, this.all_my_works_month_second)
           })
       },
       getMyGalleryDetail(gallery_id) {
         http.get('http://localhost:7080/artGallery/api/gallery/getArtistGallery/' + gallery_id)
           .then(response => {
-            console.log(response.data, 'gallery_detail');
             this.my_gallery_poster.push(response.data[0].work_piece);
           })
       },
@@ -668,7 +640,6 @@
             }
           })
           .then(response => {
-            console.log('Get user Info', response.data);
             this.userInfo = response.data;
 
             const userAbout = document.querySelector('.artist_about');

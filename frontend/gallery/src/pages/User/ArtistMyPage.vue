@@ -336,33 +336,25 @@
         }else{
           this.pinter_image = this.all_my_works_month_second[index]
         }
-        console.log(this.pinter_image,'show')
 
       },
       DMsideopen() {
         const DMList = document.querySelector('.dm__list_Artist');
         DMList.classList.add('show_dm_side');
-        // init.DMModal();
       },
       DMsideclose() {
         const DMList = document.querySelector('.dm__list_Artist');
         DMList.classList.remove('show_dm_side');
       },
-      DmRead(message_id) {
-        console.log('Dm Read', message_id);
-      },
       DmDelete(id) {
         // const DMList = document.querySelector('.DMList')
         setTimeout(() => {
-          console.log('DM Delete', id);
           const DMLIST = document.querySelectorAll('.DM__item')
           for (let item of DMLIST) {
             if (item.dataset.name == id) {
-              console.log('지운다.')
               item.remove()
             }
           }
-          console.log('뺀다')
         }, 1400);
       },
       refresh() {
@@ -372,11 +364,9 @@
         this.$router.push('/creategallery');
       },
       deleteGallery(gallery_id) {
-        console.log('지운다')
         http.post('/gallery/deleteArtistGallery/' + gallery_id)
-          .then(response => {
+          .then(() => {
             this.getMyGallery();
-            console.log('response.data', response.data);
             this.delete_gallery_state = true;
 
           })
@@ -390,7 +380,6 @@
         });
       },
       following_view() {
-        console.log('Show me following')
         this.modal_following = true;
         setTimeout(() => {
           init.follow_modal();
@@ -399,7 +388,6 @@
 
       },
       follower_view() {
-        console.log('Show me follower')
         setTimeout(() => {
           init.follow_modal();
         }, 200);
@@ -418,15 +406,12 @@
               'Content-Type': 'application/json'
             }
           })
-          .then(response => {
+          .then(() => {
             this.modify_state = true;
-            console.log('Register user_about', response);
             this.modifyabout = !this.modifyabout;
           })
       },
       DM_recived__artist() {
-        // const reply_id = document.querySelector('.sender_name')
-        // console.log(reply_id.innerText);
         if(this.dm_content.trim() !== "" && this.dm_title.trim() !==""){
 
         const test = {
@@ -438,10 +423,8 @@
           "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }
-        console.log('test',test)
         http.post('/message/sendMessage', test)
-          .then(response => {
-            console.log('Send DM', response.data)
+          .then(() => {
             this.dm_title = "";
             this.dm_content = "";
           })
@@ -453,14 +436,12 @@
       DMpull() {
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('props_id'))
           .then(response => {
-            console.log('Get all my dm list', response.data);
             this.dm_list = response.data;
           for (let item of this.dm_list) {
                 if(item.message_isCheck === '1'){
                   this.Unread_count+=1
                 }
             }
-            console.log(this.Unread_count,'dmcount')
           })
       },
       galleryRender() {
@@ -476,7 +457,6 @@
             }
           })
           .then(response => {
-            console.log('Get all my followings', response.data);
             this.followings = response.data;
           })
       },
@@ -487,14 +467,12 @@
             }
           })
           .then(response => {
-            console.log('Get all my followers', response.data);
             this.followers = response.data;
           })
       },
       getMyWorksCount() {
         http.get('/work/getMyWorksCount/' + localStorage.getItem('props_id'))
           .then(response => {
-            console.log('Get all my works count', response.data);
 
             this.posts = response.data;
           })
@@ -502,7 +480,6 @@
       getMyGallery() {
         http.get('/gallery/getMyGallery/' + localStorage.getItem('props_id'))
           .then(response => {
-            console.log('Get my gallery', response.data);
             if (response.data.length !== 2) {
               if (response.data.length === 1) {
                 this.my_gallery_list = response.data;
@@ -550,7 +527,6 @@
       getAllScrapWork() {
         http.get('/work/getAllScrapWork/' + localStorage.getItem('props_id'))
           .then(response => {
-            console.log('Get all scrap', response.data);
             this.scrap_list = response.data;
           })
       },
@@ -558,17 +534,14 @@
         http.get('/work/getMyWorks/' + localStorage.getItem('props_id'))
           .then(response => {
 
-            console.log('Create year category', this.all_my_works_year);
             for (let item of response.data) {
               let itemMonth = item.work_uploadDate.slice(5, 7)
               if(Object.keys(this.all_my_works_month_first).includes(itemMonth)){
-                console.log('itemMonth', itemMonth)
               this.all_my_works_month_first[itemMonth].push(item);
               }else{
                 this.all_my_works_month_second[itemMonth].push(item);
               }
             }
-            console.log(this.all_my_works_month_first,this.all_my_works_month_second)
           })
       },
       getMyGalleryDetail(gallery_id) {
@@ -580,7 +553,6 @@
       getUserInfo() {
          http.get('/user/getUserInfo', {params:{user_id: localStorage.getItem('props_id')}})
         .then(response => {
-          console.log('Get props info data',response.data);
           this.userInfo = response.data;
           this.artist_name = this.userInfo.user_id
           const userAbout = document.querySelector('.artist_about');

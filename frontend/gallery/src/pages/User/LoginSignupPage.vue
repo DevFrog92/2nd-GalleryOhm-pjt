@@ -222,12 +222,11 @@
       join() {
         const check = document.querySelector('.terms_checkbox')
         if(check.checked){
-          init.join(this.userInfo);
+           init.join(this.userInfo);
         }else{
           alert('약관 동의를 체크해주세요.')
+          return;
         }
-        this.userInfo.user_password = '';
-        common.objectCelar(this.userInfo);
       },
       activeBtn() {
         init.activeBtn(this.userInfo);
@@ -256,7 +255,6 @@
           .then(response => {
             this.findIdState = true;
             this.userInfo.user_id = response.data;
-            console.log(response.data, 'findId');
           })
       },
       makeUserNickName() {
@@ -278,8 +276,6 @@
                 checkBtn.classList.remove('id_check_after');
 
               }
-            }).catch(err => {
-              console.log(err);
             })
         }
       },

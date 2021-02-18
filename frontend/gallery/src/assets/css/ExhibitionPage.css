@@ -473,6 +473,45 @@ align-items: center;
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
 }
+
+.unit__btn.unit {
+	border-radius: 8px;
+	line-height: 0;
+	width: 50px;
+	height: 50px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 8px;
+	font-size: 19.2px;
+	transition: width 1s;
+
+	position: relative;
+}
+
+.unit__btn::before{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.unit__btn::after{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+
+}
+
+.foot__base__works,.all__works,.follower__works{
+	transition: all 0.1s ease-in-out;
+}
+
 .all__gallery__refresh,.all__gallery__footprints,.all__gallery__follows{
 width: 100%;
 height: 100%;
@@ -489,17 +528,88 @@ height: 130%
 	box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
 
-.unit__btn.unit {
-	border-radius: 8px;
-	line-height: 0;
-	width: 50px;
-	height: 50px;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 8px;
-	font-size: 19.2px;
+
+.unit__btn.foot__base__works:hover{
+	width: 150px;
 }
+.unit__btn.foot__base__works:hover::before{
+	content: '';
+	width: 100%;
+	height: 100%;
+	z-index: 50;
+	background-color: #f5f7fa;
+	border-radius: 320px;
+}
+
+
+.unit__btn.foot__base__works:hover::after{
+	content: '방문자순';
+	display: inline;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 100;
+	/* background-color: #f5f7fa; */
+	
+}
+
+.unit__btn.all__works:hover{
+	width: 150px;
+}
+.unit__btn.all__works:hover::before{
+	content: '';
+	width: 100%;
+	height: 100%;
+	z-index: 50;
+	background-color: #f5f7fa;
+	border-radius: 320px;
+}
+
+.unit__btn.all__works:hover::after{
+	content: '전체보기';
+	display: inline;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 100;
+	/* background-color: #f5f7fa; */
+	
+}
+
+.unit__btn.follower__works:hover{
+	width: 150px;
+}
+.unit__btn.follower__works:hover::before{
+	content: '';
+	width: 100%;
+	height: 100%;
+	z-index: 50;
+	background-color: #f5f7fa;
+	border-radius: 320px;
+}
+.unit__btn.follower__works:hover::after{
+	content: '팔로워 전시회';
+	display: inline;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 100;
+	/* background-color: #f5f7fa; */
+	
+}
+
+
+
+
 
 @media (max-width:1366px){
 	.all__gallery__btn{

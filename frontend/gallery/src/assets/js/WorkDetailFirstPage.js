@@ -1,11 +1,4 @@
-
-
 const init = ()=>{
-
-
-  
-
-
   const ROOT = document.documentElement;
   const MIN = 10;
   const THRESHOLD = innerHeight * (1.2 - 0.225);
@@ -20,13 +13,11 @@ const init = ()=>{
   
   window.addEventListener('scroll', update);
   window.addEventListener('scroll',function(){
-    console.log('scoll',window.scrollY);
     const img = document.querySelector('.artist__work__detail');
     if(img){
 
       if( window.scrollY >= 800){
         img.style.zIndex = 100;
-        console.log('붙혔다')
       }else{
         img.style.zIndex = -2;
       }
