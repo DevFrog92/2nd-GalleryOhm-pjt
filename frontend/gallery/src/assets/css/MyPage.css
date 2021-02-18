@@ -2372,3 +2372,18 @@ position: relative;
   font-size: 2.3rem;
   border-top: 2px solid #EFB730;
 }
+
+.poster__aside__id{
+  position: absolute;
+  top:7rem;
+  left: 3.3rem;
+  writing-mode: vertical-lr;
+
+}
+
+.poster__aside__date{
+  position: absolute;
+  top:7rem;
+  left: 1.7rem;
+  writing-mode: vertical-lr;
+}
