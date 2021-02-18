@@ -254,6 +254,23 @@
   font-weight: 700;
 }
 
+.contain__follower__btn{
+  display: inline-block;
+}
+
+.profile_user_name .set__follower__guest {
+  position: relative;
+  left: 2rem;
+}
+
+
+.set__follower__guest img {
+  width: 1.7rem;
+  height: 1.7rem;
+  cursor: pointer;
+}
+
+
 .profile_user_name .profile_batch {
   font-size: 0.58rem;
   font-weight: 780;
