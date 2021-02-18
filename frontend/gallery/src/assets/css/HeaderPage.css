@@ -119,48 +119,42 @@ a{
   transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s;
 }
 .nav__item:nth-child(1) .nav__item-text {
-  transition-delay: 1.2s;
+  transition-delay: 1.0s;
 }
 .nav__cb:checked ~ .nav__content .nav__item:nth-child(1) .nav__item-text {
   transition-delay: 0s;
 }
 .nav__item:nth-child(2) .nav__item-text {
-  transition-delay: 1.0s;
+  transition-delay: 0.8s;
 }
 .nav__cb:checked ~ .nav__content .nav__item:nth-child(2) .nav__item-text {
   transition-delay: 0.2s;
 }
 .nav__item:nth-child(3) .nav__item-text {
-  transition-delay: 0.8s;
+  transition-delay: 0.6s;
 }
 .nav__cb:checked ~ .nav__content .nav__item:nth-child(3) .nav__item-text {
   transition-delay: 0.4s;
 }
 .nav__item:nth-child(4) .nav__item-text {
-  transition-delay: 0.6s;
+  transition-delay: 0.4s;
 }
 .nav__cb:checked ~ .nav__content .nav__item:nth-child(4) .nav__item-text {
   transition-delay: 0.6s;
 }
 .nav__item:nth-child(5){
-  transition-delay: 0.4s;
+  transition-delay: 0.2s;
   margin-left:6px;
 }
 .nav__cb:checked ~ .nav__content .nav__item:nth-child(5) .nav__item-text {
   transition-delay: 0.8s;
 }
 .nav__item:nth-child(6) {
-  transition-delay: 0.2s;
+  transition-delay: 0.0s;
   margin-left:12px;
 }
 .nav__cb:checked ~ .nav__content .nav__item:nth-child(6) .nav__item-text {
   transition-delay: 1.0s;
-}
-.nav__item:nth-child(7) {
-  transition-delay: 0s;
-}
-.nav__cb:checked ~ .nav__content .nav__item:nth-child(7) .nav__item-text {
-  transition-delay: 1.2s;
 }
 .nav__btn {
   position: absolute;
