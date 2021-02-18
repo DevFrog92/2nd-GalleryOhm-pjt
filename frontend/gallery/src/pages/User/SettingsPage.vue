@@ -290,7 +290,7 @@
         <h3>작가 등록</h3>
         <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
       </div>
-      <div slot="header" v-else-if="artist_resister === 'modifyArtist'">
+      <div slot="header" v-else-if="artist_resister === 'changeArtistNicknameToUser'">
         <h3>작가 수정</h3>
         <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
       </div>
@@ -307,7 +307,7 @@
           한번 환영합니다!!
         </p>
       </div>
-      <div slot="body" v-if="artist_resister === 'modifyArtist'">
+      <div slot="body" v-if="artist_resister === 'changeArtistNicknameToUser'">
         <h3>{{ artist_nickName }}작가님! 작가 정보 수정이 완료되었습니다!</h3>
         <p>
           저희 '갤러리 Ω,'는 작가님의 다양한 작품 활동을 지원하기 위해서 최선을
