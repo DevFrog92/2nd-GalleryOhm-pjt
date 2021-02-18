@@ -627,3 +627,46 @@ object-fit: cover;
   }
   
 }
+
+
+.mod_login_info_button {
+  width: 8rem;
+  background: #f5f7fa;
+  padding: 0.5rem;
+  position: relative;
+  margin-bottom: 2rem;
+  border: 1px solid #f5f7fa;
+  border-radius: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mod_login_info_button span {
+  line-height: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  font-weight: semibold;
+}
+
+.login__btn{
+  margin-top: 3rem;
+}
+
+.mod_login_info_button  {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+.mod_login_info_button:hover {
+  opacity: 0.3;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mod_login_info_button:active{
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #EFB730;
+}
+

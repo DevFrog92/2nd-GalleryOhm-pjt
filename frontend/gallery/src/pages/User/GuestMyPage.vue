@@ -19,8 +19,7 @@
 
       <div class="profile_about">
         <h2 class="profile_user_name">{{userInfo.user_nickName}}<span class="Mypage__profile_batch">관람객</span> <span v-show="!who_state" class="Guest__bell"
-            @click="DMsideopen"><img src="../../assets/images/bell.png" alt=""><span
-              class="notification__num">{{Unread_count}}</span></span></h2>
+            @click="DMsideopen"><img src="../../assets/images/bell.png" alt=""><span class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
@@ -417,7 +416,7 @@
           })
           .then(response => {
             this.followers = response.data;
-          })
+        })
       },
       getMyWorksCount() {
         http.get('/work/getMyWorksCount/' + localStorage.getItem('props_id'))

@@ -23,7 +23,6 @@
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
           <span @click="follower_view">팔로워 : {{followers.length}}</span>
-          <!-- <span  @close="showModal=true">Follower : {{followers.length}}</span> -->
         </div>
         <div class="artist_about_div">
           <p class="artist_about">{{this.user_about}}</p>
@@ -186,11 +185,11 @@
           <div class="options_wrapper">
             <div class="Mypage__option" :data-value="index" v-for="(item,index) of all_my_works_month_first"
               :key="index">
-              <!-- <img :src="'../assets/images/bg'+index+'.jpg'" alt=""> -->
+              <img v-if="item[0]" :src="'data:/image/jpeg;base64,'+item[0].work_piece" alt="">
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
-                  <i class="fas fa-walking"></i>
+                  {{Number(index)}}
                 </div>
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index,1)">그림보러 가기</div>
@@ -206,7 +205,7 @@
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
-                  <i class="fas fa-snowflake"></i>
+                  {{Number(index)+6}}
                 </div>
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index,2)">그림보러 가기</div>
@@ -257,7 +256,7 @@
 
 
 
-    <Modal v-if="showModal" @close="showModal = false">
+    <Modal v-show="showModal" @close="showModal = false">
       <div slot="header">
         <h3>
         </h3>
@@ -267,8 +266,8 @@
 
       <div slot="body">
         <div class="notification__wrapper">
-          <div class="notifications" v-if="modal_following">
-            <div class="notifications__item" v-for="(people,index) of followings" :key="index">
+          <div class="notifications" v-show="modal_following">
+            <div class="notifications__item" v-for="(people,index) of followings" :key="index"  :data-name="people">
               <div class="notifications__item__avatar">
                 <img src="../../assets/images/user.png" />
               </div>
@@ -277,17 +276,14 @@
                 <!-- <span class="notifications__item__message">Just started following you</span> -->
               </div>
               <div>
-                <div class="notifications__item__option archive js-option">
-                  <i class="fas fa-folder" :data-name="people"></i>
-                </div>
                 <div class="notifications__item__option delete js-option">
                   <i class="fas fa-trash" :data-name="people"></i>
                 </div>
               </div>
             </div>
           </div>
-          <div class="notifications" v-else>
-            <div class="notifications__item" v-for="(people,index) of followers" :key="index">
+          <div class="notifications"  v-show="!modal_following">
+            <div class="notifications__item" v-for="(people,index) of followers" :key="index" :data-name="people">
               <div class="notifications__item__avatar">
                 <img src="../../assets/images/user.png" />
               </div>
@@ -296,9 +292,6 @@
                 <!-- <span class="notifications__item__message">Just started following you</span> -->
               </div>
               <div>
-                <div class="notifications__item__option archive js-option">
-                  <i class="fas fa-folder" :data-name="people"></i>
-                </div>
                 <div class="notifications__item__option delete js-option">
                   <i class="fas fa-trash" :data-name="people"></i>
                 </div>
@@ -464,9 +457,8 @@
       },
       following_view() {
         this.modal_following = true;
-        setTimeout(() => {
-          init.follow_modal();
-        }, 200);
+        init.follow_modal();
+        
         this.showModal = true;
 
       },
@@ -628,7 +620,7 @@
           })
       },
       getMyGalleryDetail(gallery_id) {
-        http.get('http://localhost:7080/artGallery/api/gallery/getArtistGallery/' + gallery_id)
+        http.get('/gallery/getArtistGallery/' + gallery_id)
           .then(response => {
             this.my_gallery_poster.push(response.data[0].work_piece);
           })

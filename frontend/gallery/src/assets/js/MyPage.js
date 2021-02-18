@@ -186,10 +186,18 @@ const getUserInfo = ()=>{
 
 
 const follow_modal = ()=>{
-  console.log('실행되었다.')
-  /*
-  * Get all the buttons actions
-  */
+  const notificationItem = document.querySelector('.notification__wrapper');
+  notificationItem.addEventListener('click',function(e){
+    if(e.target.classList.contains('notifications__item')){
+      localStorage.setItem('props_id',e.target.dataset.name)
+      getUserInfo();
+      setTimeout(()=>{
+        moveToArtistPage(localStorage.getItem('props_type'),localStorage.getItem('props_id'));
+      },500);
+      
+    }
+  })
+  // 
   const optionBtns = document.querySelectorAll( '.js-option' );
   console.log(optionBtns);
   for(var i = 0; i < optionBtns.length; i++ ) {
@@ -202,7 +210,6 @@ const follow_modal = ()=>{
       localStorage.setItem('props_id',e.target.dataset.name)
       getUserInfo();
       setTimeout(()=>{
-        console.log(' 시작 텀을 준다.')
         // notification item
         var notificationCard = this.parentNode.parentNode;
         var clickBtn = this;
@@ -250,7 +257,7 @@ const follow_modal = ()=>{
     notificationCard.classList.add( 'archive' );
     moveToArtistPage(localStorage.getItem('props_type'),localStorage.getItem('props_id'));
   } else if( clickBtn.classList.contains( 'delete' ) ){
-    // tounfollow();
+    tounfollow();
     notificationCard.classList.add( 'delete' );
   }
 }
@@ -362,14 +369,14 @@ const message_read = (message_id,target)=>{
 
   })
 }
-// const tounfollow=()=>{
-//   const formData = {
-//     follow_artistId: localStorage.getItem('props_id'),
-//     follow_userId:localStorage.getItem('user_id')
-//   }
-//   http.post('/follow/cancelFollow',formData)
-//   .then(response=>{
-//     console.log(response.data,'unfollow');
-//   })
-// }
+const tounfollow=()=>{
+  const formData = {
+    follow_artistId: localStorage.getItem('props_id'),
+    follow_userId:localStorage.getItem('user_id')
+  }
+  http.post('/follow/cancelFollow',formData)
+  .then(response=>{
+    console.log(response.data,'unfollow');
+  })
+}
 export default {init,follow_modal,DMModal};
