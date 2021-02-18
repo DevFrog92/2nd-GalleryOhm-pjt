@@ -405,31 +405,19 @@
 
 
 /* === */
-
-.d_modal_btn_container {
-  /* position: absolute; */
-  position: relative;
-  width: 150px;
-  height: 80px;
-  /* padding: 9% 30% 0 0; */
-  top:5%;
-  left: 10%;
-  transform: translateX(-50%);
-  z-index: 200;
-  /* margin-top: 1%; */
-  
+.closeModalBtn{
+  color: #EFB730;
 }
 
 .closeRegisterGalleryBtn,
 .registerGallery {
+  display: inline-block;
   margin-top: 2rem;
   color:#f5f7fa;
   font-size: 1rem;
-  padding:0.2rem;
+  padding:0.6rem;
   font-family:"S-CoreDream-8Heavy";
-
-  
-  width: auto;
+  width: 10rem;
   height: 50px;
   background: #f5f7fa;;
   position: relative;
@@ -437,11 +425,18 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
-  float: left;
+  margin:2rem  1rem 0;
 }
+
+
+
 
 .closeRegisterGalleryBtn span,
 .registerGallery span {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
   line-height: 50px;
   font-size: 20px;
   font-weight: bold;

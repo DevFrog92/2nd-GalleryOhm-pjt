@@ -81,7 +81,7 @@
 .modal-header i{
   position: absolute;
   right: 2%;
-  color: #37047a;
+  color: #EFB730;
   font-size: 1.3rem;
 }
 
@@ -140,9 +140,9 @@
   padding: 0.4rem;
   margin-right:2rem;
   color: white;
-  background: #37047a;
+  background: #EFB730;
   border-radius: 0.2rem;
-  border: 2px solid #37047a;
+  border: 2px solid #EFB730;
 }
 
 /*

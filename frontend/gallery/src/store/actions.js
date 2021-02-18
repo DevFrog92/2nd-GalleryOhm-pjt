@@ -29,13 +29,11 @@ const login = (context,userInfo) => {
 
 const leaveUser = (context,user_id) =>{
   // console.log('actions');
-  setTimeout(()=>{
     http.get(`/user/leaveUser?user_id=${user_id}`).then(()=>{
       context.commit("leaveUser");
       alert('이용해 주셔서 감사합니다.');
       router.push('/');
     })
-  },3200);
 }
 
 const findPw = (context,userInfo) => {

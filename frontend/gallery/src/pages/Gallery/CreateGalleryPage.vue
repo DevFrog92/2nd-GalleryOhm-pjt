@@ -140,11 +140,8 @@
         <div class="registerGallery" @click="modifyArtistGallery">
           <span>등록하기</span>
         </div>
-        <div
-          class="closeRegisterGalleryBtn"
-          @click="showModal_modify = false"
-        >
-         <span>나가기</span>
+        <div class="closeRegisterGalleryBtn" @click="showModal_modify = false">
+          <span>나가기</span>
         </div>
       </div>
       <div slot="footer" v-else>
@@ -247,7 +244,7 @@ export default {
           this.galleryIdArray.push(item[0].dataset.value);
         }
       }
-      console.log(this.galleryIdArray);
+      console.log('갤러리 배열 확인',this.galleryIdArray);
       if (this.gallery_works.length > 0) {
         this.modify_state = true;
         this.showModal_modify = true;
@@ -256,6 +253,7 @@ export default {
       }
     },
     modifyArtistGallery() {
+      console.log('전시관 수정')
       const formdata = new FormData();
       formdata.append("gallery_artistId", localStorage.getItem("user_id"));
       formdata.append("gallery_desc", this.gallery_info.gallery_desc);
@@ -269,6 +267,7 @@ export default {
       });
     },
     makeGallery() {
+      console.log('전시관 생성')
       const formdata = new FormData();
       formdata.append("gallery_artistId", localStorage.getItem("user_id"));
       formdata.append("gallery_desc", this.gallery_desc);
@@ -279,8 +278,9 @@ export default {
       http
         .post("/gallery/addArtistGallery", formdata)
         .then((response) => {
-          console.log(response.data);
+          console.log("전시관 생성 완료",response.data);
           this.register_state = true;
+          console.log('모달 변경')
         })
         .catch((err) => {
           console.log(err);
@@ -291,7 +291,7 @@ export default {
     },
     galleryrender() {
       this.$router.push({
-        name: 'GalleryPage',
+        name: "GalleryPage",
         params: { props_id: this.gallery_info.gallery_id },
       });
     },
