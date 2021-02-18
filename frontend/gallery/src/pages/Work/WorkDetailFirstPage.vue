@@ -74,7 +74,7 @@
     -->
       <div slot="header">
         <h3>
-          전시관 등록
+          작품 삭제
         </h3>
         <i class="fas fa-times closeModalBtn" @click="showModal=false"></i>
       </div>
@@ -153,7 +153,7 @@
         }
       },
       Works() {
-        this.$router.push('/listitem');
+        this.$router.push('/work');
         this.deleteState = false;
       },
       BookMark() {

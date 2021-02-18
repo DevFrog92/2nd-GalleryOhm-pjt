@@ -73,7 +73,7 @@
             <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value='4' @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
       </div>
