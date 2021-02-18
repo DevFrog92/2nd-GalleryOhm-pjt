@@ -8,9 +8,29 @@
         <div class="profile_border">
           <h2 class="profile_card_user_name">{{userInfo.user_id}}</h2>
           <div class="profile_icons">
+            <i class=" profile_icon fas fa-hand-holding-heart" @click="DonationModal"></i>
             <i class="profile_icon icon-chat" aria-hidden="true" @click="DMsideopen"></i>
           </div>
         </div>
+      </div>
+
+      <div class="artist__show__modal" >
+        <div class="donation__modal__close" @click="DonationModalHidden">나가기</div>
+        <div class="donation__wrapper">
+          <div class="donation__title">
+            {{artistDetail.artist_nickName}} 작가님 후원계좌
+          </div>
+          <div class="donation__content">
+            <ul>
+              <li>은행이름 : {{artistDetail.artist_bank}}</li>
+              <li>계좌번호 : {{artistDetail.artist_account}}</li>
+            </ul>
+          </div>
+          <div class="donation__footer">
+            <div>소중한 후원 감사합니다</div>
+          </div>
+        </div>
+
       </div>
 
 
@@ -39,7 +59,7 @@
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
           <div class="segment__guest">
-            <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
+            <button class="unit__mypage unit__btn__mypage" type="button"><img src="../../assets/images/pencil.png" alt=""
                 class='Guest__dm'></button>
           </div>
         </span>
@@ -177,15 +197,19 @@
 
 
     <div class="third__section">
-      <h1>{{userInfo.user_nickName}}의 작품</h1>
+      <h1>{{userInfo.user_nickName}}의 작품   <button class="unit__mypage unit__btn__mypage add__works__artist" type="button" @click.prevent="moveToCreateWork"><img src="../../assets/images/add.png" alt=""
+              class=''></button></h1>
       <div class="third__section__wrapper">
 
         <!-- season -->
         <div class="Mypage__options">
           <div class="options_wrapper">
             <div class="Mypage__option" :data-value="index" v-for="(item,index) of all_my_works_month_first"
-              :key="index">
-              <img v-if="item[0]" :src="'data:/image/jpeg;base64,'+item[0].work_piece" alt="">
+              :key="index" >
+              <div class="num__of__works">
+
+              {{item.length}}
+              </div>
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -202,6 +226,10 @@
 
             <div class="Mypage__option num2" :data-value="Number(index)+6"
               v-for="(item,index) of all_my_works_month_second" :key="Number(index)+6">
+               <div class="num__of__works">
+
+              {{item.length}}
+              </div>
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -399,6 +427,8 @@
         UnreadDm: 0,
         UnreadDmList: [],
         scrap_state: false,
+        artistDetail:{},
+        showArtistModal:false,
       }
     },
     components: {
@@ -406,6 +436,19 @@
     },
     props: ["props_id"],
     methods: {
+      DonationModal(){
+        const Donation = document.querySelector('.artist__show__modal')
+        Donation.classList.add('donation__modal__active')
+        // this.showArtistModal = true;
+      },
+      DonationModalHidden(){
+        const Donation = document.querySelector('.artist__show__modal')
+        Donation.classList.remove('donation__modal__active')
+        // this.showArtistModal = true;
+      },
+       moveToCreateWork(){
+        this.$router.push('/test/uploadImageResize')
+      },
       show_pint_woks(index, season) {
         if (season == 1) {
           this.pinter_image = this.all_my_works_month_first[index]
@@ -633,7 +676,7 @@
           })
           .then(response => {
             this.userInfo = response.data;
-
+            this.getArtistDetail();
             const userAbout = document.querySelector('.artist_about');
             userAbout.innerHTML = this.userInfo.user_about;
             this.user_about = this.userInfo.user_about;
@@ -643,6 +686,12 @@
               this.img_url = "data:/image/jpeg;base64," + this.userInfo.user_profile;
             }
           })
+      },
+      getArtistDetail(){
+        http.get('/artist/getArtistInfo?artist_id='+localStorage.getItem('user_id'))
+        .then(response=>{
+          this.artistDetail = response.data;
+        })
       }
     },
     mounted() {

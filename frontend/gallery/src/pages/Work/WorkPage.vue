@@ -7,8 +7,6 @@
               class='all__works__footprints'></button>
           <button class="unit__work unit__btn__works follower__works__artist" type="button" @click.prevent="change_followes_works"><img src="../../assets/images/followers.png" alt=""
               class='all__works__refresh'></button>
-          <button class="unit__work unit__btn__works" type="button" @click.prevent="moveToCreateWork"><img src="../../assets/images/add.png" alt=""
-              class='all__works__refresh'></button>
         </div>
     <div class="search-bar">
       <div class="search__bar">
