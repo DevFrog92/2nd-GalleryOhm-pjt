@@ -138,16 +138,13 @@
 
       <div slot="footer" class="d_modal_btn_container" v-if="modify_state">
         <div class="registerGallery" @click="modifyArtistGallery">
-          <span>등록하기</span>
+          <span>수정하기</span>
         </div>
         <div class="closeRegisterGalleryBtn" @click="showModal_modify = false">
           <span>나가기</span>
         </div>
       </div>
       <div slot="footer" v-else>
-        <div class="registerGallery" @click="galleryrender">
-          전시관으로 이동
-        </div>
         <div class="closeRegisterGalleryBtn" @click="goToMypage">
           마이페이지로 이동
         </div>

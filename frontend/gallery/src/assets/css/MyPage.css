@@ -479,7 +479,7 @@
   justify-content: center;
   align-items: center;
   /* border: 0.2rem solid #EFB730; */
-  outline: 4px solid #EFB730; 
+  outline: 10px solid #EFB730; 
   outline-offset: -1.5rem; 
   /* background: rgb(223, 22, 232); */
 }
