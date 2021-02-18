@@ -62,7 +62,11 @@
 
 
 
-          <button class="signup_btn loginFormBtn" @click.prevent="join">회원가입</button>
+          <!-- <button class="signup_btn loginFormBtn" @click.prevent="join">회원가입</button> -->
+          <div class="mod_login_info_button" @click.prevent="join"><span>회원가입</span></div>
+
+
+
         </form>
 
       </div>
@@ -138,7 +142,8 @@
 
             </div>
           </div>
-          <button class="signin_btn loginFormBtn" @click.prevent="login">로그인</button>
+          <div class="mod_login_info_button login__btn" @click.prevent="login"><span>로그인</span></div>
+
 
         </form>
       </div>

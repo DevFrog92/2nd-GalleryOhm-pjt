@@ -6,11 +6,11 @@
         <div class="gallery_article">
           <div class="gallery__desc__aside">
             <span></span>
-            <div class="created_by">Curated by</div>
+            <div class="created_by">작가</div>
             <div class="gallery_director">
               {{ gallery_info.gallery_artistId }}
             </div>
-            <div class="gallery__desc__show">Explore</div>
+            <div class="gallery__desc__show">전시관 입장 <img src="../../assets/images/right-arrow.png" alt=""></div>
           </div>
           <div class="gallery__desc__aside_desc">
             <p>

@@ -18,12 +18,14 @@
 
 
       <div class="profile_about">
-       <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">고수</span></h2>
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">고수</span>
+        <span v-if="follow_state" class="set__follower" @click="unfollow"><img src="../../assets/images/un_follower.png" alt=""></span>
+          <span v-else class="set__follower" @click="follow"><img src="../../assets/images/be_follower.png" alt=""></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
           <span @click="following_view">팔로잉 : {{followings.length}}</span>
           <span @click="follower_view">팔로워 : {{followers.length}}</span>
-          <!-- <span  @close="showModal=true">Follower : {{followers.length}}</span> -->
+          
         </div>
         <div class="artist_about_div">
           <p class="artist_about">{{this.user_about}}</p>
@@ -33,7 +35,7 @@
             <div class="modify_btn" @click='registerUserAbout'>Edit</div>
           </div>
         </div>
-  
+
 
 
         <div class="profile_menu_footer">
@@ -69,11 +71,11 @@
             <textarea name="response_message" id="response_message__artist" v-model="dm_content"></textarea>
           </div>
           <!-- <div class="send_btn__artist" @click="DM_recived__artist">답장 보내기</div> -->
-         <div class="segment__mypage">
-              <button class="unit__mypage unit__btn__mypage mypage__dm__send" type="button" @click="DM_recived__artist"><img
-                  src="../../assets/images/paper.png" alt="" class='Mypage__dm'></button>
-            </div>
-          
+          <div class="segment__mypage">
+            <button class="unit__mypage unit__btn__mypage mypage__dm__send" type="button"
+              @click="DM_recived__artist"><img src="../../assets/images/paper.png" alt="" class='Mypage__dm'></button>
+          </div>
+
         </div>
       </div>
 
@@ -103,7 +105,7 @@
 
         <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
           <div v-if="my_gallery_2.gallery_id" class="Artist__gallery__entrance_2">입장</div>
-          
+
           <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>
           <p v-if="my_gallery_2.gallery_id">Created By {{my_gallery_2.gallery_artistId}}
@@ -122,8 +124,7 @@
         <!-- season -->
         <div class="options">
           <div class="options_wrapper">
-            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_first" :key="index"
-             >
+            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_first" :key="index">
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -138,8 +139,7 @@
           </div>
           <div class="options_wrapper">
 
-            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_second" :key="index"
-             >
+            <div class="option" :data-value="index" v-for="(item,index) of all_my_works_month_second" :key="index">
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -162,12 +162,12 @@
 
         <div class="pinter__side">
           <div class="pinter_item-lists">
-              <div class="pinter_grid" v-for="(img, i) in pinter_image" :key="i" :data-value="img.work_id">
-                <img :src="'data:image/jpeg;base64,'+img.work_piece" alt="DB이미지" />
-                <div class="pinter_grid__body" :data-value="img.work_id">
-                </div>
+            <div class="pinter_grid" v-for="(img, i) in pinter_image" :key="i" :data-value="img.work_id">
+              <img :src="'data:image/jpeg;base64,'+img.work_piece" alt="DB이미지" />
+              <div class="pinter_grid__body" :data-value="img.work_id">
               </div>
-          <div class="exit_side">X</div>
+            </div>
+            <div class="exit_side">X</div>
           </div>
         </div>
       </div>
@@ -180,7 +180,8 @@
       <div slot="header">
         <h3>
         </h3>
-        <i class="fas fa-times closeModalBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
+        <i class="fas fa-times closeModalBtn"
+          @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]"></i>
       </div>
 
       <div slot="body">
@@ -227,7 +228,8 @@
       </div>
 
       <div slot="footer">
-        <button class="closeRegisterGalleryBtn" @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
+        <button class="closeRegisterGalleryBtn"
+          @click="[showModal=false,getAllMyFollowing(),getAllMyFollower(),modal_following=false]">나가기</button>
       </div>
     </Modal>
 
@@ -274,7 +276,7 @@
       return {
         showModal: false,
         modify_state: false,
-        artist_name:this.props_id,
+        artist_name: this.props_id,
         img_url: localStorage.getItem('user_profile'),
         userInfo: {},
         test_url: '../../assets/images/1.png',
@@ -320,8 +322,9 @@
         showPinterSide: false,
         showDm: false,
         showDMSide: false,
-        pinter_image:[],
-        Unread_count:0,
+        pinter_image: [],
+        Unread_count: 0,
+        follow_state: false,
 
       }
     },
@@ -330,10 +333,36 @@
     },
     props: ["props_id"],
     methods: {
-      show_pint_woks(index,season){
-        if(season == 1){
+      follow() {
+        const formData = {
+          "follow_artistId": localStorage.getItem('props_id'),
+          "follow_userId": localStorage.getItem('user_id')
+        }
+        http.post('/follow/follow', formData)
+        .then(()=>{
+          this.follow_state = true
+          this.getAllMyFollowing();
+          this.getAllMyFollower();
+        })
+      },
+      unfollow(){
+        console.log('unfollow')
+        const formData = {
+          "follow_artistId": localStorage.getItem('props_id'),
+          "follow_userId": localStorage.getItem('user_id')
+        }
+        http.post('/follow/cancelFollow', formData)
+        .then(()=>{
+          this.follow_state = false
+           this.getAllMyFollowing();
+          this.getAllMyFollower();
+          
+        })
+      },
+      show_pint_woks(index, season) {
+        if (season == 1) {
           this.pinter_image = this.all_my_works_month_first[index]
-        }else{
+        } else {
           this.pinter_image = this.all_my_works_month_second[index]
         }
 
@@ -412,23 +441,23 @@
           })
       },
       DM_recived__artist() {
-        if(this.dm_content.trim() !== "" && this.dm_title.trim() !==""){
+        if (this.dm_content.trim() !== "" && this.dm_title.trim() !== "") {
 
-        const test = {
-          "message_content": this.dm_content,
-          "message_id": 0,
-          "message_isCheck": 1,
-          "message_receiverId": localStorage.getItem('props_id'),
-          "message_sendDate": "string",
-          "message_senderId": localStorage.getItem('user_id'),
-          "message_title": this.dm_title,
-        }
-        http.post('/message/sendMessage', test)
-          .then(() => {
-            this.dm_title = "";
-            this.dm_content = "";
-          })
-        }else{
+          const test = {
+            "message_content": this.dm_content,
+            "message_id": 0,
+            "message_isCheck": 1,
+            "message_receiverId": localStorage.getItem('props_id'),
+            "message_sendDate": "string",
+            "message_senderId": localStorage.getItem('user_id'),
+            "message_title": this.dm_title,
+          }
+          http.post('/message/sendMessage', test)
+            .then(() => {
+              this.dm_title = "";
+              this.dm_content = "";
+            })
+        } else {
           alert('내용을 입력해 주세요!')
         }
 
@@ -437,10 +466,10 @@
         http.post('/message/getAllMyReceiveMessage', localStorage.getItem('props_id'))
           .then(response => {
             this.dm_list = response.data;
-          for (let item of this.dm_list) {
-                if(item.message_isCheck === '1'){
-                  this.Unread_count+=1
-                }
+            for (let item of this.dm_list) {
+              if (item.message_isCheck === '1') {
+                this.Unread_count += 1
+              }
             }
           })
       },
@@ -458,6 +487,8 @@
           })
           .then(response => {
             this.followings = response.data;
+            console.log('followings')
+
           })
       },
       getAllMyFollower() {
@@ -468,6 +499,11 @@
           })
           .then(response => {
             this.followers = response.data;
+            if(this.followers.includes(localStorage.getItem('user_id')))
+            {
+              this.follow_state = true
+            }
+
           })
       },
       getMyWorksCount() {
@@ -536,9 +572,9 @@
 
             for (let item of response.data) {
               let itemMonth = item.work_uploadDate.slice(5, 7)
-              if(Object.keys(this.all_my_works_month_first).includes(itemMonth)){
-              this.all_my_works_month_first[itemMonth].push(item);
-              }else{
+              if (Object.keys(this.all_my_works_month_first).includes(itemMonth)) {
+                this.all_my_works_month_first[itemMonth].push(item);
+              } else {
                 this.all_my_works_month_second[itemMonth].push(item);
               }
             }
@@ -551,15 +587,19 @@
           })
       },
       getUserInfo() {
-         http.get('/user/getUserInfo', {params:{user_id: localStorage.getItem('props_id')}})
-        .then(response => {
-          this.userInfo = response.data;
-          this.artist_name = this.userInfo.user_id
-          const userAbout = document.querySelector('.artist_about');
-          userAbout.innerHTML = this.userInfo.user_about;
-          this.img_url = 'data:/image/jpeg;base64,'+this.userInfo.user_profile;
-          this.user_about = this.userInfo.user_about;
-        })
+        http.get('/user/getUserInfo', {
+            params: {
+              user_id: localStorage.getItem('props_id')
+            }
+          })
+          .then(response => {
+            this.userInfo = response.data;
+            this.artist_name = this.userInfo.user_id
+            const userAbout = document.querySelector('.artist_about');
+            userAbout.innerHTML = this.userInfo.user_about;
+            this.img_url = 'data:/image/jpeg;base64,' + this.userInfo.user_profile;
+            this.user_about = this.userInfo.user_about;
+          })
       }
     },
     mounted() {

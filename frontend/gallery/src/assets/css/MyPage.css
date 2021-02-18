@@ -472,6 +472,9 @@
   display:flex;
   justify-content: center;
   align-items: center;
+  /* border: 0.2rem solid #EFB730; */
+  outline: 4px solid #EFB730; 
+  outline-offset: -1rem; 
   /* background: rgb(223, 22, 232); */
 }
 
@@ -1738,6 +1741,7 @@ position: relative;
 
 .Mypage__options{
   position: absolute;
+  padding: 3rem;
   width: 100%;
   height: 40rem;
   top: 20%;
@@ -1808,10 +1812,14 @@ position: relative;
     background-repeat: no-repeat;
     cursor: pointer;
     transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .Mypage__option img{
-  width: 100%;
+  min-width: 80px;
+  width: 50%;
   height: 100%;
   object-fit: cover;
 }
@@ -1892,12 +1900,15 @@ position: relative;
     transform: scale(1);
     max-width: 600px;
     margin: 0px;
-    border-radius: 40px;
+    border-radius: 40px;;
     /* background-size: auto 100%; */
     /*&:active {
                transform:scale(0.9);
             }*/
 }
+
+
+
 
   .Mypage__options .Mypage__option.active .shadow {
     box-shadow: inset 0 -120px 120px -120px black, inset 0 -120px 120px -100px black;
@@ -2011,7 +2022,7 @@ position: relative;
 .exit_side{
   position: absolute;
   top: 0%;
-  right: 15%;
+  right: 1%;
   z-index: 999;
   font-size: 1.5rem;
   font-family: 'S-CoreDream-8Heavy';
