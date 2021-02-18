@@ -176,6 +176,7 @@ export default {
     return {
       imgSrc: "",
       prop_workId: "",
+      prop_galleryId: "",
       work: [],
       size: "",
       artistState: false,
@@ -189,11 +190,12 @@ export default {
   props: ["work_id"],
   created() {
     this.prop_workId = this.$route.params.work_id;
-    if(this.$route.params.work_id !== undefined){
-      localStorage.setItem('work_id', this.$route.params.work_id);
+
+    if (this.$route.params.work_id !== undefined) {
+      localStorage.setItem("work_id", this.$route.params.work_id);
     }
 
-    if (localStorage.getItem('work_id') == null) {
+    if (localStorage.getItem("work_id") == null) {
       alert("잘못된 접근방식입니다.");
       history.go(-1);
     } else {
@@ -208,10 +210,11 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
+    // console.log(this.$router.history);
   },
   methods: {
     getWorkInfo() {
-      http.get("/work/getWork/" + localStorage.getItem('work_id')).then(
+      http.get("/work/getWork/" + localStorage.getItem("work_id")).then(
         (response) => {
           var work = response.data;
           work.work_piece = "data:image/jpeg;base64," + work.work_piece;
@@ -310,7 +313,7 @@ export default {
           },
         })
         .then(
-          () => { 
+          () => {
             this.scrapState = true;
           },
           (error) => {
@@ -517,7 +520,7 @@ export default {
   font-size: 40px;
 }
 
-.detail .info_box .info .title{
+.detail .info_box .info .title {
   display: inline;
   width: 50%;
 }
