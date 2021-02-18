@@ -168,10 +168,8 @@ const makeUserNickName = (context,payload) =>{
 }
 
 const deleteWork = (context,payload) =>{
-  console.log('deleteWork',payload);
   http.get(`/work/deleteWork/${payload}`)
-  .then(response =>{
-    console.log(response.data)
+  .then(() =>{
   })
 }
 

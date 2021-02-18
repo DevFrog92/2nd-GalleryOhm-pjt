@@ -87,6 +87,8 @@ function manuclickHandler(e){
       goToElem = document.querySelector('.third__section');
     }else if(targetItem.dataset.value === "3"){
       goToElem = document.querySelector('.forth__section');
+    }else if(targetItem.dataset.value === "4"){
+      return;
     }
     scrollIt(goToElem)
   }
@@ -175,6 +177,19 @@ const getUserInfo = ()=>{
 
 const follow_modal = ()=>{
   // console.log('실행되었다.')
+  const notificationItem = document.querySelector('.notifications');
+  notificationItem.addEventListener('click',function(e){
+    if(e.target.classList.contains('notifications__item')){
+      localStorage.setItem('props_id',e.target.dataset.name)
+      getUserInfo();
+      setTimeout(()=>{
+        moveToArtistPage(localStorage.getItem('props_type'),localStorage.getItem('props_id'));
+      },400);
+      
+    }
+  })
+
+
   /*
   * Get all the buttons actions
   */
