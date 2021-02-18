@@ -291,7 +291,7 @@ export default {
     },
     galleryrender() {
       this.$router.push({
-        name: "GalleryRenderPage",
+        name: 'GalleryPage',
         params: { props_id: this.gallery_info.gallery_id },
       });
     },
