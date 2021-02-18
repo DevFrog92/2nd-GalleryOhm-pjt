@@ -82,7 +82,7 @@ function gotoDetail(){
     if(e.target.classList.contains('pinter_grid__body')){
       const work_id = e.target.dataset.value
       // console.log(work_id)
-      router.push({name:'ItemDetailPage',params:{work_id:work_id}})
+      router.push({name:'WorkDetailFirstPage',params:{work_id:work_id}})
     }
   })
 

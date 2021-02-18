@@ -138,10 +138,8 @@
           />
 
           <h3>{{ my_gallery_1.gallery_name }}</h3>
-          <p v-if="my_gallery_1.gallery_id">
-            Created By {{ my_gallery_1.gallery_artistId }}
-            {{ my_gallery_1.gallery_writeTime.slice(0, 10) }} ~
-          </p>
+         <div v-if="my_gallery_1.gallery_id" class="poster__aside__id">{{my_gallery_1.gallery_artistId}}</div>
+          <div v-if="my_gallery_1.gallery_id" class="poster__aside__date">  {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</div>
         </div>
 
         <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
@@ -158,10 +156,8 @@
             alt=""
           />
           <h3>{{ my_gallery_2.gallery_name }}</h3>
-          <p v-if="my_gallery_2.gallery_id">
-            Created By {{ my_gallery_2.gallery_artistId }}
-            {{ my_gallery_2.gallery_writeTime.slice(0, 10) }} ~
-          </p>
+           <div v-if="my_gallery_2.gallery_id" class="poster__aside__id">{{my_gallery_2.gallery_artistId}}</div>
+           <div v-if="my_gallery_2.gallery_id" class="poster__aside__date">  {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</div>
         </div>
       </div>
     </div>
