@@ -677,7 +677,7 @@ export default {
     getMyGalleryDetail(gallery_id) {
       http
         .get(
-          "http://localhost:7080/artGallery/api/gallery/getArtistGallery/" +
+          "/gallery/getArtistGallery/" +
             gallery_id
         )
         .then((response) => {
