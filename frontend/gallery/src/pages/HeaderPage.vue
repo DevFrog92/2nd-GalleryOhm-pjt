@@ -40,7 +40,7 @@
         @change="controlAudio()"
       />
     </div>
-    <nav class="nav">
+    <nav class="nav__main">
       <input type="checkbox" class="nav__cb" id="menu-cb" />
       <div class="nav__content">
         <ul class="nav__items" v-if="loginState">
@@ -146,7 +146,7 @@
         @change="controlAudio()"
       />
     </div>
-    <nav class="nav">
+    <nav class="nav__main">
       <input type="checkbox" class="nav__cb" id="menu-cb" />
       <div class="nav__content">
         <ul class="nav__items" v-if="loginState">

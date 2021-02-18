@@ -505,9 +505,14 @@ export default {
 </script>
 
 <style scoped>
+* {
+
+}
 
 .container {
- margin: 0 auto;
+ /* margin: 0 auto; */
+width: 100vw;
+height: 100vh;
 }
 .admin {
   position: relative;
