@@ -717,8 +717,8 @@
       this.getMyWorks();
       this.DMpull();
       window.scrollTo(0, 0);
-
-
+    },
+    updated(){
     }
   }
 </script>
