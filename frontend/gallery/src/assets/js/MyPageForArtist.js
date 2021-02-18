@@ -4,7 +4,7 @@ const init = () => {
 
   const profileItem = document.querySelector(".profile_menu");
   const topBtn = document.querySelector(".move_to_top");
-  console.log('top Btn',topBtn);
+  // console.log('top Btn',topBtn);
   const gallery1 = document.querySelector(".Artist__gallery__entrance_1");
   const gallery2 = document.querySelector(".Artist__gallery__entrance_2");
 
@@ -26,21 +26,10 @@ const init = () => {
       }
       }
     })
-
-
-  // const scrap = document.querySelector('.scroll-wrapper')
-  // scrap.addEventListener('click',function(e){
-  //   if(e.target.classList.contains("scrap__image")){
-  //     const work_id = e.target.dataset.value;
-  //     router.push({name:'ItemDetailPage',params:{work_id:work_id}})
-  //   }
-  // })
-
-  
   
     if(gallery1){
       gallery1.addEventListener('click',function(e){
-        console.log('click event',e.target.dataset.value);
+        // console.log('click event',e.target.dataset.value);
         if(e.target.parentNode.dataset.value){
           router.push({'name':'GalleryPage',params:{props_id:e.target.parentNode.dataset.value}})
         }
@@ -50,7 +39,7 @@ const init = () => {
   if(gallery2){
 
     gallery2.addEventListener('click',function(e){
-      console.log('click event',e.target.dataset.value);
+      // console.log('click event',e.target.dataset.value);
       if(e.target.parentNode.dataset.value){
         router.push({'name':'GalleryPage',params:{props_id:e.target.parentNode.dataset.value}})
       }
@@ -68,26 +57,18 @@ const init = () => {
     }
     })
   exitSide.addEventListener('click',function(){
-    console.log('click')
+    // console.log('click')
       const pintSide = document.querySelector('.pinter__side');
       pintSide.classList.remove('active_side');
     })
-  // exitSeason.addEventListener('click',function(){
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.remove('active_season');
-  // })
-  // seasonModal.addEventListener('click',function(){
-  //   console.log('season click')
-  //   const season = document.querySelector('.show_season_works')
-  //   season.classList.add('active_season');
-  // })
+
 function gotoDetail(){
-  console.log('실행한다.')
+  // console.log('실행한다.')
   const imgList = document.querySelector('.pinter_item-lists')
   imgList.addEventListener('click',function(e){
     if(e.target.classList.contains('pinter_grid__body')){
       const work_id = e.target.dataset.value
-      console.log(work_id)
+      // console.log(work_id)
       router.push({name:'ItemDetailPage',params:{work_id:work_id}})
       
     }
@@ -100,7 +81,7 @@ function manuclickHandler(e){
   if(targetItem.classList.contains("profile_menu_item")){
     let goToElem;
     if(targetItem.dataset.value === "1"){
-      console.log('click')
+      // console.log('click')
       goToElem = document.querySelector('.second__section');
     }else if(targetItem.dataset.value === "2"){
       goToElem = document.querySelector('.third__section');
@@ -112,7 +93,7 @@ function manuclickHandler(e){
 }
 
 function scrollIt(ele){
-  console.log(ele)
+  // console.log(ele)
   topBtn.classList.add('move_to_top_show');
   window.scrollTo({
     'behavior':'smooth',
@@ -178,7 +159,7 @@ function moveToArtistPage(artist_id){
 
 
 const getUserInfo = ()=>{
-  console.log('user_info_request',localStorage.getItem('props_id'));
+  // console.log('user_info_request',localStorage.getItem('props_id'));
   http.get('/user/getUserInfo', {
     params: {
       user_id: localStorage.getItem('props_id')
@@ -186,30 +167,30 @@ const getUserInfo = ()=>{
   })
   .then(response=>{
     localStorage.setItem('props_type',response.data.user_type)
-    console.log('저장한다. props_type값',localStorage.getItem('props_type'));
+    // console.log('저장한다. props_type값',localStorage.getItem('props_type'));
 
   })
 }
 
 
 const follow_modal = ()=>{
-  console.log('실행되었다.')
+  // console.log('실행되었다.')
   /*
   * Get all the buttons actions
   */
   const optionBtns = document.querySelectorAll( '.js-option' );
-  console.log(optionBtns);
+  // console.log(optionBtns);
   for(var i = 0; i < optionBtns.length; i++ ) {
 
     /*
     * When click to a button
     */
     optionBtns[i].addEventListener( 'click', function (e ){
-      console.log('click here',e.target.dataset.name);
+      // console.log('click here',e.target.dataset.name);
       localStorage.setItem('props_id',e.target.dataset.name)
       getUserInfo();
       setTimeout(()=>{
-        console.log(' 시작 텀을 준다.')
+        // console.log(' 시작 텀을 준다.')
         // notification item
         var notificationCard = this.parentNode.parentNode;
         var clickBtn = this;
@@ -253,7 +234,7 @@ const follow_modal = ()=>{
   */
   var archiveOrDelete = function( clickBtn, notificationCard ){
     if( clickBtn.classList.contains( 'archive' ) ){
-      console.log('이동');
+      // console.log('이동');
       notificationCard.classList.add( 'archive' );
       moveToArtistPage(localStorage.getItem('props_type'));
 
@@ -266,16 +247,16 @@ const follow_modal = ()=>{
 }
 
 const moveToArtistPage = (user_type)=>{
-  console.log('현재 user type이야',user_type);
+  // console.log('현재 user type이야',user_type);
   if(localStorage.getItem('props_id') === localStorage.getItem('user_id')){
     if(localStorage.getItem('user_type') == 1){
-      console.log('guest 이동합니다.');
+      // console.log('guest 이동합니다.');
       router.push('/guestmypage');
     }else{
       router.push('/mypage');
     }
   }else if(user_type=='2'){
-    console.log('이동할게 아티스트로',router.history.current.name);
+    // console.log('이동할게 아티스트로',router.history.current.name);
     if(router.history.current.name ==='ArtistMyPage'){
       router.go();
     }else{
@@ -285,36 +266,10 @@ const moveToArtistPage = (user_type)=>{
     if(router.history.current.name === 'GuestMyPage'){
       router.go();
     }else{
-      console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
+      // console.log('이동할게 이제',localStorage.getItem('props_id'),typeof localStorage.getItem('props_id'));
       router.push({name:'GuestMyPage',params:{props_id: localStorage.getItem('props_id')}});
     }
   }
 }
 
-
-// const message_read = (message_id)=>{
-//   const formData = new FormData()
-//   formData.append('message_ids',Array(message_id))
-//   http.post('/message/checkMessage/',formData)
-//   .then(response => {
-//     console.log('read message',response.data);
-//   })
-// }
-
-
-// const DMModal =() =>{
-//   const DMList = document.querySelector('.dm__list_props');
-// }
-
-
-// const tounfollow=()=>{
-//   const formData = {
-//     follow_artistId: localStorage.getItem('props_id'),
-//     follow_userId:localStorage.getItem('user_id')
-//   }
-//   http.post('/follow/cancelFollow',formData)
-//   .then(response=>{
-//     console.log(response.data,'unfollow');
-//   })
-// }
 export default {init,follow_modal};

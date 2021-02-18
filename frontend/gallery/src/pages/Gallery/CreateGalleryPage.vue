@@ -202,7 +202,7 @@ export default {
     getGallery() {
       http.get("/gallery/getGallery/" + this.props_id).then((response) => {
         this.gallery_info = response.data;
-        console.log("this gallery info", this.gallery_info);
+        // console.log("this gallery info", this.gallery_info);
       });
     },
     getGalleryInfo() {
@@ -210,7 +210,7 @@ export default {
         .get("/gallery/getArtistGallery/" + this.props_id)
         .then((response) => {
           this.gallery_works = response.data;
-          console.log("gallery works", this.gallery_works);
+          // console.log("gallery works", this.gallery_works);
         });
     },
     getMyWorks() {
@@ -218,13 +218,13 @@ export default {
         .get(`/work/getMyWorks/${localStorage.getItem("user_id")}`)
         .then((response) => {
           const workList = response.data;
-          console.log("worklist", workList);
+          // console.log("worklist", workList);
           for (let i = 0; i < workList.length; i++) {
             workList[i].work_piece =
               "data:image/jpeg;base64," + workList[i].work_piece;
           }
           this.work_list = workList;
-          console.log(workList);
+          // console.log(workList);
         })
         .catch((err) => {
           console.log(err);
@@ -237,14 +237,14 @@ export default {
       );
       for (const emptyItem of emptyContainer) {
         let item = emptyItem.childNodes;
-        console.log(item);
+        // console.log(item);
         if (item[1]) {
           this.galleryIdArray.push(item[1].dataset.value);
         } else if (item[0]) {
           this.galleryIdArray.push(item[0].dataset.value);
         }
       }
-      console.log('갤러리 배열 확인',this.galleryIdArray);
+      // console.log('갤러리 배열 확인',this.galleryIdArray);
       if (this.gallery_works.length > 0) {
         this.modify_state = true;
         this.showModal_modify = true;
@@ -253,7 +253,7 @@ export default {
       }
     },
     modifyArtistGallery() {
-      console.log('전시관 수정')
+      // console.log('전시관 수정')
       const formdata = new FormData();
       formdata.append("gallery_artistId", localStorage.getItem("user_id"));
       formdata.append("gallery_desc", this.gallery_info.gallery_desc);
@@ -261,8 +261,8 @@ export default {
       formdata.append("gallery_id", this.gallery_info.gallery_id);
       formdata.append("gallery_name", this.gallery_info.gallery_name);
       formdata.append("gallery_workIdList", this.galleryIdArray);
-      http.post("/gallery/modifyArtistGallery", formdata).then((response) => {
-        console.log("succ modify gallery", response.data);
+      http.post("/gallery/modifyArtistGallery", formdata).then(() => {
+        // console.log("succ modify gallery", response.data);
         this.modify_state = false;
       });
     },
@@ -274,13 +274,13 @@ export default {
       formdata.append("gallery_mainWorkId", this.galleryIdArray[0]);
       formdata.append("gallery_name", this.gallery_name);
       formdata.append("gallery_workIdList", this.galleryIdArray);
-      console.log(this.galleryIdArray, "array");
+      // console.log(this.galleryIdArray, "array");
       http
         .post("/gallery/addArtistGallery", formdata)
-        .then((response) => {
-          console.log("전시관 생성 완료",response.data);
+        .then(() => {
+          // console.log("전시관 생성 완료",response.data);
           this.register_state = true;
-          console.log('모달 변경')
+          // console.log('모달 변경')
         })
         .catch((err) => {
           console.log(err);

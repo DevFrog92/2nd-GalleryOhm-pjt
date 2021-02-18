@@ -4,7 +4,7 @@ const init = () => {
  const galleryPoster = document.querySelector('.gallery_poster-lists')
   galleryPoster.addEventListener('click',function(e){
     if(e.target.classList.contains('gallery__poster')){
-      console.log('target',e.target.dataset.value)
+      // console.log('target',e.target.dataset.value)
     }
   })
 
@@ -12,7 +12,7 @@ const init = () => {
   gallertLsit.addEventListener('click',function(e){
     if(e.target.classList.contains('gallery__poster')){
       const gallery_id = e.target.dataset.value;
-      console.log('gallery_id',gallery_id)
+      // console.log('gallery_id',gallery_id)
       router.push({name:'GalleryPage',params:{props_id:gallery_id}})
     }
   })

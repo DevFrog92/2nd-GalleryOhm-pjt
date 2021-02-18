@@ -75,7 +75,7 @@ export default {
     detailImage(work_id, work_piece) {
       // var width = document.getElementById("img").width;
       // var height = document.getElementById("img").height;
-      console.log("[id:" + work_id + "] " + work_piece.length);
+      // console.log("[id:" + work_id + "] " + work_piece.length);
     },
     getOddList() {
       http;
