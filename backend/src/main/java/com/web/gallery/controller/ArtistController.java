@@ -49,7 +49,7 @@ public class ArtistController {
         if(artistService.changeArtist(artistDto)==1){
             nr.setValue("changeArtist", 1, "succ");
             if(artistService.changeArtistNicknameToUser(artistDto)==1){
-                nr.setValue("changeArtistNickname", 1, "succ");
+                nr.setValue("changeArtistNicknameToUser", 1, "succ");
             }
         }
         else
@@ -65,6 +65,9 @@ public class ArtistController {
 
         if(artistService.modifyArtist(artistDto)==1){
             nr.setValue("modifyArtist", 1, "succ");
+            if(artistService.changeArtistNicknameToUser(artistDto)==1){
+                nr.setValue("changeArtistNicknameToUser", 1, "succ");
+            }
         }
         else
             return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
