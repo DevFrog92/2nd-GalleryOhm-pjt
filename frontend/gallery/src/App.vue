@@ -20,16 +20,16 @@ export default {
     init.init();
     localStorage.setItem("redState", false);
 
-    window.addEventListener("beforeunload", this.beforeWindowUnload);
+    // window.addEventListener("beforeunload", this.beforeWindowUnload);
   },
-  methods: {
-    beforeWindowUnload(){
-      localStorage.clear();
-    },
-  },
-  destroyed(){
-    window.removeEventListener("beforeunload", this.beforeWindowUnload);
-  }
+  // methods: {
+  //   beforeWindowUnload(){
+  //     localStorage.clear();
+  //   },
+  // },
+  // destroyed(){
+  //   window.removeEventListener("beforeunload", this.beforeWindowUnload);
+  // }
 };
 </script>
 
