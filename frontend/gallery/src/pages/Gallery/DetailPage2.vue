@@ -189,8 +189,11 @@ export default {
   props: ["work_id"],
   created() {
     this.prop_workId = this.$route.params.work_id;
+    if(this.$route.params.work_id !== undefined){
+      localStorage.setItem('work_id', this.$route.params.work_id);
+    }
 
-    if (this.prop_workId == null) {
+    if (localStorage.getItem('work_id') == null) {
       alert("잘못된 접근방식입니다.");
       history.go(-1);
     } else {
@@ -208,7 +211,7 @@ export default {
   },
   methods: {
     getWorkInfo() {
-      http.get("/work/getWork/" + this.prop_workId).then(
+      http.get("/work/getWork/" + localStorage.getItem('work_id')).then(
         (response) => {
           var work = response.data;
           work.work_piece = "data:image/jpeg;base64," + work.work_piece;
