@@ -18,8 +18,8 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span v-show="!who_state" class="Guest__bell" @click="DMsideopen"><img
-              src="../../assets/images/bell.png" alt=""><span 
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span v-show="!who_state" class="Guest__bell"
+            @click="DMsideopen"><img src="../../assets/images/bell.png" alt=""><span
               class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
           <span>작품 수 : {{posts}}</span>
@@ -32,7 +32,7 @@
           <div v-if="modifyabout" class="modal_modify_about">
             <textarea name="artist_about_modify" id="artist_about_modify" cols="30" rows="10"
               v-model="user_about"></textarea>
-              <div class="modify_btn" @click='registerUserAbout'>
+            <div class="modify_btn" @click='registerUserAbout'>
               <div class="segment__guest">
                 <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png"
                     alt="" class='Guest__dm'></button>
@@ -54,7 +54,8 @@
             <div class="profile_label">더보기</div>
             <div class="profile_spacer"></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
-            <div v-if="!who_state" class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
+            <div v-if="!who_state" class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보
+                수정</span></div>
           </div>
         </div>
       </div>
@@ -156,16 +157,17 @@
           alt=""></div>
     </div>
     <div class="forth__section__guest">
-    <h1 class="outer__wrapper__title">{{guest_name}}의 즐겨찾기</h1>
-    <div class="outer-wrapper-guest" v-if="!scrap_state">
-      <div class="scroll-wrapper">
-        <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
-          <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece" alt="">
+      <h1 class="outer__wrapper__title">{{guest_name}}의 즐겨찾기</h1>
+      <div class="outer-wrapper-guest" v-if="!scrap_state">
+        <div class="scroll-wrapper">
+          <div class="scroll-slide" v-for="(item,index) of scrap_list" :key="index">
+            <img class="scrap__image" :data-value='item.work_id' :src="'data:/image/jpeg;base64,'+item.work_piece"
+              alt="">
+          </div>
         </div>
       </div>
     </div>
-    </div>
-    
+
     <Modal v-if="showModal" @close="showModal = false">
       <div slot="header">
         <h3>

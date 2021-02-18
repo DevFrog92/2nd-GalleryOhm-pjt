@@ -250,11 +250,15 @@ const DMModal =() =>{
       
       message_read(response_data.message_id,e.target);
       // e.target.classList.add('Mypage__DM__item__read')
-      const sender_name = document.querySelector('.sender_name');
-      const sender_title = document.querySelector('.sender_title');
-      const sender_content = document.querySelector('.sender_content');
-      const sendersender_time_name = document.querySelector('.sender_time');
-      const sendersender_date_name = document.querySelector('.sender_date');
+      console.log(response_data)
+      const sender_name = document.querySelector('.Guest__message__name__cover .sender_name');
+      const sender_title = document.querySelector('.Guest__message__title__cover .sender_title');
+      const sender_content = document.querySelector('.Guest__message__content__cover .sender_content');
+      const sendersender_time_name = document.querySelector('.Guest__message__date__tiem .sender_time');
+      const sendersender_date_name = document.querySelector('.Guest__message__date__tiem .sender_date');
+      console.log('sender_name',sender_name,response_data.message_senderId)
+      console.log('sender_title',sender_title ,response_data.message_title)
+      console.log('sender_content',sender_content,response_data.message_content)
       sender_name.innerText = response_data.message_senderId;
       sender_title.innerText ="제목. " + response_data.message_title;
       sender_content.innerText = response_data.message_content;
