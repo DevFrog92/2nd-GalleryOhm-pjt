@@ -18,7 +18,7 @@
         <div class="donation__modal__close" @click="DonationModalHidden">나가기</div>
         <div class="donation__wrapper">
           <div class="donation__title">
-            {{user_nickName}} 작가님 후원계좌
+            {{artistDetail.artist_nickName}} 작가님 후원계좌
           </div>
           <div class="donation__content">
             <ul>
@@ -36,7 +36,7 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Mypage__profile_batch">{{rank[artistDetail.artist_exp]}}</span><span
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Mypage__profile_batch">고수</span><span
             class="Mypage__bell" @click="showDm=true"><img src="../../assets/images/bell.png" alt=""><span
               class="notification__num" @click="DMsideopen">{{UnreadDm}}</span></span></h2>
         <div class="follow">
@@ -73,7 +73,7 @@
             <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
-            <div class="profile_item"><span class="profile_menu_item" data-value='4' @click="moveSettings">회원정보 수정</span></div>
+            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
       </div>
@@ -166,8 +166,8 @@
           <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
 
           <h3>{{my_gallery_1.gallery_name}}</h3>
-          <div v-if="my_gallery_1.gallery_id" class="poster__aside__id">{{my_gallery_1.gallery_artistId}}</div>
-          <div v-if="my_gallery_1.gallery_id" class="poster__aside__date">  {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</div>
+          <p v-if="my_gallery_1.gallery_id">작가 : {{my_gallery_1.gallery_artistId}}
+            {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</p>
         </div>
 
         <div class="Mypage__poster_card2" :data-value="my_gallery_2.gallery_id">
@@ -187,9 +187,8 @@
           </div>
           <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>
-
-             <div v-if="my_gallery_2.gallery_id" class="poster__aside__id">{{my_gallery_2.gallery_artistId}}</div>
-           <div v-if="my_gallery_2.gallery_id" class="poster__aside__date">  {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</div>
+          <p v-if="my_gallery_2.gallery_id">Created By {{my_gallery_2.gallery_artistId}}
+            {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</p>
         </div>
       </div>
 
@@ -430,8 +429,6 @@
         scrap_state: false,
         artistDetail:{},
         showArtistModal:false,
-        rank:['','초심자','중수','고수'],
-        user_nickName: localStorage.getItem("user_nickName"),
       }
     },
     components: {
@@ -701,8 +698,6 @@
       setTimeout(() => {
         init.init();
       }, 1000)
-      this.userInfo.user_nickName=localStorage.getItem("user_nickName");
-      console.log("mount"+this.userInfo.user_nickName);
     },
     created() {
       this.getUserInfo();
@@ -720,8 +715,6 @@
       this.getMyWorks();
       this.DMpull();
       window.scrollTo(0, 0);
-      
-      
     }
   }
 </script>
