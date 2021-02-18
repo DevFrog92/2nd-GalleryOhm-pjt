@@ -405,7 +405,9 @@
 
 
 /* === */
-
+.closeModalBtn{
+  color: #EFB730;
+}
 
 .closeRegisterGalleryBtn,
 .registerGallery {

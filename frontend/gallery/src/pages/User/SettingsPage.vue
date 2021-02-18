@@ -23,7 +23,7 @@
             v-model="password_for_mod"
           />
           <div class="pw_check_arrow">
-            <svg id="arrow" viewbox="0 0 48 44">
+            <svg id="arrow" viewbox="0 0 48 44" fill="#f5f7fa">
               <polygon
                 points="27.7,13.3 26.3,14.7 31.6,20 14,20 14,22 31.6,22 26.3,27.3 27.7,28.7 35.4,21 "
               />
@@ -385,7 +385,9 @@ export default {
   methods: {
     askWhy() {
       const askWhy = confirm("정말이냐??????");
-      console.log(askWhy);
+      if(askWhy){
+        this.leaveUser();
+      }
     },
     resetpage() {
       this.$router.go();

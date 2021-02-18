@@ -923,6 +923,9 @@ position: relative;
   -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
 }
+.pw_check_icon input{
+  background-color: #f5f7fa;
+}
 
 .pw_check_arrow {
   position: absolute;
@@ -930,7 +933,7 @@ position: relative;
   right: 18%;
   width: 50px;
   height: 90%;
-  background: #fff;
+  background: #f5f7fa;
   display: none;
   z-index: -2;
 }

@@ -234,13 +234,12 @@
   font-size:2rem;
 }
 .profile_icon {
-  position: absolute;
-  bottom: 5%;
   opacity: 0;
-  font-size: 1.5rem;
-  margin: 0.1rem 0;
+  font-size: 1.4rem;
+  margin: 0.2rem 0;
   transition: opacity 1s;
 }
+
 .profile_icons {
   position: absolute;
   fill: #56056c;
@@ -254,7 +253,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  cursor: pointer;
 }
+
 
 .profile_user_name{
   margin-bottom:.9rem;
@@ -386,7 +387,7 @@
   transition: color 0.5s ease;
 }
 
-.profile_menu:hover .profile_label,.profile_menu:hover .profile_spacer {
+.profile_menu:hover .profile_label,.profile_menu:hover .profile_spacer:before {
   color: #EFB730;
 }
 
@@ -1183,7 +1184,6 @@ position: relative;
   
   overflow-y: scroll;
   padding:8rem;
-  transition: all 500ms;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2280,3 +2280,94 @@ position: relative;
 }
 
 
+.artist__show__modal{
+
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: -99;
+
+  /* z-index: -10; */
+  transform: translateX(20rem);
+  transition:all 1s ease;
+}
+
+.donation__modal__active {
+  opacity: 1;
+  transform: translateX(0px);
+  z-index: 600;
+
+
+}
+
+.donation__modal__close {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 20%;
+  right: 30%;
+  font-family:"S-CoreDream-8Heavy";
+
+  cursor: pointer;
+}
+
+.donation__wrapper{
+  border: 5px solid #EFB730;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 40%;
+  height: 50%;
+  background-color: #1D2127;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.donation__title{
+  font-family:"S-CoreDream-8Heavy";
+  
+  width: 100%;
+  height: 15%;
+  background-color: #EFB730;
+  color: #2c3e50;
+  text-align: center;
+  font-size: 2rem;
+  border-bottom: 2px solid #EFB730;
+}
+
+.donation__content{
+  width: 100%;
+  height: 70%;
+  font-family:  'Noto Sans KR', sans-serif;
+  background-color: #f5f7fa;
+  display: flex;
+  align-items: center;
+}
+
+.donation__content ul {
+  list-style: none;
+  margin-left: 3rem;
+  font-size: 1.7rem;
+}
+.donation__content ul li {
+  margin: 2rem 0;
+}
+
+.donation__footer {
+  font-family:"S-CoreDream-8Heavy";
+
+  width: 100%;
+  height: 15%;
+  background-color: #EFB730;
+  color: white;
+  text-align: center;
+  font-size: 2.3rem;
+  border-top: 2px solid #EFB730;
+}
