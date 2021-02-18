@@ -505,14 +505,17 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
  margin: 0 auto;
 }
 .admin {
+  position: relative;
  margin: 0 auto;
 }
 .admin_tabs {
- margin: 0 auto;
+  left: -50%;
+ /* margin: 0 auto; */
 }
 .mt {
   margin-top: 10%;
