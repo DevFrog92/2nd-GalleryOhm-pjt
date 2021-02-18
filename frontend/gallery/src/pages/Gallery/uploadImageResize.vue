@@ -163,7 +163,7 @@ export default {
   methods: {
     hash() {
       const hashTag = document.querySelectorAll(".tags-input span");
-      this.hashtag_list = `${localStorage.getItem("user_id")},${this.work_title}`
+      this.hashtag_list = `${localStorage.getItem("user_id")},${this.work_title},`
       for (let item of hashTag) {
         if (
           this.work_info &&
