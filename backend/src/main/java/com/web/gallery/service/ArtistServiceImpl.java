@@ -30,4 +30,14 @@ public class ArtistServiceImpl implements ArtistService{
     public int modifyArtist(ArtistDto artistDto) throws Exception {
         return artistDao.modifyArtist(artistDto);
     }
+
+    @Override
+    public int changeArtistNicknameToUser(ArtistDto artistDto) throws Exception {
+        return artistDao.changeArtistNicknameToUser(artistDto);
+    }
+
+    @Override
+    public String getUserNickname(String artist_id) throws Exception {
+        return artistDao.getUserNickname(artist_id);
+    }
 }

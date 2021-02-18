@@ -41,9 +41,16 @@ public class ArtistController {
     @RequestMapping(value = "/changeArtist", method = RequestMethod.POST)
     public ResponseEntity<NumberResult> changeArtist(@RequestBody ArtistDto artistDto) throws Exception{
         NumberResult nr = new NumberResult();
-
+        System.out.println("아티스트 닉네임!!!!!!!!!!!!"+artistDto.getArtist_nickName());
+        if(artistDto.getArtist_nickName()==null){//가져온 닉네임이 없으면 유저닉네임에 있는 걸 artist 닉네임으로 설정
+            String nickname = artistService.getUserNickname(artistDto.getArtist_id());
+            artistDto.setArtist_nickName(nickname);
+        }
         if(artistService.changeArtist(artistDto)==1){
             nr.setValue("changeArtist", 1, "succ");
+            if(artistService.changeArtistNicknameToUser(artistDto)==1){
+                nr.setValue("changeArtistNickname", 1, "succ");
+            }
         }
         else
             return new ResponseEntity<NumberResult>(HttpStatus.BAD_REQUEST);
