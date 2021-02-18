@@ -18,7 +18,7 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">고수</span>
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Artist__profile_batch">{{rank[artistDetail.artist_exp]}}</span>
         <span v-if="follow_state" class="set__follower" @click="unfollow"><img src="../../assets/images/un_follower.png" alt=""></span>
           <span v-else class="set__follower" @click="follow"><img src="../../assets/images/be_follower.png" alt=""></span></h2>
         <div class="follow">
@@ -325,6 +325,9 @@
         pinter_image: [],
         Unread_count: 0,
         follow_state: false,
+        artistDetail:{},
+        rank:['','초심자','중수','고수']
+
 
       }
     },
@@ -600,6 +603,12 @@
             this.img_url = 'data:/image/jpeg;base64,' + this.userInfo.user_profile;
             this.user_about = this.userInfo.user_about;
           })
+      },
+      getArtistDetail(){
+        http.get('/artist/getArtistInfo?artist_id='+localStorage.getItem('props_id'))
+        .then(response=>{
+          this.artistDetail = response.data;
+        })
       }
     },
     mounted() {
