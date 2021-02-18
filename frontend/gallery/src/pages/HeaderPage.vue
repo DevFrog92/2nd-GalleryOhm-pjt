@@ -1,5 +1,5 @@
 <template>
-  <div id="headerpage-header" v-if="redState == 'false'">
+  <div id="headerpage-redheader" v-if="redState == 'true'">
     <div class="nav__left">
       <router-link to="/"> <div class="nav__logo"></div></router-link>
       <button
@@ -31,7 +31,7 @@
         src="../assets/images/Main/bgm.mp3"
       ></audio>
       <input
-        id="sound_volume"
+        id="red_sound_volume"
         type="range"
         value="0.0"
         max="1"
@@ -105,7 +105,7 @@
       <label class="nav__btn" for="menu-cb"></label>
     </nav>
   </div>
-  <div id="headerpage-redheader" v-else>
+  <div id="headerpage-header" v-else>
     <div class="nav__left">
       <router-link to="/"> <div class="nav__logo"></div></router-link>
       <button
@@ -137,7 +137,7 @@
         src="../assets/images/Main/bgm.mp3"
       ></audio>
       <input
-        id="red_sound_volume"
+        id="sound_volume"
         type="range"
         value="0.0"
         max="1"
@@ -259,7 +259,7 @@ export default {
     moveToMypage() {
       this.user_type = localStorage.getItem("user_type");
       this.user_id = localStorage.getItem("user_id");
-      if (this.user_type === "1") {
+      if (this.user_type === "1" || this.user_type === "0") {
         console.log("Guest");
         if (this.$router.history.current.name === "GuestMyPage") {
           this.$router.history.current.name === "GuestMyPage";
