@@ -12,7 +12,7 @@ const join = (userInfo) =>{
     if (!err.tel) {userInfo.user_tel = "";}
     if (err.showModal){
     http.post('/user/joinUser',userInfo).then(() => {
-        alert('회원가입을 축하합니다.');
+        // alert('회원가입을 축하합니다.');
         activeBtn();
         common.objectCelar(userInfo)
       })
