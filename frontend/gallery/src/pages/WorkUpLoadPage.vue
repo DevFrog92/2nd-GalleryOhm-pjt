@@ -75,7 +75,7 @@
           <div class="picture_Tag info_input">
             <label for="pictureTag">해쉬태그</label>
             <div class="hashtag">
-              <p>* Separate your tags with a comma</p>
+              <p>* 태그는 ,(쉼표)를 기준으로 구분됩니다.</p>
               <textarea
                 name="hashtagList"
                 id="hashtagList"
