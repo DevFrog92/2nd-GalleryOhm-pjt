@@ -70,7 +70,7 @@ public class UserController {
 												   @RequestParam(value = "user_birth") String user_birth,
 												   @RequestParam(value = "user_nickName") String user_nickName,
 												   @RequestParam(value = "user_name") String user_name,
-												   @RequestParam(value = "user_profile") MultipartFile user_profile) throws SQLException, IOException {
+												   @RequestParam(value = "user_profile", required = false) MultipartFile user_profile) throws SQLException, IOException {
 		NumberResult ns = new NumberResult();
 		Map<String, Object> resultMap = new HashMap<>();
 		UserDto user = new UserDto();
@@ -83,7 +83,8 @@ public class UserController {
 			user.setUser_nickName(user_nickName);
 			user.setUser_birth(user_birth);
 			user.setUser_tel(user_tel);
-			user.setUser_profile(user_profile.getBytes());
+			if(user_profile==null){user.setUser_profile(null);}
+			else {user.setUser_profile(user_profile.getBytes());}
 
 			userService.modifyUser(user);
 			ns.setValue("modifyUser", 1, "succ");
