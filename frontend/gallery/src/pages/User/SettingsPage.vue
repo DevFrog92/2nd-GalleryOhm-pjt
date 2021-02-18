@@ -362,7 +362,7 @@
             console.log('get artist info', response.data)
             this.artist_info = response.data;
             this.artist_account = this.artist_info.artist_account;
-            this.artist_bank = this.artist_info.artist_exp;
+            this.artist_bank = this.artist_info.artist_bank;
             this.artist_nickName = this.artist_info.artist_nickName;
           })
       }
