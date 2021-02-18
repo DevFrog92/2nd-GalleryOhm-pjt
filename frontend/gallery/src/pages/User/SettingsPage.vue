@@ -440,7 +440,7 @@ export default {
         artist_nickName: this.artist_nickName,
       };
       http.post("/artist/changeArtist", formData).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.artist_resister = response.data.name;
         this.showModal = true;
         localStorage.setItem("user_type", 2);
@@ -456,7 +456,7 @@ export default {
         artist_nickName: this.artist_nickName,
       };
       http.post("/artist/modifyArtist", formData).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.artist_resister = response.data.name;
         this.showModal = true;
         localStorage.setItem("user_type", 2);
@@ -470,7 +470,7 @@ export default {
         )
         .then((response) => {
           this.artist_resister = response.data.name;
-          console.log(response.data);
+          // console.log(response.data);
           this.showModal = true;
           localStorage.setItem("user_type", 1);
           this.user__type = 1;
@@ -484,7 +484,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log("get artist info", response.data);
+          // console.log("get artist info", response.data);
           this.artist_info = response.data;
           this.artist_account = this.artist_info.artist_account;
           this.artist_bank = this.artist_info.artist_bank;
