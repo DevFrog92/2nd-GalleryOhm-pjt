@@ -43,7 +43,7 @@
   cursor: pointer;
 }
 .upload_caption:hover{
-  color: #42329f;
+  color: #EFB730;
 }
 .previewPicture {
   position: relative;
@@ -131,12 +131,12 @@
 
 .info_input input:focus {
   outline: none;
-  border-bottom: 2px solid #42329f;
+  border-bottom: 2px solid #EFB730;
 }
 
 .info_input textarea:focus {
   outline: none;
-  border: 2px solid #42329f;
+  border: 2px solid #EFB730;
 }
 
 .picture_Age input {
@@ -150,7 +150,7 @@
 .info_input label {
   font-weight: bold;
   font-size: 16px;
-  color: #42329f;
+  color: #EFB730;
 }
 
 
@@ -238,7 +238,7 @@
 
 .hashtag textarea:focus {
   outline: none;
-  border: 2px solid #42329f;
+  border: 2px solid #EFB730;
 }
 
 .tags-input {
@@ -285,7 +285,7 @@
 }
 
 .tags-input:focus {
-  border-color: #42329f;
+  border-color: #EFB730;
   outline: none;
 }
 

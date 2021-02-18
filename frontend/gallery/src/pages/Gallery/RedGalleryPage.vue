@@ -52,9 +52,7 @@ import Vue from "vue";
 import http from "../../api/http.js";
 import router from "../../router";
 import VueScrollTo from "vue-scrollto";
-// import VuePageTransition from "vue-page-transition";
 Vue.use(VueScrollTo);
-// Vue.use(VuePageTransition);
 
 export default {
   data() {
@@ -81,6 +79,17 @@ export default {
 
     this.nowPage = 1;
     localStorage.setItem("redState", true);
+
+    let birth = localStorage.getItem('user_birth');
+    let today = new Date();
+
+    if(birth == 'null'){
+      alert("생년월일 정보를 확인하세요.");
+      history.go(-1);
+    }else if(today.getFullYear() - Number(birth.slice(0,4)) < 20){
+      alert("접근이 불가합니다.");
+      history.go(-1);
+    }
   },
   mounted() {
     setTimeout(() => {
