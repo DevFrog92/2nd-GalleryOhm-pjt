@@ -149,7 +149,7 @@
                 data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
               }
               this.hashTagsObject[this.searchHashtag.trim()] = data;
-              console.log('ths.hash',this.hashTagsObject)
+              // console.log('ths.hash',this.hashTagsObject)
               this.filter__hashs.push(this.searchHashtag);
               this.searchHashtag = "";
               if (data.length === 0) {
@@ -158,12 +158,12 @@
               } else {
                 this.render_image = [];
                 for (let items of Object.values(this.hashTagsObject)) {
-                  console.log('1차 for',items)
+                  // console.log('1차 for',items)
                   for (let item of Object.values(items)) {
-                  console.log('2차 for',item)
-                  console.log('checkimage',this.checkhashimages)
+                  // console.log('2차 for',item)
+                  // console.log('checkimage',this.checkhashimages)
                     if(!this.checkhashimages.includes(item)){
-                      console.log('들어갈거야')
+                      // console.log('들어갈거야')
                       this.checkhashimages.push(item);
                       
                     }
@@ -233,7 +233,7 @@
               if (this.following_list.includes(item.work_artistId)) {
                 this.following_work.push(item);
               }
-              console.log(this.following_work);
+              // console.log(this.following_work);
             })
           })
       }

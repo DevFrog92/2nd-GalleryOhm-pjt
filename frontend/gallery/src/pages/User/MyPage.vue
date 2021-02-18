@@ -36,7 +36,7 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Mypage__profile_batch">고수</span><span
+        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span class="Mypage__profile_batch">{{rank[artistDetail.artist_exp]}}</span><span
             class="Mypage__bell" @click="showDm=true"><img src="../../assets/images/bell.png" alt=""><span
               class="notification__num" @click="DMsideopen">{{UnreadDm}}</span></span></h2>
         <div class="follow">
@@ -429,6 +429,7 @@
         scrap_state: false,
         artistDetail:{},
         showArtistModal:false,
+        rank:['','초심자','중수','고수']
       }
     },
     components: {

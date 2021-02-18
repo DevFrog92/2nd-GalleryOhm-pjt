@@ -194,8 +194,8 @@ export default {
   methods: {
     artistExpUp() {
       http.post(`/admin/renewArtistExp/`).then(
-        (response) => {
-          console.log(response.data);
+        () => {
+          // console.log(response.data);
         },
         (error) => {
           console.log(error);
@@ -225,7 +225,7 @@ export default {
     getAllWork() {
       http.get(`/work/getAllWork/` + 1).then(
         (response) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.items = response.data;
         },
         (error) => {
@@ -235,8 +235,8 @@ export default {
     },
     saveKeyword() {
       http.post(`/admin/addMainGalleryKeyword/`).then(
-        (response) => {
-          console.log(response.data);
+        () => {
+          // console.log(response.data);
         },
         (error) => {
           console.log(error);
@@ -247,7 +247,7 @@ export default {
     updateMainGallery() {
       http.get(`/admin/renewMainGallery`).then(
         (response) => {
-          console.log(response);
+          // console.log(response);
 
           if (response.status == 200) {
             // this.getAllMainAdultGallery();

@@ -337,7 +337,7 @@ export default {
     updateMainGallery() {
       http.get(`/admin/renewMainGallery`).then(
         (response) => {
-          console.log(response);
+          // console.log(response);
 
           if (response.status == 200) {
             // this.getAllMainAdultGallery();
@@ -400,7 +400,7 @@ export default {
             this.items.push(w);
             this.workHashtag.push(w);
           }
-          console.log(this.items);
+          // console.log(this.items);
         },
         (error) => {
           console.log(error);
@@ -487,7 +487,7 @@ export default {
       var formData = new FormData();
       formData.append("hashtag_name", hashtag);
 
-      console.log(formData);
+      // console.log(formData);
 
       http.post(`/admin/deleteHashTagFromTotal`, formData).then(
         (response) => {

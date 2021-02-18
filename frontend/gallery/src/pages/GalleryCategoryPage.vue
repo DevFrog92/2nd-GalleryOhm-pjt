@@ -7,17 +7,16 @@
 
 <script>
 export default {
-  methods:{
-    moveToRed(){
-      this.$router.push('/RedGallery');
+  methods: {
+    moveToRed() {
+      this.$router.push("/RedGallery");
     },
-    moveToSub(){
-      this.$router.push('/SubGallery');
-    }
-  }
-}
+    moveToSub() {
+      this.$router.push("/SubGallery");
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

@@ -29,18 +29,6 @@ const checkLiIndex = (lis,index) =>{
   }
 }
 
-  // const unsubBtn = document.querySelector('.unscribe_button');
-  // unsubBtn.addEventListener('click', e => {
-  //   e.target.classList.add('delete')
-  //   setTimeout(() => 
-  //     e.target.classList.remove('delete')
-  //     // leaveUser(localStorage.getItem('user_id'))
-  //     , 3200);
-  // e.preventDefault();
-  // });
-
-
-  ////
   if(!localStorage.getItem('checkPassword_state'))
   {
   var password = document.querySelector('.setting_pw_check');
@@ -88,7 +76,7 @@ const checkLiIndex = (lis,index) =>{
     checkPassword(userInfo,password.value);
     setTimeout(() => {
       const pass = localStorage.getItem('temp_check');
-      console.log(pass);
+      // console.log(pass);
       if(!pass){
         error.classList.add('show');
         padlock.classList.remove('unlock');
@@ -129,8 +117,6 @@ document.querySelector('.rank_modal_close').addEventListener('click', offClick);
 }
 
 const modifyUser = (userInfo) => {
-  // userInfo.user_password = 'qwer1234';
-  // console.log('user_info',userInfo)
   store.dispatch("modifyUser",userInfo);
 }
 
@@ -148,70 +134,3 @@ const leaveUser = (user_id) => {
 
 }
 export default {design,modifyUser,checkPassword,makeUserNickName,leaveUser};
-
-
-
-
-// 이거 추가해주세요!!!!!!!!!!!!!!!!!!!
-// document.querySelectorAll('.button').forEach(button => button.addEventListener('click', e => {
-//   if(!button.classList.contains('delete')) {
-//       button.classList.add('delete');
-//       setTimeout(() => button.classList.remove('delete'), 3200);
-//   }
-//   e.preventDefault();
-// }));
-
-
-
-
-
-
-// var password = document.querySelector('.setting_pw_check');
-// var error = document.querySelector('.pw_error_message');
-// var padlock = document.querySelector('.padlock');
-// var arrow = document.querySelector('.pw_check_arrow');
-// var input = document.querySelector('.pw_check_icon');
-// var pass = "dupa";
-// password.addEventListener('keypress', function(e){
-// var key = e.which || e.keyCode;
-// if(key === 13){
-//   if(password.value != ""){
-//     if(password.value != pass){
-//       error.classList.add('show');
-//       padlock.classList.remove('unlock');
-//     }else{
-//       error.classList.remove('show');
-//       unlock();
-//     }
-//   }
-// }
-// });
-// password.addEventListener('keyup', function(){
-// if(password.value == ""){
-//   error.classList.remove('show');
-//   padlock.classList.remove('unlock');
-//   arrow.classList.remove('show');
-// }else{
-//   arrow.classList.add('show');
-// }
-// });
-// arrow.addEventListener('click', function(){
-//   if(password.value != pass){
-//     error.classList.add('show');
-//     padlock.classList.remove('unlock');
-//   }else{
-//     error.classList.remove('show');
-//     unlock();
-//   }
-// },false);
-// function unlock(){
-//   padlock.classList.add('unlock');
-//   input.classList.add('unlock');
-//   setTimeout(function(){
-//     padlock.classList.add('hide');
-//     setTimeout(function(){
-//       // If the password is correct
-//       window.location.href = '';
-//     }, 900);
-//   }, 600);
-// }

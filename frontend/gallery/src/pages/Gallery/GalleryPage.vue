@@ -146,8 +146,8 @@ export default {
             `/gallery/giveFootPrintToGallery/${localStorage.getItem('gallery_id')}`,
             localStorage.getItem("user_id")
           )
-          .then((response) => {
-            console.log("====> " + response.data.state);
+          .then(() => {
+            // console.log("====> " + response.data.state);
           })
           .catch((err) => {
             console.log(err);
@@ -160,8 +160,8 @@ export default {
             `/gallery/cleanFootPrintToGallery/${localStorage.getItem('gallery_id')}`,
             localStorage.getItem("user_id")
           )
-          .then((response) => {
-            console.log("====> " + response.data.state);
+          .then(() => {
+            // console.log("====> " + response.data.state);
           })
           .catch((err) => {
             console.log(err);
@@ -173,14 +173,14 @@ export default {
       http
         .get(`/gallery/getArtistGallery/${localStorage.getItem('gallery_id')}`)
         .then((response) => {
-          console.log("Get gallery data to render page");
+          // console.log("Get gallery data to render page");
           const workList = response.data;
           for (let i = 0; i < workList.length; i++) {
             workList[i].work_piece =
               "data:image/jpeg;base64," + workList[i].work_piece;
           }
           this.work_list = workList;
-          console.log("gallery work list", this.work_list);
+          // console.log("gallery work list", this.work_list);
         })
         .catch((err) => {
           console.log(err);
@@ -188,7 +188,7 @@ export default {
     },
     getGAllery() {
       http.get(`/gallery/getGallery/${localStorage.getItem('gallery_id')}`).then((response) => {
-        console.log("get gellery info", response.data);
+        // console.log("get gellery info", response.data);
         this.gallery_info = response.data;
         this.gallery_desc = this.gallery_info.gallery_desc;
       });
