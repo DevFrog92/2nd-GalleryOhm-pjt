@@ -39,7 +39,7 @@
         </div>
         <span v-if="!modifyabout" class="icon-pencil-alt-span" @click="[modifyabout=!modifyabout,modify_state=false]">
           <div class="segment__guest">
-            <button class="unit__guest unit__btn__guest" type="button"><img src="../../assets/images/pencil.png" alt=""
+            <button class="unit__mypage unit__btn__mypage" type="button"><img src="../../assets/images/pencil.png" alt=""
                 class='Guest__dm'></button>
           </div>
         </span>
@@ -177,15 +177,19 @@
 
 
     <div class="third__section">
-      <h1>{{userInfo.user_nickName}}의 작품</h1>
+      <h1>{{userInfo.user_nickName}}의 작품   <button class="unit__mypage unit__btn__mypage add__works__artist" type="button" @click.prevent="moveToCreateWork"><img src="../../assets/images/add.png" alt=""
+              class=''></button></h1>
       <div class="third__section__wrapper">
 
         <!-- season -->
         <div class="Mypage__options">
           <div class="options_wrapper">
             <div class="Mypage__option" :data-value="index" v-for="(item,index) of all_my_works_month_first"
-              :key="index">
-              <img v-if="item[0]" :src="'data:/image/jpeg;base64,'+item[0].work_piece" alt="">
+              :key="index" >
+              <div class="num__of__works">
+
+              {{item.length}}
+              </div>
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -202,6 +206,10 @@
 
             <div class="Mypage__option num2" :data-value="Number(index)+6"
               v-for="(item,index) of all_my_works_month_second" :key="Number(index)+6">
+               <div class="num__of__works">
+
+              {{item.length}}
+              </div>
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
@@ -406,6 +414,9 @@
     },
     props: ["props_id"],
     methods: {
+       moveToCreateWork(){
+        this.$router.push('/test/uploadImageResize')
+      },
       show_pint_woks(index, season) {
         if (season == 1) {
           this.pinter_image = this.all_my_works_month_first[index]
