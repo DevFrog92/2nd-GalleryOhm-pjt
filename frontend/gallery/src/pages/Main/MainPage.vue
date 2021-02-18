@@ -41,7 +41,6 @@
         class="downArrow"
         @click="
           downMain();
-          playAudio();
         "
       >
         <a
@@ -109,6 +108,9 @@
                     backgroundImage: 'url(' + mainWorkList[i].work_piece + ')',
                   }"
                 ></div>
+                <div class="main_poster__footer">
+              © 2021. {{mainGalleryList[i].gallery_artistId}} Co. all rights reserved.
+            </div>
               </div>
             </router-link>
           </div>
@@ -189,9 +191,11 @@ export default {
     HooperNavigation: window.Hooper.Navigation,
   },
   created() {
-    this.getAllMainGallery();
+    this.getGalleryData();
   },
-  mounted() {},
+  mounted() {
+    
+  },
   updated() {},
   methods: {
     downMain() {
@@ -210,52 +214,73 @@ export default {
     },
     getAllMainGallery() {
       // 메인 갤러리 조회
+      return new Promise(function(resolve) {
       http
         .get("/gallery/getAllMainGallery")
         .then((response) => {
           var galleryDatas = response.data;
           for (var i = 0; i < galleryDatas.length; i++) {
-            var workId = galleryDatas[i].gallery_mainWorkId;
-            var artistId = galleryDatas[i].gallery_artistId;
-            // 메인 갤러리의 메인 작품 조회
-            this.getWork(workId);
-            // 메인 갤러리의 작가 조회
-            this.getArtistInfo(artistId);
             var yyyyMMdd = String(galleryDatas[i].gallery_writeTime);
             var year = yyyyMMdd.substring(0, 4);
             var month = yyyyMMdd.substring(5, 7);
             var day = yyyyMMdd.substring(8, 10);
             galleryDatas[i].gallery_writeTime =
-              year + ". " + month + ". " + day + ".";
+              year + "-" + month + "-" + day;
           }
-          this.mainGalleryList = galleryDatas;
+           resolve(galleryDatas);
         })
-        .catch(() => {
-          this.errored = true;
-        });
+      });
+    },
+    async getGalleryData(){
+      this.mainGalleryList = await this.getAllMainGallery();
+      console.log(this.mainGalleryList);
+      this.getAllWork();
     },
     /* 작품 정보 */
+    async getAllWork(){
+      console.log("GETALLWORK");
+       for(var i=0;i<this.mainGalleryList.length;i++){
+        var workId = this.mainGalleryList[i].gallery_mainWorkId;
+        var work = await this.getWork(workId);
+        this.mainWorkList.push(work);
+        console.log(work);
+      }
+      this.getAllArtistInfo();
+    },
     getWork(workId) {
+      return new Promise(function(resolve) {
       http
         .get("/work/getWork/" + workId)
         .then((response) => {
           var workData = response.data;
           workData.work_piece = "data:image/jpeg;base64," + workData.work_piece;
-          this.mainWorkImages.push(workData.work_piece);
-          this.mainWorkList.push(response.data);
+        resolve(workData);
         })
         .catch(() => {
           this.errored2 = true;
         });
+      });
+    },
+     /* 작가 모든 정보 */
+    async getAllArtistInfo(){
+      console.log("GETALLArtist");
+       for(var i=0;i<this.mainGalleryList.length;i++){
+        var artistId = this.mainGalleryList[i].gallery_artistId;
+        var artist = await this.getArtistInfo(artistId);
+        this.artistsInfo.push(artist);
+        console.log(artist);
+      }
     },
     /* 작가 정보 */
     getArtistInfo(artistId) {
+      return new Promise(function(resolve) {
       http
         .get(`/artist/getArtistInfo?artist_id=${artistId}`)
         .then((response) => {
           var artistData = response.data;
-          this.artistsInfo.push(artistData);
+          resolve(artistData);
         });
+         });
     },
   },
 };
@@ -288,8 +313,10 @@ export default {
 .main_top_wrapper .banner {
   display: flex;
   justify-content: center;
-  width: 50%;
-  height: 55%;
+   /* width: 50%;
+  height: 55%; */
+  width: 60rem;
+  height: 65rem;
   margin: 5.5vh auto;
   padding: auto;
 }
@@ -305,7 +332,6 @@ export default {
   background-size: 100%;
   background-repeat: no-repeat;
 }
-
 /*************** scroll ***************/
 .main_top_wrapper .downArrow {
   position: absolute;
@@ -350,6 +376,20 @@ export default {
   border-radius: 50px;
   box-sizing: border-box;
 }
+
+/***** 8번  *****/
+/* .downArrow a span::before {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background-color: #494949;
+  border-radius: 100%;
+  box-sizing: border-box;
+} */
 
 .downArrow a span::before {
   position: absolute;
@@ -424,10 +464,10 @@ export default {
 .main_center_wrapper .main_poster_nickname {
   width: 150%;
   height: 50%;
-  -webkit-text-stroke: 0.3rem #efb730;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.15rem black;
+  -webkit-text-fill-color:  #efb730;
   /* -webkit-text-fill-color: transparent; */
-  font-size: 4.9vw;
+  font-size: 4vw;
   font-family: "S-CoreDream-8Heavy", sans-serif;
   z-index: 2;
   position: absolute;
@@ -454,10 +494,9 @@ export default {
 .main_gallery__poster:hover .main_poster_nickname {
   opacity: 1;
   /* 크게 */
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(13deg);
   transition: all 1.3s;
-  transition-duration: 2s;
-
+  transition-duration: 1.4s;
   /* 심박 */
   /* animation-name: pulse-shrink;
 		animation-duration:  0.8s;
@@ -569,9 +608,9 @@ export default {
 
 /* 번호 */
 .main_center_wrapper .number {
-  padding-top: 1%;
+  padding-top: 2%;
   margin-bottom: -1%;
-  font-size: 2vw;
+  font-size: 2.1vw;
   margin-left: 13%;
   height: 9vh;
   width: 5vw;
@@ -580,15 +619,17 @@ export default {
 .main_crown {
   margin-bottom: -1%;
   margin-left: -58%;
-  height: 9vh;
-  width: 5vw;
+  height: 5rem;
+  width: 5rem;
 }
 
 /****** 갤러리 POSTER ******/
+@media (min-width: 1281px) {
+
 .main_center_wrapper .main_gallery__poster {
   position: relative;
   font-size: 3rem;
-  margin-top: 3%;
+  margin-top: 5%;
   margin-left: 15%;
   z-index: 1;
   background-image: url("../../assets/images/Main/poster.png");
@@ -600,75 +641,93 @@ export default {
   border: 2px solid #444;
   color: #494949;
   border-width: 0.1rem;
-  width: 23vw;
-  height: 65vh;
+  width: 30rem;
+  height: 42rem;
   padding: 2.5rem 7.5rem 2rem 0.5rem;
   text-align: center;
   transition-duration: 1.5s;
   border: 0.3rem solid white;
 }
-
+}
 .main_center_wrapper .poster__header {
   width: 100%;
   position: absolute;
-  top: 0.9rem;
+  top: 0.8rem;
   text-align: left;
   font-size: 2rem;
   z-index: 100;
-  left: 1.5rem;
+  left: 1.1rem;
   font-weight: bold;
 }
 
 .main_center_wrapper .poster__writer {
+  font-family:  'Noto Sans KR', sans-serif;
+  width: 4rem;
   position: relative;
-  margin-left: -11.5vw;
+  margin-left: 0.5rem;
   z-index: 100;
   transform: rotate(90deg);
-  top: 6.4rem;
-  font-size: 0.9rem;
+  top: 3.1rem;
+  font-size: 1rem;
   /*  font-weight: bold*/
   text-decoration: none;
-  color: black;
-}
-.main_center_wrapper .poster__writer {
-  text-decoration: none;
-  color: black;
 }
 
 .main_center_wrapper .poster__date {
+  font-family:  'Noto Sans KR', sans-serif;
   position: absolute;
   z-index: 100;
   transform: rotate(90deg);
-  top: 8.5rem;
-  left: -3.5rem;
-  font-size: 1.2rem;
+  top: 7rem;
+  left: -1.6rem;
+  font-size: 1rem;
   letter-spacing: 1.2px;
 }
 
 .main_center_wrapper .main_poster__section {
-  width: 100%;
+  /* width: 100%;
   height: 100%;
   margin-left: 3vw;
   background-position: 50% 50%;
   background-size: 100%;
+  background-repeat: no-repeat; */
+   /* height: 30em;
+  width: 23em; */
+  height: 35rem;
+  width: 21.5rem;
+  background-size: 100%;
+  object-fit: cover;
+  background-position: center;
   background-repeat: no-repeat;
+  margin-left: 3.1rem;
+  margin-top: 1rem;
+}
+
+.main_center_wrapper .main_poster__footer {
+  position: absolute;
+  font-size: 0.5rem;
+  bottom:1rem;
+	left: 2rem;
+	pointer-events: none;
+  font-family:  'Noto Sans KR', sans-serif;
+
 }
 
 /*******  발자국 *******/
 .ajax-loader {
   position: absolute;
-  top: 41.5%;
-  left: 11.5%;
-  transform: rotate(62.5deg) translate(0%, 0%);
+  top: 47.5%;
+  left: 25.5%;
+  transform: rotate(60deg) translate(0%, 0%);
   font-size: 5vw;
-  width: 1em;
-  height: 7em;
+  width: 1rem;
+  height: 7rem;
   color: #494949;
 }
 
 .ajax-loader .paw {
-  width: 1em;
-  height: 1.3em;
+  width: 6.5rem;
+  height: 7.5rem;
   animation: 7050ms pawAnimation ease-in-out infinite;
   opacity: 0;
 }
@@ -739,7 +798,6 @@ export default {
   text-align: center;
   padding-left: 90vw;
   overflow: visible;
-  background-color: cornflowerblue;
   width: 100%;
   font-family: "S-CoreDream-8Heavy", sans-serif;
   color: #494949;
@@ -749,11 +807,11 @@ export default {
   width: auto;
 }
 .main_footer .main_foot p {
-  width: 20vw;
-  height: 2vh;
+  width: 20rem;
+  height: 2rem;
   opacity: 1;
-  margin-top: 0.5vh;
-  margin-left: -12vw;
+  margin-top: 0.5rem;
+  margin-left: -15rem;
   position: absolute;
 }
 
@@ -761,8 +819,8 @@ export default {
 .main_footer .move_to_top {
   z-index: 1;
   position: absolute;
-  margin-left: 1.4vw;
-  margin-top: -0.5vh;
+  margin-left: 0.3rem;
+  margin-top: -0.3rem;
 }
 .unit__btn__main {
   border: 0;
