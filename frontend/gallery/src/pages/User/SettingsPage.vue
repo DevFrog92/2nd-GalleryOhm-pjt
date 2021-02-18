@@ -119,7 +119,7 @@
                   <p class="registerinfo">* 후원을 위한 계좌번호를 입력해주세요.</p>
                 </div>
                 <div class="register_artist" id="rank_info">
-                  <input type="text" id="rank" />
+                  <input type="text" id="rank" readonly=true/>
                   <label for="rank">등급</label>
                   <!--                  <p class="rank__p">등급 <img src="../assets/images/rookie.png" alt=""></p>-->
                   <button type='button' id="rank_modal_btn"><i class="fas fa-info-circle"></i></button>
@@ -127,7 +127,10 @@
                     <div class="rank_modal_close"><a href="#"><i class="fas fa-times"></i></a></div>
 
                     <div class="rank_modal_content">
-                      여기는 내용이다아아아아아아
+                      <br>
+                        <b>아마추어</b> : 첫 작품을 올린지 60일 이내의 신입 작가<br><br>
+                        <b>고수</b> : 첫 작품을 올린지 60일이 지났고, 한개 이상의 갤러리를 등록한 고수 작가<br><br>
+                        <b>프로</b> : 명예의 전당에 오른 프로 작가<br>
                     </div>
                   </div>
                   <p class="registerinfo">* 등급은 작가등록 후 gallery의 등급기준에 따라 자동으로 부여됩니다.</p>
