@@ -233,17 +233,14 @@ export default {
     },
     async getGalleryData(){
       this.mainGalleryList = await this.getAllMainGallery();
-      console.log(this.mainGalleryList);
       this.getAllWork();
     },
     /* 작품 정보 */
     async getAllWork(){
-      console.log("GETALLWORK");
        for(var i=0;i<this.mainGalleryList.length;i++){
         var workId = this.mainGalleryList[i].gallery_mainWorkId;
         var work = await this.getWork(workId);
         this.mainWorkList.push(work);
-        console.log(work);
       }
       this.getAllArtistInfo();
     },
@@ -263,12 +260,10 @@ export default {
     },
      /* 작가 모든 정보 */
     async getAllArtistInfo(){
-      console.log("GETALLArtist");
        for(var i=0;i<this.mainGalleryList.length;i++){
         var artistId = this.mainGalleryList[i].gallery_artistId;
         var artist = await this.getArtistInfo(artistId);
         this.artistsInfo.push(artist);
-        console.log(artist);
       }
     },
     /* 작가 정보 */
@@ -372,7 +367,7 @@ export default {
   width: 30px;
   height: 50px;
   margin-left: -15px;
-  border: 3px solid #efb730;
+  border: 3px solid black;
   border-radius: 50px;
   box-sizing: border-box;
 }
@@ -399,7 +394,7 @@ export default {
   width: 6px;
   height: 6px;
   margin-left: -3px;
-  background-color: #efb730;
+  background-color: black;
   border-radius: 100%;
   -webkit-animation: sdb10 2s infinite;
   animation: sdb10 2s infinite;

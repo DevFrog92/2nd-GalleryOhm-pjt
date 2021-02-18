@@ -140,11 +140,8 @@
         <div class="registerGallery" @click="modifyArtistGallery">
           <span>등록하기</span>
         </div>
-        <div
-          class="closeRegisterGalleryBtn"
-          @click="showModal_modify = false"
-        >
-         <span>나가기</span>
+        <div class="closeRegisterGalleryBtn" @click="showModal_modify = false">
+          <span>나가기</span>
         </div>
       </div>
       <div slot="footer" v-else>
@@ -294,7 +291,7 @@ export default {
     },
     galleryrender() {
       this.$router.push({
-        name: 'GalleryPage',
+        name: "GalleryPage",
         params: { props_id: this.gallery_info.gallery_id },
       });
     },
