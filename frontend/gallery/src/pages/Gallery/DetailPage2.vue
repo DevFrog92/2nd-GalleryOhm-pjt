@@ -379,7 +379,9 @@ export default {
     deleteWork() {
       if (confirm("작품을 삭제하시겠습니까?")) {
         this.$store.dispatch("deleteWork", this.work.work_id).then(() => {
-          history.go(-1);
+          this.$router.push({
+            name: "MyPage",
+          });
         });
       }
     },

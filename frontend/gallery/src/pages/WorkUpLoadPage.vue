@@ -107,16 +107,6 @@
                 class="all__works__back"
               />
             </button>
-            <!-- <button
-              class="unit__detail__upload unit__btn__upload"
-              @click="hash"
-            >
-              <img
-                src="../assets/images/hashtag.png"
-                alt=""
-                class="all__works__hashtag"
-              />
-            </button> -->
           </div>
         </div>
       </div>
