@@ -402,3 +402,68 @@
   margin: 0 8px;
   font-size: 19.2px;
 }
+
+
+/* === */
+
+.d_modal_btn_container {
+  /* position: absolute; */
+  position: relative;
+  width: 150px;
+  height: 80px;
+  /* padding: 9% 30% 0 0; */
+  top:5%;
+  left: 10%;
+  transform: translateX(-50%);
+  z-index: 200;
+  /* margin-top: 1%; */
+  
+}
+
+.closeRegisterGalleryBtn,
+.registerGallery {
+  margin-top: 2rem;
+  color:#f5f7fa;
+  font-size: 1rem;
+  padding:0.2rem;
+  font-family:"S-CoreDream-8Heavy";
+
+  
+  width: auto;
+  height: 50px;
+  background: #f5f7fa;;
+  position: relative;
+  border-radius: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  float: left;
+}
+
+.closeRegisterGalleryBtn span,
+.registerGallery span {
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: semibold;
+  
+}
+
+.closeRegisterGalleryBtn:nth-child(1),
+.registerGallery:nth-child(1) {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  color: grey;
+}
+
+.closeRegisterGalleryBtn:nth-child(1):hover,
+.registerGallery:nth-child(1):hover {
+  opacity: 0.3;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.closeRegisterGalleryBtn:nth-child(1):active,
+.registerGallery:nth-child(1):active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #f5f7fa;
+}
