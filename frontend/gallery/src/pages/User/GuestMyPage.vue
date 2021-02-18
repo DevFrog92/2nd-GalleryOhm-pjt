@@ -274,7 +274,7 @@
             <div
               class="notifications__item"
               v-for="(people, index) of followings"
-              :key="index"
+              :key="index" :data-name="people"
             >
               <div class="notifications__item__avatar">
                 <img src="../../assets/images/user.png" />
@@ -299,7 +299,7 @@
             <div
               class="notifications__item"
               v-for="(people, index) of followers"
-              :key="index"
+              :key="index" :data-name="people"
             >
               <div class="notifications__item__avatar">
                 <img src="../../assets/images/user.png" />
@@ -310,10 +310,7 @@
                   >Just started following you</span
                 >
               </div>
-              <div>
-                <div class="notifications__item__option archive js-option">
-                  <i class="fas fa-folder" :data-name="people"></i>
-                </div>
+              <div v-if="!who_state">
                 <div class="notifications__item__option delete js-option">
                   <i class="fas fa-trash" :data-name="people"></i>
                 </div>

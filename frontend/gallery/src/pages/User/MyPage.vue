@@ -73,7 +73,7 @@
             <div class="profile_item"><span class="profile_menu_item" data-value="1">갤러리</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="2">전체 작품</span></div>
             <div class="profile_item"><span class="profile_menu_item" data-value="3">즐겨찾기</span></div>
-            <div class="profile_item"><span class="profile_menu_item" @click="moveSettings">회원정보 수정</span></div>
+            <div class="profile_item"><span class="profile_menu_item" data-value='4' @click="moveSettings">회원정보 수정</span></div>
           </div>
         </div>
       </div>
@@ -166,8 +166,8 @@
           <img v-if="my_gallery_1.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[0] " alt="">
 
           <h3>{{my_gallery_1.gallery_name}}</h3>
-          <p v-if="my_gallery_1.gallery_id">작가 : {{my_gallery_1.gallery_artistId}}
-            {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</p>
+          <div v-if="my_gallery_1.gallery_id" class="poster__aside__id">{{my_gallery_1.gallery_artistId}}</div>
+          <div v-if="my_gallery_1.gallery_id" class="poster__aside__date">  {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</div>
         </div>
 
         <div class="Mypage__poster_card2" :data-value="my_gallery_2.gallery_id">
@@ -187,8 +187,9 @@
           </div>
           <img v-if="my_gallery_2.gallery_id" :src="'data:/image/jpeg;base64,' + my_gallery_poster[1] " alt="">
           <h3>{{my_gallery_2.gallery_name}}</h3>
-          <p v-if="my_gallery_2.gallery_id">Created By {{my_gallery_2.gallery_artistId}}
-            {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</p>
+
+             <div v-if="my_gallery_2.gallery_id" class="poster__aside__id">{{my_gallery_2.gallery_artistId}}</div>
+           <div v-if="my_gallery_2.gallery_id" class="poster__aside__date">  {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</div>
         </div>
       </div>
 

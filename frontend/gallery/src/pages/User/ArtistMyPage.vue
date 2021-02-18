@@ -138,10 +138,8 @@
           />
 
           <h3>{{ my_gallery_1.gallery_name }}</h3>
-          <p v-if="my_gallery_1.gallery_id">
-            Created By {{ my_gallery_1.gallery_artistId }}
-            {{ my_gallery_1.gallery_writeTime.slice(0, 10) }} ~
-          </p>
+         <div v-if="my_gallery_1.gallery_id" class="poster__aside__id">{{my_gallery_1.gallery_artistId}}</div>
+          <div v-if="my_gallery_1.gallery_id" class="poster__aside__date">  {{my_gallery_1.gallery_writeTime.slice(0,10)}} ~</div>
         </div>
 
         <div class="poster_card2" :data-value="my_gallery_2.gallery_id">
@@ -158,10 +156,8 @@
             alt=""
           />
           <h3>{{ my_gallery_2.gallery_name }}</h3>
-          <p v-if="my_gallery_2.gallery_id">
-            Created By {{ my_gallery_2.gallery_artistId }}
-            {{ my_gallery_2.gallery_writeTime.slice(0, 10) }} ~
-          </p>
+           <div v-if="my_gallery_2.gallery_id" class="poster__aside__id">{{my_gallery_2.gallery_artistId}}</div>
+           <div v-if="my_gallery_2.gallery_id" class="poster__aside__date">  {{my_gallery_2.gallery_writeTime.slice(0,10)}} ~</div>
         </div>
       </div>
     </div>
@@ -178,10 +174,14 @@
               v-for="(item, index) of all_my_works_month_first"
               :key="index"
             >
+            <div class="num__of__works">
+
+              {{item.length}}
+              </div>
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
-                  <i class="fas fa-walking"></i>
+                   {{Number(index)}} 
                 </div>
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index, 1)">
@@ -199,10 +199,14 @@
               v-for="(item, index) of all_my_works_month_second"
               :key="index"
             >
+            <div class="num__of__works">
+
+              {{item.length}}
+              </div>
               <div class="shadow"></div>
               <div class="label">
                 <div class="icon">
-                  <i class="fas fa-snowflake"></i>
+                   {{Number(index)+6}}
                 </div>
                 <div class="info">
                   <div class="show__my__pint" @click="show_pint_woks(index, 2)">
@@ -259,7 +263,7 @@
             <div
               class="notifications__item"
               v-for="(people, index) of followings"
-              :key="index"
+              :key="index" :data-name="people"
             >
               <div class="notifications__item__avatar">
                 <img src="../../assets/images/user.png" />
@@ -270,21 +274,14 @@
                   >Just started following you</span
                 >
               </div>
-              <div>
-                <div class="notifications__item__option archive js-option">
-                  <i class="fas fa-folder" :data-name="people"></i>
-                </div>
-                <div class="notifications__item__option delete js-option">
-                  <i class="fas fa-trash" :data-name="people"></i>
-                </div>
-              </div>
+              
             </div>
           </div>
           <div class="notifications" v-else>
             <div
               class="notifications__item"
               v-for="(people, index) of followers"
-              :key="index"
+              :key="index" :data-name="people"
             >
               <div class="notifications__item__avatar">
                 <img src="../../assets/images/user.png" />
@@ -295,14 +292,7 @@
                   >Just started following you</span
                 >
               </div>
-              <div>
-                <div class="notifications__item__option archive js-option">
-                  <i class="fas fa-folder" :data-name="people"></i>
-                </div>
-                <div class="notifications__item__option delete js-option">
-                  <i class="fas fa-trash" :data-name="people"></i>
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>
