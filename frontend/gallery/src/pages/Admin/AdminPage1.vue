@@ -45,23 +45,7 @@
             >
             </b-form-tags>
 
-            <!-- <b-list-group horizontal>
-              <b-container class="bv-example-row">
-                <b-row>
-                  <b-list-group-item
-                    v-for="(hashtag, index) in hashtagList"
-                    :key="index"
-                  >
-                    <b-col>
-                      <b-button @click="deleteHashtag(hashtag.hashtag_name)">{{
-                        hashtag.hashtag_name
-                      }}</b-button>
-                    </b-col>
-                  </b-list-group-item>
-                </b-row>
-              </b-container>
-            </b-list-group> -->
-
+           
             <!-- <b-button
               variant="outline-primary"
               class="btn"

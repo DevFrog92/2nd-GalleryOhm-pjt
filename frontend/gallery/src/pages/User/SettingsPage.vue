@@ -439,6 +439,9 @@ export default {
         artist_id: localStorage.getItem("user_id"),
         artist_nickName: this.artist_nickName,
       };
+      console.log("this.artist_nickName" + this.artist_nickName);////////////////////////////////////////////////
+      this.state.user_nickName = this.artist_nickName;
+      console.log("this.state.user_nickName" + this.state.user_nickName);
       http.post("/artist/changeArtist", formData).then((response) => {
         // console.log(response.data);
         this.artist_resister = response.data.name;
@@ -455,6 +458,9 @@ export default {
         artist_id: localStorage.getItem("user_id"),
         artist_nickName: this.artist_nickName,
       };
+       console.log("this.artist_nickName" + this.artist_nickName);////////////////////////////////////////////////
+      this.state.user_nickName = this.artist_nickName;
+      console.log("this.state.user_nickName" + this.state.user_nickName);
       http.post("/artist/modifyArtist", formData).then((response) => {
         // console.log(response.data);
         this.artist_resister = response.data.name;
@@ -462,6 +468,7 @@ export default {
         localStorage.setItem("user_type", 2);
         this.user__type = 2;
       });
+      localStorage.setItem("user_nickName",this.artist_nickName);
     },
     withdraw_artist() {
       http

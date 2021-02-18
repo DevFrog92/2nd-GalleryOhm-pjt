@@ -15,6 +15,8 @@
           :autoRotate="true"
           outputFormat="blob"
           @input="setImage"
+          maxWidth=512
+          maxHeight=512
         >
           <label for="fileInput" slot="upload-label">
             <span class="upload_caption">{{
@@ -44,6 +46,7 @@
               value="0"
               required
               @click="rating"
+              checked
             />전체관람</label
           >
           <label class="gallery19"
@@ -157,13 +160,17 @@ export default {
       this.work_piece = this.work_info.work_piece;
     }
   },
-  created() {},
+  created() {
+    this.work_rating = 0;
+  },
   watch: {},
   computed: {},
   methods: {
     hash() {
       const hashTag = document.querySelectorAll(".tags-input span");
-      this.hashtag_list = `${localStorage.getItem("user_id")},${this.work_title},`
+      this.hashtag_list = `${localStorage.getItem("user_id")},${
+        this.work_title
+      },`;
       for (let item of hashTag) {
         if (
           this.work_info &&
@@ -192,16 +199,15 @@ export default {
       const file = new File([blob], "profile");
       this.work_piece = file;
       // 업로드한 파일로 부터 url 을 생성할 수 있다.
-      this.$store
-        .dispatch("addWork", {
-          work_artistId: localStorage.getItem("user_id"), //로컬스토리지 아이디 받아오기
-          work_title: this.work_title,
-          work_desc: this.work_desc,
-          work_piece: this.work_piece,
-          work_rating: this.work_rating,
-          work_tool: this.work_tool,
-          hashTags: this.hashtag_list,
-        })
+      this.$store.dispatch("addWork", {
+        work_artistId: localStorage.getItem("user_id"), //로컬스토리지 아이디 받아오기
+        work_title: this.work_title,
+        work_desc: this.work_desc,
+        work_piece: this.work_piece,
+        work_rating: this.work_rating,
+        work_tool: this.work_tool,
+        hashTags: this.hashtag_list,
+      });
     },
     setImage: function(output) {
       this.hasImage = true;

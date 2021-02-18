@@ -71,6 +71,11 @@ export default {
           data[i].work_piece = "data:image/jpeg;base64," + data[i].work_piece;
         }
         this.imgList = data;
+
+        if(this.imgList.length == 0){
+          alert("전시관 준비가 아직 되지 않았습니다.");
+          history.go(-1);
+        }
       },
       (error) => {
         console.log(error);
