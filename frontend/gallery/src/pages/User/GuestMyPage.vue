@@ -18,7 +18,7 @@
 
 
       <div class="profile_about">
-        <h2 class="profile_user_name">{{userInfo.user_nickName}} <span v-show="!who_state" class="Guest__bell"
+        <h2 class="profile_user_name">{{userInfo.user_nickName}}<span class="Mypage__profile_batch">관람객</span> <span v-show="!who_state" class="Guest__bell"
             @click="DMsideopen"><img src="../../assets/images/bell.png" alt=""><span
               class="notification__num">{{Unread_count}}</span></span></h2>
         <div class="follow">
@@ -371,10 +371,7 @@
 
           const test = {
             "message_content": this.dm_content,
-            "message_id": 0,
-            "message_isCheck": 1,
             "message_receiverId": localStorage.getItem('props_id'),
-            "message_sendDate": "string",
             "message_senderId": localStorage.getItem('user_id'),
             "message_title": this.dm_title,
           }
@@ -461,10 +458,7 @@
 
         const test = {
           "message_content": this.dm_content,
-          "message_id": 0,
-          "message_isCheck": 1,
           "message_receiverId": reply_id.innerText,
-          "message_sendDate": "string",
           "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }
@@ -506,8 +500,6 @@
       // this.getMyWorks();
       this.DMpull();
       window.scrollTo(0, 0);
-
-
     }
   }
 </script>

@@ -499,10 +499,10 @@
 
         const test = {
           "message_content": this.dm_content,
-          "message_id": 0,
-          "message_isCheck": 1,
+          // "message_id": 0,
+          // "message_isCheck": 1,
           "message_receiverId": reply_id.innerText,
-          "message_sendDate": "string",
+          // "message_sendDate": "string",
           "message_senderId": localStorage.getItem('user_id'),
           "message_title": this.dm_title,
         }

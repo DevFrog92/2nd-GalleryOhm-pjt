@@ -98,7 +98,7 @@
                 class="unit__detail__upload unit__btn__upload"
                 type="button"
               >
-                <img src="../../assets/images/pencil.png" alt="" />
+                <img src="../../assets/images/checked.png" alt="" />
               </button>
             </div>
             <div class="upload_art_button" v-else @click="addWork">
@@ -106,7 +106,7 @@
                 class="unit__detail__upload unit__btn__upload"
                 type="button"
               >
-                <img src="../../assets/images/pencil.png" alt="" />
+                <img src="../../assets/images/checked.png" alt="" />
               </button>
             </div>
             <!-- <div class="uploadBtn1" v-else @click="addWork" data-display="작품등록"></div> -->
