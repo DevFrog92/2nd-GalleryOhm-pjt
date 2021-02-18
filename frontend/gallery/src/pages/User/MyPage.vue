@@ -18,7 +18,7 @@
         <div class="donation__modal__close" @click="DonationModalHidden">나가기</div>
         <div class="donation__wrapper">
           <div class="donation__title">
-            {{artistDetail.artist_nickName}} 작가님 후원계좌
+            {{user_nickName}} 작가님 후원계좌
           </div>
           <div class="donation__content">
             <ul>
@@ -430,7 +430,8 @@
         scrap_state: false,
         artistDetail:{},
         showArtistModal:false,
-        rank:['','초심자','중수','고수']
+        rank:['','초심자','중수','고수'],
+        user_nickName: localStorage.getItem("user_nickName"),
       }
     },
     components: {
@@ -700,6 +701,8 @@
       setTimeout(() => {
         init.init();
       }, 1000)
+      this.userInfo.user_nickName=localStorage.getItem("user_nickName");
+      console.log("mount"+this.userInfo.user_nickName);
     },
     created() {
       this.getUserInfo();
@@ -717,8 +720,8 @@
       this.getMyWorks();
       this.DMpull();
       window.scrollTo(0, 0);
-    },
-    updated(){
+      
+      
     }
   }
 </script>
