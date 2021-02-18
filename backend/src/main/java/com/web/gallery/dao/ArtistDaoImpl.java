@@ -28,4 +28,8 @@ public class ArtistDaoImpl {
         }
         else return result;
     }
+
+    public int modifyArtist(ArtistDto artistDto) {
+        return sqlSession.update(ns+"modifyArtist",artistDto);
+    }
 }
