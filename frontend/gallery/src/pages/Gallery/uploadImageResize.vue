@@ -15,8 +15,8 @@
           :autoRotate="true"
           outputFormat="blob"
           @input="setImage"
-          maxWidth=512
-          maxHeight=512
+          :maxWidth="512"
+          :maxHeight="512"
         >
           <label for="fileInput" slot="upload-label">
             <span class="upload_caption">{{
