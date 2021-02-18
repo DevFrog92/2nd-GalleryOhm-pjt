@@ -36,4 +36,16 @@
 		FROM artist
 		WHERE artist_id = #{artist_id}
 	</delete>
+
+	<select id="getUserNickname" parameterType="String" resultType="String">
+		SELECT user_nickName
+		FROM user
+		WHERE user_id = #{artist_id}
+	</select>
+
+	<update id="changeArtistNicknameToUser" parameterType="artist">
+		UPDATE user
+		SET user_nickName = #{artist_nickName}
+		WHERE user_id = #{artist_id}
+	</update>
 </mapper>

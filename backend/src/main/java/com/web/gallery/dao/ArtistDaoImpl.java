@@ -32,4 +32,12 @@ public class ArtistDaoImpl {
     public int modifyArtist(ArtistDto artistDto) {
         return sqlSession.update(ns+"modifyArtist",artistDto);
     }
+
+    public String getUserNickname(String artist_id) {
+        return sqlSession.selectOne(ns+"getUserNickname", artist_id);
+    }
+
+    public int changeArtistNicknameToUser(ArtistDto artistDto) {
+        return sqlSession.update(ns+"changeArtistNicknameToUser", artistDto);
+    }
 }
