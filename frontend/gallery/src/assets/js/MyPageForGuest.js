@@ -18,17 +18,19 @@ function manuclickHandler(e){
     }else if(targetItem.dataset.value === "4"){
       return;
     }
-    scrollIt(goToElem)
+    scrollIt(goToElem);
   }
 }
 
 function scrollIt(ele){
   topBtn.classList.add('move_to_top_show');
+  if(ele!=undefined){
   window.scrollTo({
     'behavior':'smooth',
     'left':0,
     'top':ele.offsetTop
   });
+}
 }
 
 function topclickHandler(){
