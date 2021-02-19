@@ -115,7 +115,7 @@
               let most = {};
               for (let item of items) {
                 most[item[0]] = item[1];
-              }
+              }    
               this.most_like.push(most);
             })
             ///
