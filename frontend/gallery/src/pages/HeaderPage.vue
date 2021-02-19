@@ -180,7 +180,7 @@
               <a href="#" @click="logout">로그아웃</a>
             </span>
           </li>
-          <li class="nav__item" v-if="user_type == 0">
+          <li class="nav__item" v-if="user_type == '0'">
             <span class="nav__item-text">
               <router-link class="router" to="/AdminPage1">관장실</router-link>
             </span>
