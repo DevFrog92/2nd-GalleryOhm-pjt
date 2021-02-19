@@ -59,6 +59,7 @@ export default {
     return {
       imgList: [],
       nowPage: 1,
+      destroyState: false,
     };
   },
   components: {},
@@ -72,8 +73,9 @@ export default {
         }
         this.imgList = data;
 
-        if(this.imgList.length == 0){
+        if (this.imgList.length == 0) {
           alert("전시관 준비가 아직 되지 않았습니다.");
+          this.destroyState = true;
           history.go(-1);
         }
       },
@@ -85,56 +87,60 @@ export default {
     this.nowPage = 1;
     localStorage.setItem("redState", true);
 
-    let birth = localStorage.getItem('user_birth');
+    let birth = localStorage.getItem("user_birth");
     let today = new Date();
 
-    if(birth == 'null'){
+    if (birth == "null") {
       alert("생년월일 정보를 확인하세요.");
+      this.destroyState = true;
       history.go(-1);
-    }else if(today.getFullYear() - Number(birth.slice(0,4)) < 20){
+    } else if (today.getFullYear() - Number(birth.slice(0, 4)) < 20) {
+      this.destroyState = true;
       alert("접근이 불가합니다.");
       history.go(-1);
     }
   },
   mounted() {
-    setTimeout(() => {
-      const welcome = document.querySelector(".welcome");
-      welcome.remove();
-    }, 4500);
+    if (!this.destroyState) {
+      setTimeout(() => {
+        const welcome = document.querySelector(".welcome");
+        welcome.remove();
+      }, 4500);
 
-    setTimeout(() => {
-      window.scrollTo(0, 0);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
 
-      const list = document.querySelector(".list");
-      list.addEventListener("click", this.clickHandler);
+        const list = document.querySelector(".list");
+        list.addEventListener("click", this.clickHandler);
 
-      const first = document.querySelector("#Item0");
-      first.classList.add("nav__item--current");
+        const first = document.querySelector("#Item0");
+        first.classList.add("nav__item--current");
 
-      [].slice
-        .call(document.querySelectorAll(".nav_slide"))
-        .forEach(function(nav) {
-          var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
-            setCurrent = function(item) {
-              // return if already current
-              if (item.classList.contains("nav__item--current")) {
-                return false;
-              }
-              // remove current
-              var currentItem = nav.querySelector(".nav__item--current");
-              currentItem.classList.remove("nav__item--current");
+        [].slice
+          .call(document.querySelectorAll(".nav_slide"))
+          .forEach(function(nav) {
+            var navItems = [].slice.call(nav.querySelectorAll(".nav__item")),
+              setCurrent = function(item) {
+                // return if already current
+                if (item.classList.contains("nav__item--current")) {
+                  return false;
+                }
+                // remove current
+                var currentItem = nav.querySelector(".nav__item--current");
+                currentItem.classList.remove("nav__item--current");
 
-              // set current
-              item.classList.add("nav__item--current");
-            };
+                // set current
+                item.classList.add("nav__item--current");
+              };
 
-          navItems.forEach(function(item) {
-            item.addEventListener("click", function() {
-              setCurrent(item);
+            navItems.forEach(function(item) {
+              item.addEventListener("click", function() {
+                setCurrent(item);
+              });
             });
           });
-        });
-    }, 4600);
+      }, 4600);
+    }
   },
   methods: {
     changePage(i) {
