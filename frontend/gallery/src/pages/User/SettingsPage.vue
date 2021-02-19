@@ -424,7 +424,7 @@ export default {
     },
     onChangeImage(event) {
       const imgFile = event.target.files[0];
-      // console.log(imgFile,'onChangeImage');
+      
       this.userInfo.user_profile = imgFile;
       this.img_url = URL.createObjectURL(imgFile);
     },
