@@ -109,11 +109,12 @@ function manuclickHandler(e){
 function scrollIt(ele){
   // console.log(ele)
   topBtn.classList.add('move_to_top_show');
+  if(ele!=undefined){
   window.scrollTo({
     'behavior':'smooth',
     'left':0,
     'top':ele.offsetTop
-  });
+  });}
 }
 
 function topclickHandler(){

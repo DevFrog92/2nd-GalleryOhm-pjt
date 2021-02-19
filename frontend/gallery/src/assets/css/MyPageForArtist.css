@@ -19,6 +19,14 @@
   min-height: 100vh;
 }
 
+.poster_card1 h3 {
+  font-family: 'S-CoreDream-8Heavy';
+
+}
+.poster__aside__id,.poster__aside__date{
+
+
+}
 
 .artist_profile_wrapper {
   padding-left: 3rem;
@@ -867,7 +875,7 @@
   justify-content: center;
   align-items: center;
   perspective: 900px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family:  'Noto Sans KR', sans-serif;
 }
 
 .poster_card1 {
@@ -879,7 +887,8 @@
   background-repeat: no-repeat;
   position: relative;
   transform-style: preserve-3d;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family:  'Noto Sans KR', sans-serif;
+
   width: 33rem;
   height: 47rem;
 /*  background: linear-gradient(rgb(225,150,58),rgb(227,144,91));*/
@@ -931,7 +940,8 @@
   left: 5%;
   font-size:3rem;
   margin: 0;
-  font-family: 'Abel', sans-serif;
+  font-family: 'S-CoreDream-8Heavy';
+
   text-shadow: 0 0 2px rgb(255,255,255);
   pointer-events: none;
 }
@@ -943,7 +953,8 @@
   margin: 0;
   left: 2.3%;
   background: white;
-  font-family: 'Abel', sans-serif;
+  font-family:  'Noto Sans KR', sans-serif;
+
   font-weight: 600;
   text-align:center;
   transform: translatex(12px);
@@ -960,7 +971,8 @@
   width: 33rem;
   height: 47rem;
   background-image: url('../images/poster.png');
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family:  'Noto Sans KR', sans-serif;
+
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;

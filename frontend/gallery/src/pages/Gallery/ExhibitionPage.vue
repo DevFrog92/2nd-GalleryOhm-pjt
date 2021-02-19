@@ -109,13 +109,13 @@
               this.most_like_work.push(tempArr);
             })
             this.most_like_work.sort(function (a, b) {
-              return -a[3][1] + b[3][1]
+              return -a[6][1] + b[6][1]
             });
             this.most_like_work.forEach(items => {
               let most = {};
               for (let item of items) {
                 most[item[0]] = item[1];
-              }
+              }    
               this.most_like.push(most);
             })
             ///
