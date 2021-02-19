@@ -1,13 +1,13 @@
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+const signUpContainer = document.getElementById('singup_container');
 
 signUpButton.addEventListener('click', () => {
-  container.classList.add("right-panel-active");
+  signUpContainer.classList.add("right-panel-active");
 });
 
 signInButton.addEventListener('click', () => {
-  container.classList.remove("right-panel-active");
+  signUpContainer.classList.remove("right-panel-active");
 });
 
 
@@ -52,5 +52,27 @@ function toggleModalPw(event) {
 function windowOnClickPw(event) {
   if (event.target === modalPw) {
     toggleModalPw();
+  }
+}
+
+//terms모달 js------------------------------------------------
+
+var termsModal = document.querySelector(".terms_modal");
+var triggerTerms = document.querySelector(".triggerTerms");
+var closeButtonTerms = document.querySelector(".close_button_terms");
+
+
+triggerTerms.addEventListener("click", toggleModalTerms);
+closeButtonTerms.addEventListener("click", toggleModalTerms);
+window.addEventListener("click", windowOnClickTerms);
+
+function toggleModalTerms(event) {
+  event.preventDefault();
+  termsModal.classList.toggle("show_modal_terms");
+}
+
+function windowOnClickTerms(event) {
+  if (event.target === termsModal) {
+    toggleModalTerms();
   }
 }

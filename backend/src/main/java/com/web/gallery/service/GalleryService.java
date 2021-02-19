@@ -2,10 +2,9 @@ package com.web.gallery.service;
 
 import com.web.gallery.dto.GalleryDto;
 import com.web.gallery.dto.WorkDto;
-import org.hibernate.jdbc.Work;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface GalleryService {
 
@@ -40,7 +39,7 @@ public interface GalleryService {
     int deleteWorkToSubGallery(int subGallery_workId);
 
     /**** 전시관 속 작품들 목록 리스트를 반환한다. ****/
-    List<WorkDto> getArtistGallery(String galleryDetail_galleryId);
+    List<WorkDto> getArtistGallery(int galleryDetail_galleryId);
 
     /**** 작가의 아이디로 작가의 전시관 리스트를 반환한다. ****/
     List<GalleryDto> getMyGallery(String gallery_artistId);
@@ -48,5 +47,46 @@ public interface GalleryService {
     /**** 전시관을 발자국(좋아요) 누른 사용자를 footprint DB에 저장한다. (한 사용자가 좋아요 두번이상 누르지 못하도록) ****/
     void giveFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
 
+    // 성인 갤러리 작품 목록 반환
+    List<WorkDto> getAdultGallery();
 
+    // 성인 갤러리 홀수 작품 목록 반환
+    List<WorkDto> getAdultGallery_odd();
+
+    // 성인 갤러리 짝수 작품 목록 반환
+    List<WorkDto> getAdultGallery_even();
+
+    // 서브 갤러리 홀수 작품 목록 반환
+    List<WorkDto> getAllSubGallery_odd();
+
+    // 서브 갤러리 짝수 작품 목록 반환
+    List<WorkDto> getAllSubGallery_even();
+
+    // 연령 제한 작품 포함 여부 체크
+    List<HashMap<String, Integer>> isAdultGallery(int gallery_id);
+
+    // 갤러리 연령 등급 업데이트
+    void updateGalleryForAdult(int gallery_id);
+
+    // 갤러리 메인 아이디 받아오기
+    int getGalleryId(int gallery_mainWorkId);
+
+    /**** 메인 갤러리의 모든 전시관 목록들을 조회한다. (연령 제한 작품 포함) ****/
+    List<GalleryDto> getAllMainAdultGallery();
+
+    // 모든 갤러리 목록 반환
+    List<GalleryDto> getAllGallery() throws Exception;
+
+    // 모든 갤러리 목로 반환(성인용)
+    List<GalleryDto> getAllAdultGallery() throws Exception;
+
+    int getFootPrintToGallery(int footPrint_galleryId);
+
+    int isFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
+
+    void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId);
+
+    void updateFootPrintToGalleryUp(int footPrint_galleryId);
+
+    void updateFootPrintToGalleryDown(int footPrint_galleryId);
 }

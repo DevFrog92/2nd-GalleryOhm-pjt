@@ -13,6 +13,14 @@
 		VALUES(#{artist_id}, #{artist_bank}, #{artist_account}, #{artist_nickName})
 	</insert>
 
+	<update id="modifyArtist" parameterType="artist">
+		UPDATE artist
+		SET artist_bank = #{artist_bank},
+		    artist_account = #{artist_account},
+		    artist_nickName = #{artist_nickName}
+		WHERE artist_id = #{artist_id}
+	</update>
+
 	<update id="updateUserType" parameterType="String">
 		UPDATE user
 		SET user_type =
@@ -28,4 +36,16 @@
 		FROM artist
 		WHERE artist_id = #{artist_id}
 	</delete>
+
+	<select id="getUserNickname" parameterType="String" resultType="String">
+		SELECT user_nickName
+		FROM user
+		WHERE user_id = #{artist_id}
+	</select>
+
+	<update id="changeArtistNicknameToUser" parameterType="artist">
+		UPDATE user
+		SET user_nickName = #{artist_nickName}
+		WHERE user_id = #{artist_id}
+	</update>
 </mapper>

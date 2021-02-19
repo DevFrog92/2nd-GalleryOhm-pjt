@@ -1,9 +1,6 @@
 package com.web.gallery.dao;
 
-import com.web.gallery.dto.HashTagDto;
-import com.web.gallery.dto.MainGalleryDto;
-import com.web.gallery.dto.SubGalleryDto;
-import com.web.gallery.dto.UserDto;
+import com.web.gallery.dto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,7 +20,7 @@ public class AdminDaoImpl {
         return sqlSession.selectList(ns + "getAllUser");
     }
 
-    public List<String> getAllHashTag() throws SQLException {
+    public List<HashTagDto> getAllHashTag() throws SQLException {
         return sqlSession.selectList(ns + "getAllHashTag");
     }
 
@@ -35,8 +32,8 @@ public class AdminDaoImpl {
         sqlSession.update(ns + "clearRating", work_id);
     }
 
-    public void addMainGalleryHashTag(String keyword_name) {
-        sqlSession.update(ns + "addMainGalleryHashTag", keyword_name);
+    public void addMainGalleryKeyword(List<String> keywordList) {
+        sqlSession.update(ns + "addMainGalleryKeyword", keywordList);
     }
 
     public void deleteMainGalleryHashTag(String keyword_name) {
@@ -51,8 +48,8 @@ public class AdminDaoImpl {
         sqlSession.delete(ns + "deleteHashTagFromWork", hashTagDto);
     }
 
-    public void deleteHashTagFromTotal(HashTagDto hashTagDto) {
-        sqlSession.delete(ns + "deleteHashTagFromTotal", hashTagDto);
+    public void deleteHashTagFromTotal(String hashtag_name) {
+        sqlSession.delete(ns + "deleteHashTagFromTotal", hashtag_name);
     }
 
     public List<MainGalleryDto> renewMainGallery() {
@@ -64,14 +61,56 @@ public class AdminDaoImpl {
     }
 
     public void renewMainGallery_algorithm() {
-        sqlSession.update(ns + "renewMainGallery_algorithm");
+        sqlSession.insert(ns + "renewMainGallery_algorithm");
+    }
+
+    public void renewMainGallery_delete() {
+        sqlSession.delete(ns+"renewMainGallery_delete");
     }
 
     public void renewSubGallery_algorithm() {
-        sqlSession.update(ns + "renewMainGallery_algorithm");
+        List<WorkDto> subGallery = sqlSession.selectList(ns + "renewSubGallery_algorithm");
+
+        sqlSession.insert(ns + "renewSubGallery_insert", subGallery);
     }
 
     public void renewSubGallery_delete() {
         sqlSession.delete(ns + "renewSubGallery_delete");
+    }
+
+    public void renewMainAdultGallery_algorithm() {
+        sqlSession.insert(ns + "renewMainAdultGallery_algorithm");
+    }
+
+    public void renewMainAdultGallery_delete() {
+        sqlSession.delete(ns + "renewMainAdultGallery_delete");
+    }
+
+    public void deleteMainGalleryKeyword() {
+        sqlSession.delete(ns + "deleteMainGalleryKeyword");
+    }
+
+    public List<WorkDto> getAllWork() {
+        return sqlSession.selectList(ns + "getAllWork");
+    }
+
+    public void addHashTagFromTotal(List<String> hashTagList) {
+        sqlSession.insert(ns + "addHashTagFromTotal", hashTagList);
+    }
+
+    public void renewArtistExp() {
+        sqlSession.update(ns + "renewArtistExp");
+    }
+
+    public void updateArtistExpUp(String artist_id) {
+        sqlSession.update(ns + "updateArtistExpUp", artist_id);
+    }
+
+    public void updateArtistExpDown(String artist_id) {
+        sqlSession.update(ns + "updateArtistExpDown", artist_id);
+    }
+
+    public List<ArtistDto> getAllArtist() {
+        return sqlSession.selectList(ns + "getAllArtist");
     }
 }

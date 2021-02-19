@@ -3,16 +3,14 @@ package com.web.gallery.service;
 import com.web.gallery.dao.GalleryDaoImpl;
 import com.web.gallery.dto.GalleryDto;
 import com.web.gallery.dto.WorkDto;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class GalleryServiceImpl implements GalleryService{
+public class GalleryServiceImpl implements GalleryService {
 
     @Autowired
     private GalleryDaoImpl galleryDao;
@@ -71,6 +69,7 @@ public class GalleryServiceImpl implements GalleryService{
     public List<WorkDto> getAllSubGallery() {
         return galleryDao.getAllSubGallery();
     }
+
     /**** 서브 갤러리의 작품을 작품 아이디로 삭제한다. ****/
     @Override
     public int deleteWorkToSubGallery(int subGallery_workId) {
@@ -79,7 +78,7 @@ public class GalleryServiceImpl implements GalleryService{
 
     /**** 전시관 속 작품들 목록 리스트를 반환한다. ****/
     @Override
-    public List<WorkDto> getArtistGallery(String galleryDetail_galleryId) {
+    public List<WorkDto> getArtistGallery(int galleryDetail_galleryId) {
         return galleryDao.getArtistGallery(galleryDetail_galleryId);
     }
 
@@ -99,7 +98,83 @@ public class GalleryServiceImpl implements GalleryService{
         galleryDao.giveFootPrintToGallery(map);
     }
 
+    @Override
+    public List<WorkDto> getAdultGallery() {
+        return galleryDao.getAdultGallery();
+    }
 
+    @Override
+    public List<WorkDto> getAdultGallery_odd() {
+        return galleryDao.getAdultGallery_odd();
+    }
 
+    @Override
+    public List<WorkDto> getAdultGallery_even() {
+        return galleryDao.getAdultGallery_even();
+    }
 
+    @Override
+    public List<WorkDto> getAllSubGallery_odd() {
+        return galleryDao.getAllSubGallery_odd();
+    }
+
+    @Override
+    public List<WorkDto> getAllSubGallery_even() {
+        return galleryDao.getAllSubGallery_even();
+    }
+
+    @Override
+    public List<HashMap<String, Integer>> isAdultGallery(int gallery_id) {
+        return galleryDao.isAdultGallery(gallery_id);
+    }
+
+    @Override
+    public void updateGalleryForAdult(int gallery_id) {
+        galleryDao.updateGalleryForAdult(gallery_id);
+    }
+
+    @Override
+    public int getGalleryId(int gallery_mainWorkId) {
+        return galleryDao.getGalleryId(gallery_mainWorkId);
+    }
+
+    @Override
+    public List<GalleryDto> getAllMainAdultGallery() {
+        return galleryDao.getAllMainAdultGallery();
+    }
+
+    @Override
+    public List<GalleryDto> getAllGallery() throws Exception {
+        return galleryDao.getALlGallery();
+    }
+
+    @Override
+    public List<GalleryDto> getAllAdultGallery() throws Exception {
+        return galleryDao.getAllAdultGallery();
+    }
+
+    @Override
+    public int getFootPrintToGallery(int footPrint_galleryId) {
+        return galleryDao.getFootPrintToGallery(footPrint_galleryId);
+    }
+
+    @Override
+    public int isFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
+        return galleryDao.isFootPrintToGallery(footPrint_galleryId, footPrint_userId);
+    }
+
+    @Override
+    public void cleanFootPrintToGallery(int footPrint_galleryId, String footPrint_userId) {
+        galleryDao.cleanFootPrintToGallery(footPrint_galleryId, footPrint_userId);
+    }
+
+    @Override
+    public void updateFootPrintToGalleryUp(int footPrint_galleryId) {
+        galleryDao.updateFootPrintToGalleryUp(footPrint_galleryId);
+    }
+
+    @Override
+    public void updateFootPrintToGalleryDown(int footPrint_galleryId) {
+        galleryDao.updateFootPrintToGalleryDown(footPrint_galleryId);
+    }
 }

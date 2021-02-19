@@ -1,97 +1,204 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.gallery.dao.adminDao">
 
-	<select id="getAllUser" resultType="user">
-		select * from user where user_type in (1, 2)
-	</select>
+    <select id="getAllUser" resultType="user">
+        select *
+        from user
+        where user_type in (1, 2)
+    </select>
 
-	<select id="getAllHashTag" resultType="string">
-		select hashtag_name from hashtag group by hashtag_name
-	</select>
+    <select id="getAllArtist" resultType="artist">
+        select *
+        from artist
+    </select>
 
-	<update id="giveRating" parameterType="int">
-		UPDATE work SET work_rating = 19 where work_id = #{work_id};
-	</update>
+    <select id="getAllHashTag" resultType="hashTag">
+        select *
+        from hashtag
+        group by hashtag_name
+    </select>
 
-	<update id="clearRating" parameterType="int">
-		UPDATE work SET work_rating = 0 where work_id = #{work_id};
-	</update>
+    <update id="giveRating" parameterType="int">
+        UPDATE work
+        SET work_rating = 19
+        where work_id = #{work_id};
+    </update>
 
-	<insert id="addMainGalleryHashTag" parameterType="string">
-		insert into keyword(keyword_name)
-		values (#{keyword_name})
-	</insert>
+    <update id="clearRating" parameterType="int">
+        UPDATE work
+        SET work_rating = 0
+        where work_id = #{work_id};
+    </update>
 
-	<delete id="deleteMainGalleryHashTag" parameterType="string">
-		delete from keyword
-		where
-			keyword_name = #{keyword_name}
-	</delete>
+    <insert id="addMainGalleryKeyword" parameterType="list">
+        INSERT INTO
+        keyword(keyword_name)
+        VALUES
+        <foreach collection="list" index="i" item="keyword_name" separator=",">
+            (#{keyword_name})
+        </foreach>
+    </insert>
 
-	<select id="getMainGalleryHashTag" resultType="string">
-		select keyword_name from keyword group by keyword_name
-	</select>
+    <insert id="addHashTagFromTotal" parameterType="list">
+        INSERT INTO
+        hashtag(hashtag_name)
+        VALUES
+        <foreach collection="list" index="i" item="hashtag_name" separator=",">
+            (#{hashtag_name})
+        </foreach>
+    </insert>
 
-	<delete id="deleteHashTagFromWork" parameterType="hashTag">
-		delete from hashtag
-		where
-			hashtag_name = #{hashtag_name} and hashtag_workId = #{hashtag_workId}
-	</delete>
+    <delete id="deleteMainGalleryKeyword">
+        truncate keyword
+    </delete>
 
-	<delete id="deleteHashTagFromTotal" parameterType="hashTag">
-		delete from hashtag
-		where
-			hashtag_name = #{hashtag_name}
-	</delete>
+    <delete id="deleteMainGalleryHashTag" parameterType="string">
+        delete
+        from keyword
+        where keyword_name = #{keyword_name}
+    </delete>
 
-	<select id="renewMainGallery" resultType="mainGallery">
-		select mainGallery_galleryId from maingallery
-	</select>
+    <select id="getMainGalleryHashTag" resultType="string">
+        select keyword_name
+        from keyword
+        group by keyword_name
+    </select>
 
-	<select id="renewSubGallery" resultType="subGallery">
-		select subGallery_workId from subgallery
-	</select>
+    <delete id="deleteHashTagFromWork" parameterType="hashTag">
+        delete
+        from hashtag
+        where hashtag_name = #{hashtag_name}
+          and hashtag_id = #{hashtag_id}
+    </delete>
 
-	<update id="renewMainGallery_algorithm">
-		UPDATE maingallery
-		SET maingallery_galleryId = (
-		    select galleryId
-		    from gallery
-		    where galleryId in (
-				select galleryDetail_galleryId
-		        from galleryDetail
-		        where galleryDetail_workId = (
-					select hashtag_workId
-					from hashtag
-		            where hashtag_name in (
-		                select keyword_name
-		                from keyword
-						)
-					)
-				)
-			order by gallery_footPrint desc
-			LIMIT 10
-		)
-	</update>
+    <!--	<delete id="deleteHashTagFromTotal" parameterType="hashTag">-->
+    <!--		delete from hashtag-->
+    <!--		where-->
+    <!--			hashtag_name = #{hashtag_name}-->
+    <!--	</delete>-->
 
-	<insert id="renewSubGallery_algorithm">
-		insert into subgallery(subGallery_workId)
-		value(
-			select ork_id
-			from work
-			where work_artistId = (
-			    select artist_id
-			    from artist
-			    where artist_exp = 1
-				)
-			order by work_cost desc
-		)
-	</insert>
+    <select id="renewMainGallery" resultType="mainGallery">
+        select mainGallery_galleryId
+        from maingallery
+    </select>
 
-	<delete id="renewSubGallery_delete">
-		truncate subgallery
-	</delete>
+    <select id="renewSubGallery" resultType="subGallery">
+        select subGallery_workId
+        from subgallery
+    </select>
+
+    <insert id="renewMainGallery_algorithm">
+        INSERT INTO maingallery(mainGallery_galleryId)
+            (SELECT gallery_id
+             FROM gallery
+             WHERE gallery_id
+                 IN
+                   (SELECT galleryDetail_galleryId
+                    FROM gallerydetail
+                    WHERE galleryDetail_workId
+                              IN
+                          (SELECT hashtag_workId
+                           FROM hashtag
+                           WHERE hashtag_name
+                                     IN
+                                 (SELECT keyword_name
+                                  FROM keyword)
+                          )
+                   )
+               AND gallery_rating = 0
+            )
+                ORDER BY gallery_footPrint DESC LIMIT 10
+    </insert>
+
+    <insert id="renewMainAdultGallery_algorithm">
+        INSERT INTO mainadultgallery(mainAdultGallery_galleryId)
+            (SELECT gallery_id
+             FROM gallery
+             WHERE gallery_id
+                       IN
+                   (SELECT galleryDetail_galleryId
+                    FROM gallerydetail
+                    WHERE galleryDetail_workId
+                              IN
+                          (SELECT hashtag_workId
+                           FROM hashtag
+                           WHERE hashtag_name
+                                     IN
+                                 (SELECT keyword_name
+                                  FROM keyword)
+                          )
+                   )
+            )
+                ORDER BY gallery_footPrint DESC LIMIT 10
+    </insert>
+
+    <select id="getAllWork" resultType="work">
+        select *
+        from work
+    </select>
+
+    <delete id="renewMainGallery_delete">
+        truncate maingallery
+    </delete>
+
+    <delete id="deleteHashTagFromTotal" parameterType="string">
+        delete
+        from hashtag
+        where hashtag_name = #{hashtag_name}
+    </delete>
+
+    <insert id="renewSubGallery_insert" parameterType="list">
+        insert into subgallery(subGallery_workId)
+        values
+        <foreach collection="list" index="index" item="work" separator=",">
+            (#{work.work_id})
+        </foreach>
+    </insert>
+
+    <select id="renewSubGallery_algorithm" resultType="work">
+        select work_id from
+            (select work_id, work_cost
+             from work, artist
+             where work.work_rating = 0
+               and work.work_artistId = artist.artist_id
+               and artist.artist_exp = 1
+             order by rand() limit 15) as random
+        order by work_cost desc
+    </select>
+
+    <delete id="renewSubGallery_delete">
+        truncate subgallery
+    </delete>
+
+    <delete id="renewMainAdultGallery_delete">
+        truncate mainadultgallery
+    </delete>
+
+    <update id="renewArtistExp">
+        update artist,
+            (
+                select work_artistId, count(work_id) as cnt
+                from work
+                group by work_artistId
+            ) as workCnt
+        set artist.artist_exp = 2
+        where
+                artist.artist_id = workCnt.work_artistId
+            and
+                workCnt.cnt > 10
+            and
+                artist.artist_exp = 1;
+    </update>
+
+    <update id="updateArtistExpUp" parameterType="string">
+        UPDATE artist SET artist_exp = (artist_exp + 1) WHERE artist_id = #{artist_id};
+    </update>
+
+    <update id="updateArtistExpDown" parameterType="string">
+        UPDATE artist SET artist_exp = (artist_exp - 1) WHERE artist_id = #{artist_id};
+    </update>
+
 </mapper>

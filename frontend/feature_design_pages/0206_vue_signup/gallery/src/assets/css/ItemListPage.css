@@ -1,0 +1,138 @@
+
+.item-list-container {
+	margin-top: 3rem;
+	padding: 0 3rem;
+}
+
+.item-lists {
+	display: grid;
+	grid-template-columns:repeat(auto-fit,minmax(13%, auto));
+	grid-gap: 1rem;
+	/* grid-auto-rows: 15%; */
+	grid-auto-flow: dense;
+  padding: 1rem;
+}
+
+@media (max-width: 1250px) {
+	.item-list-container {
+		padding: 0 2rem;
+	}
+	.item-lists {
+		grid-template-columns: 1fr 1fr 1fr;
+		/* grid-auto-rows: 7%; */
+
+	}
+}
+	 
+
+
+ @media (max-width: 1200px) {
+	.item-list-container {
+		padding: 0 2rem;
+	}
+	 
+	.item-lists {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		/* grid-auto-rows: 15%; */
+
+	}
+}
+ @media (max-width: 992px) {
+	.item-list-container {
+		padding: 0 2rem;
+	}
+	 
+	 .item-lists {
+		grid-template-columns: 1fr 1fr 1fr;
+		/* grid-auto-rows: 10%; */
+
+
+	}
+}
+ @media (max-width: 760px) {
+	.item-list-container {
+		padding: 0 1rem;
+	}
+	 
+	 .item-lists {
+		/* grid-auto-rows: 5%; */
+		grid-template-columns: 1fr;
+		 
+	}
+}
+
+
+ .item-lists .grid {
+	 /* min-height: 350px; */
+	 display: inline-block;
+	 /* margin: 0.2rem 0; */
+   position: relative;
+   transform: scale(1);
+	 transition: 0.7s;
+	 overflow: hidden;
+		border-radius: 15px;
+
+
+}
+.item-lists .grid:hover{
+	transform: scale(1.05);
+}
+
+.item-lists .grid img {
+	height: 100%; 
+	width: 100%;
+	border-radius: 5px;
+	display: block;
+	object-fit: cover;
+	transform: scale(1.2);
+	transition: transform .3s ease-in-out;
+}
+
+ .item-lists .grid__body {
+	position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+	display: grid;
+  align-content: center;
+  text-align: center;
+  border: 1px solid #fff;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  transform: scale(1.2);
+  transition: all .3s ease-in-out;
+  pointer-events: visible;
+}
+ 
+.item-lists .grid__body h1,
+.item-lists .grid__body p {
+	opacity: 0;
+	transition: all .4s;
+}
+
+.item-lists .grid__body h1 {
+	margin: 0;
+	font-size:1.5rem;
+	transform: translate(0,-0.7rem);
+}
+
+.item-lists .grid__body p {
+	font-size: 0.8rem;
+	transform: translate(0,0.7rem);
+}
+
+.item-lists .grid:hover img{
+	filter: grayscale(100%);
+	transform: scale(1);
+}
+
+.item-lists .grid:hover .grid__body {
+	transform: scale(1);
+}
+
+.item-lists .grid__body:hover h1,
+.item-lists .grid__body:hover p {
+	opacity: 1;
+	transform: scale(1);
+}
